@@ -1,0 +1,8 @@
+{
+  "workflow": "gsd",
+  "project": "PortfolioNicoNvo",
+  "mode": "mvp",
+  "uiReview": true,
+  "sourceStyle": "../PortfolioBase/portfolio/frontend",
+  "sourceContent": "../PortfolioNicoViejo"
+}
