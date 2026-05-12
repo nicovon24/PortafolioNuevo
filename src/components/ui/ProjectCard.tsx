@@ -1,6 +1,6 @@
-import Image from "next/image";
 import { ExternalLink, Github } from "lucide-react";
 import { cn } from "@/lib/utils";
+import ProjectScreenshots from "@/components/ui/ProjectScreenshots";
 
 const linkBtn =
   "inline-flex min-h-10 items-center justify-center gap-2 rounded-full border border-line bg-[rgba(100,255,218,0.06)] px-3.5 text-sm font-bold text-accent transition-colors hover:border-accent-2 hover:bg-[rgba(255,105,180,0.12)] hover:text-accent-2";
@@ -13,9 +13,19 @@ type ProjectCardProps = {
   live?: string;
   code?: string;
   reversed?: boolean;
+  inDevelopment?: boolean;
 };
 
-export default function ProjectCard({ title, description, technologies, images, live, code, reversed = false }: ProjectCardProps) {
+export default function ProjectCard({
+  title,
+  description,
+  technologies,
+  images,
+  live,
+  code,
+  reversed = false,
+  inDevelopment = false,
+}: ProjectCardProps) {
   return (
     <article
       className={cn(
@@ -23,23 +33,18 @@ export default function ProjectCard({ title, description, technologies, images, 
         reversed && "lg:grid-cols-[0.86fr_1fr]",
       )}
     >
-      <div className={cn("relative min-h-[240px] sm:min-h-[300px] lg:min-h-[380px]", reversed && "lg:order-2")}>
-        {images.slice(0, 3).map((image, index) => (
-          <div
-            key={image}
-            className={cn(
-              "absolute overflow-hidden rounded-[22px] border border-[rgba(100,255,218,0.32)] bg-canvas shadow-[0_20px_48px_rgba(0,0,0,0.32)]",
-              index === 0 && "inset-0 bottom-[16%] right-[18%]",
-              index === 1 && "inset-[22%_0_0_38%]",
-              index === 2 && "bottom-0 left-[8%] right-[48%] top-auto h-[34%]",
-            )}
-          >
-            <Image src={image} alt={`${title} captura ${index + 1}`} fill sizes="(max-width: 768px) 80vw, 34vw" className="object-cover" />
-          </div>
-        ))}
+      <div className={cn(reversed && "lg:order-2")}>
+        <ProjectScreenshots images={images} title={title} />
       </div>
       <div className={cn("flex flex-col", reversed && "lg:order-1")}>
-        <h3 className="m-0 font-mono text-[clamp(1.25rem,2.5vw,2rem)]">{title}</h3>
+        <div className="flex flex-wrap items-center gap-2 gap-y-1">
+          <h3 className="m-0 font-mono text-[clamp(1.25rem,2.5vw,2rem)]">{title}</h3>
+          {inDevelopment && (
+            <span className="inline-flex items-center rounded-full border border-amber-400/45 bg-amber-400/10 px-2.5 py-0.5 font-mono text-[0.65rem] font-semibold uppercase tracking-wider text-amber-200">
+              En desarrollo
+            </span>
+          )}
+        </div>
         <p className="mt-2 leading-relaxed text-muted">{description}</p>
         <div className="mt-4 flex flex-wrap gap-2">
           {technologies.map((tech) => (

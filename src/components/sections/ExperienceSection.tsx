@@ -28,11 +28,13 @@ function ExperienceCard({
   company,
   title,
   icon,
+  iconBg,
   points,
 }: {
   company: string;
   title: string;
   icon: string;
+  iconBg?: string;
   points: string[];
 }) {
   return (
@@ -43,7 +45,8 @@ function ExperienceCard({
           alt={`Logo ${company}`}
           width={44}
           height={44}
-          className="size-11 shrink-0 rounded bg-neutral-100 object-contain p-1"
+          className="size-11 shrink-0 rounded object-contain p-1"
+          style={{ backgroundColor: iconBg ?? "#f5f5f5" }}
         />
         <div className="min-w-0 flex-1">
           <h3 className="mb-3 text-center font-mono text-base font-bold tracking-tight text-neutral-900 md:text-lg md:tracking-normal">
@@ -108,6 +111,7 @@ export default function ExperienceSection() {
                       company={exp.company}
                       title={exp.title}
                       icon={exp.icon}
+                      iconBg={exp.iconBg}
                       points={exp.points}
                     />
                     <p className="mt-3 font-mono text-[0.8125rem] text-muted">{exp.date}</p>
@@ -123,6 +127,7 @@ export default function ExperienceSection() {
                           company={exp.company}
                           title={exp.title}
                           icon={exp.icon}
+                          iconBg={exp.iconBg}
                           points={exp.points}
                         />
                       </div>
@@ -148,6 +153,7 @@ export default function ExperienceSection() {
                           company={exp.company}
                           title={exp.title}
                           icon={exp.icon}
+                          iconBg={exp.iconBg}
                           points={exp.points}
                         />
                       </div>

@@ -1,81 +1,80 @@
-import Image from "next/image";
 import { ArrowDown, Download, Github, Linkedin } from "lucide-react";
 import MotionFade from "@/components/motion/MotionFade";
 import MotionSlide from "@/components/motion/MotionSlide";
+import HeroScrambleName from "@/components/sections/HeroScrambleName";
+import HeroRoleCycle from "@/components/sections/HeroRoleCycle";
 import { profile } from "@/data/portfolio";
 
 const btnPrimary =
-  "inline-flex min-h-10 items-center justify-center gap-2 rounded-full border border-accent bg-accent px-3.5 text-sm font-bold text-background-deep transition-colors hover:border-accent-2 hover:bg-[rgba(255,105,180,0.12)] hover:text-accent-2";
+  "inline-flex min-h-10 items-center justify-center gap-2 border border-accent bg-accent px-3.5 font-mono text-sm font-bold uppercase tracking-wider text-background-deep shadow-[0_0_0_1px_rgba(100,255,218,0.35)_inset,0_0_24px_rgba(100,255,218,0.12)] transition-colors hover:border-accent-2 hover:bg-[rgba(255,105,180,0.12)] hover:text-accent-2";
 
 const btnSecondary =
-  "inline-flex min-h-10 items-center justify-center gap-2 rounded-full border border-line bg-[rgba(100,255,218,0.06)] px-3.5 text-sm font-bold text-accent transition-colors hover:border-accent-2 hover:bg-[rgba(255,105,180,0.12)] hover:text-accent-2";
+  "inline-flex min-h-10 items-center justify-center gap-2 border border-line bg-transparent px-3.5 font-mono text-sm font-bold uppercase tracking-wider text-muted transition-colors hover:border-accent hover:text-accent";
+
+const iconBtn =
+  "grid size-9 place-items-center border border-line bg-[rgba(8,17,31,0.88)] text-accent transition-colors hover:border-accent hover:text-accent-2";
+
+const nameLine1Class =
+  "leading-[0.95] text-ink text-[clamp(2.05rem,calc(0.88rem+5.2vw),4rem)]";
+
+const nameLine2Class =
+  "bg-gradient-to-b from-accent via-accent to-[#3edcc4] bg-clip-text text-[clamp(2.35rem,calc(1rem+5.85vw),4.65rem)] leading-[0.92] text-transparent drop-shadow-[0_0_22px_rgba(100,255,218,0.2)] [-webkit-text-fill-color:transparent]";
 
 export default function HeroSection() {
+  const github = profile.socials.find((s) => s.label === "GitHub")!;
+  const linkedin = profile.socials.find((s) => s.label === "LinkedIn")!;
+  const cv = profile.socials.find((s) => s.label === "CV")!;
+
+  const nameParts = profile.name.trim().split(/\s+/);
+  const heroFirstName = nameParts[0] ?? profile.name;
+  const heroLastName = nameParts.slice(1).join(" ") || profile.roleSecond;
+
   return (
-    <section id="top" className="flex min-h-screen w-full flex-col overflow-hidden px-page pb-6 pt-16 max-lg:pt-[4.75rem] lg:pt-20">
-      <div className="grid flex-1 grid-cols-1 items-center gap-8 lg:grid-cols-[minmax(0,1.05fr)_auto] lg:items-center lg:gap-12">
+    <section
+      id="top"
+      className="relative flex min-h-screen w-full flex-col items-start overflow-hidden px-page pb-10 pt-[4.5rem] max-lg:pt-[4.75rem] sm:pt-20 lg:pt-24"
+    >
+      <div className="relative z-0 flex w-full max-w-[48rem] flex-1 flex-col justify-center text-left lg:max-w-[52rem]">
         <div>
           <MotionSlide direction="left">
-            <p className="m-0 mb-2.5 font-mono text-xs font-semibold tracking-wide text-accent sm:text-sm">{profile.location}</p>
-            <h1 className="m-0 grid max-w-[22ch] font-mono text-[clamp(1.65rem,calc(0.45rem+3.2vw),2.65rem)] leading-[1.02] tracking-tight sm:max-w-none">
-              <span>{profile.roleFirst}</span>
-              <span className="text-transparent [-webkit-text-stroke:1.25px_var(--color-accent)]">{profile.roleSecond}</span>
-            </h1>
+            <HeroScrambleName
+              firstName={heroFirstName}
+              lastName={heroLastName}
+              line1Class={nameLine1Class}
+              line2Class={nameLine2Class}
+            />
+            <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 border-b border-line/60 pb-4 font-sans text-[clamp(0.65rem,0.55rem+1vw,0.8rem)] font-semibold uppercase tracking-[0.22em]">
+              <HeroRoleCycle className="text-muted" />
+              <span className="inline-flex items-center gap-1.5 text-accent sm:ml-auto">
+                <span className="text-[0.55rem] leading-none text-accent" aria-hidden>
+                  ▲
+                </span>
+                Disponible
+              </span>
+            </div>
           </MotionSlide>
           <MotionFade delay={0.1}>
-            <p className="mt-4 max-w-xl text-sm leading-relaxed text-muted sm:text-[0.95rem] lg:max-w-lg">{profile.intro}</p>
+            <p className="mt-5 max-w-2xl font-sans text-[0.8rem] leading-relaxed text-muted sm:text-[0.95rem]">{profile.intro}</p>
           </MotionFade>
-          <MotionFade delay={0.2} className="mt-5 flex flex-wrap gap-2.5 sm:mt-6 sm:gap-3">
-            <a className={btnPrimary} href="#projects">
-              Ver proyectos <ArrowDown size={16} />
-            </a>
-            <a className={btnSecondary} href="/pdf/CV Nicolas Von Muhlinen Spanish.pdf" target="_blank">
-              Descargar CV <Download size={16} />
-            </a>
+          <MotionFade delay={0.2} className="mt-6 flex flex-col gap-3 sm:mt-8">
+            <div className="flex flex-wrap gap-3 sm:gap-4">
+              <a className={btnPrimary} href="#projects">
+                Ver proyectos <ArrowDown size={16} />
+              </a>
+              <a className={btnSecondary} href={cv.href} target="_blank" rel="noreferrer">
+                CV.PDF <Download size={16} />
+              </a>
+            </div>
+            <div className="flex flex-wrap gap-2 border-t border-line/40 pt-4">
+              <a href={github.href} target="_blank" rel="noreferrer" aria-label="GitHub" className={iconBtn}>
+                <Github size={17} />
+              </a>
+              <a href={linkedin.href} target="_blank" rel="noreferrer" aria-label="LinkedIn" className={iconBtn}>
+                <Linkedin size={17} />
+              </a>
+            </div>
           </MotionFade>
         </div>
-        <MotionSlide direction="right" className="flex w-full justify-center lg:justify-end">
-          <div className="relative shrink-0">
-            {/* Retrato único en hero (la otra imagen del duo se quitó) */}
-            <div
-              className="relative mx-auto aspect-[9/16] max-h-[min(60vh,42rem)] w-[min(15rem,82vw)] max-w-[248px] overflow-hidden rounded-2xl border border-[rgba(100,255,218,0.4)] bg-canvas shadow-[0_20px_48px_rgba(0,0,0,0.4)] sm:rounded-[22px]"
-            >
-              <Image
-                src="/images/new-me/IMG_4939.JPEG"
-                alt={profile.name}
-                fill
-                sizes="(max-width:1024px) 240px, 260px"
-                priority
-                style={{ objectFit: "cover", objectPosition: "center 22%" }}
-              />
-            </div>
-            <div className="absolute bottom-1 right-0 z-10 flex gap-2 sm:bottom-2">
-            <a
-              href={profile.socials[0].href}
-              target="_blank"
-              rel="noreferrer"
-              aria-label="GitHub"
-              className="grid size-9 place-items-center rounded-full border border-line bg-[rgba(8,17,31,0.88)] text-accent"
-            >
-              <Github size={17} />
-            </a>
-            <a
-              href={profile.socials[1].href}
-              target="_blank"
-              rel="noreferrer"
-              aria-label="LinkedIn"
-              className="grid size-9 place-items-center rounded-full border border-line bg-[rgba(8,17,31,0.88)] text-accent"
-            >
-              <Linkedin size={17} />
-            </a>
-          </div>
-          </div>
-        </MotionSlide>
-      </div>
-      <div className="mt-6 flex w-max max-w-full select-none gap-3 font-mono text-[clamp(0.85rem,calc(0.2rem+2vw),1.85rem)] font-extrabold whitespace-nowrap text-accent/[0.09] [animation:marquee_24s_linear_infinite] sm:mt-8 sm:gap-4" aria-hidden="true">
-        <span>Nicolas Von Muhlinen</span>
-        <span>Full-stack IoT Developer</span>
-        <span>Dashboards</span>
       </div>
     </section>
   );

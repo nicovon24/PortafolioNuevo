@@ -31,7 +31,6 @@ export default function TechSection() {
                   />
                   <div className="min-w-0 flex-1 leading-tight">
                     <span className="block text-[0.8125rem] font-semibold text-ink sm:text-sm">{item.name}</span>
-                    <span className="mt-0.5 block text-[0.7rem] leading-snug text-muted sm:text-xs">{item.level}</span>
                   </div>
                 </MotionFade>
               ))}

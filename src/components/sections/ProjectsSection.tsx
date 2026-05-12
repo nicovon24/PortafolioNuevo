@@ -5,9 +5,9 @@ import { projects } from "@/data/portfolio";
 
 export default function ProjectsSection() {
   return (
-    <Section id="projects" eyebrow="../Proyectos" title="Casos donde producto, datos y UI se encuentran.">
+    <Section id="projects" eyebrow="../Proyectos" title="Proyectos destacados">
       <div className="grid gap-9 lg:gap-10">
-        {projects.map((project, index) => (
+        {projects.filter((p) => !p.hidden).map((project, index) => (
           <MotionSlide key={project.title} direction={index % 2 === 0 ? "left" : "right"}>
             <ProjectCard {...project} reversed={index % 2 !== 0} />
           </MotionSlide>

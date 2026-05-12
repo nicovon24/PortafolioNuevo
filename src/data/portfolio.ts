@@ -7,7 +7,7 @@ export const navItems = [
 ];
 
 export const profile = {
-  name: "Nicolas Von Muhlinen",
+  name: "NICOLAS VON MUHLINEN",
   roleFirst: "Full-stack",
   roleSecond: "Developer",
   location: "Córdoba, Argentina",
@@ -19,7 +19,7 @@ export const profile = {
   socials: [
     { label: "GitHub", href: "https://github.com/nicovon24" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/nicolas-von-muhlinen" },
-    { label: "CV", href: "/pdf/Nicolas_Von_Muhlinen_CV_EN.pdf" },
+    { label: "CV", href: "/pdf/Nicolas_Von_Muhlinen_CV.pdf" },
   ],
 };
 
@@ -34,25 +34,36 @@ export const techGroups = [
   {
     title: "Frontend",
     items: [
-      { name: "HTML 5", level: "Avanzado", icon: "/images/svg/html.svg" },
-      { name: "CSS 3", level: "Avanzado", icon: "/images/svg/css.svg" },
-      { name: "JavaScript", level: "Avanzado", icon: "/images/svg/js.svg" },
-      { name: "TypeScript", level: "Intermedio", icon: "/images/svg/ts.svg" },
-      { name: "React", level: "Avanzado", icon: "/images/svg/react.svg" },
-      { name: "Redux", level: "Avanzado", icon: "/images/svg/redux.svg" },
-      { name: "Tailwind", level: "Avanzado", icon: "/images/svg/tailwind.svg" },
-      { name: "Next.js", level: "Intermedio", icon: "/images/svg/next.svg" },
+      { name: "Next.js", icon: "/images/svg/next.svg" },
+      { name: "React", icon: "/images/svg/react.svg" },
+      { name: "TypeScript", icon: "/images/svg/ts.svg" },
+      { name: "JavaScript", icon: "/images/svg/js.svg" },
+      { name: "Redux", icon: "/images/svg/redux.svg" },
+      { name: "Zustand", icon: "/images/svg/zustand.svg" },
+      { name: "HTML 5", icon: "/images/svg/html.svg" },
+      { name: "CSS 3", icon: "/images/svg/css.svg" },
+      { name: "Tailwind", icon: "/images/svg/tailwind.svg" },
+      { name: "Vercel", icon: "/images/svg/vercel.svg" }
     ],
   },
   {
     title: "Backend y herramientas",
     items: [
-      { name: "Node.js", level: "Intermedio", icon: "/images/svg/node.svg" },
-      { name: "SQL", level: "Intermedio", icon: "/images/svg/sqlSvg.svg" },
-      { name: "MongoDB", level: "Intermedio", icon: "/images/svg/mongo.svg" },
-      { name: "Git", level: "Avanzado", icon: "/images/svg/git.svg" },
-      { name: "Linux", level: "Basico", icon: "/images/svg/linux.svg" },
-      { name: "C#", level: "Intermedio", icon: "/images/svg/c-sharp.svg" }
+      { name: "Node.js", icon: "/images/svg/node.svg" },
+      { name: "SQL", icon: "/images/svg/sqlSvg.svg" },
+      { name: "MongoDB", icon: "/images/svg/mongo.svg" },
+      { name: "Docker", icon: "/images/svg/docker.svg" },
+      { name: "Git", icon: "/images/svg/git.svg" },
+      { name: "Linux", icon: "/images/svg/linux.svg" },
+    ],
+  },
+  {
+    title: "IA",
+    items: [
+      { name: "Claude Code", icon: "/images/svg/claude.svg" },
+      { name: "ChatGPT", icon: "/images/svg/openai.svg" },
+      { name: "Gemini", icon: "/images/svg/gemini.svg" },
+      { name: "Agentes GSD", icon: "/images/svg/gsd.svg" },
     ],
   },
 ];
@@ -64,6 +75,7 @@ export const experiences: Array<{
   title: string;
   date: string;
   icon: string;
+  iconBg?: string;
   points: string[];
   kind: ExperienceKind;
 }> = [
@@ -86,6 +98,7 @@ export const experiences: Array<{
     title: "Full-stack Developer",
     date: "Abril 2023 - Julio 2023",
     icon: "/images/company/freelance.png",
+    iconBg: "#1a3a6b",
     kind: "work",
     points: [
       "Renderizado de componentes y estilos en diferentes secciones",
@@ -110,6 +123,7 @@ export const experiences: Array<{
     title: "Asistente de enseñanza / Tutor",
     date: "Enero 2023 - Abril 2023",
     icon: "/images/company/henry.png",
+    iconBg: "#f5a623",
     kind: "study",
     points: [
       "Coordinar el grupo de estudiantes con el objetivo de lograr su adaptación al programa",
@@ -119,7 +133,20 @@ export const experiences: Array<{
   },
 ];
 
-export const projects = [
+export type PortfolioProject = {
+  title: string;
+  description: string;
+  technologies: string[];
+  images: string[];
+  live?: string;
+  code?: string;
+  /** Si es true, el proyecto sigue en desarrollo activo */
+  inDevelopment?: boolean;
+  /** No listar en la sección de proyectos */
+  hidden?: boolean;
+};
+
+export const projects: PortfolioProject[] = [
   {
     title: "Prodeazo (Prode Mundial 2026)",
     description:
@@ -130,9 +157,10 @@ export const projects = [
       "/images/projects/prodeazo/login.png",
       "/images/projects/prodeazo/inicio.jpg",
     ],
+    code: "https://github.com/nicovon24/Prodeazo",
     live: "https://prodeazo.vercel.app",
+    inDevelopment: true,
   },
-  
   {
     title: "Scout Panel",
     description:
@@ -143,7 +171,36 @@ export const projects = [
       "/images/projects/scoutpanel/compare.png",
       "/images/projects/scoutpanel/reports.png",
     ],
+    code: "https://github.com/nicovon24/ScoutPanelLDP",
     live: "https://scout-panel-ldp.vercel.app",
+    inDevelopment: true,
+  },
+  {
+    title: "Gabriel Bornoroni — Sitio oficial",
+    hidden: true,
+    description:
+      "Landing institucional y espacio del sorteo de la dieta del Diputado Nacional Gabriel Bornoroni (Córdoba). Resume su rol desde 2023 y el trabajo legislativo en el equipo del Presidente Javier Milei y Karina Milei; comunica que la política debe estar al servicio de la sociedad y presenta el sorteo de la dieta como gesto de transparencia («no vine a vivir de la política sino a cambiar las cosas»). Guía el registro para participantes mayores de 18 años con domicilio en la provincia de Córdoba —una vez registrados entran en todos los sorteos futuros—, destaca la cuenta regresiva del próximo sorteo y enlaza participación y bases y condiciones.",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS"],
+    images: ["/images/projects/partido/gabriel/sorteo.png", "/images/projects/partido/gabriel/home.png",],
+    live: "https://gabrielbornoroni.com.ar/",
+  },
+  {
+    title: "App Fiscalización",
+    description:
+      "Web para fiscales generales de Córdoba en las legislativas de octubre de 2025: dashboard, login, fiscales, incidencias, preguntas y escrutinio por mesas, consumiendo una API REST. Next.js (App Router), Redux Toolkit y Tailwind; feedback con toasts y alertas. Deploy en Vercel.",
+    technologies: [
+      "Next.js",
+      "Framer Motion",
+      "Redux Toolkit",
+      "Vercel",
+    ],
+    images: [
+      "/images/projects/partido/app/dashboard1.png",
+      "/images/projects/partido/app/dashboard2.png",
+      "/images/projects/partido/app/dashboard3.png",
+      "/images/projects/partido/app/seccionales.png",
+      "/images/projects/partido/app/mesas.png",
+    ],
   },
   {
     title: "IoTLogIQ Demo - Senzary",
