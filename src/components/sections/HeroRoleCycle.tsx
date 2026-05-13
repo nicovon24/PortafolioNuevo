@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 const PHRASES = [
   "Full-stack developer",
   "React · Node · TypeScript · Angular",
-  "+4 años de experiencia",
+  "+3 años de experiencia",
   "IoT, Dashboards y Deportes ",
 ];
 const TYPE_DELAY = 68;

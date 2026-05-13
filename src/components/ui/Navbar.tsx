@@ -2,16 +2,69 @@
 
 import { Github, Linkedin, Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { navItems, profile } from "@/data/portfolio";
 import { cn } from "@/lib/utils";
 
 const headerIconBtn =
   "grid size-9 place-items-center rounded-full border border-line bg-[rgba(100,255,218,0.08)] text-accent transition-colors hover:border-accent-2 hover:bg-[rgba(255,105,180,0.12)] hover:text-accent-2";
 
+function useActiveSectionHref() {
+  const ids = useMemo(() => navItems.map((item) => item.href.replace(/^#/, "")), []);
+
+  const [activeHref, setActiveHref] = useState("");
+
+  useEffect(() => {
+    let raf = 0;
+
+    const compute = () => {
+      raf = 0;
+      const probe = Math.min(132, Math.max(76, window.innerHeight * 0.11));
+      let current = "";
+      for (const id of ids) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        if (el.getBoundingClientRect().top <= probe) {
+          current = id;
+        }
+      }
+
+      const doc = document.documentElement;
+      const atBottom = window.scrollY + window.innerHeight >= doc.scrollHeight - 40;
+      if (atBottom && ids.length > 0) {
+        const lastId = ids[ids.length - 1];
+        const lastEl = document.getElementById(lastId);
+        if (lastEl && lastEl.getBoundingClientRect().top < window.innerHeight - 32) {
+          current = lastId;
+        }
+      }
+
+      const next = current ? `#${current}` : "";
+      setActiveHref((prev) => (prev === next ? prev : next));
+    };
+
+    const onScrollOrResize = () => {
+      if (!raf) raf = requestAnimationFrame(compute);
+    };
+
+    compute();
+    window.addEventListener("scroll", onScrollOrResize, { passive: true });
+    window.addEventListener("resize", onScrollOrResize, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", onScrollOrResize);
+      window.removeEventListener("resize", onScrollOrResize);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, [ids]);
+
+  return activeHref;
+}
+
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [hasScrolled, setHasScrolled] = useState(false);
+  const activeHref = useActiveSectionHref();
 
   useEffect(() => {
     const handleScroll = () => setHasScrolled(window.scrollY > 8);
@@ -58,7 +111,12 @@ export default function Navbar() {
       </a>
       <nav className="relative z-[1] hidden items-center gap-[clamp(0.75rem,2.2vw,2rem)] text-ink lg:flex" aria-label="Navegacion principal">
         {navItems.map((item, index) => (
-          <a key={item.href} href={item.href} className="nav-link">
+          <a
+            key={item.href}
+            href={item.href}
+            className={cn("nav-link", activeHref === item.href && "nav-link--active")}
+            aria-current={activeHref === item.href ? "location" : undefined}
+          >
             <span>{String(index + 1).padStart(2, "0")}</span>
             {item.label}
           </a>
@@ -84,7 +142,16 @@ export default function Navbar() {
           transition={{ duration: 0.25, ease: "easeOut" }}
         >
           {navItems.map((item) => (
-            <a key={item.href} href={item.href} className="rounded-lg px-2 py-2 text-ink transition-colors hover:text-accent-2" onClick={() => setOpen(false)}>
+            <a
+              key={item.href}
+              href={item.href}
+              className={cn(
+                "rounded-lg px-2 py-2 text-ink transition-colors hover:text-accent-2",
+                activeHref === item.href && "bg-[rgba(100,255,218,0.14)] text-accent",
+              )}
+              aria-current={activeHref === item.href ? "location" : undefined}
+              onClick={() => setOpen(false)}
+            >
               {item.label}
             </a>
           ))}

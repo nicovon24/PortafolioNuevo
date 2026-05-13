@@ -62,6 +62,7 @@ export default function ProjectScreenshots({ images, title }: ProjectScreenshots
       <div className="relative min-h-[240px] sm:min-h-[300px] lg:min-h-[380px]">
         <button
           type="button"
+          suppressHydrationWarning
           onClick={() => openAt(0)}
           className="absolute right-2 top-2 z-[25] inline-flex items-center gap-1.5 rounded-full border border-[rgba(100,255,218,0.45)] bg-[rgba(8,17,31,0.92)] px-2.5 py-1.5 font-mono text-[0.7rem] font-bold uppercase tracking-wide text-accent shadow-[0_8px_24px_rgba(0,0,0,0.35)] backdrop-blur-sm transition-colors hover:border-accent-2 hover:text-accent-2 sm:right-3 sm:top-3 sm:px-3 sm:text-xs"
           aria-label={`Ampliar galería de ${title}`}
@@ -73,6 +74,7 @@ export default function ProjectScreenshots({ images, title }: ProjectScreenshots
           <button
             key={`${title}-preview-${i}`}
             type="button"
+            suppressHydrationWarning
             onClick={() => openAt(i)}
             className={cn(
               "absolute overflow-hidden rounded-[22px] border border-[rgba(100,255,218,0.32)] bg-canvas text-left shadow-[0_20px_48px_rgba(0,0,0,0.32)] transition-[transform,box-shadow] hover:brightness-[1.04] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
@@ -114,6 +116,7 @@ export default function ProjectScreenshots({ images, title }: ProjectScreenshots
               </p>
               <button
                 type="button"
+                suppressHydrationWarning
                 onClick={close}
                 className="grid size-9 shrink-0 place-items-center rounded-full border border-line text-accent transition-colors hover:border-accent-2 hover:bg-[rgba(100,255,218,0.08)] hover:text-accent-2 sm:size-10"
                 aria-label="Cerrar galería"
@@ -125,6 +128,7 @@ export default function ProjectScreenshots({ images, title }: ProjectScreenshots
             <div className="relative min-h-0 flex-1 w-full">
               <button
                 type="button"
+                suppressHydrationWarning
                 onClick={goPrev}
                 className="absolute left-1 top-1/2 z-10 grid size-9 -translate-y-1/2 place-items-center rounded-full border border-line bg-[rgba(8,17,31,0.92)] text-accent shadow-[0_8px_24px_rgba(0,0,0,0.45)] transition-colors hover:border-accent-2 hover:text-accent-2 sm:left-3 sm:size-10"
                 aria-label="Imagen anterior"
@@ -133,6 +137,7 @@ export default function ProjectScreenshots({ images, title }: ProjectScreenshots
               </button>
               <button
                 type="button"
+                suppressHydrationWarning
                 onClick={goNext}
                 className="absolute right-1 top-1/2 z-10 grid size-9 -translate-y-1/2 place-items-center rounded-full border border-line bg-[rgba(8,17,31,0.92)] text-accent shadow-[0_8px_24px_rgba(0,0,0,0.45)] transition-colors hover:border-accent-2 hover:text-accent-2 sm:right-3 sm:size-10"
                 aria-label="Imagen siguiente"

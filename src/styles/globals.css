@@ -68,6 +68,16 @@
     object-fit: cover;
   }
 
+  ::selection {
+    background-color: color-mix(in srgb, var(--color-accent) 40%, transparent);
+    color: var(--color-background-deep);
+  }
+
+  ::-moz-selection {
+    background-color: color-mix(in srgb, var(--color-accent) 40%, transparent);
+    color: var(--color-background-deep);
+  }
+
   ::-webkit-scrollbar {
     width: 0.8rem;
   }
@@ -270,6 +280,33 @@ html.with-hud-cursor [contenteditable="true"] {
 
   .nav-link:nth-child(even):hover::before {
     transform: scaleX(1) rotate(2deg);
+  }
+
+  /* Mismo resalte que hover: sección actual al hacer scroll */
+  .nav-link--active {
+    @apply text-background-deep;
+    transform: translateY(-1px);
+  }
+
+  .nav-link--active span {
+    @apply text-background-deep;
+  }
+
+  .nav-link--active::before {
+    opacity: 1;
+    transform: scaleX(1) rotate(-2deg);
+  }
+
+  .nav-link:nth-child(even).nav-link--active::before {
+    transform: scaleX(1) rotate(2deg);
+  }
+
+  .nav-link--active:hover {
+    @apply text-background-deep;
+  }
+
+  .nav-link--active:hover span {
+    @apply text-background-deep;
   }
 }
 
