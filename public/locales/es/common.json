@@ -122,8 +122,8 @@
   },
   "contact": {
     "eyebrow": "../Contacto",
-    "title": "Hablemos de tu proximo producto, dashboard o integracion.",
-    "description": "Estoy abierto a oportunidades donde pueda combinar desarrollo full-stack, IoT y visualizacion de datos con una experiencia de usuario cuidada.",
+    "title": "Disponible para freelance y posiciones full-time.",
+    "description": "Si tenés un proyecto con datos, IoT o deportes — o simplemente querés charlar — escribime.",
     "form": {
       "name": "Nombre",
       "namePlaceholder": "Tu nombre",

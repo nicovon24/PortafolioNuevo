@@ -3,7 +3,6 @@
 import { Mail } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import MotionFade from "@/components/motion/MotionFade";
-import ContactForm from "@/components/sections/ContactForm";
 import Section from "@/components/ui/Section";
 import { profile } from "@/data/portfolio";
 
@@ -20,7 +19,7 @@ export default function ContactSection() {
       eyebrow={t("contact.eyebrow")}
       title={t("contact.title")}
     >
-      <div className={`${panel} grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-10`}>
+      <div className={`${panel} flex flex-col justify-center gap-4`}>
         <MotionFade className="flex flex-col justify-center gap-4">
           <p className="m-0 leading-relaxed text-muted lg:text-[1.02rem]">
             {t("contact.description")}
@@ -31,9 +30,6 @@ export default function ContactSection() {
           >
             <Mail size={17} /> {profile.email}
           </a>
-        </MotionFade>
-        <MotionFade delay={0.06}>
-          <ContactForm />
         </MotionFade>
       </div>
     </Section>

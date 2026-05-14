@@ -120,7 +120,7 @@ export const experiences: Array<{
     key: "henry",
     company: "Soy Henry",
     icon: "/images/company/henry.png",
-    iconBg: "#f5a623",
+    iconBg: "#ffff00",
     kind: "study",
   },
 ];

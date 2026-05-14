@@ -14,6 +14,10 @@ export const metadata: Metadata = {
   title: "Nicolas Von Muhlinen | Full-stack IoT Developer",
   description:
     "Portfolio de Nicolas Von Muhlinen, desarrollador Full-stack IoT basado en Cordoba, Argentina.",
+  // Dark Reader looks for meta[name=darkreader-lock]; Next skips `other` values that are "", so content must be non-empty.
+  other: {
+    "darkreader-lock": "on",
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

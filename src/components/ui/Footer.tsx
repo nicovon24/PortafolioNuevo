@@ -1,6 +1,6 @@
 "use client";
 
-import { FileDown, Github, Linkedin } from "lucide-react";
+import { FileDown, Github, Linkedin, Mail } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { profile } from "@/data/portfolio";
 
@@ -30,6 +30,9 @@ export default function Footer() {
               </a>
               <a href={cv.href} target="_blank" rel="noreferrer" aria-label={t("footer.downloadCv")} className={iconBtn}>
                 <FileDown size={17} />
+              </a>
+              <a href={`mailto:${profile.email}`} aria-label="Email" className={iconBtn}>
+                <Mail size={17} />
               </a>
             </div>
             <p className="m-0 font-sans text-[clamp(0.8125rem,0.72rem+0.35vw,0.95rem)] font-semibold uppercase tracking-[0.16em] text-ink">
