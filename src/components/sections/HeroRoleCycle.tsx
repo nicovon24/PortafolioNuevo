@@ -1,26 +1,23 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
-/** Cortas para el typewriter; reflejan CV + proyectos (IoT, dashboards, deporte/datos). */
-const PHRASES = [
-  "Full-stack developer",
-  "React · Node · TypeScript · Angular",
-  "+3 años de experiencia",
-  "IoT, Dashboards y Deportes ",
-];
 const TYPE_DELAY = 68;
 const HOLD_DELAY = 2400;
 const ERASE_DELAY = 38;
 
 export default function HeroRoleCycle({ className }: { className?: string }) {
+  const { t } = useTranslation();
+  const phrases = t("hero.phrases", { returnObjects: true }) as string[];
+
   const [display, setDisplay] = useState("");
   const [phraseIdx, setPhraseIdx] = useState(0);
   const [phase, setPhase] = useState<"typing" | "hold" | "erasing">("typing");
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    const phrase = PHRASES[phraseIdx]!;
+    const phrase = phrases[phraseIdx] ?? "";
 
     if (phase === "typing") {
       if (display.length < phrase.length) {
@@ -40,7 +37,7 @@ export default function HeroRoleCycle({ className }: { className?: string }) {
           ERASE_DELAY,
         );
       } else {
-        setPhraseIdx((phraseIdx + 1) % PHRASES.length);
+        setPhraseIdx((phraseIdx + 1) % phrases.length);
         setPhase("typing");
       }
     }
@@ -48,7 +45,7 @@ export default function HeroRoleCycle({ className }: { className?: string }) {
     return () => {
       if (timer.current) clearTimeout(timer.current);
     };
-  }, [display, phase, phraseIdx]);
+  }, [display, phase, phraseIdx, phrases]);
 
   return (
     <span className={className}>

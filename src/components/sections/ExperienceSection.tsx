@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { GraduationCap, Monitor } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { experiences } from "@/data/portfolio";
 import { cn } from "@/lib/utils";
 
@@ -64,6 +65,8 @@ function ExperienceCard({
 }
 
 export default function ExperienceSection() {
+  const { t } = useTranslation();
+
   return (
     <section
       id="experience"
@@ -71,18 +74,17 @@ export default function ExperienceSection() {
     >
       <header className="mb-10 grid max-w-[900px] gap-2 md:mb-11 lg:mb-12">
         <p className="m-0 font-mono text-sm uppercase tracking-[0.08em] text-muted">
-          04 · Experiencia
+          {t("experience.eyebrow")}
         </p>
         <div className="flex flex-wrap items-center gap-4">
           <h2 className="m-0 font-mono text-[clamp(1.65rem,4.2vw,3rem)] leading-tight tracking-normal text-accent">
-            Experiencias
+            {t("experience.title")}
           </h2>
           <span className="hidden h-px min-w-[4rem] flex-1 max-w-[11rem] bg-accent/65 sm:block" aria-hidden />
         </div>
       </header>
 
       <div className="relative mx-auto max-w-[72rem]">
-        {/* Desktop: línea vertical centrada */}
         <div
           className="pointer-events-none absolute left-[21px] top-3 bottom-3 hidden w-px bg-accent/35 md:left-1/2 md:block md:-translate-x-1/2"
           aria-hidden
@@ -92,29 +94,29 @@ export default function ExperienceSection() {
           {experiences.map((exp, i) => {
             const cardLeft = i % 2 === 0;
             const isLast = i === experiences.length - 1;
+            const title = t(`experience.items.${exp.key}.title`);
+            const date = t(`experience.items.${exp.key}.date`);
+            const points = t(`experience.items.${exp.key}.points`, { returnObjects: true }) as string[];
 
             return (
-              <li key={`${exp.company}-${exp.date}`}>
+              <li key={`${exp.company}-${exp.key}`}>
                 {/* Mobile */}
                 <div className="flex gap-5 md:hidden">
                   <div className="flex shrink-0 flex-col items-center pt-2">
                     <TimelineDot kind={exp.kind} />
                     {!isLast && (
-                      <div
-                        className="mt-3 mb-1 min-h-10 w-px flex-1 bg-accent/28"
-                        aria-hidden
-                      />
+                      <div className="mt-3 mb-1 min-h-10 w-px flex-1 bg-accent/28" aria-hidden />
                     )}
                   </div>
                   <div className="min-w-0 flex-1 pb-2">
                     <ExperienceCard
                       company={exp.company}
-                      title={exp.title}
+                      title={title}
                       icon={exp.icon}
                       iconBg={exp.iconBg}
-                      points={exp.points}
+                      points={points}
                     />
-                    <p className="mt-3 font-mono text-[0.8125rem] text-muted">{exp.date}</p>
+                    <p className="mt-3 font-mono text-[0.8125rem] text-muted">{date}</p>
                   </div>
                 </div>
 
@@ -125,25 +127,23 @@ export default function ExperienceSection() {
                       <div className="w-[calc(50%-2rem)] shrink-0 pr-8">
                         <ExperienceCard
                           company={exp.company}
-                          title={exp.title}
+                          title={title}
                           icon={exp.icon}
                           iconBg={exp.iconBg}
-                          points={exp.points}
+                          points={points}
                         />
                       </div>
                       <div className="relative flex w-16 shrink-0 justify-center pt-6">
                         <TimelineDot kind={exp.kind} />
                       </div>
                       <div className="flex w-[calc(50%-2rem)] shrink-0 items-start pl-8 pt-8">
-                        <p className="m-0 font-mono text-[0.8125rem] text-muted">{exp.date}</p>
+                        <p className="m-0 font-mono text-[0.8125rem] text-muted">{date}</p>
                       </div>
                     </>
                   ) : (
                     <>
                       <div className="flex w-[calc(50%-2rem)] shrink-0 justify-end pr-8 pt-8">
-                        <p className="m-0 text-right font-mono text-[0.8125rem] text-muted">
-                          {exp.date}
-                        </p>
+                        <p className="m-0 text-right font-mono text-[0.8125rem] text-muted">{date}</p>
                       </div>
                       <div className="relative flex w-16 shrink-0 justify-center pt-6">
                         <TimelineDot kind={exp.kind} />
@@ -151,10 +151,10 @@ export default function ExperienceSection() {
                       <div className="w-[calc(50%-2rem)] shrink-0 pl-8">
                         <ExperienceCard
                           company={exp.company}
-                          title={exp.title}
+                          title={title}
                           icon={exp.icon}
                           iconBg={exp.iconBg}
-                          points={exp.points}
+                          points={points}
                         />
                       </div>
                     </>

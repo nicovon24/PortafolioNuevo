@@ -1,11 +1,13 @@
+"use client";
+
 import { ArrowDown, Download, Github, Linkedin } from "lucide-react";
+import { motion, type Variants } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import MotionFade from "@/components/motion/MotionFade";
 import MotionSlide from "@/components/motion/MotionSlide";
 import HeroScrambleName from "@/components/sections/HeroScrambleName";
 import HeroRoleCycle from "@/components/sections/HeroRoleCycle";
 import { profile } from "@/data/portfolio";
-
-const HERO_TAGS = ["IoT", "Sports tech", "Dashboards"] as const;
 
 const btnPrimary =
   "inline-flex min-h-10 items-center justify-center gap-2 border border-accent bg-accent px-3.5 font-mono text-sm font-bold uppercase tracking-wider text-background-deep shadow-[0_0_0_1px_rgba(100,255,218,0.35)_inset,0_0_24px_rgba(100,255,218,0.12)] transition-colors hover:border-accent-2 hover:bg-[rgba(255,105,180,0.12)] hover:text-accent-2";
@@ -14,7 +16,7 @@ const btnSecondary =
   "inline-flex min-h-10 items-center justify-center gap-2 border border-line bg-transparent px-3.5 font-mono text-sm font-bold uppercase tracking-wider text-muted transition-colors hover:border-accent hover:text-accent";
 
 const iconBtn =
-  "grid size-9 place-items-center border border-line bg-[rgba(8,17,31,0.88)] text-accent transition-colors hover:border-accent hover:text-accent-2";
+  "grid size-9 place-items-center border border-line bg-[rgba(8,17,31,0.88)] text-accent transition-colors hover:border-accent-2 hover:bg-[rgba(255,105,180,0.12)] hover:text-accent-2";
 
 const nameLine1Class =
   "leading-[0.95] text-ink text-[clamp(2.05rem,calc(0.88rem+5.2vw),4rem)]";
@@ -30,6 +32,43 @@ const hudValMuted =
   "text-right font-semibold uppercase tracking-[0.14em] text-muted/55";
 const hudValAccent =
   "text-right font-semibold uppercase tracking-[0.14em] text-accent";
+
+const HERO_TAGS = ["IoT", "Sports tech", "Dashboards"] as const;
+
+const heroHudViewport = { once: true as const, margin: "-80px" as const };
+
+const heroHudListVariants: Variants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.07, delayChildren: 0.14 },
+  },
+};
+
+const heroHudRowVariants: Variants = {
+  hidden: { opacity: 0, x: 32 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+const heroStatsListVariants: Variants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.16, delayChildren: 0.22 },
+  },
+};
+
+const heroStatItemVariants: Variants = {
+  hidden: { opacity: 0, y: 36, scale: 0.92 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] },
+  },
+};
 
 function HeroRingStat({ label, value }: { label: string; value: string }) {
   return (
@@ -49,13 +88,15 @@ function HeroRingStat({ label, value }: { label: string; value: string }) {
 }
 
 export default function HeroSection() {
+  const { t } = useTranslation();
+
   const github = profile.socials.find((s) => s.label === "GitHub")!;
   const linkedin = profile.socials.find((s) => s.label === "LinkedIn")!;
   const cv = profile.socials.find((s) => s.label === "CV")!;
 
   const nameParts = profile.name.trim().split(/\s+/);
   const heroFirstName = nameParts[0] ?? profile.name;
-  const heroLastName = nameParts.slice(1).join(" ") || profile.roleSecond;
+  const heroLastName = nameParts.slice(1).join(" ") || "";
 
   return (
     <section
@@ -64,26 +105,32 @@ export default function HeroSection() {
     >
       <aside
         className="pointer-events-none absolute right-1 z-[2] hidden max-w-[14rem] text-right sm:right-2 md:block md:right-3 lg:right-4 top-[5.75rem] lg:top-[6.75rem]"
-        aria-label="Resumen de perfil"
+        aria-label={t("hero.profileSummary")}
       >
-        <div className="space-y-1.5">
-          <p className={hudRow}>
-            <span className={hudKey}>Loc ·</span>
-            <span className={hudValMuted}>Córdoba / ARG</span>
-          </p>
-          <p className={hudRow}>
-            <span className={hudKey}>Stack ·</span>
-            <span className={hudValMuted}>Next · Angular · IoT</span>
-          </p>
-          <p className={hudRow}>
-            <span className={hudKey}>Rol ·</span>
-            <span className={hudValMuted}>Full-stack</span>
-          </p>
-          <p className={hudRow}>
-            <span className={hudKey}>Estado ·</span>
-            <span className={hudValAccent}>Disponible</span>
-          </p>
-        </div>
+        <motion.div
+          className="space-y-1.5"
+          variants={heroHudListVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={heroHudViewport}
+        >
+          <motion.p className={hudRow} variants={heroHudRowVariants}>
+            <span className={hudKey}>{t("hero.locKey")}</span>
+            <span className={hudValMuted}>{t("hero.locVal")}</span>
+          </motion.p>
+          <motion.p className={hudRow} variants={heroHudRowVariants}>
+            <span className={hudKey}>{t("hero.stackKey")}</span>
+            <span className={hudValMuted}>{t("hero.stackVal")}</span>
+          </motion.p>
+          <motion.p className={hudRow} variants={heroHudRowVariants}>
+            <span className={hudKey}>{t("hero.roleKey")}</span>
+            <span className={hudValMuted}>{t("hero.roleVal")}</span>
+          </motion.p>
+          <motion.p className={hudRow} variants={heroHudRowVariants}>
+            <span className={hudKey}>{t("hero.statusKey")}</span>
+            <span className={hudValAccent}>{t("hero.statusVal")}</span>
+          </motion.p>
+        </motion.div>
       </aside>
 
       <div className="relative z-0 flex w-full max-w-[48rem] flex-1 flex-col justify-center text-left lg:max-w-[52rem]">
@@ -101,20 +148,20 @@ export default function HeroSection() {
               </div>
               <span
                 className="inline-flex w-fit shrink-0 items-center gap-2 rounded-full border border-accent/40 bg-accent/[0.07] px-3 py-1 text-[0.62rem] font-bold tracking-[0.12em] text-accent sm:text-[0.65rem]"
-                title="Disponible para nuevos proyectos"
+                title={t("hero.available")}
               >
                 <span className="relative flex h-2 w-2 shrink-0" aria-hidden>
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-35" />
                   <span className="relative m-auto inline-flex h-[5px] w-[5px] rounded-full bg-accent shadow-[0_0_8px_rgba(100,255,218,0.85)]" />
                 </span>
-                Disponible
+                {t("hero.available")}
               </span>
             </div>
           </MotionSlide>
           <MotionFade delay={0.08}>
             <ul
               className="mt-6 flex max-w-2xl flex-wrap gap-2"
-              aria-label="Enfoques y stack"
+              aria-label={t("hero.stackFocus")}
             >
               {HERO_TAGS.map((tag) => (
                 <li
@@ -127,15 +174,17 @@ export default function HeroSection() {
             </ul>
           </MotionFade>
           <MotionFade delay={0.1}>
-            <p className="mt-5 max-w-2xl font-sans text-[0.8rem] leading-relaxed text-muted sm:mt-6 sm:text-[0.95rem]">{profile.intro}</p>
+            <p className="mt-5 max-w-2xl font-sans text-[0.8rem] leading-relaxed text-muted sm:mt-6 sm:text-[0.95rem]">
+              {t("hero.intro")}
+            </p>
           </MotionFade>
           <MotionFade delay={0.2} className="mt-6 flex flex-col gap-3 sm:mt-8">
             <div className="flex flex-wrap gap-3 sm:gap-4">
               <a className={btnPrimary} href="#projects">
-                Ver proyectos <ArrowDown size={16} />
+                {t("hero.viewProjects")} <ArrowDown size={16} />
               </a>
               <a className={btnSecondary} href={cv.href} target="_blank" rel="noreferrer">
-                CV <Download size={16} />
+                {t("hero.cv")} <Download size={16} />
               </a>
             </div>
             <div className="flex flex-wrap gap-2 border-t border-line/40 pt-4">
@@ -150,13 +199,21 @@ export default function HeroSection() {
         </div>
       </div>
 
-      <aside
+      <motion.aside
         className="pointer-events-none absolute bottom-[4.25rem] right-1 z-[2] flex gap-8 sm:bottom-10 sm:right-2 sm:gap-10 md:right-3 lg:right-4"
-        aria-label="Experiencia y proyectos"
+        aria-label={t("hero.statsLabel")}
+        variants={heroStatsListVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={heroHudViewport}
       >
-        <HeroRingStat label="Experiencia" value="3+" />
-        <HeroRingStat label="Proyectos" value="12+" />
-      </aside>
+        <motion.div variants={heroStatItemVariants}>
+          <HeroRingStat label={t("hero.experienceStat")} value="3+" />
+        </motion.div>
+        <motion.div variants={heroStatItemVariants}>
+          <HeroRingStat label={t("hero.projectsStat")} value="12+" />
+        </motion.div>
+      </motion.aside>
     </section>
   );
 }

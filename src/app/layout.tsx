@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Nunito_Sans } from "next/font/google";
 import TrailingCursor from "@/components/TrailingCursor";
+import I18nProvider from "@/components/providers/I18nProvider";
 import "@/styles/globals.css";
 
 const nunitoSans = Nunito_Sans({
@@ -19,8 +20,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="es" className={`scroll-smooth ${nunitoSans.variable}`}>
       <body className={`antialiased ${nunitoSans.className}`} suppressHydrationWarning>
-        <TrailingCursor />
-        {children}
+        <I18nProvider>
+          <TrailingCursor />
+          {children}
+        </I18nProvider>
       </body>
     </html>
   );

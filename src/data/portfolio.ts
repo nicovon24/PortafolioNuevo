@@ -1,9 +1,9 @@
 export const navItems = [
-  { href: "#about", label: "Sobre mi" },
-  { href: "#tech", label: "Tech" },
-  { href: "#projects", label: "Proyectos" },
-  { href: "#experience", label: "Experiencia" },
-  { href: "#contact", label: "Contacto" },
+  { href: "#about", label: "nav.about" },
+  { href: "#tech", label: "nav.tech" },
+  { href: "#projects", label: "nav.projects" },
+  { href: "#experience", label: "nav.experience" },
+  { href: "#contact", label: "nav.contact" },
 ];
 
 export const profile = {
@@ -32,7 +32,7 @@ export const services = [
 
 export const techGroups = [
   {
-    title: "Frontend",
+    title: "tech.groups.frontend",
     items: [
       { name: "Next.js", icon: "/images/svg/next.svg" },
       { name: "React", icon: "/images/svg/react.svg" },
@@ -50,7 +50,7 @@ export const techGroups = [
     ],
   },
   {
-    title: "Backend y herramientas",
+    title: "tech.groups.backend",
     items: [
       { name: "Node.js", icon: "/images/svg/node.svg" },
       { name: "Express.js", icon: "/images/svg/express.svg" },
@@ -69,7 +69,7 @@ export const techGroups = [
     ],
   },
   {
-    title: "Testing",
+    title: "tech.groups.testing",
     items: [
       { name: "Vitest", icon: "/images/svg/vitest.svg" },
       { name: "Jest", icon: "/images/svg/jest.svg" },
@@ -78,7 +78,7 @@ export const techGroups = [
     ],
   },
   {
-    title: "IA",
+    title: "tech.groups.ia",
     items: [
       { name: "Claude Code", icon: "/images/svg/claude.svg" },
       { name: "ChatGPT", icon: "/images/svg/openai.svg" },
@@ -91,86 +91,55 @@ export const techGroups = [
 export type ExperienceKind = "work" | "study";
 
 export const experiences: Array<{
+  key: string;
   company: string;
-  title: string;
-  date: string;
   icon: string;
   iconBg?: string;
-  points: string[];
   kind: ExperienceKind;
 }> = [
   {
+    key: "senzary",
     company: "Senzary",
-    title: "Full-stack IoT Developer",
-    date: "Agosto 2023 - Actualidad",
     icon: "/images/projects/senzary/logo/1.png",
     kind: "work",
-    points: [
-      "Desarrollo y diseño de dashboards para diversos casos de uso",
-      "Análisis de casos de uso, estableciendo offsets y thresholds",
-      "Implementación de rule chains y procesamiento avanzado de datos",
-      "Implementación de metodologías ágiles",
-      "Capacitación a otros desarrolladores",
-    ],
   },
   {
+    key: "freelance",
     company: "Freelance en Gen Consultores",
-    title: "Full-stack Developer",
-    date: "Abril 2023 - Julio 2023",
     icon: "/images/company/freelance.png",
     iconBg: "#1a3a6b",
     kind: "work",
-    points: [
-      "Renderizado de componentes y estilos en diferentes secciones",
-      "Mantenimiento y optimización de la app",
-      "Trabajo en equipo y propuestas de mejora",
-    ],
   },
   {
+    key: "nocountry",
     company: "No Country",
-    title: "Full-stack Developer",
-    date: "Abril 2023 - Julio 2023",
     icon: "/images/company/no_country.png",
     kind: "study",
-    points: [
-      "Liderar el armado de la base de datos y del servidor (back-end)",
-      "Desarrollar las rutas y controladores de empleados",
-      "Asistir en el frontend y el armado de componentes",
-    ],
   },
   {
+    key: "henry",
     company: "Soy Henry",
-    title: "Asistente de enseñanza / Tutor",
-    date: "Enero 2023 - Abril 2023",
     icon: "/images/company/henry.png",
     iconBg: "#f5a623",
     kind: "study",
-    points: [
-      "Coordinar el grupo de estudiantes con el objetivo de lograr su adaptación al programa",
-      "Proponer ideas para la mejora de los procesos del Bootcamp",
-      "Promover la cohesión grupal y generar comunidad",
-    ],
   },
 ];
 
 export type PortfolioProject = {
+  key: string;
   title: string;
-  description: string;
   technologies: string[];
   images: string[];
   live?: string;
   code?: string;
-  /** Si es true, el proyecto sigue en desarrollo activo */
   inDevelopment?: boolean;
-  /** No listar en la sección de proyectos */
   hidden?: boolean;
 };
 
 export const projects: PortfolioProject[] = [
   {
+    key: "prodeazo",
     title: "Prodeazo (Prode Mundial 2026)",
-    description:
-      "Plataforma de pronósticos y estadísticas de fútbol pensada para el Mundial 2026 y escalar a otros torneos: fixtures y resultados en tiempo real, predicciones antes del inicio del partido, puntos por aciertos y rankings generales y por ligas. MVP con fixture, predicciones, ranking, comparativa usuario a usuario y picks especiales (campeón, goleador, etc.); roadmap en fases para miniligas con administración y un módulo estadístico reutilizable (grupos, llaves, métricas y perfiles). Stack inicial: Next.js y TypeScript, Supabase con PostgreSQL, Tailwind y NextUI; fixtures y resultados vía Bzzoiro BSD.",
     technologies: ["Next.js", "TypeScript", "Supabase", "Tailwind", "NextUI"],
     images: [
       "/images/projects/prodeazo/home.jpg",
@@ -182,9 +151,8 @@ export const projects: PortfolioProject[] = [
     inDevelopment: true,
   },
   {
+    key: "scoutpanel",
     title: "Scout Panel",
-    description:
-      "Proyecto desarrollado para un challenge y que sigue en proceso: planeo seguir trabajándolo hasta cerrarlo. El diseño del frontend, del backend y de la base de datos es propio. Los datos son inventados y cargados por seed; la app no está conectada a ninguna API externa de estadísticas ni jugadores reales. Funcionalidades: búsqueda y filtros (posición, nacionalidad, club, edad), comparador hasta tres jugadores con radar y tablas, historial de lesiones ligado al rating, shortlist con auth JWT, clubes, reportes exportables PDF/Excel, heatmaps y vista de mercado. UI oscura inspirada en LDP y Sofascore. Stack: Next.js 14 (App Router), TypeScript, Tailwind, HeroUI (NextUI), Zustand y Recharts; API Express, Drizzle, Zod y PostgreSQL 16; tests Vitest, Supertest y Playwright; Docker y deploy Vercel + Render + Supabase.",
     technologies: ["Next.js", "TypeScript", "Express", "Drizzle", "PostgreSQL", "Tailwind"],
     images: [
       "/images/projects/scoutpanel/home.png",
@@ -196,24 +164,17 @@ export const projects: PortfolioProject[] = [
     inDevelopment: true,
   },
   {
+    key: "gabriel",
     title: "Gabriel Bornoroni — Sitio oficial",
     hidden: true,
-    description:
-      "Landing institucional y espacio del sorteo de la dieta del Diputado Nacional Gabriel Bornoroni (Córdoba). Resume su rol desde 2023 y el trabajo legislativo en el equipo del Presidente Javier Milei y Karina Milei; comunica que la política debe estar al servicio de la sociedad y presenta el sorteo de la dieta como gesto de transparencia («no vine a vivir de la política sino a cambiar las cosas»). Guía el registro para participantes mayores de 18 años con domicilio en la provincia de Córdoba —una vez registrados entran en todos los sorteos futuros—, destaca la cuenta regresiva del próximo sorteo y enlaza participación y bases y condiciones.",
     technologies: ["Next.js", "TypeScript", "Tailwind CSS"],
-    images: ["/images/projects/partido/gabriel/sorteo.png", "/images/projects/partido/gabriel/home.png",],
+    images: ["/images/projects/partido/gabriel/sorteo.png", "/images/projects/partido/gabriel/home.png"],
     live: "https://gabrielbornoroni.com.ar/",
   },
   {
+    key: "appfiscalizacion",
     title: "App Fiscalización",
-    description:
-      "Web para fiscales generales de Córdoba en las legislativas de octubre de 2025: dashboard, login, fiscales, incidencias, preguntas y escrutinio por mesas, consumiendo una API REST. Next.js (App Router), Redux Toolkit y Tailwind; feedback con toasts y alertas. Deploy en Vercel.",
-    technologies: [
-      "Next.js",
-      "Framer Motion",
-      "Redux Toolkit",
-      "Vercel",
-    ],
+    technologies: ["Next.js", "Framer Motion", "Redux Toolkit", "Vercel"],
     images: [
       "/images/projects/partido/app/dashboard1.png",
       "/images/projects/partido/app/dashboard2.png",
@@ -223,9 +184,8 @@ export const projects: PortfolioProject[] = [
     ],
   },
   {
+    key: "iotlogiq",
     title: "IoTLogIQ - Senzary",
-    description:
-      "Producto Smart Industry desarrollado desde cero con Angular y ThingsBoard: plataforma de análisis de datos y dashboards de sensores y activos, con trabajo full-stack (frontend y backend). Lideré la migración a la nueva versión (dashboards y onboardings renovados) y más de 10 proyectos y subproyectos para clientes en sectores como aeropuertos, data centers, monitoreo ambiental y acuíferos, principalmente en Latinoamérica y EE.UU. La galería resume vistas del producto, digital twin, analítica predictiva y despliegues en campo (incluido aeropuerto y otros entornos industriales).",
     technologies: ["Angular", "ThingsBoard", "IoT", "Dashboards", "Data visualization"],
     images: [
       "/images/projects/senzary/demo/air-quality-1.png",
@@ -251,12 +211,11 @@ export const projects: PortfolioProject[] = [
     ],
   },
   {
+    key: "cloudlab",
     title: "Cloudlab - No Country",
-    description:
-      "Plataforma para laboratorios clinicos orientada a agilizar la gestion de estudios, resultados y pacientes.",
     technologies: ["Next.js", "TypeScript", "Tailwind"],
     images: ["/images/projects/cloudlab/1.png", "/images/projects/cloudlab/2.png", "/images/projects/cloudlab/3.png"],
     code: "https://github.com/No-Country/s9-16-m-node-react",
     live: "https://cloudlab-s9-16.vercel.app/",
-  }
+  },
 ];

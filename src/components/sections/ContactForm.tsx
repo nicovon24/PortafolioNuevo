@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Send } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { profile } from "@/data/portfolio";
 
 const inputClass =
@@ -9,11 +10,11 @@ const inputClass =
 
 const labelClass = "mb-1.5 block font-mono text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-accent";
 
-/** Mismo estilo que el CTA primario del hero (“Ver proyectos”). */
 const btnSubmit =
   "inline-flex min-h-10 shrink-0 items-center justify-center gap-2 border border-accent bg-accent px-3.5 font-mono text-sm font-bold uppercase tracking-wider text-background-deep shadow-[0_0_0_1px_rgba(100,255,218,0.35)_inset,0_0_24px_rgba(100,255,218,0.12)] transition-colors hover:border-accent-2 hover:bg-[rgba(255,105,180,0.12)] hover:text-accent-2";
 
 export default function ContactForm() {
+  const { t } = useTranslation();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
@@ -21,8 +22,8 @@ export default function ContactForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const body = [`Nombre: ${name}`, `Email: ${email}`, "", message].join("\n");
-    const mailto = `mailto:${profile.email}?subject=${encodeURIComponent(subject || "Contacto desde el portfolio")}&body=${encodeURIComponent(body)}`;
+    const body = [`${t("contact.form.name")}: ${name}`, `${t("contact.form.email")}: ${email}`, "", message].join("\n");
+    const mailto = `mailto:${profile.email}?subject=${encodeURIComponent(subject || t("contact.form.defaultSubject"))}&body=${encodeURIComponent(body)}`;
     window.location.href = mailto;
   };
 
@@ -31,7 +32,7 @@ export default function ContactForm() {
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <label className={labelClass} htmlFor="contact-name">
-            Nombre
+            {t("contact.form.name")}
           </label>
           <input
             id="contact-name"
@@ -42,13 +43,13 @@ export default function ContactForm() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             className={inputClass}
-            placeholder="Tu nombre"
+            placeholder={t("contact.form.namePlaceholder")}
             suppressHydrationWarning
           />
         </div>
         <div>
           <label className={labelClass} htmlFor="contact-email">
-            Email
+            {t("contact.form.email")}
           </label>
           <input
             id="contact-email"
@@ -59,14 +60,14 @@ export default function ContactForm() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className={inputClass}
-            placeholder="nombre@ejemplo.com"
+            placeholder={t("contact.form.emailPlaceholder")}
             suppressHydrationWarning
           />
         </div>
       </div>
       <div>
         <label className={labelClass} htmlFor="contact-subject">
-          Asunto
+          {t("contact.form.subject")}
         </label>
         <input
           id="contact-subject"
@@ -75,13 +76,13 @@ export default function ContactForm() {
           value={subject}
           onChange={(e) => setSubject(e.target.value)}
           className={inputClass}
-          placeholder="Asunto del mensaje"
+          placeholder={t("contact.form.subjectPlaceholder")}
           suppressHydrationWarning
         />
       </div>
       <div>
         <label className={labelClass} htmlFor="contact-message">
-          Mensaje
+          {t("contact.form.message")}
         </label>
         <textarea
           id="contact-message"
@@ -91,13 +92,13 @@ export default function ContactForm() {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           className={`${inputClass} min-h-[8.5rem] resize-y`}
-          placeholder="Contame en qué puedo ayudarte..."
+          placeholder={t("contact.form.messagePlaceholder")}
           suppressHydrationWarning
         />
       </div>
       <div className="flex flex-col gap-2 pt-1 sm:flex-row sm:items-center sm:justify-between">
         <button type="submit" className={btnSubmit} suppressHydrationWarning>
-          Enviar <Send size={16} />
+          {t("contact.form.submit")} <Send size={16} />
         </button>
       </div>
     </form>

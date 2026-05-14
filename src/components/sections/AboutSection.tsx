@@ -1,13 +1,18 @@
+"use client";
+
+import { useTranslation } from "react-i18next";
 import MotionFade from "@/components/motion/MotionFade";
 import Section from "@/components/ui/Section";
-import { profile, services } from "@/data/portfolio";
 
 export default function AboutSection() {
+  const { t } = useTranslation();
+  const services = t("about.services", { returnObjects: true }) as string[];
+
   return (
-    <Section id="about" eyebrow="../Sobre mi" title="Construyo interfaces y sistemas que conectan datos con decisiones.">
+    <Section id="about" eyebrow={t("about.eyebrow")} title={t("about.title")}>
       <div className="grid grid-cols-1 items-start gap-7 lg:grid-cols-[1fr_0.85fr] lg:gap-8">
         <MotionFade className="leading-relaxed text-muted text-base lg:text-[1.05rem]">
-          <p>{profile.about}</p>
+          <p>{t("about.description")}</p>
         </MotionFade>
         <div className="grid gap-3">
           {services.map((service, index) => (

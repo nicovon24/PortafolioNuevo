@@ -1,20 +1,25 @@
+"use client";
+
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
 import MotionFade from "@/components/motion/MotionFade";
 import Section from "@/components/ui/Section";
 import { techGroups } from "@/data/portfolio";
 
 export default function TechSection() {
+  const { t } = useTranslation();
+
   return (
     <Section
       id="tech"
-      eyebrow="../Tech"
-      title="Tecnologías que uso"
+      eyebrow={t("tech.eyebrow")}
+      title={t("tech.title")}
       className="py-10 md:py-12 lg:py-14 [&>div:first-child]:mb-5 md:[&>div:first-child]:mb-6 [&_h2]:text-[clamp(1.25rem,3vw,2rem)]"
     >
       <div className="grid gap-4 lg:gap-5">
         {techGroups.map((group) => (
           <div key={group.title}>
-            <h3 className="m-0 mb-2 font-mono text-sm font-semibold text-accent">{group.title}</h3>
+            <h3 className="m-0 mb-2 font-mono text-sm font-semibold text-accent">{t(group.title)}</h3>
             <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
               {group.items.map((item, index) => (
                 <MotionFade

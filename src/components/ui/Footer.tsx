@@ -1,4 +1,7 @@
+"use client";
+
 import { FileDown, Github, Linkedin } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { profile } from "@/data/portfolio";
 
 const iconBtn =
@@ -8,6 +11,7 @@ const panel =
   "rounded-2xl border border-line bg-panel px-6 py-8 shadow-[0_20px_56px_rgba(0,0,0,0.22)] backdrop-blur-[14px] md:px-8 md:py-9";
 
 export default function Footer() {
+  const { t } = useTranslation();
   const github = profile.socials.find((s) => s.label === "GitHub")!;
   const linkedin = profile.socials.find((s) => s.label === "LinkedIn")!;
   const cv = profile.socials.find((s) => s.label === "CV")!;
@@ -24,7 +28,7 @@ export default function Footer() {
               <a href={linkedin.href} target="_blank" rel="noreferrer" aria-label="LinkedIn" className={iconBtn}>
                 <Linkedin size={17} />
               </a>
-              <a href={cv.href} target="_blank" rel="noreferrer" aria-label="Descargar CV" className={iconBtn}>
+              <a href={cv.href} target="_blank" rel="noreferrer" aria-label={t("footer.downloadCv")} className={iconBtn}>
                 <FileDown size={17} />
               </a>
             </div>

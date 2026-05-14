@@ -1,0 +1,146 @@
+{
+  "nav": {
+    "about": "Sobre mi",
+    "tech": "Tech",
+    "projects": "Proyectos",
+    "experience": "Experiencia",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "locKey": "Loc ·",
+    "locVal": "Córdoba / ARG",
+    "stackKey": "Stack ·",
+    "stackVal": "Next · Angular · IoT",
+    "roleKey": "Rol ·",
+    "roleVal": "Full-stack",
+    "statusKey": "Estado ·",
+    "statusVal": "Disponible",
+    "available": "Disponible",
+    "viewProjects": "Ver proyectos",
+    "cv": "CV",
+    "profileSummary": "Resumen de perfil",
+    "statsLabel": "Experiencia y proyectos",
+    "experienceStat": "Experiencia",
+    "projectsStat": "Proyectos",
+    "stackFocus": "Enfoques y stack",
+    "intro": "Soy desarrollador Full-stack y Analista de Sistemas, con experiencia desde 2022. He trabajado en plataformas IoT industriales y dashboards con tecnologías Javascript, Typescript, SQL y NoSQL, y me estoy orientando hacia el software aplicado al deporte y el machine learning.",
+    "phrases": [
+      "Full-stack developer",
+      "React · Node · TypeScript · Angular",
+      "+3 años de experiencia",
+      "IoT, Dashboards y Deportes"
+    ]
+  },
+  "about": {
+    "eyebrow": "../Sobre mi",
+    "title": "Construyo interfaces y sistemas que conectan datos con decisiones.",
+    "description": "Radicado en Córdoba, Argentina, soy desarrollador full-stack y Analista de Sistemas. Trabajo con React, Node, TypeScript, Angular, bases de datos SQL y NoSQL, con experiencia en ThingsBoard y plataformas IoT industriales. He entregado soluciones para aeropuertos, data centers y monitoreo ambiental para clientes en Latinoamérica y EE.UU. Hablo tres idiomas y uso herramientas de IA (Cursor, Claude, Gemini) como parte activa de mi flujo de trabajo. Mi foco actual está en el cruce entre software, datos y deporte — especialmente el fútbol profesional — y en incorporar machine learning a proyectos con impacto real.",
+    "services": [
+      "Desarrollador IoT",
+      "Full-stack con experiencia frontend y backend",
+      "Dashboards y visualizacion de datos",
+      "Fan de Star Wars y del deporte"
+    ]
+  },
+  "tech": {
+    "eyebrow": "../Tech",
+    "title": "Tecnologías que uso",
+    "groups": {
+      "frontend": "Frontend",
+      "backend": "Backend y herramientas",
+      "testing": "Testing",
+      "ia": "IA"
+    }
+  },
+  "projects": {
+    "eyebrow": "../Proyectos",
+    "title": "Proyectos destacados",
+    "inDevelopment": "En desarrollo",
+    "viewCode": "Ver código",
+    "viewLive": "Ver live",
+    "items": {
+      "prodeazo": {
+        "description": "Plataforma de pronósticos y estadísticas de fútbol pensada para el Mundial 2026 y escalar a otros torneos: fixtures y resultados en tiempo real, predicciones antes del inicio del partido, puntos por aciertos y rankings generales y por ligas. MVP con fixture, predicciones, ranking, comparativa usuario a usuario y picks especiales (campeón, goleador, etc.); roadmap en fases para miniligas con administración y un módulo estadístico reutilizable (grupos, llaves, métricas y perfiles). Stack inicial: Next.js y TypeScript, Supabase con PostgreSQL, Tailwind y NextUI; fixtures y resultados vía Bzzoiro BSD."
+      },
+      "scoutpanel": {
+        "description": "Proyecto desarrollado para un challenge y que sigue en proceso: planeo seguir trabajándolo hasta cerrarlo. El diseño del frontend, del backend y de la base de datos es propio. Los datos son inventados y cargados por seed; la app no está conectada a ninguna API externa de estadísticas ni jugadores reales. Funcionalidades: búsqueda y filtros (posición, nacionalidad, club, edad), comparador hasta tres jugadores con radar y tablas, historial de lesiones ligado al rating, shortlist con auth JWT, clubes, reportes exportables PDF/Excel, heatmaps y vista de mercado. UI oscura inspirada en LDP y Sofascore. Stack: Next.js 14 (App Router), TypeScript, Tailwind, HeroUI (NextUI), Zustand y Recharts; API Express, Drizzle, Zod y PostgreSQL 16; tests Vitest, Supertest y Playwright; Docker y deploy Vercel + Render + Supabase."
+      },
+      "appfiscalizacion": {
+        "description": "Web para fiscales generales de Córdoba en las legislativas de octubre de 2025: dashboard, login, fiscales, incidencias, preguntas y escrutinio por mesas, consumiendo una API REST. Next.js (App Router), Redux Toolkit y Tailwind; feedback con toasts y alertas. Deploy en Vercel."
+      },
+      "iotlogiq": {
+        "description": "Producto Smart Industry desarrollado desde cero con Angular y ThingsBoard: plataforma de análisis de datos y dashboards de sensores y activos, con trabajo full-stack (frontend y backend). Lideré la migración a la nueva versión (dashboards y onboardings renovados) y más de 10 proyectos y subproyectos para clientes en sectores como aeropuertos, data centers, monitoreo ambiental y acuíferos, principalmente en Latinoamérica y EE.UU. La galería resume vistas del producto, digital twin, analítica predictiva y despliegues en campo (incluido aeropuerto y otros entornos industriales)."
+      },
+      "cloudlab": {
+        "description": "Plataforma para laboratorios clinicos orientada a agilizar la gestion de estudios, resultados y pacientes."
+      }
+    }
+  },
+  "experience": {
+    "eyebrow": "04 · Experiencia",
+    "title": "Experiencias",
+    "items": {
+      "senzary": {
+        "title": "Full-stack IoT Developer",
+        "date": "Agosto 2023 - Actualidad",
+        "points": [
+          "Desarrollo y diseño de dashboards para diversos casos de uso",
+          "Análisis de casos de uso, estableciendo offsets y thresholds",
+          "Implementación de rule chains y procesamiento avanzado de datos",
+          "Implementación de metodologías ágiles",
+          "Capacitación a otros desarrolladores"
+        ]
+      },
+      "freelance": {
+        "title": "Full-stack Developer",
+        "date": "Abril 2023 - Julio 2023",
+        "points": [
+          "Renderizado de componentes y estilos en diferentes secciones",
+          "Mantenimiento y optimización de la app",
+          "Trabajo en equipo y propuestas de mejora"
+        ]
+      },
+      "nocountry": {
+        "title": "Full-stack Developer",
+        "date": "Abril 2023 - Julio 2023",
+        "points": [
+          "Liderar el armado de la base de datos y del servidor (back-end)",
+          "Desarrollar las rutas y controladores de empleados",
+          "Asistir en el frontend y el armado de componentes"
+        ]
+      },
+      "henry": {
+        "title": "Asistente de enseñanza / Tutor",
+        "date": "Enero 2023 - Abril 2023",
+        "points": [
+          "Coordinar el grupo de estudiantes con el objetivo de lograr su adaptación al programa",
+          "Proponer ideas para la mejora de los procesos del Bootcamp",
+          "Promover la cohesión grupal y generar comunidad"
+        ]
+      }
+    }
+  },
+  "contact": {
+    "eyebrow": "../Contacto",
+    "title": "Hablemos de tu proximo producto, dashboard o integracion.",
+    "description": "Estoy abierto a oportunidades donde pueda combinar desarrollo full-stack, IoT y visualizacion de datos con una experiencia de usuario cuidada.",
+    "form": {
+      "name": "Nombre",
+      "namePlaceholder": "Tu nombre",
+      "email": "Email",
+      "emailPlaceholder": "nombre@ejemplo.com",
+      "subject": "Asunto",
+      "subjectPlaceholder": "Asunto del mensaje",
+      "message": "Mensaje",
+      "messagePlaceholder": "Contame en qué puedo ayudarte...",
+      "submit": "Enviar",
+      "defaultSubject": "Contacto desde el portfolio"
+    }
+  },
+  "footer": {
+    "downloadCv": "Descargar CV"
+  },
+  "lang": {
+    "toggle": "Cambiar idioma"
+  }
+}

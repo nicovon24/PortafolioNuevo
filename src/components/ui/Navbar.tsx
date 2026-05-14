@@ -1,10 +1,12 @@
 "use client";
 
-import { Github, Linkedin, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
-import { navItems, profile } from "@/data/portfolio";
+import { useTranslation } from "react-i18next";
+import { navItems } from "@/data/portfolio";
 import { cn } from "@/lib/utils";
+import LanguageToggle from "@/components/ui/LanguageToggle";
 
 const headerIconBtn =
   "grid size-9 place-items-center rounded-full border border-line bg-[rgba(100,255,218,0.08)] text-accent transition-colors hover:border-accent-2 hover:bg-[rgba(255,105,180,0.12)] hover:text-accent-2";
@@ -62,6 +64,7 @@ function useActiveSectionHref() {
 }
 
 export default function Navbar() {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const [hasScrolled, setHasScrolled] = useState(false);
   const activeHref = useActiveSectionHref();
@@ -118,17 +121,12 @@ export default function Navbar() {
             aria-current={activeHref === item.href ? "location" : undefined}
           >
             <span>{String(index + 1).padStart(2, "0")}</span>
-            {item.label}
+            {t(item.label)}
           </a>
         ))}
       </nav>
       <div className="relative z-[1] flex items-center gap-1.5">
-        <a href={profile.socials[0].href} className={headerIconBtn} aria-label="GitHub" target="_blank" rel="noreferrer">
-          <Github size={17} />
-        </a>
-        <a href={profile.socials[1].href} className={headerIconBtn} aria-label="LinkedIn" target="_blank" rel="noreferrer">
-          <Linkedin size={17} />
-        </a>
+        <LanguageToggle />
         <button type="button" className={cn(headerIconBtn, "lg:hidden")} onClick={() => setOpen((value) => !value)} aria-label="Abrir menu">
           {open ? <X size={19} /> : <Menu size={19} />}
         </button>
@@ -152,7 +150,7 @@ export default function Navbar() {
               aria-current={activeHref === item.href ? "location" : undefined}
               onClick={() => setOpen(false)}
             >
-              {item.label}
+              {t(item.label)}
             </a>
           ))}
         </motion.nav>
