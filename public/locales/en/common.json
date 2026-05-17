@@ -84,38 +84,29 @@
         "title": "Full-stack IoT Developer",
         "date": "August 2023 - Present",
         "points": [
-          "Development and design of dashboards for various use cases",
-          "Use case analysis, establishing offsets and thresholds",
-          "Implementation of rule chains and advanced data processing",
-          "Implementation of agile methodologies",
+          "End-to-end industrial IoT dashboard work with strong UX/UI emphasis for operations and quick reading of sensors and KPIs",
+          "Use case breakdown, offsets and thresholds; rule chains, advanced data processing and alarms (severity and notification aligned with operations)",
+          "Agile execution, technical/functional documentation (ThingsBoard and integrations as needed) plus functional and regression testing across views, flows and alarming",
           "Training other developers"
         ]
       },
-      "freelance": {
-        "title": "Full-stack Developer",
-        "date": "April 2023 - July 2023",
+      "politicalFreelance": {
+        "title": "Full-stack freelance · electoral applications",
+        "date": "July 2025 - Present",
         "points": [
-          "Component rendering and styles across different sections",
-          "App maintenance and optimization",
-          "Teamwork and improvement proposals"
+          "Full-stack web apps for electoral, political and oversight workflows — internal and campaign use, plus operational UIs (precincts/branches, polling-place views) when in scope",
+          "UX/UI collaboration with stakeholders, rollout training for field teams and functional documentation with usage criteria and onboarding",
+          "Functional and regression testing before critical milestones, plus coordination of resources, timelines and priorities in demanding cycles"
         ]
       },
-      "nocountry": {
-        "title": "Full-stack Developer",
-        "date": "April 2023 - July 2023",
+      "early2023": {
+        "title": "Tutor & Dev (Soy Henry) & No Country · GEN Consultores",
+        "date": "January 2023 - July 2023",
         "points": [
-          "Lead database and server setup (back-end)",
-          "Develop employee routes and controllers",
-          "Assist with frontend and component building"
-        ]
-      },
-      "henry": {
-        "title": "Teaching Assistant / Tutor",
-        "date": "January 2023 - April 2023",
-        "points": [
-          "Coordinate the student group with the goal of achieving program adaptation",
-          "Propose ideas to improve Bootcamp processes",
-          "Promote group cohesion and build community"
+          "Soy Henry — teaching assistant: coordinating students, bootcamp-process improvements and group cohesion",
+          "No Country — full-stack group project: database and server, routes and controllers, frontend and component support",
+          "GEN Consultores — freelance: section-by-section component styling and rendering, maintenance and app optimization",
+          "Collaborative work, steady team communication and continuous functional improvements"
         ]
       }
     }

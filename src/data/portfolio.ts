@@ -104,24 +104,18 @@ export const experiences: Array<{
     kind: "work",
   },
   {
-    key: "freelance",
-    company: "Freelance en Gen Consultores",
+    key: "politicalFreelance",
+    company: "Freelance · consultoría política",
     icon: "/images/company/freelance.png",
-    iconBg: "#1a3a6b",
+    iconBg: "#1a2332",
     kind: "work",
   },
   {
-    key: "nocountry",
-    company: "No Country",
-    icon: "/images/company/no_country.png",
-    kind: "study",
-  },
-  {
-    key: "henry",
-    company: "Soy Henry",
+    key: "early2023",
+    company: "Soy Henry · No Country · GEN Consultores",
     icon: "/images/company/henry.png",
     iconBg: "#ffff00",
-    kind: "study",
+    kind: "work",
   },
 ];
 

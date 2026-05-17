@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="N">
+  <!-- N monogram favicon -->
+  <rect width="32" height="32" rx="9" fill="#0e1a2e"/>
+  <rect x="0.5" y="0.5" width="31" height="31" rx="8.5" fill="none" stroke="#64ffda" stroke-opacity="0.22" stroke-width="1"/>
+  <path
+    fill="none"
+    stroke="#64ffda"
+    stroke-width="3"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M 9 25 V 7 M 9 7 L 23 25 M 23 7 V 25"
+  />
+</svg>

@@ -84,38 +84,29 @@
         "title": "Full-stack IoT Developer",
         "date": "Agosto 2023 - Actualidad",
         "points": [
-          "Desarrollo y diseño de dashboards para diversos casos de uso",
-          "Análisis de casos de uso, estableciendo offsets y thresholds",
-          "Implementación de rule chains y procesamiento avanzado de datos",
-          "Implementación de metodologías ágiles",
+          "Desarrollo end-to-end de dashboards IoT industriales, con fuerte foco en UX/UI para supervisión y lectura rápida de sensores y KPIs",
+          "Análisis de casos de uso, offsets y thresholds; rule chains, procesamiento avanzado de datos y alarmas (severidad y notificación acordes a operación)",
+          "Metodologías ágiles, documentación técnica/funcional (ThingsBoard e integraciones cuando aplica) y pruebas funcionales y de regresión sobre vistas, flujos y alarmas",
           "Capacitación a otros desarrolladores"
         ]
       },
-      "freelance": {
-        "title": "Full-stack Developer",
-        "date": "Abril 2023 - Julio 2023",
+      "politicalFreelance": {
+        "title": "Freelance full-stack · Apps Electorales",
+        "date": "Julio 2025 - Actualidad",
         "points": [
-          "Renderizado de componentes y estilos en diferentes secciones",
-          "Mantenimiento y optimización de la app",
-          "Trabajo en equipo y propuestas de mejora"
+          "Desarrollo full-stack de apps político-electorales y de fiscalización: uso interno y campaña; interfaces operativas (p. ej. seccionales/mesas) según alcance",
+          "Colaboración en UX/UI con el cliente, capacitaciones para adopción por equipos y documentación funcional con criterios de uso y onboarding",
+          "Testing funcional y de regresión previo a hitos críticos y coordinación de recursos, plazos y prioridades en entornos de alta exigencia"
         ]
       },
-      "nocountry": {
-        "title": "Full-stack Developer",
-        "date": "Abril 2023 - Julio 2023",
+      "early2023": {
+        "title": "Tutor & Dev (Soy Henry) y No Country · GEN Consultores",
+        "date": "Enero 2023 - Julio 2023",
         "points": [
-          "Liderar el armado de la base de datos y del servidor (back-end)",
-          "Desarrollar las rutas y controladores de empleados",
-          "Asistir en el frontend y el armado de componentes"
-        ]
-      },
-      "henry": {
-        "title": "Asistente de enseñanza / Tutor",
-        "date": "Enero 2023 - Abril 2023",
-        "points": [
-          "Coordinar el grupo de estudiantes con el objetivo de lograr su adaptación al programa",
-          "Proponer ideas para la mejora de los procesos del Bootcamp",
-          "Promover la cohesión grupal y generar comunidad"
+          "Soy Henry — asistente de enseñanza: coordinación de estudiantes, propuestas de mejora del bootcamp y cohesión grupal",
+          "No Country — full-stack en proyecto grupal: base de datos y servidor, rutas y controladores, apoyo en frontend y componentes",
+          "GEN Consultores — freelance: renderizado de componentes y estilos por sección, mantenimiento y optimización de la aplicación",
+          "Trabajo colaborativo, comunicación constante en equipo y mejoras funcionales continuas"
         ]
       }
     }
