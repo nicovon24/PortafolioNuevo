@@ -133,7 +133,7 @@ export default function HeroSection() {
         </motion.div>
       </aside>
 
-      <div className="relative z-0 flex w-full max-w-[48rem] flex-1 flex-col justify-center text-left lg:max-w-[52rem]">
+      <div className="relative z-0 flex w-full max-w-[56rem] flex-1 flex-col justify-center text-left lg:max-w-[64rem] xl:max-w-[70rem]">
         <div>
           <MotionSlide direction="left">
             <HeroScrambleName
@@ -142,7 +142,7 @@ export default function HeroSection() {
               line1Class={nameLine1Class}
               line2Class={nameLine2Class}
             />
-            <div className="mt-4 flex w-full max-w-2xl flex-col gap-3 font-mono text-[clamp(0.65rem,0.55rem+1vw,0.78rem)] font-semibold uppercase tracking-[0.14em] text-muted sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+            <div className="mt-4 flex w-full max-w-3xl flex-col gap-3 font-mono text-[clamp(0.65rem,0.55rem+1vw,0.78rem)] font-semibold uppercase tracking-[0.14em] text-muted sm:flex-row sm:items-center sm:justify-between sm:gap-4">
               <div className="min-h-[1.5em] min-w-0 flex-1 sm:mr-2">
                 <HeroRoleCycle className="text-muted" />
               </div>
@@ -160,7 +160,7 @@ export default function HeroSection() {
           </MotionSlide>
           <MotionFade delay={0.08}>
             <ul
-              className="mt-6 flex max-w-2xl flex-wrap gap-2"
+              className="mt-6 flex max-w-3xl flex-wrap gap-2"
               aria-label={t("hero.stackFocus")}
             >
               {HERO_TAGS.map((tag) => (
@@ -174,7 +174,7 @@ export default function HeroSection() {
             </ul>
           </MotionFade>
           <MotionFade delay={0.1}>
-            <p className="mt-5 max-w-2xl font-sans text-[0.8rem] leading-relaxed text-muted sm:mt-6 sm:text-[0.95rem]">
+            <p className="mt-5 max-w-3xl font-sans text-[0.8rem] leading-relaxed text-muted sm:mt-6 sm:text-[0.95rem]">
               {t("hero.intro")}
             </p>
           </MotionFade>

@@ -21,9 +21,21 @@
 :root {
   --line: rgba(100, 255, 218, 0.24);
   --page-padding: var(--spacing-page);
-  --layout-shell-width: min(80vw, 82rem);
+  --layout-shell-width: 100%;
   --hud-tick: #8b9cad;
   --hud-tick-glow: rgba(139, 156, 173, 0.45);
+}
+
+@media (min-width: 640px) {
+  :root {
+    --layout-shell-width: min(94vw, 96rem);
+  }
+}
+
+@media (min-width: 1536px) {
+  :root {
+    --layout-shell-width: min(91vw, 102rem);
+  }
 }
 
 @layer base {

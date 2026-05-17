@@ -84,7 +84,7 @@ export default function ExperienceSection() {
         </div>
       </header>
 
-      <div className="relative mx-auto max-w-[72rem]">
+      <div className="relative mx-auto w-full max-w-none">
         <div
           className="pointer-events-none absolute left-[21px] top-3 bottom-3 hidden w-px bg-accent/35 md:left-1/2 md:block md:-translate-x-1/2"
           aria-hidden

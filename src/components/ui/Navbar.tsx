@@ -79,7 +79,8 @@ export default function Navbar() {
   return (
     <motion.header
       className={cn(
-        "fixed top-0 left-1/2 z-40 flex w-[var(--layout-shell-width)] max-[560px]:w-[min(var(--layout-shell-width),calc(100vw-1rem))] -translate-x-1/2 items-center justify-between gap-[clamp(1rem,2vw,2.5rem)] overflow-hidden border border-transparent bg-[rgba(14,26,46,0.72)] px-page py-[1.05rem] backdrop-blur-[18px]",
+        "fixed top-0 left-1/2 z-40 flex w-[var(--layout-shell-width)] max-sm:w-full -translate-x-1/2 items-center justify-between gap-[clamp(1rem,2vw,2.5rem)] border border-transparent bg-[rgba(14,26,46,0.72)] px-page py-[1.05rem] backdrop-blur-[18px]",
+        open ? "overflow-visible" : "overflow-hidden",
         hasScrolled &&
           "rounded-full border-line bg-[rgba(8,17,31,0.86)] py-3 px-[clamp(1rem,3vw,2rem)] shadow-[0_18px_60px_rgba(0,0,0,0.34)]",
       )}
@@ -127,13 +128,19 @@ export default function Navbar() {
       </nav>
       <div className="relative z-[1] flex items-center gap-1.5">
         <LanguageToggle />
-        <button type="button" className={cn(headerIconBtn, "lg:hidden")} onClick={() => setOpen((value) => !value)} aria-label="Abrir menu">
+        <button
+          type="button"
+          className={cn(headerIconBtn, "lg:hidden")}
+          onClick={() => setOpen((value) => !value)}
+          aria-label={open ? "Cerrar menu" : "Abrir menu"}
+          aria-expanded={open}
+        >
           {open ? <X size={19} /> : <Menu size={19} />}
         </button>
       </div>
       {open && (
         <motion.nav
-          className="absolute top-[calc(100%+10px)] right-0 grid w-[min(260px,88vw)] gap-3 rounded-[22px] border border-line bg-[rgba(8,17,31,0.96)] p-4 shadow-[0_24px_60px_rgba(25,25,25,0.14)] lg:hidden"
+          className="absolute top-[calc(100%+10px)] right-0 z-50 grid w-[min(260px,88vw)] gap-3 rounded-[22px] border border-line bg-[rgba(8,17,31,0.96)] p-4 shadow-[0_24px_60px_rgba(25,25,25,0.14)] lg:hidden"
           aria-label="Navegacion mobile"
           initial={{ opacity: 0, y: -14, scale: 0.98 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
