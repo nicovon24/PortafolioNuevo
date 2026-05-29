@@ -79,10 +79,10 @@ export default function Navbar() {
   return (
     <motion.header
       className={cn(
-        "fixed top-0 left-1/2 z-40 flex w-[var(--layout-shell-width)] max-sm:w-full -translate-x-1/2 items-center justify-between gap-[clamp(1rem,2vw,2.5rem)] border border-transparent bg-[rgba(14,26,46,0.72)] px-page py-[1.05rem] backdrop-blur-[18px]",
+        "fixed top-0 left-1/2 z-40 flex w-full -translate-x-1/2 items-center justify-between gap-[clamp(1rem,2vw,2.5rem)] border border-transparent bg-[rgba(14,26,46,0.72)] px-page py-[1.05rem] backdrop-blur-[18px]",
         open ? "overflow-visible" : "overflow-hidden",
         hasScrolled &&
-          "rounded-full border-line bg-[rgba(8,17,31,0.86)] py-3 px-[clamp(1rem,3vw,2rem)] shadow-[0_18px_60px_rgba(0,0,0,0.34)]",
+          "w-[min(94vw,80rem)] rounded-full border-line bg-[rgba(8,17,31,0.86)] py-3 px-[clamp(1rem,3vw,2rem)] shadow-[0_18px_60px_rgba(0,0,0,0.34)]",
       )}
       initial={{ opacity: 0, y: -42 }}
       animate={{ opacity: 1, y: hasScrolled ? 16 : 0 }}
@@ -92,6 +92,14 @@ export default function Navbar() {
         className={cn(
           "pointer-events-none absolute inset-[-1px] bg-[linear-gradient(110deg,transparent_0%,rgba(100,255,218,0.18)_36%,rgba(255,105,180,0.14)_48%,transparent_62%)] opacity-0 [transform:translateX(-55%)]",
           hasScrolled && "opacity-100 [animation:nav-shine_5s_ease-in-out_infinite]",
+        )}
+        aria-hidden="true"
+      />
+      {/* bottom accent line — visible only when not scrolled */}
+      <span
+        className={cn(
+          "pointer-events-none absolute bottom-0 left-0 h-[2px] w-full origin-left bg-gradient-to-r from-transparent via-accent to-transparent opacity-100 transition-all duration-500",
+          hasScrolled && "opacity-0 scale-x-0",
         )}
         aria-hidden="true"
       />

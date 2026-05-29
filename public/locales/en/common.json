@@ -23,7 +23,7 @@
     "experienceStat": "Experience",
     "projectsStat": "Projects",
     "stackFocus": "Focus & stack",
-    "intro": "I'm a Full-stack Developer and Systems Analyst with experience since 2022. I've worked on industrial IoT platforms and dashboards using JavaScript, TypeScript, SQL and NoSQL technologies, and I'm moving toward software applied to sports and machine learning.",
+    "intro": "I'm a Full-stack Developer and Systems Analyst with experience since 2022. I've worked on industrial IoT platforms and dashboards using JavaScript, TypeScript, SQL and NoSQL technologies, with a strong focus on industrial IoT systems, real-time dashboards, and remote data solutions.",
     "phrases": [
       "Full-stack developer",
       "React · Node · TypeScript · Angular",
@@ -72,7 +72,7 @@
         "description": "Smart Industry product built from scratch with Angular and ThingsBoard: sensor and asset data analysis platform and dashboards, with full-stack work (frontend and backend). I led the migration to the new version (renewed dashboards and onboardings) and over 10 projects and sub-projects for clients in sectors such as airports, data centers, environmental monitoring and aquifers, mainly in Latin America and the US. The gallery summarizes product views, digital twin, predictive analytics and field deployments (including airport and other industrial environments)."
       },
       "cloudlab": {
-        "description": "Platform for clinical laboratories aimed at streamlining the management of studies, results and patients."
+        "description": "Platform for clinical laboratories aimed at streamlining the management of studies, results and patients. "
       }
     }
   },

@@ -12,7 +12,7 @@ export const profile = {
   roleSecond: "Developer",
   location: "Córdoba, Argentina",
   intro:
-    "Soy desarrollador Full-stack y Analista de Sistemas, con experiencia desde 2022. He trabajado en plataformas IoT industriales y dashboards con tecnologías Javascript, Typescript, SQL y NoSQL, y me estoy orientando hacia el software aplicado al deporte y el machine learning.",
+    "Soy desarrollador Full-stack y Analista de Sistemas, con experiencia desde 2022. He trabajado en plataformas IoT industriales y dashboards con tecnologías Javascript, Typescript, SQL y NoSQL, con un fuerte foco en sistemas IoT industriales, dashboards en tiempo real y soluciones de datos remotos.",
   about:
     "Radicado en Córdoba, Argentina, soy desarrollador full-stack y Analista de Sistemas. Trabajo con React, Node, TypeScript, Angular, bases de datos SQL y NoSQL, con experiencia en ThingsBoard y plataformas IoT industriales. He entregado soluciones para aeropuertos, data centers y monitoreo ambiental para clientes en Latinoamérica y EE.UU. Hablo tres idiomas y uso herramientas de IA (Cursor, Claude, Gemini) como parte activa de mi flujo de trabajo. Mi foco actual está en el cruce entre software, datos y deporte — especialmente el fútbol profesional — y en incorporar machine learning a proyectos con impacto real.",
   email: "nicovon24@gmail.com",

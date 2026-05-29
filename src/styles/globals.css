@@ -26,18 +26,6 @@
   --hud-tick-glow: rgba(139, 156, 173, 0.45);
 }
 
-@media (min-width: 640px) {
-  :root {
-    --layout-shell-width: min(94vw, 96rem);
-  }
-}
-
-@media (min-width: 1536px) {
-  :root {
-    --layout-shell-width: min(91vw, 102rem);
-  }
-}
-
 @layer base {
   *,
   *::before,
@@ -330,6 +318,48 @@ html.with-hud-cursor [contenteditable="true"] {
   to {
     transform: translateX(-35%);
   }
+}
+
+@keyframes hero-tech-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.hero-tech-track {
+  animation: hero-tech-marquee 38s linear infinite;
+  will-change: transform;
+}
+
+.hero-tech-track:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-tech-track {
+    animation: none;
+  }
+}
+
+.hero-tech-mask {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 7%,
+    #000 93%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 7%,
+    #000 93%,
+    transparent 100%
+  );
 }
 
 @keyframes nav-shine {
