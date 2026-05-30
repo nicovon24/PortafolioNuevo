@@ -12,9 +12,9 @@ export const profile = {
   roleSecond: "Developer",
   location: "Córdoba, Argentina",
   intro:
-    "Soy desarrollador Full-stack y Analista de Sistemas, con experiencia desde 2022. He trabajado en plataformas IoT industriales y dashboards con tecnologías Javascript, Typescript, SQL y NoSQL, con un fuerte foco en sistemas IoT industriales, dashboards en tiempo real y soluciones de datos remotos.",
+    "Soy desarrollador Full-stack y Analista de Sistemas con experiencia desde 2022. Construyo frontend y backend de aplicaciones web, dashboards y plataformas de datos con React, Node, Angular, React Native, Claude Code y AWS. He trabajado en proyectos para industrias diversas — software a medida, IoT industrial, plataformas deportivas y software electoral — para clientes en Latinoamérica y EE.UU.",
   about:
-    "Radicado en Córdoba, Argentina, soy desarrollador full-stack y Analista de Sistemas. Trabajo con React, Node, TypeScript, Angular, bases de datos SQL y NoSQL, con experiencia en ThingsBoard y plataformas IoT industriales. He entregado soluciones para aeropuertos, data centers y monitoreo ambiental para clientes en Latinoamérica y EE.UU. Hablo tres idiomas y uso herramientas de IA (Cursor, Claude, Gemini) como parte activa de mi flujo de trabajo. Mi foco actual está en el cruce entre software, datos y deporte — especialmente el fútbol profesional — y en incorporar machine learning a proyectos con impacto real.",
+    "Radicado en Córdoba, Argentina. Soy desarrollador full-stack y Analista de Sistemas: trabajo tanto en frontend como en backend con React, Next.js, Node, TypeScript, Angular y bases de datos SQL/NoSQL. He entregado proyectos en industrias diversas — software a medida, plataformas deportivas, aplicaciones electorales y plataformas IoT industriales (aeropuertos, data centers, monitoreo ambiental) — para clientes en Latinoamérica y EE.UU. Hablo tres idiomas y uso herramientas de IA (Cursor, Claude, Gemini) como parte activa de mi flujo de trabajo.",
   email: "nicovon24@gmail.com",
   socials: [
     { label: "GitHub", href: "https://github.com/nicovon24" },
@@ -24,9 +24,9 @@ export const profile = {
 };
 
 export const services = [
-  "Desarrollador IoT",
-  "Full-stack con experiencia frontend y backend",
-  "Dashboards y visualizacion de datos",
+  "Full-stack: frontend y backend",
+  "Dashboards y visualización de datos",
+  "Proyectos en industrias diversas",
   "Fan de Star Wars y del deporte",
 ];
 

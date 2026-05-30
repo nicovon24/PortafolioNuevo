@@ -49,7 +49,7 @@ const hudValMuted =
 const hudValAccent =
   "text-right font-semibold uppercase tracking-[0.14em] text-accent";
 
-const HERO_TAGS = ["IoT", "Fullstack", "Dashboards"] as const;
+const HERO_TAGS = ["Fullstack", "Frontend", "Backend", "Dashboards"] as const;
 
 const heroHudViewport = { once: true as const, margin: "-80px" as const };
 
@@ -117,10 +117,10 @@ export default function HeroSection() {
   return (
     <section
       id="top"
-      className="relative flex min-h-screen w-full flex-col items-start overflow-hidden pb-32 pt-[4.5rem] max-lg:pt-[4.75rem] sm:pb-36 sm:pt-20 lg:pt-24"
+      className="relative flex w-full flex-col items-start overflow-hidden pb-12 pt-28 sm:pb-14 sm:pt-32 lg:min-h-screen lg:pb-36 lg:pt-24"
     >
       <aside
-        className="pointer-events-none absolute right-page z-[2] hidden max-w-[14rem] text-right md:block top-[5.75rem] lg:top-[6.75rem]"
+        className="pointer-events-none absolute right-page top-[5.75rem] z-[2] hidden max-w-[14rem] text-right lg:top-[6.75rem] lg:block"
         aria-label={t("hero.profileSummary")}
       >
         <motion.div
@@ -149,39 +149,11 @@ export default function HeroSection() {
         </motion.div>
       </aside>
 
-      {/* Flex row: text left, photo right; max-w keeps the layout balanced on huge screens */}
-      <div className="relative z-0 mx-auto flex w-full min-w-0 max-w-[110rem] flex-1 flex-col justify-center px-page text-left md:flex-row md:items-center md:gap-6 lg:gap-10 xl:gap-12">
+      {/* Flex row at lg+: text left, photo right. Stacked below lg so the photo doesn't get cramped on tablets. */}
+      <div className="relative z-0 mx-auto flex w-full min-w-0 max-w-[110rem] flex-col justify-start px-page pt-1 text-left lg:flex-1 lg:flex-row lg:items-center lg:justify-center lg:gap-10 lg:pt-0 xl:gap-12">
 
-        {/* ── PHOTO (DOM first → top on mobile; md:order-2 → right on desktop) ── */}
-        <MotionFade className="flex justify-center pb-6 md:order-2 md:ml-auto md:shrink-0 md:pb-0">
-          <div
-            className="relative size-[11.5rem] sm:size-[13.5rem] md:size-[18rem] lg:size-[22rem] xl:size-[26rem]"
-            aria-hidden="false"
-          >
-            {/* ambient glow */}
-            <span className="pointer-events-none absolute -inset-4 rounded-full bg-accent/15 blur-3xl" aria-hidden />
-            {/* pulse ring */}
-            <span className="pointer-events-none absolute inset-0 animate-pulse rounded-full ring-1 ring-accent/25" aria-hidden />
-            {/* photo circle */}
-            <div className="relative size-full overflow-hidden rounded-full border-2 border-accent shadow-[0_0_0_3px_rgba(8,17,31,0.85),0_0_32px_rgba(100,255,218,0.45),0_0_80px_rgba(100,255,218,0.18),inset_0_0_36px_rgba(100,255,218,0.12)]">
-              <Image
-                src="/images/profile/profile.png"
-                alt={profile.name}
-                fill
-                sizes="(min-width: 1280px) 26rem, (min-width: 1024px) 22rem, (min-width: 768px) 18rem, (min-width: 640px) 13.5rem, 11.5rem"
-                className="object-cover object-[center_18%]"
-                priority
-              />
-              <span
-                className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(100,255,218,0.08),transparent_60%),linear-gradient(180deg,rgba(8,17,31,0.05)_0%,rgba(8,17,31,0.55)_100%)]"
-                aria-hidden
-              />
-            </div>
-          </div>
-        </MotionFade>
-
-        {/* ── TEXT (md:order-1 → left on desktop) ── */}
-        <div className="min-w-0 flex-1 md:order-1 md:max-w-[34rem] lg:max-w-[38rem] xl:max-w-[44rem]">
+        {/* ── TEXT (DOM first → above on tablet/mobile / left on desktop) ── */}
+        <div className="min-w-0 flex-1 lg:max-w-[38rem] xl:max-w-[44rem]">
           <MotionSlide direction="left">
             <HeroScrambleName
               firstName={heroFirstName}
@@ -242,7 +214,7 @@ export default function HeroSection() {
           </MotionFade>
           <MotionFade delay={0.28} className="mt-6 sm:mt-8">
             <div
-              className="hero-tech-mask group/hero-tech relative w-full overflow-hidden"
+              className="hero-tech-mask group/hero-tech relative w-full overflow-x-clip overflow-y-visible py-3"
               aria-label="Tech and tools carousel"
               role="region"
             >
@@ -269,10 +241,38 @@ export default function HeroSection() {
             </div>
           </MotionFade>
         </div>
+
+        {/* ── PHOTO (DOM last → below carousel on tablet/mobile / right on desktop) ── */}
+        <MotionFade className="flex justify-center pt-6 lg:order-2 lg:ml-auto lg:shrink-0 lg:pt-0">
+          <div
+            className="relative size-[14rem] sm:size-[16rem] md:size-[18rem] lg:size-[22rem] xl:size-[26rem]"
+            aria-hidden="false"
+          >
+            {/* ambient glow */}
+            <span className="pointer-events-none absolute -inset-4 rounded-full bg-accent/15 blur-3xl" aria-hidden />
+            {/* pulse ring */}
+            <span className="pointer-events-none absolute inset-0 animate-pulse rounded-full ring-1 ring-accent/25" aria-hidden />
+            {/* photo circle */}
+            <div className="relative size-full overflow-hidden rounded-full border-2 border-accent shadow-[0_0_0_3px_rgba(8,17,31,0.85),0_0_32px_rgba(100,255,218,0.45),0_0_80px_rgba(100,255,218,0.18),inset_0_0_36px_rgba(100,255,218,0.12)]">
+              <Image
+                src="/images/profile/profile.png"
+                alt={profile.name}
+                fill
+                sizes="(min-width: 1280px) 26rem, (min-width: 1024px) 22rem, (min-width: 768px) 18rem, (min-width: 640px) 16rem, 14rem"
+                className="object-cover object-[center_18%]"
+                priority
+              />
+              <span
+                className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(100,255,218,0.08),transparent_60%),linear-gradient(180deg,rgba(8,17,31,0.05)_0%,rgba(8,17,31,0.55)_100%)]"
+                aria-hidden
+              />
+            </div>
+          </div>
+        </MotionFade>
       </div>
 
       <motion.aside
-        className="pointer-events-none absolute bottom-[4.25rem] right-page z-[2] flex gap-8 sm:bottom-10 sm:gap-10"
+        className="pointer-events-none absolute bottom-[4.25rem] right-page z-[2] hidden gap-8 sm:bottom-10 sm:gap-10 lg:flex"
         aria-label={t("hero.statsLabel")}
         variants={heroStatsListVariants}
         initial="hidden"

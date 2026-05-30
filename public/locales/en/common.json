@@ -10,7 +10,7 @@
     "locKey": "Loc ·",
     "locVal": "Córdoba / ARG",
     "stackKey": "Stack ·",
-    "stackVal": "Next · Angular · IoT",
+    "stackVal": "Next · Node · React · TS",
     "roleKey": "Role ·",
     "roleVal": "Full-stack",
     "statusKey": "Status ·",
@@ -23,22 +23,22 @@
     "experienceStat": "Experience",
     "projectsStat": "Projects",
     "stackFocus": "Focus & stack",
-    "intro": "I'm a Full-stack Developer and Systems Analyst with experience since 2022. I've worked on industrial IoT platforms and dashboards using JavaScript, TypeScript, SQL and NoSQL technologies, with a strong focus on industrial IoT systems, real-time dashboards, and remote data solutions.",
+    "intro": "I'm a Full-stack Developer and Systems Analyst with experience since 2022. I build the frontend and backend of web applications, dashboards and data platforms with React, Node, Angular, React Native, Claude Code and AWS. I've worked on projects across diverse industries — custom software, industrial IoT, sports platforms and electoral software — for clients in Latin America and the US.",
     "phrases": [
       "Full-stack developer",
-      "React · Node · TypeScript · Angular",
+      "React · Next · Node · TypeScript",
       "+3 years of experience",
-      "IoT, Dashboards & Sports"
+      "Frontend · Backend · Product"
     ]
   },
   "about": {
     "eyebrow": "../About me",
     "title": "I build interfaces and systems that connect data with decisions.",
-    "description": "Based in Córdoba, Argentina, I'm a full-stack developer and Systems Analyst. I work with React, Node, TypeScript, Angular, SQL and NoSQL databases, with experience in ThingsBoard and industrial IoT platforms. I've delivered solutions for airports, data centers and environmental monitoring for clients in Latin America and the US. I speak three languages and use AI tools (Cursor, Claude, Gemini) as an active part of my workflow. My current focus is at the intersection of software, data and sport — especially professional football — and incorporating machine learning into projects with real impact.",
+    "description": "Based in Córdoba, Argentina. I'm a full-stack developer and Systems Analyst: I work both on the frontend and the backend with React, Next.js, Node, TypeScript, Angular and SQL/NoSQL databases. I've shipped projects across diverse industries — custom software, sports platforms, electoral applications and industrial IoT platforms (airports, data centers, environmental monitoring) — for clients in Latin America and the US. I speak three languages and use AI tools (Cursor, Claude, Gemini) as an active part of my workflow.",
     "services": [
-      "IoT Developer",
-      "Full-stack with frontend and backend experience",
-      "Dashboards and data visualization",
+      "Full-stack: frontend & backend",
+      "Dashboards & data visualization",
+      "Projects across diverse industries",
       "Star Wars and sports fan"
     ]
   },
@@ -81,7 +81,7 @@
     "title": "Experience",
     "items": {
       "senzary": {
-        "title": "Full-stack IoT Developer",
+        "title": "Full-stack Developer · Industrial IoT",
         "date": "August 2023 - Present",
         "points": [
           "End-to-end industrial IoT dashboard work with strong UX/UI emphasis for operations and quick reading of sensors and KPIs",
@@ -114,7 +114,7 @@
   "contact": {
     "eyebrow": "../Contact",
     "title": "Available for freelance and full-time positions.",
-    "description": "If you have a project involving data, IoT or sports — or just want to connect — feel free to reach out.",
+    "description": "If you have a project — custom software, dashboards, data platforms or any idea — feel free to reach out.",
     "form": {
       "name": "Name",
       "namePlaceholder": "Your name",
