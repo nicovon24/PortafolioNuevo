@@ -127,6 +127,7 @@ export type PortfolioProject = {
   live?: string;
   live2?: string;
   code?: string;
+  privateRepo?: boolean;
   inDevelopment?: boolean;
   hidden?: boolean;
 };
@@ -163,6 +164,7 @@ export const projects: PortfolioProject[] = [
     title: "App Fiscalización",
     technologies: ["Next.js", "Framer Motion", "Redux Toolkit", "Vercel"],
     live: "https://fiscalizar.lalibertadavanzacba.com/",
+    privateRepo: true,
     images: [
       "/images/projects/partido/app/dashboard1.png",
       "/images/projects/partido/app/dashboard2.png",
@@ -184,6 +186,7 @@ export const projects: PortfolioProject[] = [
     ],
     live: "https://queabusocba.com/",
     live2: "https://gabrielbornoroni.com.ar/",
+    privateRepo: true,
   },
   {
     key: "trashcans",
@@ -197,6 +200,7 @@ export const projects: PortfolioProject[] = [
       "/images/projects/senzary/vercel/trashcans/onboarding.png",
     ],
     live: "https://trashcans.senzary.com/",
+    privateRepo: true,
   },
   {
     key: "workeriq",
@@ -208,6 +212,7 @@ export const projects: PortfolioProject[] = [
       "/images/projects/senzary/vercel/workeriq/map-v2.png",
     ],
     live: "https://workeriq-drill.iotlogiq.com/",
+    privateRepo: true,
   },
   {
     key: "iotlogiq",
@@ -236,6 +241,7 @@ export const projects: PortfolioProject[] = [
       "/images/projects/senzary/airport/7.png",
     ],
     live: "https://iotlogiq.com/",
+    privateRepo: true,
   },
   {
     key: "cloudlab",

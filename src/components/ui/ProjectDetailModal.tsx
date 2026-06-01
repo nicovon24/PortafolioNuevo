@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, ExternalLink, Github, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, ExternalLink, Github, Lock, X } from "lucide-react";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
@@ -21,6 +21,7 @@ type ProjectDetailModalProps = {
   live?: string;
   live2?: string;
   code?: string;
+  privateRepo?: boolean;
   index?: number;
   initialLightbox?: boolean;
 };
@@ -35,6 +36,7 @@ export default function ProjectDetailModal({
   live,
   live2,
   code,
+  privateRepo = false,
   index = 0,
   initialLightbox = false,
 }: ProjectDetailModalProps) {
@@ -249,6 +251,11 @@ export default function ProjectDetailModal({
                 >
                   <Github size={15} /> {t("projects.sourceCode")}
                 </a>
+              )}
+              {!code && privateRepo && (
+                <span className="inline-flex flex-1 min-h-11 items-center justify-center gap-2 rounded-full border border-line/40 bg-transparent px-5 text-sm font-bold text-muted/50 cursor-default">
+                  <Lock size={15} /> {t("projects.privateRepo")}
+                </span>
               )}
             </div>
           </div>

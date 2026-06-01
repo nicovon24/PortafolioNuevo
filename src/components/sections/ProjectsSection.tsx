@@ -23,6 +23,7 @@ export default function ProjectsSection() {
               live={project.live}
               live2={project.live2}
               code={project.code}
+              privateRepo={project.privateRepo}
               inDevelopment={project.inDevelopment}
               index={index}
             />

@@ -59,9 +59,13 @@
     "viewCode": "Ver código",
     "viewLive": "Ver live",
     "inspectProject": "Inspeccionar Proyecto",
-    "sourceCode": "Source Code",
-    "liveDeployment": "Live Deployment",
-    "architectureStack": "SYSTEM ARCHITECTURE STACK",
+    "sourceCode": "Ver Código",
+    "liveDeployment": "Ver en Vivo",
+    "architectureStack": "STACK DE ARQUITECTURA",
+    "privateRepo": "Repo Privado",
+    "viewImages": "Ver Imágenes",
+    "live1": "Ver en Vivo 1",
+    "live2": "Ver en Vivo 2",
     "items": {
       "prodeazo": {
         "description": "Plataforma de pronósticos y estadísticas de fútbol pensada para el Mundial 2026 y escalar a otros torneos: fixtures y resultados en tiempo real, predicciones antes del inicio del partido, puntos por aciertos y rankings generales y por ligas. MVP con fixture, predicciones, ranking, comparativa usuario a usuario y picks especiales (campeón, goleador, etc.); roadmap en fases para miniligas con administración y un módulo estadístico reutilizable (grupos, llaves, métricas y perfiles). Stack inicial: Next.js y TypeScript, Supabase con PostgreSQL, Tailwind y NextUI; fixtures y resultados vía Bzzoiro BSD."

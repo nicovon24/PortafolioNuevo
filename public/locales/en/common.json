@@ -62,6 +62,10 @@
     "sourceCode": "Source Code",
     "liveDeployment": "Live Deployment",
     "architectureStack": "SYSTEM ARCHITECTURE STACK",
+    "privateRepo": "Private Source Code",
+    "viewImages": "View Images",
+    "live1": "Live 1",
+    "live2": "Live 2",
     "items": {
       "prodeazo": {
         "description": "Football prediction and statistics platform designed for the 2026 World Cup and scalable to other tournaments: real-time fixtures and results, predictions before match kick-off, points for correct picks and general and league rankings. MVP with fixture, predictions, ranking, user-to-user comparison and special picks (champion, top scorer, etc.); phased roadmap for mini-leagues with administration and a reusable statistics module (groups, brackets, metrics and profiles). Initial stack: Next.js and TypeScript, Supabase with PostgreSQL, Tailwind and NextUI; fixtures and results via Bzzoiro BSD."

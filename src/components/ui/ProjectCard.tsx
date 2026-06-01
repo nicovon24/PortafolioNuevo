@@ -1,6 +1,6 @@
 "use client";
 
-import { ExternalLink, Github, Images, Search } from "lucide-react";
+import { ExternalLink, Github, Images, Lock, Search } from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import ProjectScreenshots from "@/components/ui/ProjectScreenshots";
@@ -14,6 +14,7 @@ type ProjectCardProps = {
   live?: string;
   live2?: string;
   code?: string;
+  privateRepo?: boolean;
   inDevelopment?: boolean;
   index?: number;
 };
@@ -26,6 +27,7 @@ export default function ProjectCard({
   live,
   live2,
   code,
+  privateRepo = false,
   inDevelopment = false,
   index = 0,
 }: ProjectCardProps) {
@@ -77,7 +79,7 @@ export default function ProjectCard({
               className="pointer-events-auto flex items-center gap-1.5 rounded-full border border-accent/60 bg-[rgba(8,17,31,0.92)] px-4 py-2 font-mono text-xs font-bold text-accent shadow-[0_8px_28px_rgba(0,0,0,0.5)] backdrop-blur-sm transition-colors hover:border-accent hover:bg-accent/10"
             >
               <Images size={13} className="shrink-0" />
-              View Images
+              {t("projects.viewImages")}
             </button>
           </div>
         </div>
@@ -100,25 +102,49 @@ export default function ProjectCard({
             ))}
           </div>
           <div className="mt-auto flex gap-2 pt-4" onClick={(e) => e.stopPropagation()}>
-            {(live || live2) && (
-              <a
-                href={live ?? live2}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex w-1/2 min-h-8 items-center justify-center gap-1.5 rounded-full bg-accent px-3 text-[0.7rem] font-bold text-[#08111f] transition-opacity hover:opacity-85"
-              >
-                {t("projects.liveDeployment")} <ExternalLink size={12} />
-              </a>
-            )}
-            {code && (
-              <a
-                href={code}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex w-1/2 min-h-8 items-center justify-center gap-1.5 rounded-full border border-accent bg-transparent px-3 text-[0.7rem] font-bold text-accent transition-colors hover:bg-accent/10"
-              >
-                <Github size={12} /> {t("projects.sourceCode")}
-              </a>
+            {/* When two live links + privateRepo: live buttons stacked left, badge right */}
+            {live && live2 && privateRepo ? (
+              <>
+                <div className="flex w-1/2 flex-col gap-1.5">
+                  <a href={live} target="_blank" rel="noreferrer"
+                    className="inline-flex min-h-7 items-center justify-center gap-1.5 rounded-full bg-accent px-3 text-[0.65rem] font-bold text-[#08111f] transition-opacity hover:opacity-85">
+                    {t("projects.live1")} <ExternalLink size={11} />
+                  </a>
+                  <a href={live2} target="_blank" rel="noreferrer"
+                    className="inline-flex min-h-7 items-center justify-center gap-1.5 rounded-full bg-accent px-3 text-[0.65rem] font-bold text-[#08111f] transition-opacity hover:opacity-85">
+                    {t("projects.live2")} <ExternalLink size={11} />
+                  </a>
+                </div>
+                <span className="inline-flex w-1/2 min-h-8 items-center justify-center gap-1.5 rounded-full border border-line/50 bg-transparent px-3 text-[0.7rem] font-bold text-muted/60 cursor-default">
+                  <Lock size={12} /> {t("projects.privateRepo")}
+                </span>
+              </>
+            ) : (
+              <>
+                {live && (
+                  <a href={live} target="_blank" rel="noreferrer"
+                    className="inline-flex w-1/2 min-h-8 items-center justify-center gap-1.5 rounded-full bg-accent px-3 text-[0.7rem] font-bold text-[#08111f] transition-opacity hover:opacity-85">
+                    {live2 ? `${t("projects.liveDeployment")} 1` : t("projects.liveDeployment")} <ExternalLink size={12} />
+                  </a>
+                )}
+                {live2 && (
+                  <a href={live2} target="_blank" rel="noreferrer"
+                    className="inline-flex w-1/2 min-h-8 items-center justify-center gap-1.5 rounded-full bg-accent px-3 text-[0.7rem] font-bold text-[#08111f] transition-opacity hover:opacity-85">
+                    {t("projects.liveDeployment")} 2 <ExternalLink size={12} />
+                  </a>
+                )}
+                {code && (
+                  <a href={code} target="_blank" rel="noreferrer"
+                    className="inline-flex w-1/2 min-h-8 items-center justify-center gap-1.5 rounded-full border border-accent bg-transparent px-3 text-[0.7rem] font-bold text-accent transition-colors hover:bg-accent/10">
+                    <Github size={12} /> {t("projects.sourceCode")}
+                  </a>
+                )}
+                {!code && privateRepo && (
+                  <span className="inline-flex w-1/2 min-h-8 items-center justify-center gap-1.5 rounded-full border border-line/50 bg-transparent px-3 text-[0.7rem] font-bold text-muted/60 cursor-default">
+                    <Lock size={12} /> {t("projects.privateRepo")}
+                  </span>
+                )}
+              </>
             )}
           </div>
         </div>
@@ -135,6 +161,7 @@ export default function ProjectCard({
         live={live}
         live2={live2}
         code={code}
+        privateRepo={privateRepo}
         index={index}
         initialLightbox={startLightbox}
       />
