@@ -340,7 +340,7 @@ export default function HeroSection() {
         viewport={heroHudViewport}
       >
         <motion.div variants={heroStatItemVariants}>
-          <HeroRingStat label={t("hero.experienceStat")} value="3+" />
+          <HeroRingStat label={t("hero.experienceStat")} value="4+" />
         </motion.div>
         <motion.div variants={heroStatItemVariants}>
           <HeroRingStat label={t("hero.projectsStat")} value="12+" />
