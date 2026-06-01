@@ -282,6 +282,7 @@ html.with-hud-cursor [contenteditable="true"] {
     transform: scaleX(1) rotate(2deg);
   }
 
+
   /* Mismo resalte que hover: sección actual al hacer scroll */
   .nav-link--active {
     @apply text-background-deep;
@@ -370,5 +371,101 @@ html.with-hud-cursor [contenteditable="true"] {
   45%,
   100% {
     transform: translateX(70%);
+  }
+}
+
+@keyframes navbar-border-sweep {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.navbar-border-animated {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(100, 255, 218, 0.9) 40%,
+    rgba(255, 105, 180, 0.85) 60%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: navbar-border-sweep 3s linear infinite;
+}
+
+@property --photo-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes photo-border-spin {
+  from {
+    --photo-angle: 0deg;
+  }
+  to {
+    --photo-angle: 360deg;
+  }
+}
+
+.photo-border-ring {
+  background: conic-gradient(
+    from var(--photo-angle),
+    transparent 20%,
+    rgba(100, 255, 218, 0.95) 48%,
+    rgba(255, 105, 180, 0.9) 60%,
+    transparent 80%
+  );
+  padding: 2.5px;
+  border-radius: 9999px;
+  animation: photo-border-spin 4s linear infinite;
+}
+
+.hero-tech-icon-even,
+.hero-tech-icon-odd {
+  transition: filter 0.2s ease, opacity 0.2s ease;
+}
+
+.group\/hero-tech-item:hover .hero-tech-icon-even {
+  filter: sepia(1) hue-rotate(112deg) saturate(2.5) brightness(1.05);
+}
+
+.group\/hero-tech-item:hover .hero-tech-icon-odd {
+  filter: sepia(1) hue-rotate(288deg) saturate(2.5) brightness(1.05);
+}
+
+.photo-border-ring--glitch {
+  background: conic-gradient(
+    from var(--photo-angle),
+    transparent 20%,
+    rgba(255, 105, 180, 0.55) 48%,
+    rgba(100, 255, 218, 0.35) 60%,
+    transparent 80%
+  );
+  animation: photo-border-spin 4s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar-border-animated {
+    animation: none;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(100, 255, 218, 0.6),
+      transparent
+    );
+    background-size: 100% 100%;
+  }
+  .photo-border-ring {
+    animation: none;
+    background: conic-gradient(
+      from 45deg,
+      transparent 20%,
+      rgba(100, 255, 218, 0.8) 50%,
+      rgba(255, 105, 180, 0.7) 62%,
+      transparent 80%
+    );
   }
 }

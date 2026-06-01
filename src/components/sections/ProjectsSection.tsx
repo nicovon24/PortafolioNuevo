@@ -12,18 +12,19 @@ export default function ProjectsSection() {
 
   return (
     <Section id="projects" eyebrow={t("projects.eyebrow")} title={t("projects.title")}>
-      <div className="grid gap-9 lg:gap-10">
+      <div className="grid items-stretch gap-5 sm:grid-cols-2 lg:gap-6">
         {visible.map((project, index) => (
-          <MotionSlide key={project.key} direction={index % 2 === 0 ? "left" : "right"}>
+          <MotionSlide key={project.key} direction={index % 2 === 0 ? "left" : "right"} className="h-full">
             <ProjectCard
               projectKey={project.key}
               title={project.title}
               technologies={project.technologies}
               images={project.images}
               live={project.live}
+              live2={project.live2}
               code={project.code}
               inDevelopment={project.inDevelopment}
-              reversed={index % 2 !== 0}
+              index={index}
             />
           </MotionSlide>
         ))}

@@ -3,11 +3,13 @@
 import Image from "next/image";
 import { ArrowDown, Download, Github, Linkedin } from "lucide-react";
 import { motion, type Variants } from "framer-motion";
+import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import MotionFade from "@/components/motion/MotionFade";
 import MotionSlide from "@/components/motion/MotionSlide";
 import HeroScrambleName from "@/components/sections/HeroScrambleName";
 import HeroRoleCycle from "@/components/sections/HeroRoleCycle";
+import HeroTechCarousel from "@/components/sections/HeroTechCarousel";
 import { profile } from "@/data/portfolio";
 
 const HERO_CAROUSEL: Array<{ name: string; icon: string }> = [
@@ -39,6 +41,9 @@ const nameLine1Class =
 
 const nameLine2Class =
   "bg-gradient-to-b from-accent via-accent to-[#3edcc4] bg-clip-text text-[clamp(2.35rem,calc(1rem+5.85vw),4.65rem)] leading-[0.92] text-transparent drop-shadow-[0_0_22px_rgba(100,255,218,0.2)] [-webkit-text-fill-color:transparent]";
+
+const nameLine2ScrambleClass =
+  "bg-gradient-to-b from-accent-2 via-accent-2 to-[#ff85c0] bg-clip-text text-[clamp(2.35rem,calc(1rem+5.85vw),4.65rem)] leading-[0.92] text-transparent drop-shadow-[0_0_22px_rgba(255,105,180,0.25)] [-webkit-text-fill-color:transparent]";
 
 const hudRow =
   "m-0 flex flex-wrap justify-end gap-x-1 font-mono text-[0.55rem] leading-snug sm:text-[0.6rem]";
@@ -110,6 +115,17 @@ export default function HeroSection() {
   const linkedin = profile.socials.find((s) => s.label === "LinkedIn")!;
   const cv = profile.socials.find((s) => s.label === "CV")!;
 
+  const [isScrambling, setIsScrambling] = useState(false);
+  const [badgeGlitch, setBadgeGlitch] = useState(false);
+  const handleScrambleChange = useCallback((active: boolean) => {
+    setIsScrambling(active);
+    if (active) {
+      setBadgeGlitch(true);
+    } else {
+      setTimeout(() => setBadgeGlitch(false), 500);
+    }
+  }, []);
+
   const nameParts = profile.name.trim().split(/\s+/);
   const heroFirstName = nameParts[0] ?? profile.name;
   const heroLastName = nameParts.slice(1).join(" ") || "";
@@ -117,7 +133,7 @@ export default function HeroSection() {
   return (
     <section
       id="top"
-      className="relative flex w-full flex-col items-start overflow-hidden pb-12 pt-28 sm:pb-14 sm:pt-32 lg:min-h-screen lg:pb-36 lg:pt-24"
+      className="relative flex w-full flex-col items-start overflow-hidden px-page pb-12 pt-28 sm:pb-14 sm:pt-32 lg:min-h-screen lg:pb-36 lg:pt-24"
     >
       <aside
         className="pointer-events-none absolute right-page top-[5.75rem] z-[2] hidden max-w-[14rem] text-right lg:top-[6.75rem] lg:block"
@@ -150,7 +166,7 @@ export default function HeroSection() {
       </aside>
 
       {/* Flex row at lg+: text left, photo right. Stacked below lg so the photo doesn't get cramped on tablets. */}
-      <div className="relative z-0 mx-auto flex w-full min-w-0 max-w-[110rem] flex-col justify-start px-page pt-1 text-left lg:flex-1 lg:flex-row lg:items-center lg:justify-center lg:gap-10 lg:pt-0 xl:gap-12">
+      <div className="relative z-0 mx-auto flex w-full min-w-0 max-w-[84rem] flex-col justify-start pt-1 text-left lg:flex-1 lg:flex-row lg:items-center lg:justify-center lg:gap-10 lg:pt-0 xl:gap-12">
 
         {/* ── TEXT (DOM first → above on tablet/mobile / left on desktop) ── */}
         <div className="min-w-0 flex-1 lg:max-w-[38rem] xl:max-w-[44rem]">
@@ -160,18 +176,23 @@ export default function HeroSection() {
               lastName={heroLastName}
               line1Class={nameLine1Class}
               line2Class={nameLine2Class}
+              line2ScrambleClass={nameLine2ScrambleClass}
+              onScrambleChange={handleScrambleChange}
             />
             <div className="mt-4 flex w-full flex-col gap-3 font-mono text-[clamp(0.65rem,0.55rem+1vw,0.78rem)] font-semibold uppercase tracking-[0.14em] text-muted sm:flex-row sm:items-center sm:justify-between sm:gap-4">
               <div className="min-h-[1.5em] min-w-0 flex-1 sm:mr-2">
                 <HeroRoleCycle className="text-muted" />
               </div>
               <span
-                className="inline-flex w-fit shrink-0 items-center gap-2 rounded-full border border-accent/40 bg-accent/[0.07] px-3 py-1 text-[0.62rem] font-bold tracking-[0.12em] text-accent sm:text-[0.65rem]"
-                title={t("hero.available")}
+                className={`inline-flex w-fit shrink-0 items-center gap-2 rounded-full px-3 py-1 text-[0.62rem] font-bold tracking-[0.12em] transition-colors duration-300 sm:text-[0.65rem] ${
+                  badgeGlitch
+                    ? "border border-accent-2/40 bg-accent-2/[0.07] text-accent-2"
+                    : "border border-accent/40 bg-accent/[0.07] text-accent"
+                }`}
               >
                 <span className="relative flex h-2 w-2 shrink-0" aria-hidden>
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-35" />
-                  <span className="relative m-auto inline-flex h-[5px] w-[5px] rounded-full bg-accent shadow-[0_0_8px_rgba(100,255,218,0.85)]" />
+                  <span className={`absolute inline-flex h-full w-full animate-ping rounded-full opacity-35 transition-colors duration-300 ${badgeGlitch ? "bg-accent-2" : "bg-accent"}`} />
+                  <span className={`relative m-auto inline-flex h-[5px] w-[5px] rounded-full transition-all duration-300 ${badgeGlitch ? "bg-accent-2 shadow-[0_0_8px_rgba(255,105,180,0.85)]" : "bg-accent shadow-[0_0_8px_rgba(100,255,218,0.85)]"}`} />
                 </span>
                 {t("hero.available")}
               </span>
@@ -218,11 +239,17 @@ export default function HeroSection() {
               aria-label="Tech and tools carousel"
               role="region"
             >
-              <ul className="hero-tech-track flex w-max items-stretch gap-3 sm:gap-4">
-                {[...HERO_CAROUSEL, ...HERO_CAROUSEL].map((item, i) => (
+              <HeroTechCarousel>
+                {[...HERO_CAROUSEL, ...HERO_CAROUSEL].map((item, i) => {
+                  const isEven = (i % HERO_CAROUSEL.length) % 2 === 0;
+                  return (
                   <li
                     key={`${item.name}-${i}`}
-                    className="group/hero-tech-item flex w-[5.75rem] shrink-0 flex-col items-center justify-center gap-1.5 rounded-lg border border-line/70 bg-[rgba(8,17,31,0.7)] px-2 py-2.5 backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-accent hover:bg-[rgba(100,255,218,0.06)] hover:shadow-[0_0_0_1px_rgba(100,255,218,0.4)_inset,0_0_18px_rgba(100,255,218,0.22)] sm:w-[6.25rem]"
+                    className={`group/hero-tech-item flex w-[5.75rem] shrink-0 flex-col items-center justify-center gap-1.5 rounded-lg border border-line/70 bg-[rgba(8,17,31,0.7)] px-2 py-2.5 backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 sm:w-[6.25rem] ${
+                      isEven
+                        ? "hover:border-accent hover:bg-[rgba(100,255,218,0.06)] hover:shadow-[0_0_0_1px_rgba(100,255,218,0.4)_inset,0_0_18px_rgba(100,255,218,0.22)]"
+                        : "hover:border-accent-2 hover:bg-[rgba(255,105,180,0.06)] hover:shadow-[0_0_0_1px_rgba(255,105,180,0.4)_inset,0_0_18px_rgba(255,105,180,0.22)]"
+                    }`}
                     aria-hidden={i >= HERO_CAROUSEL.length ? true : undefined}
                   >
                     <Image
@@ -230,45 +257,68 @@ export default function HeroSection() {
                       alt=""
                       width={24}
                       height={24}
-                      className="size-6 object-contain opacity-90 transition-opacity duration-200 group-hover/hero-tech-item:opacity-100"
+                      className={`size-6 object-contain opacity-90 transition-all duration-200 group-hover/hero-tech-item:opacity-100 ${
+                        isEven ? "hero-tech-icon-even" : "hero-tech-icon-odd"
+                      }`}
                     />
-                    <span className="block w-full truncate text-center font-mono text-[0.58rem] font-semibold uppercase tracking-[0.08em] text-muted transition-colors duration-200 group-hover/hero-tech-item:text-accent sm:text-[0.62rem]">
+                    <span className={`block w-full truncate text-center font-mono text-[0.58rem] font-semibold uppercase tracking-[0.08em] text-muted transition-colors duration-200 sm:text-[0.62rem] ${
+                      isEven ? "group-hover/hero-tech-item:text-accent" : "group-hover/hero-tech-item:text-accent-2"
+                    }`}>
                       {item.name}
                     </span>
                   </li>
-                ))}
-              </ul>
+                );
+                })}
+              </HeroTechCarousel>
             </div>
           </MotionFade>
         </div>
 
         {/* ── PHOTO (DOM last → below carousel on tablet/mobile / right on desktop) ── */}
-        <MotionFade className="flex justify-center pt-6 lg:order-2 lg:ml-auto lg:shrink-0 lg:pt-0">
+        <motion.div
+          className="flex cursor-pointer justify-center pt-6 lg:order-2 lg:ml-auto lg:shrink-0 lg:pt-0"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          whileHover={{
+            x: [0, 8, -8, 6, -6, 3, 0],
+            transition: { duration: 1.4, ease: "easeInOut", repeat: Infinity, repeatType: "loop" },
+          }}
+        >
           <div
             className="relative size-[14rem] sm:size-[16rem] md:size-[18rem] lg:size-[22rem] xl:size-[26rem]"
             aria-hidden="false"
           >
-            {/* ambient glow */}
-            <span className="pointer-events-none absolute -inset-4 rounded-full bg-accent/15 blur-3xl" aria-hidden />
-            {/* pulse ring */}
+            <span
+              className={`pointer-events-none absolute -inset-4 rounded-full blur-3xl transition-colors duration-500 ${isScrambling ? "bg-accent-2/10" : "bg-accent/15"}`}
+              aria-hidden
+            />
             <span className="pointer-events-none absolute inset-0 animate-pulse rounded-full ring-1 ring-accent/25" aria-hidden />
-            {/* photo circle */}
-            <div className="relative size-full overflow-hidden rounded-full border-2 border-accent shadow-[0_0_0_3px_rgba(8,17,31,0.85),0_0_32px_rgba(100,255,218,0.45),0_0_80px_rgba(100,255,218,0.18),inset_0_0_36px_rgba(100,255,218,0.12)]">
-              <Image
-                src="/images/profile/profile.png"
-                alt={profile.name}
-                fill
-                sizes="(min-width: 1280px) 26rem, (min-width: 1024px) 22rem, (min-width: 768px) 18rem, (min-width: 640px) 16rem, 14rem"
-                className="object-cover object-[center_18%]"
-                priority
-              />
-              <span
-                className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(100,255,218,0.08),transparent_60%),linear-gradient(180deg,rgba(8,17,31,0.05)_0%,rgba(8,17,31,0.55)_100%)]"
-                aria-hidden
-              />
+            <div className={`photo-border-ring absolute inset-0 ${isScrambling ? "photo-border-ring--glitch" : ""}`}>
+              <div
+                className="relative size-full overflow-hidden rounded-full transition-shadow duration-500"
+                style={{
+                  boxShadow: isScrambling
+                    ? "0 0 0 3px rgba(8,17,31,0.85), 0 0 32px rgba(255,105,180,0.22), 0 0 80px rgba(255,105,180,0.08), inset 0 0 36px rgba(255,105,180,0.07)"
+                    : "0 0 0 3px rgba(8,17,31,0.85), 0 0 32px rgba(100,255,218,0.45), 0 0 80px rgba(100,255,218,0.18), inset 0 0 36px rgba(100,255,218,0.12)",
+                }}
+              >
+                <Image
+                  src="/images/profile/profile.png"
+                  alt={profile.name}
+                  fill
+                  sizes="(min-width: 1280px) 26rem, (min-width: 1024px) 22rem, (min-width: 768px) 18rem, (min-width: 640px) 16rem, 14rem"
+                  className="object-cover object-[center_18%]"
+                  priority
+                />
+                <span
+                  className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(100,255,218,0.08),transparent_60%),linear-gradient(180deg,rgba(8,17,31,0.05)_0%,rgba(8,17,31,0.55)_100%)]"
+                  aria-hidden
+                />
+              </div>
             </div>
           </div>
-        </MotionFade>
+        </motion.div>
       </div>
 
       <motion.aside

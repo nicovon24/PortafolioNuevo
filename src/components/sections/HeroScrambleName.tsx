@@ -37,6 +37,8 @@ type HeroScrambleNameProps = {
   lastName: string;
   line1Class: string;
   line2Class: string;
+  line2ScrambleClass?: string;
+  onScrambleChange?: (active: boolean) => void;
 };
 
 const HOLD_MS = 8000;
@@ -50,10 +52,11 @@ const OPACITY_MIN = 1 - OPACITY_DIP;
 /**
  * Ciclo suave: estable → glifo/símbolos con leve baja de opacidad → vuelve al nombre.
  */
-export default function HeroScrambleName({ firstName, lastName, line1Class, line2Class }: HeroScrambleNameProps) {
+export default function HeroScrambleName({ firstName, lastName, line1Class, line2Class, line2ScrambleClass, onScrambleChange }: HeroScrambleNameProps) {
   const [line1, setLine1] = useState(firstName);
   const [line2, setLine2] = useState(lastName);
   const [wrapOpacity, setWrapOpacity] = useState(1);
+  const [isScrambling, setIsScrambling] = useState(false);
   const startRef = useRef<number | null>(null);
   const frameSkipRef = useRef(0);
 
@@ -101,6 +104,10 @@ export default function HeroScrambleName({ firstName, lastName, line1Class, line
         setLine1(buildScrambled(firstName, resolveP));
         setLine2(buildScrambled(lastName, resolveP));
       }
+      setIsScrambling((prev) => {
+        if (prev !== inGibberish) onScrambleChange?.(inGibberish);
+        return inGibberish;
+      });
       setWrapOpacity(opacity);
       raf = requestAnimationFrame(frame);
     };
@@ -114,7 +121,7 @@ export default function HeroScrambleName({ firstName, lastName, line1Class, line
   return (
     <h1 className="m-0 font-sans font-extrabold tracking-tight" style={{ opacity: wrapOpacity }} aria-label={label}>
       <span className={`block max-w-none ${line1Class}`}>{line1}</span>
-      <span className={`mt-1 block max-w-none ${line2Class}`}>{line2}</span>
+      <span className={`mt-1 block max-w-none transition-[filter] duration-300 ${isScrambling && line2ScrambleClass ? line2ScrambleClass : line2Class}`}>{line2}</span>
     </h1>
   );
 }

@@ -9,9 +9,10 @@ import { cn } from "@/lib/utils";
 type ProjectScreenshotsProps = {
   images: string[];
   title: string;
+  compact?: boolean;
 };
 
-export default function ProjectScreenshots({ images, title }: ProjectScreenshotsProps) {
+export default function ProjectScreenshots({ images, title, compact = false }: ProjectScreenshotsProps) {
   const labelId = useId();
   const [open, setOpen] = useState(false);
   const [index, setIndex] = useState(0);
@@ -59,17 +60,19 @@ export default function ProjectScreenshots({ images, title }: ProjectScreenshots
 
   return (
     <>
-      <div className="relative min-h-[240px] sm:min-h-[300px] lg:min-h-[380px]">
-        <button
-          type="button"
-          suppressHydrationWarning
-          onClick={() => openAt(0)}
-          className="absolute right-2 top-2 z-[25] inline-flex items-center gap-1.5 rounded-full border border-[rgba(100,255,218,0.45)] bg-[rgba(8,17,31,0.92)] px-2.5 py-1.5 font-mono text-[0.7rem] font-bold uppercase tracking-wide text-accent shadow-[0_8px_24px_rgba(0,0,0,0.35)] backdrop-blur-sm transition-colors hover:border-accent-2 hover:text-accent-2 sm:right-3 sm:top-3 sm:px-3 sm:text-xs"
-          aria-label={`Ampliar galería de ${title}`}
-        >
-          <ZoomIn size={14} className="shrink-0 sm:size-4" />
-          Galería
-        </button>
+      <div className={cn("relative", compact ? "h-[200px]" : "h-[260px] sm:h-[310px] lg:h-[390px]")}>
+        {!compact && (
+          <button
+            type="button"
+            suppressHydrationWarning
+            onClick={() => openAt(0)}
+            className="absolute right-2 top-2 z-[25] inline-flex items-center gap-1.5 rounded-full border border-[rgba(100,255,218,0.45)] bg-[rgba(8,17,31,0.92)] px-2.5 py-1.5 font-mono text-[0.7rem] font-bold uppercase tracking-wide text-accent shadow-[0_8px_24px_rgba(0,0,0,0.35)] backdrop-blur-sm transition-colors hover:border-accent-2 hover:text-accent-2 sm:right-3 sm:top-3 sm:px-3 sm:text-xs"
+            aria-label={`Ampliar galería de ${title}`}
+          >
+            <ZoomIn size={14} className="shrink-0 sm:size-4" />
+            Galería
+          </button>
+        )}
         {previews.map((image, i) => (
           <button
             key={`${title}-preview-${i}`}

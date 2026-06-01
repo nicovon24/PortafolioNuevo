@@ -125,6 +125,7 @@ export type PortfolioProject = {
   technologies: string[];
   images: string[];
   live?: string;
+  live2?: string;
   code?: string;
   inDevelopment?: boolean;
   hidden?: boolean;
@@ -158,17 +159,10 @@ export const projects: PortfolioProject[] = [
     inDevelopment: true,
   },
   {
-    key: "gabriel",
-    title: "Gabriel Bornoroni — Sitio oficial",
-    hidden: true,
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS"],
-    images: ["/images/projects/partido/gabriel/sorteo.png", "/images/projects/partido/gabriel/home.png"],
-    live: "https://gabrielbornoroni.com.ar/",
-  },
-  {
     key: "appfiscalizacion",
     title: "App Fiscalización",
     technologies: ["Next.js", "Framer Motion", "Redux Toolkit", "Vercel"],
+    live: "https://fiscalizar.lalibertadavanzacba.com/",
     images: [
       "/images/projects/partido/app/dashboard1.png",
       "/images/projects/partido/app/dashboard2.png",
@@ -176,6 +170,44 @@ export const projects: PortfolioProject[] = [
       "/images/projects/partido/app/seccionales.png",
       "/images/projects/partido/app/mesas.png",
     ],
+  },
+  {
+    key: "queabuso",
+    title: "Apps políticas",
+    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Node.js", "PostgreSQL"],
+    images: [
+      "/images/projects/partido/queabuso/landing.png",
+      "/images/projects/partido/queabuso/deja-denuncias.png",
+      "/images/projects/partido/queabuso/denuncias.png",
+      "/images/projects/partido/gabriel/sorteo.png",
+      "/images/projects/partido/gabriel/home.png",
+    ],
+    live: "https://queabusocba.com/",
+    live2: "https://gabrielbornoroni.com.ar/",
+  },
+  {
+    key: "trashcans",
+    title: "TrashCans — Senzary",
+    technologies: ["Angular", "ThingsBoard", "IoT", "Dashboards"],
+    images: [
+      "/images/projects/senzary/vercel/trashcans/landing.png",
+      "/images/projects/senzary/vercel/trashcans/map.png",
+      "/images/projects/senzary/vercel/trashcans/analytics.png",
+      "/images/projects/senzary/vercel/trashcans/tickets.png",
+      "/images/projects/senzary/vercel/trashcans/onboarding.png",
+    ],
+    live: "https://trashcans.senzary.com/",
+  },
+  {
+    key: "workeriq",
+    title: "WorkerIQ Drill — Senzary",
+    technologies: ["Angular", "ThingsBoard", "IoT", "Dashboards", "Data visualization"],
+    images: [
+      "/images/projects/senzary/vercel/workeriq/landing.png",
+      "/images/projects/senzary/vercel/workeriq/map.png",
+      "/images/projects/senzary/vercel/workeriq/map-v2.png",
+    ],
+    live: "https://workeriq-drill.iotlogiq.com/",
   },
   {
     key: "iotlogiq",
@@ -203,6 +235,7 @@ export const projects: PortfolioProject[] = [
       "/images/projects/senzary/airport/6.png",
       "/images/projects/senzary/airport/7.png",
     ],
+    live: "https://iotlogiq.com/",
   },
   {
     key: "cloudlab",

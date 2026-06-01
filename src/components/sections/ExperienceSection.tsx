@@ -72,7 +72,7 @@ export default function ExperienceSection() {
       id="experience"
       className="w-full px-page py-14 md:py-16 lg:py-[4.25rem]"
     >
-      <header className="mb-10 grid max-w-[900px] gap-2 md:mb-11 lg:mb-12">
+      <header className="mb-10 grid max-w-[84rem] mx-auto gap-2 md:mb-11 lg:mb-12">
         <p className="m-0 font-mono text-sm uppercase tracking-[0.08em] text-muted">
           {t("experience.eyebrow")}
         </p>
@@ -84,7 +84,7 @@ export default function ExperienceSection() {
         </div>
       </header>
 
-      <div className="relative mx-auto w-full max-w-none">
+      <div className="relative mx-auto w-full max-w-[84rem]">
         <div
           className="pointer-events-none absolute left-[21px] top-3 bottom-3 hidden w-px bg-accent/35 md:left-1/2 md:block md:-translate-x-1/2"
           aria-hidden

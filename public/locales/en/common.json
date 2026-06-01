@@ -58,6 +58,10 @@
     "inDevelopment": "In development",
     "viewCode": "View code",
     "viewLive": "View live",
+    "inspectProject": "Inspect Project",
+    "sourceCode": "Source Code",
+    "liveDeployment": "Live Deployment",
+    "architectureStack": "SYSTEM ARCHITECTURE STACK",
     "items": {
       "prodeazo": {
         "description": "Football prediction and statistics platform designed for the 2026 World Cup and scalable to other tournaments: real-time fixtures and results, predictions before match kick-off, points for correct picks and general and league rankings. MVP with fixture, predictions, ranking, user-to-user comparison and special picks (champion, top scorer, etc.); phased roadmap for mini-leagues with administration and a reusable statistics module (groups, brackets, metrics and profiles). Initial stack: Next.js and TypeScript, Supabase with PostgreSQL, Tailwind and NextUI; fixtures and results via Bzzoiro BSD."
@@ -67,6 +71,15 @@
       },
       "appfiscalizacion": {
         "description": "Web app for general electoral monitors in the October 2025 Córdoba legislative elections: dashboard, login, monitors, incidents, questions and table-by-table scrutiny, consuming a REST API. Next.js (App Router), Redux Toolkit and Tailwind; feedback with toasts and alerts. Deployed on Vercel."
+      },
+      "queabuso": {
+        "description": "Two apps for the same client — Gabriel Bornoroni and Libertad Avanza Córdoba. ¡Qué Abuso! CBA: platform to report tax and bureaucratic abuses, with complaint form, evidence upload, public feed and reactions. Gabriel Bornoroni official site: campaign website with home, raffle and content sections. Full-stack: Next.js/React, TypeScript, Tailwind and Node.js + PostgreSQL."
+      },
+      "trashcans": {
+        "description": "IoT dashboard for real-time monitoring of smart waste containers: fill level, temperature, alerts and collection route management. Built with Angular and ThingsBoard for Senzary."
+      },
+      "workeriq": {
+        "description": "Industrial drilling IoT monitoring platform: real-time tracking of drilling parameters, operational alerts and metric visualization. Built with Angular and ThingsBoard for Senzary."
       },
       "iotlogiq": {
         "description": "Smart Industry product built from scratch with Angular and ThingsBoard: sensor and asset data analysis platform and dashboards, with full-stack work (frontend and backend). I led the migration to the new version (renewed dashboards and onboardings) and over 10 projects and sub-projects for clients in sectors such as airports, data centers, environmental monitoring and aquifers, mainly in Latin America and the US. The gallery summarizes product views, digital twin, predictive analytics and field deployments (including airport and other industrial environments)."

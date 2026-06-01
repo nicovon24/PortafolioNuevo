@@ -1,12 +1,10 @@
 "use client";
 
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink, Github, Images, Search } from "lucide-react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { cn } from "@/lib/utils";
 import ProjectScreenshots from "@/components/ui/ProjectScreenshots";
-
-const linkBtn =
-  "inline-flex min-h-10 items-center justify-center gap-2 rounded-full border border-line bg-[rgba(100,255,218,0.06)] px-3.5 text-sm font-bold text-accent transition-colors hover:border-accent-2 hover:bg-[rgba(255,105,180,0.12)] hover:text-accent-2";
+import ProjectDetailModal from "@/components/ui/ProjectDetailModal";
 
 type ProjectCardProps = {
   projectKey: string;
@@ -14,9 +12,10 @@ type ProjectCardProps = {
   technologies: string[];
   images: string[];
   live?: string;
+  live2?: string;
   code?: string;
-  reversed?: boolean;
   inDevelopment?: boolean;
+  index?: number;
 };
 
 export default function ProjectCard({
@@ -25,53 +24,120 @@ export default function ProjectCard({
   technologies,
   images,
   live,
+  live2,
   code,
-  reversed = false,
   inDevelopment = false,
+  index = 0,
 }: ProjectCardProps) {
   const { t } = useTranslation();
   const description = t(`projects.items.${projectKey}.description`);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [startLightbox, setStartLightbox] = useState(false);
+
+  const truncated =
+    description.length > 110 ? description.slice(0, 110).trimEnd() + "…" : description;
+
+  function openModal(e: React.MouseEvent) {
+    e.stopPropagation();
+    setStartLightbox(false);
+    setModalOpen(true);
+  }
+
+  function openLightbox(e: React.MouseEvent) {
+    e.stopPropagation();
+    setStartLightbox(true);
+    setModalOpen(true);
+  }
 
   return (
-    <article
-      className={cn(
-        "grid grid-cols-1 items-center gap-7 rounded-3xl border border-line bg-panel p-4 shadow-[0_20px_56px_rgba(0,0,0,0.22)] backdrop-blur-[14px] sm:p-5 lg:grid-cols-[1fr_0.86fr] lg:gap-8",
-        reversed && "lg:grid-cols-[0.86fr_1fr]",
-      )}
-    >
-      <div className={cn(reversed && "lg:order-2")}>
-        <ProjectScreenshots images={images} title={title} />
-      </div>
-      <div className={cn("flex flex-col", reversed && "lg:order-1")}>
-        <div className="flex flex-wrap items-center gap-2 gap-y-1">
-          <h3 className="m-0 font-mono text-[clamp(1.25rem,2.5vw,2rem)]">{title}</h3>
-          {inDevelopment && (
-            <span className="inline-flex items-center rounded-full border border-amber-400/45 bg-amber-400/10 px-2.5 py-0.5 font-mono text-[0.65rem] font-semibold uppercase tracking-wider text-amber-200">
-              {t("projects.inDevelopment")}
-            </span>
-          )}
+    <>
+      <article
+        className="relative flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-panel shadow-[0_20px_56px_rgba(0,0,0,0.22)] backdrop-blur-[14px] transition-all duration-300 hover:-translate-y-1 hover:border-accent"
+        onClick={() => { setStartLightbox(false); setModalOpen(true); }}
+      >
+        {/* Image area with hover overlay */}
+        <div className="group relative cursor-pointer">
+          <ProjectScreenshots images={images} title={title} compact />
+
+          {/* Hover overlay — only over images */}
+          <div className="pointer-events-none absolute inset-0 z-[20] flex items-center justify-center gap-2 bg-[rgba(5,10,20,0.60)] opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+            <button
+              type="button"
+              suppressHydrationWarning
+              onClick={openModal}
+              className="pointer-events-auto flex items-center gap-1.5 rounded-full border border-accent/60 bg-[rgba(8,17,31,0.92)] px-4 py-2 font-mono text-xs font-bold text-accent shadow-[0_8px_28px_rgba(0,0,0,0.5)] backdrop-blur-sm transition-colors hover:border-accent hover:bg-accent/10"
+            >
+              <Search size={13} className="shrink-0" />
+              {t("projects.inspectProject")}
+            </button>
+            <button
+              type="button"
+              suppressHydrationWarning
+              onClick={openLightbox}
+              className="pointer-events-auto flex items-center gap-1.5 rounded-full border border-accent/60 bg-[rgba(8,17,31,0.92)] px-4 py-2 font-mono text-xs font-bold text-accent shadow-[0_8px_28px_rgba(0,0,0,0.5)] backdrop-blur-sm transition-colors hover:border-accent hover:bg-accent/10"
+            >
+              <Images size={13} className="shrink-0" />
+              View Images
+            </button>
+          </div>
         </div>
-        <p className="mt-2 leading-relaxed text-muted">{description}</p>
-        <div className="mt-4 flex flex-wrap gap-2">
-          {technologies.map((tech) => (
-            <span key={tech} className="rounded-full bg-[rgba(100,255,218,0.1)] px-2.5 py-1.5 text-xs font-bold text-accent">
-              {tech}
-            </span>
-          ))}
+
+        <div className="flex flex-col flex-1 p-4 sm:p-5">
+          <div className="flex flex-wrap items-center gap-2 gap-y-1">
+            <h3 className="m-0 font-mono text-lg leading-tight">{title}</h3>
+            {inDevelopment && (
+              <span className="inline-flex items-center rounded-full border border-amber-400/45 bg-amber-400/10 px-2 py-0.5 font-mono text-[0.6rem] font-semibold uppercase tracking-wider text-amber-200">
+                {t("projects.inDevelopment")}
+              </span>
+            )}
+          </div>
+          <p className="mt-2 text-sm leading-relaxed text-muted">{truncated}</p>
+          <div className="mt-3 flex flex-wrap gap-1.5">
+            {technologies.map((tech) => (
+              <span key={tech} className="rounded-full bg-[rgba(100,255,218,0.1)] px-2 py-1 text-[0.65rem] font-bold text-accent">
+                {tech}
+              </span>
+            ))}
+          </div>
+          <div className="mt-auto flex gap-2 pt-4" onClick={(e) => e.stopPropagation()}>
+            {(live || live2) && (
+              <a
+                href={live ?? live2}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex w-1/2 min-h-8 items-center justify-center gap-1.5 rounded-full bg-accent px-3 text-[0.7rem] font-bold text-[#08111f] transition-opacity hover:opacity-85"
+              >
+                {t("projects.liveDeployment")} <ExternalLink size={12} />
+              </a>
+            )}
+            {code && (
+              <a
+                href={code}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex w-1/2 min-h-8 items-center justify-center gap-1.5 rounded-full border border-accent bg-transparent px-3 text-[0.7rem] font-bold text-accent transition-colors hover:bg-accent/10"
+              >
+                <Github size={12} /> {t("projects.sourceCode")}
+              </a>
+            )}
+          </div>
         </div>
-        <div className="mt-5 flex flex-wrap gap-2.5">
-          {live && (
-            <a href={live} target="_blank" rel="noreferrer" className={linkBtn}>
-              <ExternalLink size={15} /> {t("projects.viewLive")}
-            </a>
-          )}
-          {code && (
-            <a href={code} target="_blank" rel="noreferrer" className={linkBtn}>
-              <Github size={15} /> {t("projects.viewCode")}
-            </a>
-          )}
-        </div>
-      </div>
-    </article>
+      </article>
+
+      <ProjectDetailModal
+        open={modalOpen}
+        onClose={() => { setModalOpen(false); setStartLightbox(false); }}
+        projectKey={projectKey}
+        title={title}
+        description={description}
+        technologies={technologies}
+        images={images}
+        live={live}
+        live2={live2}
+        code={code}
+        index={index}
+        initialLightbox={startLightbox}
+      />
+    </>
   );
 }

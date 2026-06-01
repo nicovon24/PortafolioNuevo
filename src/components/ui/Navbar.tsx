@@ -79,10 +79,10 @@ export default function Navbar() {
   return (
     <motion.header
       className={cn(
-        "fixed top-0 left-1/2 z-40 flex w-full -translate-x-1/2 items-center justify-between gap-[clamp(1rem,2vw,2.5rem)] border border-transparent bg-[rgba(14,26,46,0.72)] px-page py-[1.05rem] backdrop-blur-[18px]",
+        "fixed top-0 left-1/2 z-40 w-full -translate-x-1/2 border border-transparent bg-[rgba(14,26,46,0.72)] backdrop-blur-[18px]",
         open ? "overflow-visible" : "overflow-hidden",
         hasScrolled &&
-          "w-[min(94vw,80rem)] rounded-full border-line bg-[rgba(8,17,31,0.86)] py-3 px-[clamp(1rem,3vw,2rem)] shadow-[0_18px_60px_rgba(0,0,0,0.34)]",
+          "w-[min(94vw,84rem)] rounded-full border-line bg-[rgba(8,17,31,0.86)] shadow-[0_18px_60px_rgba(0,0,0,0.34)]",
       )}
       initial={{ opacity: 0, y: -42 }}
       animate={{ opacity: 1, y: hasScrolled ? 16 : 0 }}
@@ -98,11 +98,15 @@ export default function Navbar() {
       {/* bottom accent line — visible only when not scrolled */}
       <span
         className={cn(
-          "pointer-events-none absolute bottom-0 left-0 h-[2px] w-full origin-left bg-gradient-to-r from-transparent via-accent to-transparent opacity-100 transition-all duration-500",
+          "navbar-border-animated pointer-events-none absolute bottom-0 left-0 h-[2px] w-full origin-left opacity-100 transition-all duration-500",
           hasScrolled && "opacity-0 scale-x-0",
         )}
         aria-hidden="true"
       />
+      <div className={cn(
+        "mx-auto flex w-full max-w-[84rem] items-center justify-between gap-[clamp(1rem,2vw,2.5rem)] px-page py-[1.05rem]",
+        hasScrolled && "py-3 px-[clamp(1rem,3vw,2rem)]",
+      )}>
       <a
         className="group relative z-[1] flex items-center gap-[0.35rem] font-mono text-[clamp(0.78rem,1.1vw,0.98rem)] font-normal text-accent"
         href="#top"
@@ -170,6 +174,7 @@ export default function Navbar() {
           ))}
         </motion.nav>
       )}
+      </div>
     </motion.header>
   );
 }

@@ -58,6 +58,10 @@
     "inDevelopment": "En desarrollo",
     "viewCode": "Ver código",
     "viewLive": "Ver live",
+    "inspectProject": "Inspeccionar Proyecto",
+    "sourceCode": "Source Code",
+    "liveDeployment": "Live Deployment",
+    "architectureStack": "SYSTEM ARCHITECTURE STACK",
     "items": {
       "prodeazo": {
         "description": "Plataforma de pronósticos y estadísticas de fútbol pensada para el Mundial 2026 y escalar a otros torneos: fixtures y resultados en tiempo real, predicciones antes del inicio del partido, puntos por aciertos y rankings generales y por ligas. MVP con fixture, predicciones, ranking, comparativa usuario a usuario y picks especiales (campeón, goleador, etc.); roadmap en fases para miniligas con administración y un módulo estadístico reutilizable (grupos, llaves, métricas y perfiles). Stack inicial: Next.js y TypeScript, Supabase con PostgreSQL, Tailwind y NextUI; fixtures y resultados vía Bzzoiro BSD."
@@ -67,6 +71,15 @@
       },
       "appfiscalizacion": {
         "description": "Web para fiscales generales de Córdoba en las legislativas de octubre de 2025: dashboard, login, fiscales, incidencias, preguntas y escrutinio por mesas, consumiendo una API REST. Next.js (App Router), Redux Toolkit y Tailwind; feedback con toasts y alertas. Deploy en Vercel."
+      },
+      "queabuso": {
+        "description": "Dos apps para el mismo cliente — Gabriel Bornoroni y Libertad Avanza Córdoba. ¡Qué Abuso! CBA: plataforma para denunciar abusos impositivos y burocráticos, con formulario y carga de evidencia, feed público de denuncias y reacciones. Sitio oficial de Gabriel Bornoroni: web de campaña con home, sorteo y secciones. Full-stack: Next.js/React, TypeScript, Tailwind y Node.js + PostgreSQL."
+      },
+      "trashcans": {
+        "description": "Dashboard IoT para monitoreo en tiempo real de contenedores de residuos inteligentes: nivel de llenado, temperatura, alertas y rutas de recolección. Desarrollado con Angular y ThingsBoard para Senzary."
+      },
+      "workeriq": {
+        "description": "Plataforma IoT de monitoreo de perforación industrial: seguimiento de parámetros de perforación, alertas operativas y visualización de métricas en tiempo real. Desarrollado con Angular y ThingsBoard para Senzary."
       },
       "iotlogiq": {
         "description": "Producto Smart Industry desarrollado desde cero con Angular y ThingsBoard: plataforma de análisis de datos y dashboards de sensores y activos, con trabajo full-stack (frontend y backend). Lideré la migración a la nueva versión (dashboards y onboardings renovados) y más de 10 proyectos y subproyectos para clientes en sectores como aeropuertos, data centers, monitoreo ambiental y acuíferos, principalmente en Latinoamérica y EE.UU. La galería resume vistas del producto, digital twin, analítica predictiva y despliegues en campo (incluido aeropuerto y otros entornos industriales)."
