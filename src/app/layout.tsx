@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="es" className={`scroll-smooth ${nunitoSans.variable}`}>
+    <html lang="es" className={`scroll-smooth ${nunitoSans.variable}`} suppressHydrationWarning>
       <body className={`antialiased ${nunitoSans.className}`} suppressHydrationWarning>
         <I18nProvider>
           <TrailingCursor />

@@ -105,7 +105,7 @@ export default function HeroScrambleName({ firstName, lastName, line1Class, line
         setLine2(buildScrambled(lastName, resolveP));
       }
       setIsScrambling((prev) => {
-        if (prev !== inGibberish) onScrambleChange?.(inGibberish);
+        if (prev !== inGibberish) setTimeout(() => onScrambleChange?.(inGibberish), 0);
         return inGibberish;
       });
       setWrapOpacity(opacity);
