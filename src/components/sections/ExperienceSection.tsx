@@ -46,6 +46,7 @@ function ExperienceCard({
           alt={`Logo ${company}`}
           width={44}
           height={44}
+          loading="lazy"
           className="size-11 shrink-0 rounded object-contain p-1"
           style={{ backgroundColor: iconBg ?? "#f5f5f5" }}
         />

@@ -5,6 +5,7 @@ import { ChevronLeft, ChevronRight, X, ZoomIn } from "lucide-react";
 import { useCallback, useEffect, useId, useState } from "react";
 import { createPortal } from "react-dom";
 import { cn } from "@/lib/utils";
+import { Skeleton } from "@/components/ui/Skeleton";
 
 type ProjectScreenshotsProps = {
   images: string[];
@@ -57,6 +58,7 @@ export default function ProjectScreenshots({ images, title, compact = false }: P
   if (count === 0) return null;
 
   const previews = images.slice(0, 3);
+  const [loadedMap, setLoadedMap] = useState<Record<number, boolean>>({});
 
   return (
     <>
@@ -87,12 +89,17 @@ export default function ProjectScreenshots({ images, title, compact = false }: P
             )}
             aria-label={`${title} captura ${i + 1} — abrir galería`}
           >
+            {!loadedMap[i] && <Skeleton className="absolute inset-0 rounded-[22px]" />}
             <Image
               src={image}
               alt={`${title} captura ${i + 1}`}
               fill
               sizes="(max-width: 768px) 80vw, 34vw"
-              className="pointer-events-none object-cover"
+              className={cn(
+                "pointer-events-none object-cover transition-opacity duration-300",
+                loadedMap[i] ? "opacity-100" : "opacity-0",
+              )}
+              onLoad={() => setLoadedMap((prev) => ({ ...prev, [i]: true }))}
             />
           </button>
         ))}

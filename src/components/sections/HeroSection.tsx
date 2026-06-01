@@ -2,8 +2,9 @@
 
 import Image from "next/image";
 import { ArrowDown, Download, Github, Linkedin } from "lucide-react";
-import { motion, type Variants } from "framer-motion";
+import { motion, useScroll, useTransform, type Variants } from "framer-motion";
 import { useCallback, useState } from "react";
+import { Skeleton } from "@/components/ui/Skeleton";
 import { useTranslation } from "react-i18next";
 import MotionFade from "@/components/motion/MotionFade";
 import MotionSlide from "@/components/motion/MotionSlide";
@@ -117,6 +118,10 @@ export default function HeroSection() {
 
   const [isScrambling, setIsScrambling] = useState(false);
   const [badgeGlitch, setBadgeGlitch] = useState(false);
+  const [photoLoaded, setPhotoLoaded] = useState(false);
+
+  const { scrollY } = useScroll();
+  const photoParallaxY = useTransform(scrollY, [0, 600], [0, 55]);
   const handleScrambleChange = useCallback((active: boolean) => {
     setIsScrambling(active);
     if (active) {
@@ -277,6 +282,7 @@ export default function HeroSection() {
         {/* ── PHOTO (DOM last → below carousel on tablet/mobile / right on desktop) ── */}
         <motion.div
           className="flex cursor-pointer justify-center pt-6 lg:order-2 lg:ml-auto lg:shrink-0 lg:pt-0"
+          style={{ y: photoParallaxY }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
@@ -303,13 +309,17 @@ export default function HeroSection() {
                     : "0 0 0 3px rgba(8,17,31,0.85), 0 0 32px rgba(100,255,218,0.45), 0 0 80px rgba(100,255,218,0.18), inset 0 0 36px rgba(100,255,218,0.12)",
                 }}
               >
+                {!photoLoaded && (
+                  <Skeleton className="absolute inset-0 rounded-full" />
+                )}
                 <Image
                   src="/images/profile/profile.png"
                   alt={profile.name}
                   fill
                   sizes="(min-width: 1280px) 26rem, (min-width: 1024px) 22rem, (min-width: 768px) 18rem, (min-width: 640px) 16rem, 14rem"
-                  className="object-cover object-[center_18%]"
+                  className={`object-cover object-[center_18%] transition-opacity duration-500 ${photoLoaded ? "opacity-100" : "opacity-0"}`}
                   priority
+                  onLoad={() => setPhotoLoaded(true)}
                 />
                 <span
                   className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(100,255,218,0.08),transparent_60%),linear-gradient(180deg,rgba(8,17,31,0.05)_0%,rgba(8,17,31,0.55)_100%)]"

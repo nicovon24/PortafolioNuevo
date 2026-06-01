@@ -6,6 +6,7 @@ import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
+import { Skeleton } from "@/components/ui/Skeleton";
 
 const linkBtn =
   "inline-flex min-h-10 items-center justify-center gap-2 rounded-full border border-line bg-[rgba(100,255,218,0.06)] px-4 text-sm font-bold text-accent transition-colors hover:border-accent-2 hover:bg-[rgba(255,105,180,0.12)] hover:text-accent-2";
@@ -43,6 +44,7 @@ export default function ProjectDetailModal({
   const { t } = useTranslation();
   const labelId = useId();
   const [imgIndex, setImgIndex] = useState(0);
+  const [imgLoaded, setImgLoaded] = useState(false);
   const [lightbox, setLightbox] = useState(false);
   const lightboxRef = useRef(false);
   // Track if modal was opened directly as lightbox (View Images) — closing lightbox should close everything
@@ -56,12 +58,13 @@ export default function ProjectDetailModal({
     else setLightbox(false);
   }, [onClose]);
 
-  const goPrev = useCallback(() => setImgIndex((i) => (i - 1 + count) % count), [count]);
-  const goNext = useCallback(() => setImgIndex((i) => (i + 1) % count), [count]);
+  const goPrev = useCallback(() => { setImgLoaded(false); setImgIndex((i) => (i - 1 + count) % count); }, [count]);
+  const goNext = useCallback(() => { setImgLoaded(false); setImgIndex((i) => (i + 1) % count); }, [count]);
 
   useEffect(() => {
     if (!open) return;
     setImgIndex(0);
+    setImgLoaded(false);
     setLightbox(initialLightbox);
     lightboxRef.current = initialLightbox;
     directLightboxRef.current = initialLightbox;
@@ -120,14 +123,16 @@ export default function ProjectDetailModal({
           {/* Left: image gallery */}
           <div className="relative flex h-[200px] w-full flex-col bg-[#08111f] md:h-full md:w-[55%]">
             <div className="relative flex-1 w-full overflow-hidden">
+              {!imgLoaded && <Skeleton className="absolute inset-0 rounded-none" />}
               {images[imgIndex] && (
                 <Image
                   src={images[imgIndex]}
                   alt={`${title} captura ${imgIndex + 1}`}
                   fill
                   sizes="(max-width: 768px) 100vw, 55vw"
-                  className="object-cover"
+                  className={cn("object-cover transition-opacity duration-300", imgLoaded ? "opacity-100" : "opacity-0")}
                   priority
+                  onLoad={() => setImgLoaded(true)}
                 />
               )}
 
