@@ -36,9 +36,6 @@ export default function ProjectCard({
   const [modalOpen, setModalOpen] = useState(false);
   const [startLightbox, setStartLightbox] = useState(false);
 
-  const truncated =
-    description.length > 110 ? description.slice(0, 110).trimEnd() + "…" : description;
-
   function openModal(e: React.MouseEvent) {
     e.stopPropagation();
     setStartLightbox(false);
@@ -93,7 +90,7 @@ export default function ProjectCard({
               </span>
             )}
           </div>
-          <p className="mt-2 text-sm leading-relaxed text-muted">{truncated}</p>
+          <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-muted">{description}</p>
           <div className="mt-3 flex flex-wrap gap-1.5">
             {technologies.map((tech) => (
               <span key={tech} className="rounded-full bg-[rgba(100,255,218,0.1)] px-2 py-1 text-[0.65rem] font-bold text-accent">
