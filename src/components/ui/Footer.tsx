@@ -18,7 +18,7 @@ export default function Footer() {
 
   return (
     <footer className="mt-16 w-full px-page pb-10 pt-2">
-      <div className="mx-auto w-full max-w-[84rem]">
+      <div className="mx-auto w-full max-w-shell">
       <div className={panel}>
         <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
           <div className="flex flex-col gap-4">

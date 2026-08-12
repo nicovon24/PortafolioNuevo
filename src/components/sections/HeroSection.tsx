@@ -174,7 +174,7 @@ export default function HeroSection() {
       </aside>
 
       {/* Flex row at lg+: text left, photo right. Stacked below lg so the photo doesn't get cramped on tablets. */}
-      <div className="relative z-0 mx-auto flex w-full min-w-0 max-w-[84rem] flex-col justify-start pt-1 text-left lg:flex-1 lg:flex-row lg:items-center lg:justify-center lg:gap-10 lg:pt-0 xl:gap-12">
+      <div className="relative z-0 mx-auto flex w-full min-w-0 max-w-shell flex-col justify-start pt-1 text-left lg:flex-1 lg:flex-row lg:items-center lg:justify-center lg:gap-10 lg:pt-0 xl:gap-12">
 
         {/* ── TEXT (DOM first → above on tablet/mobile / left on desktop) ── */}
         <div className="min-w-0 flex-1 lg:max-w-[38rem] xl:max-w-[44rem]">

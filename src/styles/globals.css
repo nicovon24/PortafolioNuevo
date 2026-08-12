@@ -5,7 +5,8 @@
   --font-mono: var(--font-jetbrains-mono), ui-monospace, "Cascadia Code", "Consolas", monospace;
 
   --spacing-page: clamp(1rem, 4vw, 3.75rem);
-  --spacing-shell: 84rem;
+  /* Ancho del contenido. Unico lugar donde se ajusta: navbar, hero, secciones y footer lo consumen. */
+  --spacing-shell: 72rem;
 
   --color-background: #0e1a2e;
   --color-background-deep: #08111f;

@@ -104,7 +104,7 @@ export default function Navbar() {
         aria-hidden="true"
       />
       <div className={cn(
-        "mx-auto flex w-full max-w-[84rem] items-center justify-between gap-[clamp(1rem,2vw,2.5rem)] py-[1.05rem]",
+        "mx-auto flex w-full max-w-shell items-center justify-between gap-[clamp(1rem,2vw,2.5rem)] py-[1.05rem]",
         hasScrolled && "py-3",
       )}>
       <a
