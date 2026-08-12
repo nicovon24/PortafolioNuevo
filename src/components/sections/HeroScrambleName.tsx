@@ -42,9 +42,9 @@ type HeroScrambleNameProps = {
   onScrambleChange?: (active: boolean) => void;
 };
 
-const HOLD_MS = 8000;
+const HOLD_MS = 250;
 const SCRAMBLE_OUT_MS = 300;
-const SCRAMBLE_IN_MS = 400;
+const SCRAMBLE_IN_MS = 550;
 const CYCLE_MS = HOLD_MS + SCRAMBLE_OUT_MS + SCRAMBLE_IN_MS;
 
 const OPACITY_DIP = 0.15;
@@ -80,7 +80,9 @@ export default function HeroScrambleName({ firstName, lastName, line1Class, line
     const frame = (now: number) => {
       if (startRef.current === null) startRef.current = now;
       const elapsed = now - startRef.current;
-      const t = elapsed % CYCLE_MS;
+      // Una sola pasada al entrar. Antes reciclaba cada 8s de forma indefinida.
+      const done = elapsed >= CYCLE_MS;
+      const t = done ? CYCLE_MS : elapsed;
 
       let resolveP = 1;
       let opacity = 1;
@@ -114,6 +116,14 @@ export default function HeroScrambleName({ firstName, lastName, line1Class, line
         return inGibberish;
       });
       setWrapOpacity(opacity);
+
+      if (done) {
+        // Asentar en el nombre limpio y soltar el loop.
+        setLine1(firstName);
+        setLine2(lastName);
+        setWrapOpacity(1);
+        return;
+      }
       raf = requestAnimationFrame(frame);
     };
 

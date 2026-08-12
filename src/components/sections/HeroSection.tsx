@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { ArrowDown, Download, Github, Linkedin } from "lucide-react";
 import { motion, useScroll, useTransform, type Variants } from "framer-motion";
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { useTranslation } from "react-i18next";
 import MotionFade from "@/components/motion/MotionFade";
@@ -35,7 +35,7 @@ const btnSecondary =
   "inline-flex min-h-10 items-center justify-center gap-2 border border-line bg-transparent px-3.5 font-mono text-sm font-bold uppercase tracking-wider text-muted transition-colors hover:border-accent hover:text-accent";
 
 const iconBtn =
-  "grid size-9 place-items-center border border-line bg-[rgba(8,17,31,0.88)] text-accent transition-colors hover:border-accent-2 hover:bg-[rgba(255,105,180,0.12)] hover:text-accent-2";
+  "grid size-9 place-items-center border border-line bg-panel-strong text-accent transition-colors hover:border-accent-2 hover:bg-[rgba(255,105,180,0.12)] hover:text-accent-2";
 
 const nameLine1Class =
   "leading-[0.95] text-ink text-[clamp(2.05rem,calc(0.88rem+5.2vw),4rem)]";
@@ -47,11 +47,11 @@ const nameLine2ScrambleClass =
   "bg-gradient-to-b from-accent-2 via-accent-2 to-[#ff85c0] bg-clip-text text-[clamp(2.35rem,calc(1rem+5.85vw),4.65rem)] leading-[0.92] text-transparent drop-shadow-[0_0_22px_rgba(255,105,180,0.25)] [-webkit-text-fill-color:transparent]";
 
 const hudRow =
-  "m-0 flex flex-wrap justify-end gap-x-1 font-mono text-[0.55rem] leading-snug sm:text-[0.6rem]";
+  "m-0 flex flex-wrap justify-end gap-x-1 font-mono text-micro leading-snug";
 const hudKey =
-  "shrink-0 uppercase tracking-[0.2em] text-muted/55";
+  "shrink-0 uppercase tracking-[0.2em] text-muted";
 const hudValMuted =
-  "text-right font-semibold uppercase tracking-[0.14em] text-muted/55";
+  "text-right font-semibold uppercase tracking-[0.14em] text-muted";
 const hudValAccent =
   "text-right font-semibold uppercase tracking-[0.14em] text-accent";
 
@@ -95,11 +95,11 @@ const heroStatItemVariants: Variants = {
 function HeroRingStat({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex flex-col items-center gap-2">
-      <span className="max-w-[5.5rem] text-center font-mono text-[0.58rem] font-semibold uppercase leading-tight tracking-[0.14em] text-muted/85 sm:text-[0.6rem]">
+      <span className="max-w-[5.5rem] text-center font-mono text-micro font-semibold uppercase leading-tight tracking-[0.14em] text-muted ">
         {label}
       </span>
       <div
-        className="relative grid size-[4.35rem] place-items-center rounded-full border-2 border-dashed border-accent/75 bg-[rgba(8,17,31,0.85)] shadow-[0_0_28px_rgba(100,255,218,0.18),inset_0_0_20px_rgba(100,255,218,0.08)] backdrop-blur-sm sm:size-[4.85rem]"
+        className="relative grid size-[4.35rem] place-items-center rounded-full border-2 border-dashed border-accent/75 bg-panel-strong shadow-[0_0_28px_rgba(100,255,218,0.18),inset_0_0_20px_rgba(100,255,218,0.08)] backdrop-blur-sm sm:size-[4.85rem]"
         aria-hidden
       >
         <div className="pointer-events-none absolute inset-0 rounded-full border border-accent/25" />
@@ -120,8 +120,10 @@ export default function HeroSection() {
   const [badgeGlitch, setBadgeGlitch] = useState(false);
   const [photoLoaded, setPhotoLoaded] = useState(false);
 
-  const { scrollY } = useScroll();
-  const photoParallaxY = useTransform(scrollY, [0, 600], [0, 55]);
+  // Acotado al hero: useScroll() global mantiene la suscripcion viva con la seccion fuera de pantalla.
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
+  const photoParallaxY = useTransform(scrollYProgress, [0, 1], [0, 55]);
   const handleScrambleChange = useCallback((active: boolean) => {
     setIsScrambling(active);
     if (active) {
@@ -137,6 +139,7 @@ export default function HeroSection() {
 
   return (
     <section
+      ref={sectionRef}
       id="top"
       className="relative flex w-full flex-col items-start overflow-hidden px-page pb-12 pt-28 sm:pb-14 sm:pt-32 lg:min-h-screen lg:pb-36 lg:pt-24"
     >
@@ -189,7 +192,7 @@ export default function HeroSection() {
                 <HeroRoleCycle className="text-muted" />
               </div>
               <span
-                className={`inline-flex w-fit shrink-0 items-center gap-2 rounded-full px-3 py-1 text-[0.62rem] font-bold tracking-[0.12em] transition-colors duration-300 sm:text-[0.65rem] ${
+                className={`inline-flex w-fit shrink-0 items-center gap-2 rounded-full px-3 py-1 text-micro font-bold tracking-[0.12em] transition-colors duration-300 sm:text-mini ${
                   badgeGlitch
                     ? "border border-accent-2/40 bg-accent-2/[0.07] text-accent-2"
                     : "border border-accent/40 bg-accent/[0.07] text-accent"
@@ -208,7 +211,7 @@ export default function HeroSection() {
               {HERO_TAGS.map((tag) => (
                 <li
                   key={tag}
-                  className="rounded border border-accent/25 bg-accent/[0.05] px-3 py-1.5 font-mono text-[0.62rem] font-semibold uppercase tracking-[0.1em] text-accent/90 sm:text-[0.65rem]"
+                  className="rounded border border-accent/25 bg-accent/[0.05] px-3 py-1.5 font-mono text-micro font-semibold uppercase tracking-[0.1em] text-accent/90 sm:text-mini"
                 >
                   {tag}
                 </li>
@@ -241,7 +244,7 @@ export default function HeroSection() {
           <MotionFade delay={0.28} className="mt-6 sm:mt-8">
             <div
               className="hero-tech-mask group/hero-tech relative w-full overflow-x-clip overflow-y-visible py-3"
-              aria-label="Tech and tools carousel"
+              aria-label={t("gallery.techCarousel")}
               role="region"
             >
               <HeroTechCarousel>
@@ -250,7 +253,7 @@ export default function HeroSection() {
                   return (
                   <li
                     key={`${item.name}-${i}`}
-                    className={`group/hero-tech-item flex w-[5.75rem] shrink-0 flex-col items-center justify-center gap-1.5 rounded-lg border border-line/70 bg-[rgba(8,17,31,0.7)] px-2 py-2.5 backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 sm:w-[6.25rem] ${
+                    className={`group/hero-tech-item flex w-[5.75rem] shrink-0 flex-col items-center justify-center gap-1.5 rounded-lg border border-line/70 bg-panel-strong px-2 py-2.5 backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 sm:w-[6.25rem] ${
                       isEven
                         ? "hover:border-accent hover:bg-[rgba(100,255,218,0.06)] hover:shadow-[0_0_0_1px_rgba(100,255,218,0.4)_inset,0_0_18px_rgba(100,255,218,0.22)]"
                         : "hover:border-accent-2 hover:bg-[rgba(255,105,180,0.06)] hover:shadow-[0_0_0_1px_rgba(255,105,180,0.4)_inset,0_0_18px_rgba(255,105,180,0.22)]"
@@ -266,7 +269,7 @@ export default function HeroSection() {
                         isEven ? "hero-tech-icon-even" : "hero-tech-icon-odd"
                       }`}
                     />
-                    <span className={`block w-full truncate text-center font-mono text-[0.58rem] font-semibold uppercase tracking-[0.08em] text-muted transition-colors duration-200 sm:text-[0.62rem] ${
+                    <span className={`block w-full truncate text-center font-mono text-micro font-semibold uppercase tracking-[0.08em] text-muted transition-colors duration-200 sm:text-micro ${
                       isEven ? "group-hover/hero-tech-item:text-accent" : "group-hover/hero-tech-item:text-accent-2"
                     }`}>
                       {item.name}
@@ -286,9 +289,10 @@ export default function HeroSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          // Una sacudida por hover. Antes era repeat: Infinity mientras el mouse estuviera encima.
           whileHover={{
             x: [0, 8, -8, 6, -6, 3, 0],
-            transition: { duration: 1.4, ease: "easeInOut", repeat: Infinity, repeatType: "loop" },
+            transition: { duration: 1.4, ease: "easeInOut" },
           }}
         >
           <div

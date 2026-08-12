@@ -2,9 +2,10 @@
 
 @theme {
   --font-sans: var(--font-nunito-sans), "Segoe UI", system-ui, sans-serif;
-  --font-mono: "Cascadia Code", "Consolas", monospace;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, "Cascadia Code", "Consolas", monospace;
 
   --spacing-page: clamp(1rem, 4vw, 3.75rem);
+  --spacing-shell: 84rem;
 
   --color-background: #0e1a2e;
   --color-background-deep: #08111f;
@@ -16,6 +17,23 @@
   --color-panel: rgba(11, 23, 43, 0.78);
   --color-panel-strong: rgba(8, 17, 31, 0.92);
   --color-canvas: #0b172b;
+  --color-overlay: rgba(5, 10, 20, 0.96);
+
+  /* Dos radios: superficies y pills. Antes convivian 8 valores distintos. */
+  --radius-card: 1rem;
+  --radius-card-lg: 1.375rem;
+
+  --shadow-card: 0 20px 56px rgba(0, 0, 0, 0.22);
+  --shadow-card-sm: 0 10px 28px rgba(0, 0, 0, 0.16);
+  --shadow-pop: 0 18px 42px -14px rgba(0, 0, 0, 0.45);
+
+  /* Escala tipografica: piso de 11px, reemplaza los text-[0.55rem]..[0.72rem] arbitrarios. */
+  --text-micro: 0.6875rem;
+  --text-micro--line-height: 1.1;
+  --text-mini: 0.75rem;
+  --text-mini--line-height: 1.25;
+  --text-section: clamp(1.65rem, 4.2vw, 3rem);
+  --text-section--line-height: 1.1;
 }
 
 :root {
@@ -371,7 +389,7 @@ html.with-hud-cursor [contenteditable="true"] {
     transparent 100%
   );
   background-size: 200% 100%;
-  animation: navbar-border-sweep 3s linear infinite;
+  animation: navbar-border-sweep 9s linear infinite;
 }
 
 @property --photo-angle {
@@ -399,7 +417,7 @@ html.with-hud-cursor [contenteditable="true"] {
   );
   padding: 2.5px;
   border-radius: 9999px;
-  animation: photo-border-spin 4s linear infinite;
+  animation: photo-border-spin 14s linear infinite;
 }
 
 .hero-tech-icon-even,
@@ -423,7 +441,7 @@ html.with-hud-cursor [contenteditable="true"] {
     rgba(100, 255, 218, 0.35) 60%,
     transparent 80%
   );
-  animation: photo-border-spin 4s linear infinite;
+  animation: photo-border-spin 14s linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -471,5 +489,27 @@ html.with-hud-cursor [contenteditable="true"] {
 @media (prefers-reduced-motion: reduce) {
   .skeleton-shimmer {
     animation: none;
+  }
+}
+
+/* Red de seguridad: apaga cualquier animacion/transicion cuando el sistema lo pide. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Piso de accesibilidad: todo lo enfocable muestra anillo, sin depender de que
+   cada componente recuerde agregarlo. Critico porque `cursor: none` esconde el puntero. */
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: 2px;
   }
 }

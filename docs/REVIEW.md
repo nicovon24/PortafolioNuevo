@@ -23,7 +23,7 @@ Stack: Next.js 15.5.9 / React 19 / Tailwind v4 (CSS-first, sin `tailwind.config`
 | ExperienceSection unificada al tema dark + usa `<Section>` | `ExperienceSection.tsx` | Eran cards `bg-white` con esquinas rectas, y un header que invertía las convenciones de `Section` |
 | Código muerto eliminado | — | `gsap`, `next-themes`, `@emailjs/browser`, `ContactForm.tsx`, `ProjectCardSkeleton.tsx`, `.hero-tech-track` |
 
-Baseline actual: **196 kB First Load JS**, build limpio.
+Baseline actual: **195 kB First Load JS**, build limpio.
 
 ---
 
@@ -54,50 +54,50 @@ Baseline actual: **196 kB First Load JS**, build limpio.
 
 ---
 
-## Fase 1 — Animaciones
+## Fase 1 — Animaciones ✅ completada
 
 **Objetivo:** que nada se anime cuando no se ve, y que todo respete `prefers-reduced-motion`.
 
-- [ ] `MotionFade` / `MotionSlide` no consultan `useReducedMotion()` de framer-motion. Dos líneas, alto retorno de accesibilidad.
-- [ ] `TechSection.tsx:25-40` monta **un `MotionFade` (= un `motion.div` + un IntersectionObserver) por cada ítem de tech**. Son decenas de observers para un stagger que se resuelve con un contenedor `variants` + `staggerChildren`. Mismo patrón en `AboutSection.tsx:56-65`.
-- [ ] `HeroSection.tsx:123` usa `useScroll()` global sin `target`: la suscripción sigue viva con el hero fuera de pantalla. Acotar con `useScroll({ target, offset })`.
-- [ ] `HeroSection.tsx:289` tiene un `whileHover` con `repeat: Infinity` — sacudida eterna mientras el mouse esté encima. Limitar a 1-2 repeticiones.
-- [ ] Reducir las animaciones CSS infinitas de `globals.css` (`nav-shine` 5s, `navbar-border-sweep` 3s, `photo-border-ring` 4s). El anillo cónico repinta un gradiente de ~416px cada frame.
-- [ ] Reconsiderar el ciclo infinito de scramble del nombre (`HOLD_MS = 8000`): una sola pasada al montar.
+- [x] `MotionFade` / `MotionSlide` no consultan `useReducedMotion()` de framer-motion. Dos líneas, alto retorno de accesibilidad.
+- [x] `TechSection.tsx:25-40` monta **un `MotionFade` (= un `motion.div` + un IntersectionObserver) por cada ítem de tech**. Son decenas de observers para un stagger que se resuelve con un contenedor `variants` + `staggerChildren`. Mismo patrón en `AboutSection.tsx:56-65`.
+- [x] `HeroSection.tsx:123` usa `useScroll()` global sin `target`: la suscripción sigue viva con el hero fuera de pantalla. Acotar con `useScroll({ target, offset })`.
+- [x] `HeroSection.tsx:289` tiene un `whileHover` con `repeat: Infinity` — sacudida eterna mientras el mouse esté encima. Limitar a 1-2 repeticiones.
+- [x] Reducir las animaciones CSS infinitas de `globals.css` (`nav-shine` 5s, `navbar-border-sweep` 3s, `photo-border-ring` 4s). El anillo cónico repinta un gradiente de ~416px cada frame.
+- [x] Reconsiderar el ciclo infinito de scramble del nombre (`HOLD_MS = 8000`): una sola pasada al montar.
 
 ## Fase 2 — Rendimiento
 
 - [ ] **`next.config.ts` está prácticamente vacío.** Configurar `images.formats` (AVIF/WebP), `deviceSizes`, `qualities` y `minimumCacheTTL`.
 - [ ] **i18n: se bundlean los dos idiomas.** `src/lib/i18n.ts:3-4` importa ambos JSON estáticamente (~21 kB) aunque ya están servidos desde `/public/locales/`. Cargar sólo el activo, el otro bajo demanda.
 - [ ] `ProjectDetailModal` (~340 líneas) se importa estático en cada `ProjectCard`. Pasar a `next/dynamic`.
-- [ ] `TrailingCursor` se descarga y ejecuta también en mobile, donde se auto-desactiva. Envolver en `dynamic(..., { ssr: false })`.
+- [x] `TrailingCursor` se descarga y ejecuta también en mobile, donde se auto-desactiva. Envolver en `dynamic(..., { ssr: false })`.
 - [ ] framer-motion se importa completo en 4 archivos. Migrar a `LazyMotion` + `domAnimation`, o reemplazar `MotionFade`/`MotionSlide` por un hook con `IntersectionObserver` + clases CSS y sacar framer del critical path.
 - [ ] Cada card renderiza **3 imágenes apiladas** → ~30 requests en la grilla. Evaluar cargar 1 y las otras en hover/apertura.
 - [ ] `profile.png` (319 kB) es la imagen del LCP y es un PNG: pasarla a JPEG/WebP de origen.
 - [ ] `Navbar.tsx` tiene **dos** listeners de scroll independientes (`:19-61` y `:73-77`) y llama `getBoundingClientRect()` por sección en cada frame. Fusionar y reemplazar por `IntersectionObserver`.
 
-## Fase 3 — UI y design system
+## Fase 3 — UI y design system ✅ completada
 
-- [ ] Cargar `--font-mono` con `next/font` (hoy depende de fuentes de Windows).
-- [ ] Extraer `Button`, `IconButton`, `Card`, `Modal`. Ver duplicaciones: panel ×5, icon-button ×6, flecha de carrusel ×6, botón "live" ×6.
-- [ ] Tokenizar radios, sombras y la escala tipográfica en `@theme`.
-- [ ] Usar el token `--color-panel-strong` (está definido y no se usa): hay 10 sitios con `bg-[rgba(8,17,31,0.92)]` literal, que es exactamente ese valor. Ídem `text-[#08111f]` → `text-background-deep`.
-- [ ] **Unificar los dos lightboxes.** `ProjectScreenshots.tsx` (176 líneas) y `ProjectDetailModal.tsx` (341) implementan cada uno su portal, su manejo de Escape/flechas y su bloqueo de scroll. Además pueden apilarse: hay z-index 200 / 200 / 300 compitiendo.
-- [ ] Mover el SVG de Darth Vader embebido en `AboutSection.tsx:8-35` a `/public/images/svg/`.
-- [ ] `AboutSection.tsx:62` mapea iconos **por índice** contra el array de traducciones: reordenar `about.services` en el JSON rompe la correspondencia. Pasar a claves.
+- [x] Cargar `--font-mono` con `next/font` (hoy depende de fuentes de Windows).
+- [x] Extraer `Button`, `IconButton`, `Card`, `Modal`. Ver duplicaciones: panel ×5, icon-button ×6, flecha de carrusel ×6, botón "live" ×6.
+- [x] Tokenizar radios, sombras y la escala tipográfica en `@theme`.
+- [x] Usar el token `--color-panel-strong` (está definido y no se usa): hay 10 sitios con `bg-[rgba(8,17,31,0.92)]` literal, que es exactamente ese valor. Ídem `text-[#08111f]` → `text-background-deep`.
+- [x] **Unificar los dos lightboxes.** `ProjectScreenshots.tsx` (176 líneas) y `ProjectDetailModal.tsx` (341) implementan cada uno su portal, su manejo de Escape/flechas y su bloqueo de scroll. Además pueden apilarse: hay z-index 200 / 200 / 300 compitiendo.
+- [x] Mover el SVG de Darth Vader embebido en `AboutSection.tsx:8-35` a `/public/images/svg/`.
+- [x] `AboutSection.tsx:62` mapea iconos **por índice** contra el array de traducciones: reordenar `about.services` en el JSON rompe la correspondencia. Pasar a claves.
 
-## Fase 4 — Accesibilidad
+## Fase 4 — Accesibilidad ✅ completada
 
 Es el frente más flojo del proyecto.
 
-- [ ] **`ProjectCard.tsx:53` es un `<article>` con `onClick`**, sin `role`, sin `tabIndex`, sin handler de teclado. Ninguna card de proyecto es alcanzable con Tab. Los dos botones internos viven en un overlay `opacity-0 group-hover:opacity-100`: reciben foco pero son invisibles (falta `group-focus-within:opacity-100`).
-- [ ] **Casi no hay focus states.** Un grep de `focus-visible|focus:|outline` en todo `src/` devuelve 2 resultados, y uno estaba en el componente muerto que ya borramos. Sumado a `cursor: none !important` (`globals.css:100`), quien navega con teclado no tiene ni cursor ni anillo de foco.
-- [ ] Modales sin focus trap ni restauración de foco al cerrar; el fondo no queda `inert`.
-- [ ] `<html lang="es">` está fijo en `layout.tsx:25` y nunca cambia al pasar a inglés (falla WCAG 3.1.1).
-- [ ] Contraste: `text-muted/55` a `text-[0.55rem]` (`HeroSection.tsx:52`) da ≈3.4:1 — no pasa AA. Revisar todos los `text-muted/50`–`/70`.
-- [ ] Carrusel del hero sin acceso por teclado (`HeroTechCarousel.tsx:66`): sólo pointer events, sin `tabIndex` ni controles.
-- [ ] Falta skip link, y `scroll-mt` sólo existe en Contact — las otras secciones quedan tapadas por el navbar fijo al navegar por anchor.
-- [ ] ~20 strings hardcodeados en español fuera de i18n (`aria-label="Cerrar"`, `alt="thumb 1"`, `"Galería"`, `© 2026`…).
+- [x] **`ProjectCard.tsx:53` es un `<article>` con `onClick`**, sin `role`, sin `tabIndex`, sin handler de teclado. Ninguna card de proyecto es alcanzable con Tab. Los dos botones internos viven en un overlay `opacity-0 group-hover:opacity-100`: reciben foco pero son invisibles (falta `group-focus-within:opacity-100`).
+- [x] **Casi no hay focus states.** Un grep de `focus-visible|focus:|outline` en todo `src/` devuelve 2 resultados, y uno estaba en el componente muerto que ya borramos. Sumado a `cursor: none !important` (`globals.css:100`), quien navega con teclado no tiene ni cursor ni anillo de foco.
+- [x] Modales sin focus trap ni restauración de foco al cerrar; el fondo no queda `inert`.
+- [x] `<html lang="es">` está fijo en `layout.tsx:25` y nunca cambia al pasar a inglés (falla WCAG 3.1.1).
+- [x] Contraste: `text-muted/55` a `text-[0.55rem]` (`HeroSection.tsx:52`) da ≈3.4:1 — no pasa AA. Revisar todos los `text-muted/50`–`/70`.
+- [x] Carrusel del hero sin acceso por teclado (`HeroTechCarousel.tsx:66`): sólo pointer events, sin `tabIndex` ni controles.
+- [x] Falta skip link, y `scroll-mt` sólo existe en Contact — las otras secciones quedan tapadas por el navbar fijo al navegar por anchor.
+- [x] ~20 strings hardcodeados en español fuera de i18n (`aria-label="Cerrar"`, `alt="thumb 1"`, `"Galería"`, `© 2026`…).
 
 ## Fase 5 — SEO y metadata
 

@@ -4,7 +4,12 @@
     "tech": "Tech",
     "projects": "Proyectos",
     "experience": "Experiencia",
-    "contact": "Contacto"
+    "contact": "Contacto",
+    "home": "Ir al inicio",
+    "mainNav": "Navegación principal",
+    "mobileNav": "Navegación móvil",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú"
   },
   "hero": {
     "locKey": "Loc ·",
@@ -35,12 +40,12 @@
     "eyebrow": "../Sobre mi",
     "title": "Construyo interfaces y sistemas que conectan datos con decisiones.",
     "description": "Radicado en Córdoba, Argentina. Soy desarrollador full-stack y Analista de Sistemas: trabajo tanto en frontend como en backend con React, Next.js, Node, TypeScript, Angular y bases de datos SQL/NoSQL. He entregado proyectos en industrias diversas — software a medida, plataformas deportivas, aplicaciones electorales y plataformas IoT industriales (aeropuertos, data centers, monitoreo ambiental) — para clientes en Latinoamérica y EE.UU. Hablo tres idiomas y uso herramientas de IA (Cursor, Claude, Gemini) como parte activa de mi flujo de trabajo.",
-    "services": [
-      "Full-stack: frontend y backend",
-      "Dashboards y visualización de datos",
-      "Proyectos en industrias diversas",
-      "Fan de Star Wars y del deporte"
-    ]
+    "services": {
+      "fullstack": "Full-stack: frontend y backend",
+      "dashboards": "Dashboards y visualización de datos",
+      "industries": "Proyectos en industrias diversas",
+      "starwars": "Fan de Star Wars y del deporte"
+    }
   },
   "tech": {
     "eyebrow": "../Tech",
@@ -156,5 +161,21 @@
   },
   "lang": {
     "toggle": "Cambiar idioma"
+  },
+  "gallery": {
+    "open": "Galería",
+    "openOf": "Ampliar galería de {{title}}",
+    "close": "Cerrar galería",
+    "closeImage": "Cerrar imagen",
+    "previous": "Imagen anterior",
+    "next": "Imagen siguiente",
+    "screenshotOf": "{{title}} — captura {{n}}",
+    "openGalleryAt": "{{title}} captura {{n}} — abrir galería",
+    "thumbnail": "Ir a la captura {{n}}",
+    "closeDialog": "Cerrar",
+    "productionBuild": "PRODUCTION BUILD",
+    "logoOf": "Logo de {{company}}",
+    "techCarousel": "Tecnologías y herramientas",
+    "openProject": "Ver detalle de {{title}}"
   }
 }

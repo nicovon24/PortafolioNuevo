@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import type { ReactNode } from "react";
 
 type MotionSlideProps = {
@@ -18,11 +18,13 @@ const offset = {
 };
 
 export default function MotionSlide({ children, className, direction = "up", delay = 0 }: MotionSlideProps) {
+  const reduced = useReducedMotion();
+
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, ...offset[direction] }}
-      whileInView={{ opacity: 1, x: 0, y: 0 }}
+      initial={reduced ? false : { opacity: 0, ...offset[direction] }}
+      whileInView={reduced ? undefined : { opacity: 1, x: 0, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] }}
     >

@@ -4,7 +4,12 @@
     "tech": "Tech",
     "projects": "Projects",
     "experience": "Experience",
-    "contact": "Contact"
+    "contact": "Contact",
+    "home": "Go to top",
+    "mainNav": "Main navigation",
+    "mobileNav": "Mobile navigation",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   },
   "hero": {
     "locKey": "Loc ·",
@@ -35,12 +40,12 @@
     "eyebrow": "../About me",
     "title": "I build interfaces and systems that connect data with decisions.",
     "description": "Based in Córdoba, Argentina. I'm a full-stack developer and Systems Analyst: I work both on the frontend and the backend with React, Next.js, Node, TypeScript, Angular and SQL/NoSQL databases. I've shipped projects across diverse industries — custom software, sports platforms, electoral applications and industrial IoT platforms (airports, data centers, environmental monitoring) — for clients in Latin America and the US. I speak three languages and use AI tools (Cursor, Claude, Gemini) as an active part of my workflow.",
-    "services": [
-      "Full-stack: frontend & backend",
-      "Dashboards & data visualization",
-      "Projects across diverse industries",
-      "Star Wars and sports fan"
-    ]
+    "services": {
+      "fullstack": "Full-stack: frontend & backend",
+      "dashboards": "Dashboards & data visualization",
+      "industries": "Projects across diverse industries",
+      "starwars": "Star Wars and sports fan"
+    }
   },
   "tech": {
     "eyebrow": "../Tech",
@@ -156,5 +161,21 @@
   },
   "lang": {
     "toggle": "Change language"
+  },
+  "gallery": {
+    "open": "Gallery",
+    "openOf": "Open {{title}} gallery",
+    "close": "Close gallery",
+    "closeImage": "Close image",
+    "previous": "Previous image",
+    "next": "Next image",
+    "screenshotOf": "{{title}} — screenshot {{n}}",
+    "openGalleryAt": "{{title}} screenshot {{n}} — open gallery",
+    "thumbnail": "Go to screenshot {{n}}",
+    "closeDialog": "Close",
+    "productionBuild": "PRODUCTION BUILD",
+    "logoOf": "{{company}} logo",
+    "techCarousel": "Technologies and tools",
+    "openProject": "View {{title}} details"
   }
 }

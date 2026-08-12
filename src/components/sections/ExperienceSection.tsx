@@ -44,7 +44,7 @@ function ExperienceCard({
       <div className="flex gap-4">
         <Image
           src={icon}
-          alt={`Logo ${company}`}
+          alt=""
           width={44}
           height={44}
           loading="lazy"

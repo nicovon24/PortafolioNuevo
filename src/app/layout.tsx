@@ -1,12 +1,23 @@
 import type { Metadata } from "next";
-import { Nunito_Sans } from "next/font/google";
-import TrailingCursor from "@/components/TrailingCursor";
+import { JetBrains_Mono, Nunito_Sans } from "next/font/google";
+import dynamic from "next/dynamic";
 import I18nProvider from "@/components/providers/I18nProvider";
 import "@/styles/globals.css";
+
+// Decorativo y sin efecto en mobile (se autodesactiva en pointer:coarse): fuera del bundle inicial.
+const TrailingCursor = dynamic(() => import("@/components/TrailingCursor"));
 
 const nunitoSans = Nunito_Sans({
   subsets: ["latin", "latin-ext"],
   variable: "--font-nunito-sans",
+  display: "swap",
+});
+
+// font-mono se usa en navbar, titulos, badges y botones. Sin esto caia a
+// Cascadia Code/Consolas, que solo existen en Windows.
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains-mono",
   display: "swap",
 });
 
@@ -22,8 +33,18 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="es" className={`scroll-smooth ${nunitoSans.variable}`} suppressHydrationWarning>
+    <html
+      lang="es"
+      className={`scroll-smooth ${nunitoSans.variable} ${jetbrainsMono.variable}`}
+      suppressHydrationWarning
+    >
       <body className={`antialiased ${nunitoSans.className}`} suppressHydrationWarning>
+        <a
+          href="#main"
+          className="sr-only rounded-card border border-accent bg-background-deep px-4 py-2 font-mono text-sm text-accent focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-400"
+        >
+          Saltar al contenido
+        </a>
         <I18nProvider>
           <TrailingCursor />
           {children}

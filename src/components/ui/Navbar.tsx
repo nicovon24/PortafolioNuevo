@@ -82,7 +82,7 @@ export default function Navbar() {
         "fixed top-0 left-1/2 z-40 w-full -translate-x-1/2 border border-transparent bg-[rgba(14,26,46,0.72)] backdrop-blur-[18px] px-page",
         open ? "overflow-visible" : "overflow-hidden",
         hasScrolled &&
-          "w-[min(94vw,84rem)] rounded-full border-line bg-[rgba(8,17,31,0.86)] shadow-[0_18px_60px_rgba(0,0,0,0.34)]",
+          "w-[min(94vw,84rem)] rounded-full border-line bg-panel-strong shadow-[0_18px_60px_rgba(0,0,0,0.34)]",
       )}
       initial={{ opacity: 0, y: -42 }}
       animate={{ opacity: 1, y: hasScrolled ? 16 : 0 }}
@@ -110,7 +110,7 @@ export default function Navbar() {
       <a
         className="group relative z-[1] flex items-center gap-[0.35rem] font-mono text-[clamp(0.78rem,1.1vw,0.98rem)] font-normal text-accent"
         href="#top"
-        aria-label="Ir al inicio"
+        aria-label={t("nav.home")}
         onClick={() => setOpen(false)}
       >
         <span className="text-[clamp(1.15rem,2.3vw,2.35rem)] text-muted transition-[color,transform] duration-300 ease-out group-hover:text-ink group-hover:rotate-[4deg]">
@@ -125,7 +125,7 @@ export default function Navbar() {
           /&gt;
         </span>
       </a>
-      <nav className="relative z-[1] hidden items-center gap-[clamp(0.75rem,2.2vw,2rem)] text-ink lg:flex" aria-label="Navegacion principal">
+      <nav className="relative z-[1] hidden items-center gap-[clamp(0.75rem,2.2vw,2rem)] text-ink lg:flex" aria-label={t("nav.mainNav")}>
         {navItems.map((item, index) => (
           <a
             key={item.href}
@@ -152,8 +152,8 @@ export default function Navbar() {
       </div>
       {open && (
         <motion.nav
-          className="absolute top-[calc(100%+10px)] right-0 z-50 grid w-[min(260px,88vw)] gap-3 rounded-[22px] border border-line bg-[rgba(8,17,31,0.96)] p-4 shadow-[0_24px_60px_rgba(25,25,25,0.14)] lg:hidden"
-          aria-label="Navegacion mobile"
+          className="absolute top-[calc(100%+10px)] right-0 z-50 grid w-[min(260px,88vw)] gap-3 rounded-[22px] border border-line bg-panel-strong p-4 shadow-[0_24px_60px_rgba(25,25,25,0.14)] lg:hidden"
+          aria-label={t("nav.mobileNav")}
           initial={{ opacity: 0, y: -14, scale: 0.98 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.25, ease: "easeOut" }}
