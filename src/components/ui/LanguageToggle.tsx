@@ -26,7 +26,7 @@ export default function LanguageToggle() {
       type="button"
       onClick={toggle}
       aria-label={lang === "es" ? "Switch to English" : "Cambiar a Español"}
-      className="flex items-center gap-1.5 rounded-full border border-line bg-[rgba(100,255,218,0.08)] px-2.5 py-1.5 font-mono text-[0.72rem] font-semibold text-accent transition-colors hover:border-accent-2 hover:bg-[rgba(255,105,180,0.12)] hover:text-accent-2"
+      className="flex items-center gap-1.5 rounded-full border border-line bg-[rgba(119,236,208,0.08)] px-2.5 py-1.5 font-mono text-[0.72rem] font-semibold text-accent transition-colors hover:border-accent-2 hover:bg-[rgba(236,124,180,0.12)] hover:text-accent-2"
     >
       <Flag className="h-[0.9rem] w-[1.35rem] shrink-0 rounded-[2px] ring-1 ring-white/15" />
       <span>{current.label}</span>

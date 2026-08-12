@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 import LanguageToggle from "@/components/ui/LanguageToggle";
 
 const headerIconBtn =
-  "grid size-9 place-items-center rounded-full border border-line bg-[rgba(100,255,218,0.08)] text-accent transition-colors hover:border-accent-2 hover:bg-[rgba(255,105,180,0.12)] hover:text-accent-2";
+  "grid size-9 place-items-center rounded-full border border-line bg-[rgba(119,236,208,0.08)] text-accent transition-colors hover:border-accent-2 hover:bg-[rgba(236,124,180,0.12)] hover:text-accent-2";
 
 function useActiveSectionHref() {
   const ids = useMemo(() => navItems.map((item) => item.href.replace(/^#/, "")), []);
@@ -90,7 +90,7 @@ export default function Navbar() {
     >
       <div
         className={cn(
-          "pointer-events-none absolute inset-[-1px] bg-[linear-gradient(110deg,transparent_0%,rgba(100,255,218,0.18)_36%,rgba(255,105,180,0.14)_48%,transparent_62%)] opacity-0 [transform:translateX(-55%)]",
+          "pointer-events-none absolute inset-[-1px] bg-[linear-gradient(110deg,transparent_0%,rgba(119,236,208,0.18)_36%,rgba(236,124,180,0.14)_48%,transparent_62%)] opacity-0 [transform:translateX(-55%)]",
           hasScrolled && "opacity-100 [animation:nav-shine_5s_ease-in-out_infinite]",
         )}
         aria-hidden="true"
@@ -164,7 +164,7 @@ export default function Navbar() {
               href={item.href}
               className={cn(
                 "rounded-lg px-2 py-2 text-ink transition-colors hover:text-accent-2",
-                activeHref === item.href && "bg-[rgba(100,255,218,0.14)] text-accent",
+                activeHref === item.href && "bg-[rgba(119,236,208,0.14)] text-accent",
               )}
               aria-current={activeHref === item.href ? "location" : undefined}
               onClick={() => setOpen(false)}

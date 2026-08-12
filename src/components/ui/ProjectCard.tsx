@@ -4,6 +4,7 @@ import { ExternalLink, Github, Images, Lock, Search } from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import Button, { TechChip } from "@/components/ui/Button";
+import HUDCorners from "@/components/ui/HUDCorners";
 import ProjectScreenshots from "@/components/ui/ProjectScreenshots";
 import ProjectDetailModal from "@/components/ui/ProjectDetailModal";
 
@@ -17,6 +18,9 @@ type ProjectCardProps = {
   code?: string;
   privateRepo?: boolean;
   inDevelopment?: boolean;
+  year?: string;
+  role?: string;
+  featured?: boolean;
   index?: number;
 };
 
@@ -30,6 +34,9 @@ export default function ProjectCard({
   code,
   privateRepo = false,
   inDevelopment = false,
+  year,
+  role,
+  featured = false,
   index = 0,
 }: ProjectCardProps) {
   const { t } = useTranslation();
@@ -46,7 +53,7 @@ export default function ProjectCard({
 
   return (
     <>
-      <article className="group/card relative flex h-full flex-col overflow-hidden rounded-card-lg border border-line bg-panel shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-accent focus-within:border-accent">
+      <HUDCorners className="group/card flex h-full flex-col overflow-hidden rounded-card-lg border border-line bg-panel shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-accent focus-within:border-accent">
         <div className="group/media relative">
           <ProjectScreenshots images={images} title={title} compact />
 
@@ -74,6 +81,13 @@ export default function ProjectCard({
         </div>
 
         <div className="flex flex-1 flex-col p-4 sm:p-5">
+          {(year || role) && (
+            <p className="m-0 mb-1.5 flex items-center gap-2 font-mono text-micro uppercase tracking-wider text-muted">
+              {year && <span className="tabular-nums text-accent">{year}</span>}
+              {year && role && <span aria-hidden className="h-px w-3 bg-line" />}
+              {role && <span>{role}</span>}
+            </p>
+          )}
           <div className="flex flex-wrap items-center gap-2 gap-y-1">
             <h3 className="m-0 font-mono text-lg leading-tight">
               {/* El titulo es el disparador accesible: antes el click vivia en el <article>. */}
@@ -153,7 +167,7 @@ export default function ProjectCard({
             )}
           </div>
         </div>
-      </article>
+      </HUDCorners>
 
       <ProjectDetailModal
         open={modalOpen}

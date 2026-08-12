@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { Code2, LayoutDashboard, Globe } from "lucide-react";
 import MotionFade from "@/components/motion/MotionFade";
 import { MotionStagger, MotionStaggerItem } from "@/components/motion/MotionStagger";
+import { ParallaxLayer } from "@/components/motion/Parallax";
 import Section from "@/components/ui/Section";
 
 // Emparejado por clave, no por indice: reordenar el JSON de locales ya no descoloca los iconos.
@@ -22,11 +23,14 @@ export default function AboutSection() {
   const { t } = useTranslation();
 
   return (
-    <Section id="about" eyebrow={t("about.eyebrow")} title={t("about.title")}>
+    <Section id="about" index="01" eyebrow={t("about.eyebrow")} title={t("about.title")} parallax>
       <div className="grid grid-cols-1 items-start gap-7 lg:grid-cols-[1fr_0.85fr] lg:gap-8">
-        <MotionFade className="text-base leading-relaxed text-muted lg:text-lg">
-          <p>{t("about.description")}</p>
-        </MotionFade>
+        <ParallaxLayer speed={22}>
+          <MotionFade className="text-base leading-relaxed text-muted lg:text-lg">
+            <p>{t("about.description")}</p>
+          </MotionFade>
+        </ParallaxLayer>
+        <ParallaxLayer speed={-18}>
         <MotionStagger className="grid grid-cols-2 gap-3">
           {SERVICES.map((service) => (
             <MotionStaggerItem
@@ -40,6 +44,7 @@ export default function AboutSection() {
             </MotionStaggerItem>
           ))}
         </MotionStagger>
+        </ParallaxLayer>
       </div>
     </Section>
   );

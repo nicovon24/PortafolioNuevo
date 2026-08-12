@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono, Nunito_Sans } from "next/font/google";
 import dynamic from "next/dynamic";
+import GrainOverlay from "@/components/ui/GrainOverlay";
 import I18nProvider from "@/components/providers/I18nProvider";
 import "@/styles/globals.css";
 
@@ -45,6 +46,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         >
           Saltar al contenido
         </a>
+        <GrainOverlay />
         <I18nProvider>
           <TrailingCursor />
           {children}

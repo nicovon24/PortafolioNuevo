@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { ArrowDown, Download, Github, Linkedin } from "lucide-react";
-import { motion, useScroll, useTransform, type Variants } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform, type Variants } from "framer-motion";
 import { useCallback, useRef, useState } from "react";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { useTranslation } from "react-i18next";
@@ -29,22 +29,22 @@ const HERO_CAROUSEL: Array<{ name: string; icon: string }> = [
 ];
 
 const btnPrimary =
-  "inline-flex min-h-10 items-center justify-center gap-2 border border-accent bg-accent px-3.5 font-mono text-sm font-bold uppercase tracking-wider text-background-deep shadow-[0_0_0_1px_rgba(100,255,218,0.35)_inset,0_0_24px_rgba(100,255,218,0.12)] transition-colors hover:border-accent-2 hover:bg-[rgba(255,105,180,0.12)] hover:text-accent-2";
+  "inline-flex min-h-10 items-center justify-center gap-2 border border-accent bg-accent px-3.5 font-mono text-sm font-bold uppercase tracking-wider text-background-deep shadow-[0_0_0_1px_rgba(119,236,208,0.35)_inset,0_0_24px_rgba(119,236,208,0.12)] transition-colors hover:border-accent-2 hover:bg-[rgba(236,124,180,0.12)] hover:text-accent-2";
 
 const btnSecondary =
   "inline-flex min-h-10 items-center justify-center gap-2 border border-line bg-transparent px-3.5 font-mono text-sm font-bold uppercase tracking-wider text-muted transition-colors hover:border-accent hover:text-accent";
 
 const iconBtn =
-  "grid size-9 place-items-center border border-line bg-panel-strong text-accent transition-colors hover:border-accent-2 hover:bg-[rgba(255,105,180,0.12)] hover:text-accent-2";
+  "grid size-9 place-items-center border border-line bg-panel-strong text-accent transition-colors hover:border-accent-2 hover:bg-[rgba(236,124,180,0.12)] hover:text-accent-2";
 
 const nameLine1Class =
   "leading-[0.95] text-ink text-[clamp(2.05rem,calc(0.88rem+5.2vw),4rem)]";
 
 const nameLine2Class =
-  "bg-gradient-to-b from-accent via-accent to-[#3edcc4] bg-clip-text text-[clamp(2.35rem,calc(1rem+5.85vw),4.65rem)] leading-[0.92] text-transparent drop-shadow-[0_0_22px_rgba(100,255,218,0.2)] [-webkit-text-fill-color:transparent]";
+  "bg-gradient-to-b from-accent via-accent to-[#3edcc4] bg-clip-text text-[clamp(2.35rem,calc(1rem+5.85vw),4.65rem)] leading-[0.92] text-transparent drop-shadow-[0_0_22px_rgba(119,236,208,0.2)] [-webkit-text-fill-color:transparent]";
 
 const nameLine2ScrambleClass =
-  "bg-gradient-to-b from-accent-2 via-accent-2 to-[#ff85c0] bg-clip-text text-[clamp(2.35rem,calc(1rem+5.85vw),4.65rem)] leading-[0.92] text-transparent drop-shadow-[0_0_22px_rgba(255,105,180,0.25)] [-webkit-text-fill-color:transparent]";
+  "bg-gradient-to-b from-accent-2 via-accent-2 to-[#ff85c0] bg-clip-text text-[clamp(2.35rem,calc(1rem+5.85vw),4.65rem)] leading-[0.92] text-transparent drop-shadow-[0_0_22px_rgba(236,124,180,0.25)] [-webkit-text-fill-color:transparent]";
 
 const hudRow =
   "m-0 flex flex-wrap justify-end gap-x-1 font-mono text-micro leading-snug";
@@ -99,7 +99,7 @@ function HeroRingStat({ label, value }: { label: string; value: string }) {
         {label}
       </span>
       <div
-        className="relative grid size-[4.35rem] place-items-center rounded-full border-2 border-dashed border-accent/75 bg-panel-strong shadow-[0_0_28px_rgba(100,255,218,0.18),inset_0_0_20px_rgba(100,255,218,0.08)] backdrop-blur-sm sm:size-[4.85rem]"
+        className="relative grid size-[4.35rem] place-items-center rounded-full border-2 border-dashed border-accent/75 bg-panel-strong shadow-[0_0_28px_rgba(119,236,208,0.18),inset_0_0_20px_rgba(119,236,208,0.08)] backdrop-blur-sm sm:size-[4.85rem]"
         aria-hidden
       >
         <div className="pointer-events-none absolute inset-0 rounded-full border border-accent/25" />
@@ -122,8 +122,10 @@ export default function HeroSection() {
 
   // Acotado al hero: useScroll() global mantiene la suscripcion viva con la seccion fuera de pantalla.
   const sectionRef = useRef<HTMLElement>(null);
+  const reducedMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
-  const photoParallaxY = useTransform(scrollYProgress, [0, 1], [0, 55]);
+  // El bloque global de prefers-reduced-motion en CSS no frena transforms de framer-motion.
+  const photoParallaxY = useTransform(scrollYProgress, [0, 1], [0, reducedMotion ? 0 : 55]);
   const handleScrambleChange = useCallback((active: boolean) => {
     setIsScrambling(active);
     if (active) {
@@ -143,8 +145,11 @@ export default function HeroSection() {
       id="top"
       className="relative flex w-full flex-col items-start overflow-hidden px-page pb-12 pt-28 sm:pb-14 sm:pt-32 lg:min-h-screen lg:pb-36 lg:pt-24"
     >
+      {/* Los HUD se alinean al contenedor centrado, no al borde de la pantalla:
+          anclados a right-page quedaban fuera del shell y descentraban el hero. */}
+      <div className="pointer-events-none absolute inset-x-page top-0 bottom-0 z-[2] mx-auto hidden max-w-shell lg:block">
       <aside
-        className="pointer-events-none absolute right-page top-[5.75rem] z-[2] hidden max-w-[14rem] text-right lg:top-[6.75rem] lg:block"
+        className="pointer-events-none absolute right-0 top-[5.75rem] max-w-[14rem] text-right lg:top-[6.75rem]"
         aria-label={t("hero.profileSummary")}
       >
         <motion.div
@@ -170,8 +175,29 @@ export default function HeroSection() {
             <span className={hudKey}>{t("hero.statusKey")}</span>
             <span className={hudValAccent}>{t("hero.statusVal")}</span>
           </motion.p>
+          <motion.p className={hudRow} variants={heroHudRowVariants}>
+            <span className={hudKey}>{t("hero.eduKey")}</span>
+            <span className={hudValMuted}>{t("hero.eduVal")}</span>
+          </motion.p>
         </motion.div>
       </aside>
+
+      <motion.aside
+        className="pointer-events-none absolute bottom-[4.25rem] right-0 hidden gap-8 sm:bottom-10 sm:gap-10 lg:flex"
+        aria-label={t("hero.statsLabel")}
+        variants={heroStatsListVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={heroHudViewport}
+      >
+        <motion.div variants={heroStatItemVariants}>
+          <HeroRingStat label={t("hero.experienceStat")} value="4+" />
+        </motion.div>
+        <motion.div variants={heroStatItemVariants}>
+          <HeroRingStat label={t("hero.projectsStat")} value="12+" />
+        </motion.div>
+      </motion.aside>
+      </div>
 
       {/* Flex row at lg+: text left, photo right. Stacked below lg so the photo doesn't get cramped on tablets. */}
       <div className="relative z-0 mx-auto flex w-full min-w-0 max-w-shell flex-col justify-start pt-1 text-left lg:flex-1 lg:flex-row lg:items-center lg:justify-center lg:gap-10 lg:pt-0 xl:gap-12">
@@ -200,7 +226,7 @@ export default function HeroSection() {
               >
                 <span className="relative flex h-2 w-2 shrink-0" aria-hidden>
                   <span className={`absolute inline-flex h-full w-full animate-ping rounded-full opacity-35 transition-colors duration-300 ${badgeGlitch ? "bg-accent-2" : "bg-accent"}`} />
-                  <span className={`relative m-auto inline-flex h-[5px] w-[5px] rounded-full transition-all duration-300 ${badgeGlitch ? "bg-accent-2 shadow-[0_0_8px_rgba(255,105,180,0.85)]" : "bg-accent shadow-[0_0_8px_rgba(100,255,218,0.85)]"}`} />
+                  <span className={`relative m-auto inline-flex h-[5px] w-[5px] rounded-full transition-all duration-300 ${badgeGlitch ? "bg-accent-2 shadow-[0_0_8px_rgba(236,124,180,0.85)]" : "bg-accent shadow-[0_0_8px_rgba(119,236,208,0.85)]"}`} />
                 </span>
                 {t("hero.available")}
               </span>
@@ -255,8 +281,8 @@ export default function HeroSection() {
                     key={`${item.name}-${i}`}
                     className={`group/hero-tech-item flex w-[5.75rem] shrink-0 flex-col items-center justify-center gap-1.5 rounded-lg border border-line/70 bg-panel-strong px-2 py-2.5 backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 sm:w-[6.25rem] ${
                       isEven
-                        ? "hover:border-accent hover:bg-[rgba(100,255,218,0.06)] hover:shadow-[0_0_0_1px_rgba(100,255,218,0.4)_inset,0_0_18px_rgba(100,255,218,0.22)]"
-                        : "hover:border-accent-2 hover:bg-[rgba(255,105,180,0.06)] hover:shadow-[0_0_0_1px_rgba(255,105,180,0.4)_inset,0_0_18px_rgba(255,105,180,0.22)]"
+                        ? "hover:border-accent hover:bg-[rgba(119,236,208,0.06)] hover:shadow-[0_0_0_1px_rgba(119,236,208,0.4)_inset,0_0_18px_rgba(119,236,208,0.22)]"
+                        : "hover:border-accent-2 hover:bg-[rgba(236,124,180,0.06)] hover:shadow-[0_0_0_1px_rgba(236,124,180,0.4)_inset,0_0_18px_rgba(236,124,180,0.22)]"
                     }`}
                     aria-hidden={i >= HERO_CAROUSEL.length ? true : undefined}
                   >
@@ -309,8 +335,8 @@ export default function HeroSection() {
                 className="relative size-full overflow-hidden rounded-full transition-shadow duration-500"
                 style={{
                   boxShadow: isScrambling
-                    ? "0 0 0 3px rgba(8,17,31,0.85), 0 0 32px rgba(255,105,180,0.22), 0 0 80px rgba(255,105,180,0.08), inset 0 0 36px rgba(255,105,180,0.07)"
-                    : "0 0 0 3px rgba(8,17,31,0.85), 0 0 32px rgba(100,255,218,0.45), 0 0 80px rgba(100,255,218,0.18), inset 0 0 36px rgba(100,255,218,0.12)",
+                    ? "0 0 0 3px rgba(8,17,31,0.85), 0 0 32px rgba(236,124,180,0.22), 0 0 80px rgba(236,124,180,0.08), inset 0 0 36px rgba(236,124,180,0.07)"
+                    : "0 0 0 3px rgba(8,17,31,0.85), 0 0 32px rgba(119,236,208,0.45), 0 0 80px rgba(119,236,208,0.18), inset 0 0 36px rgba(119,236,208,0.12)",
                 }}
               >
                 {!photoLoaded && (
@@ -326,7 +352,7 @@ export default function HeroSection() {
                   onLoad={() => setPhotoLoaded(true)}
                 />
                 <span
-                  className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(100,255,218,0.08),transparent_60%),linear-gradient(180deg,rgba(8,17,31,0.05)_0%,rgba(8,17,31,0.55)_100%)]"
+                  className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(119,236,208,0.08),transparent_60%),linear-gradient(180deg,rgba(8,17,31,0.05)_0%,rgba(8,17,31,0.55)_100%)]"
                   aria-hidden
                 />
               </div>
@@ -335,21 +361,6 @@ export default function HeroSection() {
         </motion.div>
       </div>
 
-      <motion.aside
-        className="pointer-events-none absolute bottom-[4.25rem] right-page z-[2] hidden gap-8 sm:bottom-10 sm:gap-10 lg:flex"
-        aria-label={t("hero.statsLabel")}
-        variants={heroStatsListVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={heroHudViewport}
-      >
-        <motion.div variants={heroStatItemVariants}>
-          <HeroRingStat label={t("hero.experienceStat")} value="4+" />
-        </motion.div>
-        <motion.div variants={heroStatItemVariants}>
-          <HeroRingStat label={t("hero.projectsStat")} value="12+" />
-        </motion.div>
-      </motion.aside>
     </section>
   );
 }

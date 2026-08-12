@@ -21,7 +21,11 @@ const PREVIEW_POSITION = [
   "bottom-0 left-[8%] right-[48%] top-auto z-[14] h-[34%]",
 ];
 
-export default function ProjectScreenshots({ images, title, compact = false }: ProjectScreenshotsProps) {
+export default function ProjectScreenshots({
+  images,
+  title,
+  compact = false,
+}: ProjectScreenshotsProps) {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const [index, setIndex] = useState(0);
@@ -39,7 +43,12 @@ export default function ProjectScreenshots({ images, title, compact = false }: P
 
   return (
     <>
-      <div className={cn("relative", compact ? "h-[200px]" : "h-[260px] sm:h-[310px] lg:h-[390px]")}>
+      <div
+        className={cn(
+          "relative",
+          compact ? "h-50" : "h-65 sm:h-77.5 lg:h-97.5",
+        )}
+      >
         {!compact && (
           <Button
             size="sm"
@@ -71,7 +80,10 @@ export default function ProjectScreenshots({ images, title, compact = false }: P
               fill
               sizes="(max-width: 768px) 80vw, 34vw"
               className={cn(
-                "pointer-events-none object-cover transition-opacity duration-300",
+                "pointer-events-none object-cover transition-[opacity,filter] duration-500",
+                // Desaturadas en reposo, a color al pasar por la card (o al enfocarla con teclado).
+                compact &&
+                  "grayscale-[0.3] group-hover/card:grayscale-0 group-focus-within/card:grayscale-0",
                 loadedMap[i] ? "opacity-100" : "opacity-0",
               )}
               onLoad={() => setLoadedMap((prev) => ({ ...prev, [i]: true }))}

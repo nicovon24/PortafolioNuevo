@@ -15,6 +15,7 @@ export default function ContactSection() {
   return (
     <Section
       id="contact"
+      index="05"
       className="scroll-mt-24"
       eyebrow={t("contact.eyebrow")}
       title={t("contact.title")}

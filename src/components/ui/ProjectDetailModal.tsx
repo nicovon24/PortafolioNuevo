@@ -110,8 +110,9 @@ export default function ProjectDetailModal({
           aria-modal="true"
           aria-labelledby={labelId}
           onClick={(e) => e.stopPropagation()}
-          className="relative flex w-full max-w-[72rem] flex-col overflow-hidden rounded-card border border-line bg-background-deep shadow-[0_32px_80px_rgba(0,0,0,0.75)] md:flex-row"
-          style={{ height: "min(640px, 90vh)" }}
+          // Una sola columna: en dos columnas la imagen quedaba chica y el texto cortado.
+          className="relative flex w-full max-w-4xl flex-col overflow-y-auto rounded-card border border-line bg-background-deep shadow-[0_32px_80px_rgba(0,0,0,0.75)]"
+          style={{ maxHeight: "92vh" }}
         >
           <IconButton
             label={t("gallery.closeDialog")}
@@ -121,18 +122,19 @@ export default function ProjectDetailModal({
             <X size={18} />
           </IconButton>
 
-          {/* Galeria */}
-          <div className="relative flex h-[200px] w-full flex-col bg-background-deep md:h-full md:w-[55%]">
-            <div className="relative w-full flex-1 overflow-hidden">
+          {/* Galeria arriba, a lo ancho del modal. */}
+          <div className="relative flex w-full shrink-0 flex-col bg-canvas">
+            <div className="relative h-[42vh] max-h-104 min-h-56 w-full overflow-hidden">
               {!imgLoaded && <Skeleton className="absolute inset-0 rounded-none" />}
               {images[imgIndex] && (
                 <Image
                   src={images[imgIndex]}
                   alt={t("gallery.screenshotOf", { title, n: imgIndex + 1 })}
                   fill
-                  sizes="(max-width: 768px) 100vw, 55vw"
+                  sizes="(max-width: 896px) 100vw, 896px"
+                  // contain y no cover: son capturas de pantalla, recortarlas pierde la UI.
                   className={cn(
-                    "cursor-zoom-in object-cover transition-opacity duration-300",
+                    "cursor-zoom-in object-contain transition-opacity duration-300",
                     imgLoaded ? "opacity-100" : "opacity-0",
                   )}
                   onClick={() => setLightbox(true)}
@@ -185,8 +187,8 @@ export default function ProjectDetailModal({
             )}
           </div>
 
-          {/* Detalle */}
-          <div className="flex flex-1 flex-col gap-4 overflow-y-auto p-5 md:p-7">
+          {/* Detalle: el scroll lo maneja el panel entero, no esta columna. */}
+          <div className="flex flex-col gap-4 p-5 md:p-7">
             <div className="flex flex-wrap items-center gap-2">
               <span className="font-mono text-micro font-semibold uppercase tracking-widest text-accent">
                 {t("gallery.productionBuild")}

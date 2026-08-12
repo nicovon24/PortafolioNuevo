@@ -34,10 +34,11 @@ export const techGroups = [
   {
     title: "tech.groups.frontend",
     items: [
-      { name: "Next.js", icon: "/images/svg/next.svg" },
-      { name: "React", icon: "/images/svg/react.svg" },
+      { name: "Next.js", icon: "/images/svg/next.svg", primary: true },
+      { name: "React", icon: "/images/svg/react.svg", primary: true },
+      { name: "Angular", icon: "/images/svg/angular.svg", primary: true },
       { name: "Vite.js", icon: "/images/svg/vite.svg" },
-      { name: "TypeScript", icon: "/images/svg/ts.svg" },
+      { name: "TypeScript", icon: "/images/svg/ts.svg", primary: true },
       { name: "JavaScript", icon: "/images/svg/js.svg" },
       { name: "Redux", icon: "/images/svg/redux.svg" },
       { name: "Zustand", icon: "/images/svg/zustand.svg" },
@@ -52,20 +53,21 @@ export const techGroups = [
   {
     title: "tech.groups.backend",
     items: [
-      { name: "Java", icon: "/images/svg/java.svg" },
-      { name: "Spring Boot", icon: "/images/svg/springboot.svg" },
-      { name: "Node.js", icon: "/images/svg/node.svg" },
+      { name: "Java", icon: "/images/svg/java.svg", primary: true },
+      { name: "Spring Boot", icon: "/images/svg/springboot.svg", primary: true },
+      { name: "Node.js", icon: "/images/svg/node.svg", primary: true },
+      { name: "NestJS", icon: "/images/svg/nestjs.svg", primary: true },
       { name: "Express.js", icon: "/images/svg/express.svg" },
       { name: "JWT", icon: "/images/svg/jwt.svg" },
       { name: "Passport.js", icon: "/images/svg/passport.svg" },
-      { name: "SQL", icon: "/images/svg/sqlSvg.svg" },
-      { name: "PostgreSQL", icon: "/images/svg/postgresql.svg" },
-      { name: "MongoDB", icon: "/images/svg/mongo.svg" },
+      { name: "SQL", icon: "/images/svg/sqlSvg.svg", primary: true },
+      { name: "PostgreSQL", icon: "/images/svg/postgresql.svg", primary: true },
+      { name: "MongoDB", icon: "/images/svg/mongo.svg", primary: true },
       { name: "Sequelize", icon: "/images/svg/sequelize.svg" },
       { name: "Postman", icon: "/images/svg/postman.svg" },
       { name: "Stripe", icon: "/images/svg/stripe.svg" },
       { name: "Mercado Pago", icon: "/images/svg/mercadopago.svg" },
-      { name: "Docker", icon: "/images/svg/docker.svg" },
+      { name: "Docker", icon: "/images/svg/docker.svg", primary: true },
       { name: "Git", icon: "/images/svg/git.svg" },
       { name: "Linux", icon: "/images/svg/linux.svg" },
     ],
@@ -82,7 +84,7 @@ export const techGroups = [
   {
     title: "tech.groups.ia",
     items: [
-      { name: "Claude Code", icon: "/images/svg/claude.svg" },
+      { name: "Claude Code", icon: "/images/svg/claude.svg", primary: true },
       { name: "ChatGPT", icon: "/images/svg/openai.svg" },
       { name: "Gemini", icon: "/images/svg/gemini.svg" },
       { name: "Agentes GSD", icon: "/images/svg/gsd.svg" },
@@ -90,7 +92,22 @@ export const techGroups = [
   },
 ];
 
-export type ExperienceKind = "work" | "study";
+/** Tipo de vinculo, se muestra como etiqueta en la timeline. */
+export type ExperienceKind = "professional" | "freelance" | "academic";
+
+/** Productos y soluciones dentro de una experiencia (acordeon). */
+export const senzaryProducts = [
+  "iotlogiq",
+  "airportiq",
+  "workeriq",
+  "iac",
+  "industry",
+  "trashcans",
+  "ai",
+] as const;
+
+/** Freelance: politica primero, que es el foco principal. */
+export const freelanceProducts = ["political", "iot", "delivery"] as const;
 
 export const experiences: Array<{
   key: string;
@@ -98,33 +115,58 @@ export const experiences: Array<{
   icon: string;
   iconBg?: string;
   kind: ExperienceKind;
+  /** En curso: muestra el punto pulsante en la timeline. */
+  current?: boolean;
+  /** Entrada secundaria: resumen de 1-2 lineas en vez de bullets. */
+  compact?: boolean;
+  /** Claves de i18n en experience.products, renderizadas como acordeon. */
+  products?: readonly string[];
 }> = [
   {
     key: "senzary",
     company: "Senzary",
     icon: "/images/projects/senzary/logo/1.png",
-    kind: "work",
+    kind: "professional",
+    current: true,
+    products: senzaryProducts,
   },
   {
     key: "politicalFreelance",
-    company: "Freelance · consultoría política",
+    company: "Freelance · consultoría política e IoT",
     icon: "/images/company/freelance.png",
     iconBg: "#1a2332",
-    kind: "work",
+    kind: "freelance",
+    current: true,
+    products: freelanceProducts,
   },
   {
     key: "early2023",
-    company: "Soy Henry · No Country · GEN Consultores",
+    // Soy Henry ya va en el titulo: repetirlo aca era redundante.
+    company: "No Country · GEN Consultores",
     icon: "/images/company/henry.png",
     iconBg: "#ffff00",
-    kind: "work",
+    kind: "academic",
+    compact: true,
   },
 ];
+
+/** Filtros de la seccion Proyectos. El orden define el orden de las tabs. */
+export const projectCategories = ["iot", "web", "java", "work", "personal"] as const;
+
+export type ProjectCategory = (typeof projectCategories)[number];
 
 export type PortfolioProject = {
   key: string;
   title: string;
   technologies: string[];
+  /** Un proyecto puede caer en varias: rubro + contexto a la vez. */
+  categories: ProjectCategory[];
+  /** Año o rango, se muestra como meta arriba del titulo. */
+  year: string;
+  /** Rol que cumpliste, junto al año. */
+  role: string;
+  /** Ocupa dos columnas en la grilla de desktop. */
+  featured?: boolean;
   images: string[];
   live?: string;
   live2?: string;
@@ -137,8 +179,12 @@ export type PortfolioProject = {
 export const projects: PortfolioProject[] = [
   {
     key: "workeriq",
-    title: "WorkerIQ Drill — Senzary",
-    technologies: ["Angular", "ThingsBoard", "IoT", "Dashboards", "Data visualization"],
+    categories: ["iot", "web", "work"],
+    year: "2024",
+    role: "Full-stack",
+    featured: true,
+    title: "WorkerIQ — ENI · Senzary",
+    technologies: ["React", "Node.js", "IoT", "Tiempo real", "Mapas", "Dashboards"],
     images: [
       "/images/projects/senzary/vercel/workeriq/landing.png",
       "/images/projects/senzary/vercel/workeriq/map.png",
@@ -149,6 +195,10 @@ export const projects: PortfolioProject[] = [
   },
   {
     key: "appfiscalizacion",
+    categories: ["web", "work"],
+    year: "2025",
+    role: "Full-stack",
+    featured: true,
     title: "App Fiscalización",
     technologies: ["Next.js", "Framer Motion", "Redux Toolkit", "Vercel"],
     live: "https://fiscalizar.lalibertadavanzacba.com/",
@@ -163,6 +213,9 @@ export const projects: PortfolioProject[] = [
   },
   {
     key: "prodeazo",
+    categories: ["web", "personal"],
+    year: "2026",
+    role: "Full-stack",
     title: "Prodeazo (Prode Mundial 2026)",
     technologies: ["Next.js", "TypeScript", "Supabase", "Tailwind", "NextUI"],
     images: [
@@ -175,6 +228,9 @@ export const projects: PortfolioProject[] = [
   },
   {
     key: "queabuso",
+    categories: ["web", "work"],
+    year: "2025",
+    role: "Full-stack",
     title: "Apps políticas",
     technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Node.js", "PostgreSQL"],
     images: [
@@ -189,23 +245,39 @@ export const projects: PortfolioProject[] = [
     privateRepo: true,
   },
   {
+    key: "scoutpanel",
+    categories: ["web", "personal"],
+    year: "2025",
+    role: "Full-stack",
+    title: "Scout Panel",
+    technologies: ["Next.js", "TypeScript", "Express", "Drizzle", "PostgreSQL", "Tailwind"],
+    images: [
+      "/images/projects/scoutpanel/home.png",
+      "/images/projects/scoutpanel/compare.png",
+      "/images/projects/scoutpanel/reports.png",
+    ],
+    code: "https://github.com/nicovon24/ScoutPanelLDP",
+    live: "https://scout-panel-ldp.vercel.app",
+  },
+  {
     key: "iotarg",
+    categories: ["iot", "web", "personal"],
+    year: "2026",
+    role: "Full-stack",
     title: "IoTArg",
     technologies: [
       "React.js",
       "React Query",
       "Zod",
       "Tailwind CSS",
-      "Hero UI",
       "WebSockets",
       "NestJS",
       "Node.js",
       "TypeScript",
       "Fastify",
-      "Prisma ORM",
+      "Prisma",
       "PostgreSQL",
       "Redis",
-      "Desarrollo de API",
       "Docker",
       "Thingsboard",
       "IOT",
@@ -222,6 +294,9 @@ export const projects: PortfolioProject[] = [
   },
   {
     key: "fintrack",
+    categories: ["java", "personal"],
+    year: "2026",
+    role: "Full-stack",
     title: "Fintrack",
     technologies: [
       "Java",
@@ -232,8 +307,7 @@ export const projects: PortfolioProject[] = [
       "Spring Data",
       "Spring Security",
       "Passport.js",
-      "POI",
-      "API de Swagger",
+      "Swagger",
     ],
     images: [
       "/images/projects/fintrack/1.png",
@@ -246,8 +320,20 @@ export const projects: PortfolioProject[] = [
   },
   {
     key: "iotlogiq",
-    title: "IoTLogIQ - Senzary",
-    technologies: ["Angular", "ThingsBoard", "IoT", "Dashboards", "Data visualization"],
+    categories: ["iot", "web", "work"],
+    year: "2023—2026",
+    role: "Full-stack",
+    title: "IoTLogIQ — Senzary",
+    technologies: [
+      "Angular",
+      "Node.js",
+      "React",
+      "ThingsBoard",
+      "IoT",
+      "Digital twin",
+      "Dashboards",
+      "Data visualization",
+    ],
     images: [
       "/images/projects/senzary/demo/air-quality-1.png",
       "/images/projects/senzary/demo/gpio.png",
@@ -256,10 +342,6 @@ export const projects: PortfolioProject[] = [
       "/images/projects/senzary/smartindustry/overview.png",
       "/images/projects/senzary/smartindustry/digitaltwin.png",
       "/images/projects/senzary/demo/predictive.png",
-      "/images/projects/senzary/airport/1.png",
-      "/images/projects/senzary/airport/3.png",
-      "/images/projects/senzary/airport/4.png",
-      "/images/projects/senzary/airport/5.png",
       "/images/projects/senzary/indiana/1.png",
       "/images/projects/senzary/demo/air-quality-2.png",
       "/images/projects/senzary/demo/temperature.png",
@@ -267,16 +349,17 @@ export const projects: PortfolioProject[] = [
       "/images/projects/senzary/demo/doors-2.png",
       "/images/projects/senzary/demo/on-off-1.png",
       "/images/projects/senzary/demo/bob.png",
-      "/images/projects/senzary/airport/6.png",
-      "/images/projects/senzary/airport/7.png",
     ],
     live: "https://iotlogiq.com/",
     privateRepo: true,
   },
   {
     key: "trashcans",
+    categories: ["iot", "work"],
+    year: "2024",
+    role: "Full-stack · IoT",
     title: "TrashCans — Senzary",
-    technologies: ["Angular", "ThingsBoard", "IoT", "Dashboards"],
+    technologies: ["Angular", "Node.js", "IoT", "Dashboards"],
     images: [
       "/images/projects/senzary/vercel/trashcans/landing.png",
       "/images/projects/senzary/vercel/trashcans/map.png",
@@ -288,23 +371,36 @@ export const projects: PortfolioProject[] = [
     privateRepo: true,
   },
   {
-    key: "scoutpanel",
-    title: "Scout Panel",
-    technologies: ["Next.js", "TypeScript", "Express", "Drizzle", "PostgreSQL", "Tailwind"],
-    images: [
-      "/images/projects/scoutpanel/home.png",
-      "/images/projects/scoutpanel/compare.png",
-      "/images/projects/scoutpanel/reports.png",
-    ],
-    code: "https://github.com/nicovon24/ScoutPanelLDP",
-    live: "https://scout-panel-ldp.vercel.app",
-  },
-  {
     key: "cloudlab",
+    categories: ["web", "personal"],
+    year: "2023",
+    role: "Frontend",
     title: "Cloudlab - No Country",
     technologies: ["Next.js", "TypeScript", "Tailwind"],
     images: ["/images/projects/cloudlab/1.png", "/images/projects/cloudlab/2.png", "/images/projects/cloudlab/3.png"],
     code: "https://github.com/No-Country/s9-16-m-node-react",
     live: "https://cloudlab-s9-16.vercel.app/",
+  },
+  {
+    key: "airportiq",
+    categories: ["iot", "work"],
+    year: "2024—2025",
+    role: "Full-stack",
+    title: "AirportIQ — Jacksonville Airport · Senzary",
+    technologies: [
+      "Angular",
+      "Node.js",
+      "IoT",
+      "Dashboards",
+    ],
+    images: [
+      "/images/projects/senzary/airport/1.png",
+      "/images/projects/senzary/airport/3.png",
+      "/images/projects/senzary/airport/4.png",
+      "/images/projects/senzary/airport/5.png",
+      "/images/projects/senzary/airport/6.png",
+      "/images/projects/senzary/airport/7.png",
+    ],
+    privateRepo: true,
   },
 ];

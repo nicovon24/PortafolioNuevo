@@ -15,12 +15,12 @@
     "locKey": "Loc ·",
     "locVal": "Córdoba / ARG",
     "stackKey": "Stack ·",
-    "stackVal": "Next · Node · React · TS",
+    "stackVal": "TypeScript · Python · Java",
     "roleKey": "Role ·",
     "roleVal": "Full-stack",
-    "statusKey": "Status ·",
-    "statusVal": "Available",
-    "available": "Available",
+    "statusKey": "Focus ·",
+    "statusVal": "Full-stack / AI",
+    "available": "Córdoba, ARG · Remote",
     "viewProjects": "View projects",
     "cv": "CV",
     "profileSummary": "Profile summary",
@@ -34,7 +34,9 @@
       "React · Next · Node · TypeScript",
       "+4 years of experience",
       "Frontend · Backend · Product"
-    ]
+    ],
+    "eduKey": "Edu ·",
+    "eduVal": "Systems Analyst"
   },
   "about": {
     "eyebrow": "../About me",
@@ -52,10 +54,12 @@
     "title": "Technologies I use",
     "groups": {
       "frontend": "Frontend",
-      "backend": "Backend & tools",
+      "backend": "Backend",
       "testing": "Testing",
       "ia": "AI"
-    }
+    },
+    "primary": "Core",
+    "groupLabel": "Technology groups"
   },
   "projects": {
     "eyebrow": "../Projects",
@@ -85,13 +89,13 @@
         "description": "Two apps for the same client — Gabriel Bornoroni and Libertad Avanza Córdoba. ¡Qué Abuso! CBA: platform to report tax and bureaucratic abuses, with complaint form, evidence upload, public feed and reactions. Gabriel Bornoroni official site: campaign website with home, raffle and content sections. Full-stack: Next.js/React, TypeScript, Tailwind and Node.js + PostgreSQL."
       },
       "trashcans": {
-        "description": "IoT dashboard for real-time monitoring of smart waste containers: fill level, temperature, alerts and collection route management. Built with Angular and ThingsBoard for Senzary."
+        "description": "IoT dashboard for real-time monitoring of smart waste containers: fill level, temperature, alerts and collection routes. Built on the Senzary platform."
       },
       "workeriq": {
-        "description": "Industrial drilling IoT monitoring platform: real-time tracking of drilling parameters, operational alerts and metric visualization. Built with Angular and ThingsBoard for Senzary."
+        "description": "Worker safety solution for ENI, built in React on top of the IoTLogIQ platform: real-time personnel tracking, geolocated maps, mustering, operational alerts and metric visualization for field teams."
       },
       "iotlogiq": {
-        "description": "Smart Industry product built from scratch with Angular and ThingsBoard: sensor and asset data analysis platform and dashboards, with full-stack work (frontend and backend). I led the migration to the new version (renewed dashboards and onboardings) and over 10 projects and sub-projects for clients in sectors such as airports, data centers, environmental monitoring and aquifers, mainly in Latin America and the US. The gallery summarizes product views, digital twin, predictive analytics and field deployments (including airport and other industrial environments)."
+        "description": "Smart Industry product built from scratch with tailored solutions for Shell, ENI, AES, IAC, Jacksonville Airport and Ternium, among others. I worked full-stack, on both frontend and backend, and supported the product migration from ThingsBoard to an in-house stack on Angular and Node.js. I also led AI tooling adoption across the development team. Over 10 projects delivered for clients in airports, oil & gas, energy, steel, data centers and environmental monitoring, mainly in Latin America and the US."
       },
       "cloudlab": {
         "description": "Platform for clinical laboratories aimed at streamlining the management of studies, results and patients. "
@@ -101,7 +105,22 @@
       },
       "fintrack": {
         "description": "Full-stack app for managing income, expenses, and investments with multi-currency support (ARS/USD). Built the backend in Java 21 + Spring Boot 4 (JPA, Spring Security with JWT and Google OAuth2, Excel import via Apache POI) and the frontend in Angular 22 with Signals, integrating real-time exchange-rate and brokerage data (dólar blue, IOL) for the investments module. Includes an analytics dashboard, transaction categorization, and a consolidated net worth view."
+      },
+      "airportiq": {
+        "description": "Airport operations solution built for Jacksonville Airport on top of the IoTLogIQ platform: air quality, temperature, people counting and flow, queue management and environmental monitoring. Dashboards designed for quick reading in the control room, with threshold alarms, per-terminal views and measurement history."
       }
+    },
+    "filters": {
+      "all": "All",
+      "iot": "IoT",
+      "web": "Web",
+      "java": "Java",
+      "work": "Work",
+      "personal": "Personal",
+      "countOne": "{{count}} project",
+      "countOther": "{{count}} projects",
+      "filterLabel": "Filter projects by category",
+      "empty": "No projects in this category."
     }
   },
   "experience": {
@@ -109,7 +128,7 @@
     "title": "Experience",
     "items": {
       "senzary": {
-        "title": "Full-stack Developer · Industrial IoT",
+        "title": "Full-stack Developer · Frontend Lead · Industrial IoT",
         "date": "August 2023 - Present",
         "points": [
           "End-to-end industrial IoT dashboard work with strong UX/UI emphasis for operations and quick reading of sensors and KPIs",
@@ -119,16 +138,17 @@
         ]
       },
       "politicalFreelance": {
-        "title": "Full-stack freelance · electoral applications",
+        "title": "Freelance full-stack · Electoral apps and IoT",
         "date": "July 2025 - Present",
         "points": [
-          "Full-stack web apps for electoral, political and oversight workflows — internal and campaign use, plus operational UIs (precincts/branches, polling-place views) when in scope",
-          "UX/UI collaboration with stakeholders, rollout training for field teams and functional documentation with usage criteria and onboarding",
-          "Functional and regression testing before critical milestones, plus coordination of resources, timelines and priorities in demanding cycles"
+          "Full-stack development of political/electoral and poll-watching apps: internal and campaign use; operational interfaces (e.g. precincts/tables) as scoped",
+          "End-to-end IoT applications on ThingsBoard: tank level and volume measurement and pontoon monitoring, from device modeling and rule chains through to dashboards and alarms",
+          "UX/UI collaboration with the client, training for team adoption and functional documentation with usage and onboarding criteria",
+          "Functional and regression testing ahead of critical milestones, plus coordination of resources, deadlines and priorities in high-demand environments"
         ]
       },
       "early2023": {
-        "title": "Tutor & Dev (Soy Henry) & No Country · GEN Consultores",
+        "title": "Systems Analyst student · Tutor & Dev at Soy Henry",
         "date": "January 2023 - July 2023",
         "points": [
           "Soy Henry — teaching assistant: coordinating students, bootcamp-process improvements and group cohesion",
@@ -137,11 +157,59 @@
           "Collaborative work, steady team communication and continuous functional improvements"
         ]
       }
+    },
+    "kinds": {
+      "professional": "Professional experience",
+      "freelance": "Freelance",
+      "academic": "Academic experience"
+    },
+    "summaryEarly2023": "My first steps in development: teaching assistant at the Soy Henry bootcamp, full-stack on a No Country team project, and freelance frontend work for GEN Consultores.",
+    "products": {
+      "iotlogiq": {
+        "name": "IoTLogIQ · platform",
+        "detail": "Smart Industry product built from scratch, with a base platform and tailored solutions per client: Shell, ENI, AES, IAC, Jacksonville Airport and Ternium, among others. I worked full-stack, leading the frontend and often the backend as well, and supported the product migration from ThingsBoard to an in-house stack on Angular and Node.js."
+      },
+      "airportiq": {
+        "name": "AirportIQ · Jacksonville Airport",
+        "detail": "Airport operations solution: air quality, temperature, people counting and flow, queue management and environmental monitoring. Dashboards designed for quick reading in the control room, with threshold alarms and per-terminal views."
+      },
+      "workeriq": {
+        "name": "WorkerIQ · ENI",
+        "detail": "Worker safety on site: real-time personnel tracking, geolocated maps, mustering and operational alerts. Built in React on top of the platform, focused on real-time data and field readability."
+      },
+      "industry": {
+        "name": "Oil & gas, energy and steel",
+        "detail": "Solutions for Shell, AES and Ternium: asset monitoring, digital twin, predictive analytics and KPI dashboards for industrial operations. Use-case analysis, offsets and thresholds, rule chains and alarms with severity matching each operation."
+      },
+      "trashcans": {
+        "name": "TrashCans",
+        "detail": "IoT dashboard for smart waste containers: fill level, temperature, alarms and collection route management."
+      },
+      "ai": {
+        "name": "AI adoption across the team",
+        "detail": "I led the rollout of AI tooling in the development team workflow: usage standards, prompts and review criteria, plus training other developers to speed up delivery without trading off quality."
+      },
+      "iac": {
+        "name": "DustIQ · IAC",
+        "detail": "Environmental and process monitoring solution for IAC: particulate matter measurement (DustIQ) alongside tank level and volume control. Dashboards with threshold alarms, measurement history and per-asset views for daily operations."
+      },
+      "political": {
+        "name": "Electoral and poll-watching apps",
+        "detail": "Full-stack development of political/electoral and poll-watching applications, for internal and campaign use: tracking dashboards, poll-watcher management, incident reporting and vote counting by precinct and table. UX/UI collaboration with the client, training for team adoption and functional documentation with usage and onboarding criteria."
+      },
+      "iot": {
+        "name": "End-to-end IoT applications",
+        "detail": "Complete IoT solutions on ThingsBoard: tank level and volume measurement and pontoon monitoring. From device modeling and rule chains through to dashboards, threshold alarms and measurement history."
+      },
+      "delivery": {
+        "name": "Delivery and coordination",
+        "detail": "Functional and regression testing ahead of critical milestones, plus coordination of resources, deadlines and priorities in high-demand environments, with campaign dates that do not move."
+      }
     }
   },
   "contact": {
     "eyebrow": "../Contact",
-    "title": "Available for freelance and full-time positions.",
+    "title": "Let's talk about your next project.",
     "description": "If you have a project — custom software, dashboards, data platforms or any idea — feel free to reach out.",
     "form": {
       "name": "Name",
