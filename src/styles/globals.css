@@ -108,13 +108,17 @@ html.with-hud-cursor [contenteditable="true"] {
   cursor: text !important;
 }
 
+/* Posicion la maneja JS con translate3d (compositor), no con left/top (layout). */
 .hud-cursor-root {
   position: fixed;
+  left: 0;
+  top: 0;
   z-index: 320;
   width: 28px;
   height: 28px;
   pointer-events: none;
-  transform: translate(-50%, -50%);
+  will-change: transform;
+  transform: translate3d(-100px, -100px, 0) translate(-50%, -50%);
 }
 
 /* Sobre botones/enlaces: solo círculo + punto (reference HUD) */
@@ -318,31 +322,6 @@ html.with-hud-cursor [contenteditable="true"] {
 
   to {
     transform: translateX(-35%);
-  }
-}
-
-@keyframes hero-tech-marquee {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-
-  to {
-    transform: translate3d(-50%, 0, 0);
-  }
-}
-
-.hero-tech-track {
-  animation: hero-tech-marquee 38s linear infinite;
-  will-change: transform;
-}
-
-.hero-tech-track:hover {
-  animation-play-state: paused;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-tech-track {
-    animation: none;
   }
 }
 

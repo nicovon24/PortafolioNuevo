@@ -18,9 +18,14 @@ export default function HeroTechCarousel({ children }: { children: React.ReactNo
     const track = trackRef.current;
     if (!track) return;
 
-    const tick = () => {
-      const halfWidth = track.scrollWidth / 2;
+    // scrollWidth forces a synchronous layout, so cache it instead of reading it per frame.
+    let halfWidth = track.scrollWidth / 2;
+    const resizeObserver = new ResizeObserver(() => {
+      halfWidth = track.scrollWidth / 2;
+    });
+    resizeObserver.observe(track);
 
+    const tick = () => {
       if (!isDragging.current) {
         if (!isHovering.current) {
           xRef.current -= AUTO_SPEED;
@@ -32,15 +37,20 @@ export default function HeroTechCarousel({ children }: { children: React.ReactNo
       }
 
       // seamless wrap
-      if (xRef.current <= -halfWidth) xRef.current += halfWidth;
-      if (xRef.current > 0) xRef.current -= halfWidth;
+      if (halfWidth > 0) {
+        if (xRef.current <= -halfWidth) xRef.current += halfWidth;
+        if (xRef.current > 0) xRef.current -= halfWidth;
+      }
 
       track.style.transform = `translateX(${xRef.current}px)`;
       rafRef.current = requestAnimationFrame(tick);
     };
 
     rafRef.current = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(rafRef.current);
+    return () => {
+      cancelAnimationFrame(rafRef.current);
+      resizeObserver.disconnect();
+    };
   }, []);
 
   const onPointerDown = (e: React.PointerEvent) => {

@@ -17,6 +17,7 @@ export default function ProjectScreenshots({ images, title, compact = false }: P
   const labelId = useId();
   const [open, setOpen] = useState(false);
   const [index, setIndex] = useState(0);
+  const [loadedMap, setLoadedMap] = useState<Record<number, boolean>>({});
   const count = images.length;
   const safeIndex = count > 0 ? Math.min(index, count - 1) : 0;
 
@@ -58,7 +59,6 @@ export default function ProjectScreenshots({ images, title, compact = false }: P
   if (count === 0) return null;
 
   const previews = images.slice(0, 3);
-  const [loadedMap, setLoadedMap] = useState<Record<number, boolean>>({});
 
   return (
     <>

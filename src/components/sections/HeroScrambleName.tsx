@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useActiveOnScreen } from "@/hooks/useActiveOnScreen";
 
 const CHARSET =
   "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789/[]<>!@#$%&*+=?\\|_:-·•^~`";
@@ -59,14 +60,18 @@ export default function HeroScrambleName({ firstName, lastName, line1Class, line
   const [isScrambling, setIsScrambling] = useState(false);
   const startRef = useRef<number | null>(null);
   const frameSkipRef = useRef(0);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const active = useActiveOnScreen(headingRef);
 
   useEffect(() => {
     startRef.current = null;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (reduced.matches) {
+    // Fuera de pantalla o pestaña oculta: descansar en el nombre limpio, sin rAF.
+    if (reduced.matches || !active) {
       setLine1(firstName);
       setLine2(lastName);
       setWrapOpacity(1);
+      setIsScrambling(false);
       return;
     }
 
@@ -114,12 +119,12 @@ export default function HeroScrambleName({ firstName, lastName, line1Class, line
 
     raf = requestAnimationFrame(frame);
     return () => cancelAnimationFrame(raf);
-  }, [firstName, lastName]);
+  }, [firstName, lastName, active]);
 
   const label = `${firstName} ${lastName}`;
 
   return (
-    <h1 className="m-0 font-sans font-extrabold tracking-tight" style={{ opacity: wrapOpacity }} aria-label={label}>
+    <h1 ref={headingRef} className="m-0 font-sans font-extrabold tracking-tight" style={{ opacity: wrapOpacity }} aria-label={label}>
       <span className={`block max-w-none ${line1Class}`}>{line1}</span>
       <span className={`mt-1 block max-w-none transition-[filter] duration-300 ${isScrambling && line2ScrambleClass ? line2ScrambleClass : line2Class}`}>{line2}</span>
     </h1>

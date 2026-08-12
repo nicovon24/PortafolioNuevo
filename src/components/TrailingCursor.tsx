@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const HTML_CLASS = "with-hud-cursor";
 const BURST_DURATION_MS = 2000;
@@ -46,8 +46,8 @@ function spawnClickBurst(clientX: number, clientY: number) {
 /** HUD: retícula por defecto; sobre enlaces/botones: círculo gris + punto celeste. */
 export default function TrailingCursor() {
   const [enabled, setEnabled] = useState(false);
-  const [pos, setPos] = useState({ x: 0, y: 0 });
   const [pointerMode, setPointerMode] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const html = document.documentElement;
@@ -61,33 +61,57 @@ export default function TrailingCursor() {
     html.classList.add(HTML_CLASS);
     setEnabled(true);
 
-    const onMove = (e: PointerEvent) => {
-      setPos({ x: e.clientX, y: e.clientY });
-      const under = document.elementFromPoint(e.clientX, e.clientY);
-      setPointerMode(isInteractiveUnderPointer(under));
+    return () => {
+      html.classList.remove(HTML_CLASS);
     };
+  }, []);
+
+  useEffect(() => {
+    if (!enabled) return;
+
+    let x = 0;
+    let y = 0;
+    let frame = 0;
+
+    // Coalesce every pointermove into one transform write per frame.
+    const flush = () => {
+      frame = 0;
+      const root = rootRef.current;
+      if (root) root.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
+    };
+
+    const onMove = (e: PointerEvent) => {
+      x = e.clientX;
+      y = e.clientY;
+      if (!frame) frame = requestAnimationFrame(flush);
+    };
+
+    // Delegation beats elementFromPoint(): the browser already knows the hit target.
+    const onOver = (e: PointerEvent) => setPointerMode(isInteractiveUnderPointer(e.target));
 
     const onPointerDown = (e: PointerEvent) => {
       if (e.button !== 0 || e.pointerType === "touch") return;
       spawnClickBurst(e.clientX, e.clientY);
     };
 
-    window.addEventListener("pointermove", onMove);
+    window.addEventListener("pointermove", onMove, { passive: true });
+    window.addEventListener("pointerover", onOver, { passive: true });
     window.addEventListener("pointerdown", onPointerDown);
 
     return () => {
+      if (frame) cancelAnimationFrame(frame);
       window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerover", onOver);
       window.removeEventListener("pointerdown", onPointerDown);
-      html.classList.remove(HTML_CLASS);
     };
-  }, []);
+  }, [enabled]);
 
   if (!enabled) return null;
 
   return (
     <div
+      ref={rootRef}
       className={`hud-cursor-root${pointerMode ? " hud-cursor-root--pointer" : ""}`}
-      style={{ left: pos.x, top: pos.y }}
       aria-hidden
     >
       <span className="hud-cursor__ring" />

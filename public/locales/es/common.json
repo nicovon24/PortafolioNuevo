@@ -90,6 +90,12 @@
       },
       "cloudlab": {
         "description": "Plataforma para laboratorios clinicos orientada a agilizar la gestion de estudios, resultados y pacientes."
+      },
+      "iotarg": {
+        "description": "Plataforma full-stack de gestión de flota IoT: monitoreo de dispositivos y activos en tiempo real, mapas geolocalizados, alarmas, dashboards personalizables con drag-and-drop y control de acceso multi-cliente y multi-rol. Integra ThingsBoard como motor IoT (telemetría, reglas, entidades) detrás de un backend en NestJS que expone APIs REST + WebSocket, con frontend en Next.js/React. Pensada para escalar a múltiples clientes con jerarquías de dispositivos y permisos granulares por rol. Actualmente corre sobre el plan free-tier de ThingsBoard, por lo que algunas funciones enterprise están limitadas por ahora."
+      },
+      "fintrack": {
+        "description": "App full-stack para gestionar ingresos, gastos e inversiones con soporte multi-moneda (ARS/USD). Backend en Java 21 + Spring Boot 4 (JPA, Spring Security con JWT y Google OAuth2, importación de Excel vía Apache POI) y frontend en Angular 22 con Signals, integrando datos en tiempo real de tipo de cambio y bróker (dólar blue, IOL) para el módulo de inversiones. Incluye dashboard de analítica, categorización de transacciones y un patrimonio neto consolidado."
       }
     }
   },

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { GraduationCap, Monitor } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import Section from "@/components/ui/Section";
 import { experiences } from "@/data/portfolio";
 import { cn } from "@/lib/utils";
 
@@ -11,8 +12,8 @@ function TimelineDot({ kind }: { kind: "work" | "study" }) {
   return (
     <div
       className={cn(
-        "relative z-[1] flex size-11 shrink-0 items-center justify-center rounded-full border-2 border-white shadow-[0_4px_14px_rgba(0,0,0,0.25)]",
-        isWork ? "bg-accent text-[#08111f]" : "bg-amber-500 text-white",
+        "relative z-[1] flex size-11 shrink-0 items-center justify-center rounded-full border-2 border-background shadow-[0_4px_14px_rgba(0,0,0,0.45)]",
+        isWork ? "bg-accent text-background-deep" : "bg-accent-2 text-background-deep",
       )}
       aria-hidden
     >
@@ -39,7 +40,7 @@ function ExperienceCard({
   points: string[];
 }) {
   return (
-    <article className="rounded-none border border-black/[0.06] bg-white p-5 shadow-[0_18px_42px_-14px_rgba(0,0,0,0.38)] md:p-6">
+    <article className="rounded-2xl border border-line bg-panel p-5 shadow-[0_20px_56px_rgba(0,0,0,0.22)] md:p-6">
       <div className="flex gap-4">
         <Image
           src={icon}
@@ -51,10 +52,10 @@ function ExperienceCard({
           style={{ backgroundColor: iconBg ?? "#f5f5f5" }}
         />
         <div className="min-w-0 flex-1">
-          <h3 className="mb-3 text-center font-mono text-base font-bold tracking-tight text-neutral-900 md:text-lg md:tracking-normal">
+          <h3 className="mb-3 text-center font-mono text-base font-bold tracking-tight text-ink md:text-lg md:tracking-normal">
             {title}
           </h3>
-          <ul className="m-0 list-disc space-y-1.5 pl-5 text-sm leading-snug text-neutral-700">
+          <ul className="m-0 list-disc space-y-1.5 pl-5 text-sm leading-snug text-muted">
             {points.map((pt, idx) => (
               <li key={idx}>{pt}</li>
             ))}
@@ -69,23 +70,8 @@ export default function ExperienceSection() {
   const { t } = useTranslation();
 
   return (
-    <section
-      id="experience"
-      className="w-full px-page py-14 md:py-16 lg:py-[4.25rem]"
-    >
-      <header className="mb-10 grid max-w-[84rem] mx-auto gap-2 md:mb-11 lg:mb-12">
-        <p className="m-0 font-mono text-sm uppercase tracking-[0.08em] text-muted">
-          {t("experience.eyebrow")}
-        </p>
-        <div className="flex flex-wrap items-center gap-4">
-          <h2 className="m-0 font-mono text-[clamp(1.65rem,4.2vw,3rem)] leading-tight tracking-normal text-accent">
-            {t("experience.title")}
-          </h2>
-          <span className="hidden h-px min-w-[4rem] flex-1 max-w-[11rem] bg-accent/65 sm:block" aria-hidden />
-        </div>
-      </header>
-
-      <div className="relative mx-auto w-full max-w-[84rem]">
+    <Section id="experience" eyebrow={t("experience.eyebrow")} title={t("experience.title")}>
+      <div className="relative w-full">
         <div
           className="pointer-events-none absolute left-[21px] top-3 bottom-3 hidden w-px bg-accent/35 md:left-1/2 md:block md:-translate-x-1/2"
           aria-hidden
@@ -166,6 +152,6 @@ export default function ExperienceSection() {
           })}
         </ul>
       </div>
-    </section>
+    </Section>
   );
 }
