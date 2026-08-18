@@ -160,10 +160,6 @@ export default function HeroSection() {
           viewport={heroHudViewport}
         >
           <motion.p className={hudRow} variants={heroHudRowVariants}>
-            <span className={hudKey}>{t("hero.locKey")}</span>
-            <span className={hudValMuted}>{t("hero.locVal")}</span>
-          </motion.p>
-          <motion.p className={hudRow} variants={heroHudRowVariants}>
             <span className={hudKey}>{t("hero.stackKey")}</span>
             <span className={hudValMuted}>{t("hero.stackVal")}</span>
           </motion.p>

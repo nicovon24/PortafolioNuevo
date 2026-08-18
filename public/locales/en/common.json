@@ -12,8 +12,6 @@
     "closeMenu": "Close menu"
   },
   "hero": {
-    "locKey": "Loc ·",
-    "locVal": "Córdoba / ARG",
     "stackKey": "Stack ·",
     "stackVal": "TypeScript · Python · Java",
     "roleKey": "Role ·",
