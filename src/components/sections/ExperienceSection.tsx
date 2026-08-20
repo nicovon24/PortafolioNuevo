@@ -114,6 +114,7 @@ export default function ExperienceSection() {
       eyebrow={t("experience.eyebrow")}
       title={t("experience.title")}
       parallax
+      variant="tech"
     >
       {/* Timeline unica alineada a la izquierda: mismo layout en mobile y desktop. */}
       <ol className="relative m-0 list-none border-l border-line/70 p-0 pl-7 sm:pl-9">

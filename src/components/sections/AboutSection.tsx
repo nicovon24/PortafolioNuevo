@@ -23,7 +23,14 @@ export default function AboutSection() {
   const { t } = useTranslation();
 
   return (
-    <Section id="about" index="01" eyebrow={t("about.eyebrow")} title={t("about.title")} parallax>
+    <Section
+      id="about"
+      index="01"
+      eyebrow={t("about.eyebrow")}
+      title={t("about.title")}
+      parallax
+      variant="tech"
+    >
       <div className="grid grid-cols-1 items-start gap-7 lg:grid-cols-[1fr_0.85fr] lg:gap-8">
         <ParallaxLayer speed={22}>
           <MotionFade className="text-base leading-relaxed text-muted lg:text-lg">

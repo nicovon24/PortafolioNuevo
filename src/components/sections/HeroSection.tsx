@@ -127,6 +127,7 @@ export default function HeroSection() {
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
   // El bloque global de prefers-reduced-motion en CSS no frena transforms de framer-motion.
   const photoParallaxY = useTransform(scrollYProgress, [0, 1], [0, reducedMotion ? 0 : 55]);
+
   const handleScrambleChange = useCallback((active: boolean) => {
     setIsScrambling(active);
     if (active) {
@@ -144,7 +145,7 @@ export default function HeroSection() {
     <section
       ref={sectionRef}
       id="top"
-      className="relative flex w-full flex-col items-start overflow-hidden px-page pb-12 pt-32 sm:pb-14 sm:pt-36 lg:min-h-screen lg:pb-36 lg:pt-30"
+      className="section-bg-grid-floor relative flex w-full flex-col items-start overflow-hidden px-page pb-12 pt-32 sm:pb-14 sm:pt-36 lg:min-h-screen lg:pb-36 lg:pt-30"
     >
       {/* Los HUD se alinean al contenedor centrado, no al borde de la pantalla:
           anclados a right-page quedaban fuera del shell y descentraban el hero. */}

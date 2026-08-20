@@ -8,7 +8,9 @@
       "Bash(node -e ' *)",
       "PowerShell(Remove-Item \"c:\\\\Users\\\\Nicolas\\\\Desktop\\\\Proyectos-Challenges\\\\nuevos\\\\Portfolio\\\\PortfolioNicoNvo\\\\src\\\\components\\\\sections\\\\CircuitCanvas.tsx\" -Confirm:$false)",
       "Bash(awk '{print $1}')",
-      "Bash(git rm *)"
+      "Bash(git rm *)",
+      "Bash(git commit *)",
+      "Bash(gh pr create --base master --head new-ui --title 'refactor\\(assets\\): mover imagenes a src/assets y ajustar espaciado del hero' --body ' *)"
     ]
   }
 }

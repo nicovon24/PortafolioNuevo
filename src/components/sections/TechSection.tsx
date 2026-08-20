@@ -10,16 +10,21 @@ import { techGroups } from "@/data/portfolio";
 
 /** Pseudo-grupo: junta el stack principal de todos los grupos. */
 const PRIMARY = "primary";
+/** Pseudo-grupo: junta todas las tecnologias de todos los grupos. */
+const ALL = "all";
 
 export default function TechSection() {
   const { t } = useTranslation();
   const [active, setActive] = useState<string>(PRIMARY);
 
   const primaryItems = techGroups.flatMap((g) => g.items.filter((i) => "primary" in i && i.primary));
-  const items = active === PRIMARY ? primaryItems : (techGroups.find((g) => g.title === active)?.items ?? []);
+  const allItems = techGroups.flatMap((g) => g.items);
+  const items =
+    active === PRIMARY ? primaryItems : active === ALL ? allItems : (techGroups.find((g) => g.title === active)?.items ?? []);
 
   const tabs = [
     { key: PRIMARY, label: t("tech.primary"), count: primaryItems.length },
+    { key: ALL, label: t("tech.all"), count: allItems.length },
     ...techGroups.map((g) => ({ key: g.title, label: t(g.title), count: g.items.length })),
   ];
 
@@ -30,6 +35,7 @@ export default function TechSection() {
       eyebrow={t("tech.eyebrow")}
       title={t("tech.title")}
       parallax
+      variant="tech"
       className="py-10 md:py-12 lg:py-14 [&>div:first-child]:mb-5 md:[&>div:first-child]:mb-6 [&_h2]:text-[clamp(1.25rem,3vw,2rem)]"
     >
       {/* Tabs por grupo: antes eran 4 grupos apilados, mucho alto y todo con el mismo peso. */}

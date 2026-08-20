@@ -12,7 +12,20 @@ type SectionProps = {
   className?: string;
   /** Activa el parallax de scroll para el header y habilita <ParallaxLayer> en los children. */
   parallax?: boolean;
+  /**
+   * Fondo de la seccion:
+   * - "grid-floor": piso de grilla en perspectiva animado, se repite por seccion (default de la app)
+   * - "tech": grid fino + glow rojo, estatico (variante alternativa sin animacion)
+   * - "none": solo el fondo global del body
+   */
+  variant?: "tech" | "grid-floor" | "none";
 };
+
+const VARIANT_CLASS = {
+  tech: "section-bg-tech",
+  "grid-floor": "section-bg-grid-floor",
+  none: "",
+} as const;
 
 export default function Section({
   id,
@@ -22,6 +35,7 @@ export default function Section({
   children,
   className = "",
   parallax = false,
+  variant = "none",
 }: SectionProps) {
   const header = (eyebrow || title) && (
     <div className="mb-8 grid gap-2.5 md:mb-9 lg:mb-10">
@@ -55,7 +69,8 @@ export default function Section({
       id={id}
       className={cn(
         "w-full scroll-mt-24 px-page py-14 md:py-16 lg:py-17",
-        parallax && "overflow-hidden",
+        (parallax || variant !== "none") && "overflow-hidden",
+        VARIANT_CLASS[variant],
         className,
       )}
     >
