@@ -57,6 +57,7 @@
       "ia": "AI"
     },
     "primary": "Core",
+    "all": "All",
     "groupLabel": "Technology groups"
   },
   "projects": {

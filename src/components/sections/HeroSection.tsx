@@ -11,40 +11,41 @@ import MotionSlide from "@/components/motion/MotionSlide";
 import HeroScrambleName from "@/components/sections/HeroScrambleName";
 import HeroRoleCycle from "@/components/sections/HeroRoleCycle";
 import HeroTechCarousel from "@/components/sections/HeroTechCarousel";
+import { TechIcon, type TechSlug } from "@/components/ui/TechIcon";
 import { profile } from "@/data/portfolio";
 
-const HERO_CAROUSEL: Array<{ name: string; icon: string }> = [
-  { name: "React", icon: "/images/svg/react.svg" },
-  { name: "Next.js", icon: "/images/svg/next.svg" },
-  { name: "Angular", icon: "/images/svg/angular.svg" },
-  { name: "TypeScript", icon: "/images/svg/ts.svg" },
-  { name: "Node.js", icon: "/images/svg/node.svg" },
-  { name: "GraphQL", icon: "/images/svg/graphql.svg" },
-  { name: "MongoDB", icon: "/images/svg/mongo.svg" },
-  { name: "AWS", icon: "/images/svg/aws.svg" },
-  { name: "TailwindCSS", icon: "/images/svg/tailwind.svg" },
-  { name: "Docker", icon: "/images/svg/docker.svg" },
-  { name: "Jira", icon: "/images/svg/jira.svg" },
-  { name: "Claude Code", icon: "/images/svg/claude.svg" },
+const HERO_CAROUSEL: Array<{ name: string; icon: TechSlug }> = [
+  { name: "React", icon: "react" },
+  { name: "Next.js", icon: "next" },
+  { name: "Angular", icon: "angular" },
+  { name: "TypeScript", icon: "ts" },
+  { name: "Node.js", icon: "node" },
+  { name: "GraphQL", icon: "graphql" },
+  { name: "MongoDB", icon: "mongo" },
+  { name: "AWS", icon: "aws" },
+  { name: "TailwindCSS", icon: "tailwind" },
+  { name: "Docker", icon: "docker" },
+  { name: "Jira", icon: "jira" },
+  { name: "Claude Code", icon: "claude" },
 ];
 
 const btnPrimary =
-  "inline-flex min-h-10 items-center justify-center gap-2 border border-accent bg-accent px-3.5 font-mono text-sm font-bold uppercase tracking-wider text-background-deep shadow-[0_0_0_1px_rgba(119,236,208,0.35)_inset,0_0_24px_rgba(119,236,208,0.12)] transition-colors hover:border-accent-2 hover:bg-[rgba(236,124,180,0.12)] hover:text-accent-2";
+  "inline-flex min-h-10 items-center justify-center gap-2 border border-accent bg-accent px-3.5 font-mono text-sm font-bold uppercase tracking-wider text-background shadow-[0_0_24px_rgba(217,100,90,0.18)] transition-colors hover:border-accent-2 hover:bg-accent-2";
 
 const btnSecondary =
   "inline-flex min-h-10 items-center justify-center gap-2 border border-line bg-transparent px-3.5 font-mono text-sm font-bold uppercase tracking-wider text-muted transition-colors hover:border-accent hover:text-accent";
 
 const iconBtn =
-  "grid size-9 place-items-center border border-line bg-panel-strong text-accent transition-colors hover:border-accent-2 hover:bg-[rgba(236,124,180,0.12)] hover:text-accent-2";
+  "grid size-9 place-items-center border border-line bg-panel-strong text-accent transition-colors hover:border-accent-2 hover:bg-[rgba(255,107,94,0.12)] hover:text-accent-2";
 
 const nameLine1Class =
-  "leading-[0.95] text-ink text-[clamp(2.05rem,calc(0.88rem+5.2vw),4rem)]";
+  "font-display font-bold leading-[0.95] text-ink text-[clamp(2.05rem,calc(0.88rem+5.2vw),4rem)]";
 
 const nameLine2Class =
-  "bg-gradient-to-b from-accent via-accent to-[#3edcc4] bg-clip-text text-[clamp(2.35rem,calc(1rem+5.85vw),4.65rem)] leading-[0.92] text-transparent drop-shadow-[0_0_22px_rgba(119,236,208,0.2)] [-webkit-text-fill-color:transparent]";
+  "font-display font-bold text-accent text-[clamp(2.35rem,calc(1rem+5.85vw),4.65rem)] leading-[0.92] [text-shadow:0_0_30px_rgba(217,100,90,0.35)]";
 
 const nameLine2ScrambleClass =
-  "bg-gradient-to-b from-accent-2 via-accent-2 to-[#ff85c0] bg-clip-text text-[clamp(2.35rem,calc(1rem+5.85vw),4.65rem)] leading-[0.92] text-transparent drop-shadow-[0_0_22px_rgba(236,124,180,0.25)] [-webkit-text-fill-color:transparent]";
+  "font-display font-bold text-accent-2 text-[clamp(2.35rem,calc(1rem+5.85vw),4.65rem)] leading-[0.92] [text-shadow:0_0_30px_rgba(255,107,94,0.3)]";
 
 const hudRow =
   "m-0 flex flex-wrap justify-end gap-x-1 font-mono text-micro leading-snug";
@@ -99,7 +100,7 @@ function HeroRingStat({ label, value }: { label: string; value: string }) {
         {label}
       </span>
       <div
-        className="relative grid size-[4.35rem] place-items-center rounded-full border-2 border-dashed border-accent/75 bg-panel-strong shadow-[0_0_28px_rgba(119,236,208,0.18),inset_0_0_20px_rgba(119,236,208,0.08)] backdrop-blur-sm sm:size-[4.85rem]"
+        className="relative grid size-[4.35rem] place-items-center rounded-full border-2 border-dashed border-accent/75 bg-panel-strong shadow-[0_0_28px_rgba(217,100,90,0.18),inset_0_0_20px_rgba(217,100,90,0.08)] backdrop-blur-sm sm:size-[4.85rem]"
         aria-hidden
       >
         <div className="pointer-events-none absolute inset-0 rounded-full border border-accent/25" />
@@ -126,6 +127,7 @@ export default function HeroSection() {
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
   // El bloque global de prefers-reduced-motion en CSS no frena transforms de framer-motion.
   const photoParallaxY = useTransform(scrollYProgress, [0, 1], [0, reducedMotion ? 0 : 55]);
+
   const handleScrambleChange = useCallback((active: boolean) => {
     setIsScrambling(active);
     if (active) {
@@ -143,13 +145,13 @@ export default function HeroSection() {
     <section
       ref={sectionRef}
       id="top"
-      className="relative flex w-full flex-col items-start overflow-hidden px-page pb-12 pt-28 sm:pb-14 sm:pt-32 lg:min-h-screen lg:pb-36 lg:pt-24"
+      className="section-bg-grid-floor relative flex w-full flex-col items-start overflow-hidden px-page pb-12 pt-32 sm:pb-14 sm:pt-36 lg:min-h-screen lg:pb-36 lg:pt-30"
     >
       {/* Los HUD se alinean al contenedor centrado, no al borde de la pantalla:
           anclados a right-page quedaban fuera del shell y descentraban el hero. */}
       <div className="pointer-events-none absolute inset-x-page top-0 bottom-0 z-[2] mx-auto hidden max-w-shell lg:block">
       <aside
-        className="pointer-events-none absolute right-0 top-[5.75rem] max-w-[14rem] text-right lg:top-[6.75rem]"
+        className="pointer-events-none absolute right-0 top-[7.5rem] max-w-[14rem] text-right lg:top-[8.5rem]"
         aria-label={t("hero.profileSummary")}
       >
         <motion.div
@@ -222,7 +224,7 @@ export default function HeroSection() {
               >
                 <span className="relative flex h-2 w-2 shrink-0" aria-hidden>
                   <span className={`absolute inline-flex h-full w-full animate-ping rounded-full opacity-35 transition-colors duration-300 ${badgeGlitch ? "bg-accent-2" : "bg-accent"}`} />
-                  <span className={`relative m-auto inline-flex h-[5px] w-[5px] rounded-full transition-all duration-300 ${badgeGlitch ? "bg-accent-2 shadow-[0_0_8px_rgba(236,124,180,0.85)]" : "bg-accent shadow-[0_0_8px_rgba(119,236,208,0.85)]"}`} />
+                  <span className={`relative m-auto inline-flex h-[5px] w-[5px] rounded-full transition-all duration-300 ${badgeGlitch ? "bg-accent-2 shadow-[0_0_8px_rgba(255,107,94,0.85)]" : "bg-accent shadow-[0_0_8px_rgba(217,100,90,0.85)]"}`} />
                 </span>
                 {t("hero.available")}
               </span>
@@ -277,18 +279,17 @@ export default function HeroSection() {
                     key={`${item.name}-${i}`}
                     className={`group/hero-tech-item flex w-[5.75rem] shrink-0 flex-col items-center justify-center gap-1.5 rounded-lg border border-line/70 bg-panel-strong px-2 py-2.5 backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 sm:w-[6.25rem] ${
                       isEven
-                        ? "hover:border-accent hover:bg-[rgba(119,236,208,0.06)] hover:shadow-[0_0_0_1px_rgba(119,236,208,0.4)_inset,0_0_18px_rgba(119,236,208,0.22)]"
-                        : "hover:border-accent-2 hover:bg-[rgba(236,124,180,0.06)] hover:shadow-[0_0_0_1px_rgba(236,124,180,0.4)_inset,0_0_18px_rgba(236,124,180,0.22)]"
+                        ? "hover:border-accent hover:bg-[rgba(217,100,90,0.04)] hover:shadow-[0_0_0_1px_rgba(217,100,90,0.4)_inset,0_0_18px_rgba(217,100,90,0.22)]"
+                        : "hover:border-accent-2 hover:bg-[rgba(255,107,94,0.04)] hover:shadow-[0_0_0_1px_rgba(255,107,94,0.4)_inset,0_0_18px_rgba(255,107,94,0.22)]"
                     }`}
                     aria-hidden={i >= HERO_CAROUSEL.length ? true : undefined}
                   >
-                    <Image
-                      src={item.icon}
-                      alt=""
-                      width={24}
-                      height={24}
-                      className={`size-6 object-contain opacity-90 transition-all duration-200 group-hover/hero-tech-item:opacity-100 ${
-                        isEven ? "hero-tech-icon-even" : "hero-tech-icon-odd"
+                    <TechIcon
+                      name={item.icon}
+                      className={`size-6 text-muted opacity-90 transition-colors duration-200 group-hover/hero-tech-item:opacity-100 ${
+                        isEven
+                          ? "group-hover/hero-tech-item:text-accent"
+                          : "group-hover/hero-tech-item:text-accent-2"
                       }`}
                     />
                     <span className={`block w-full truncate text-center font-mono text-micro font-semibold uppercase tracking-[0.08em] text-muted transition-colors duration-200 sm:text-micro ${
@@ -331,8 +332,8 @@ export default function HeroSection() {
                 className="relative size-full overflow-hidden rounded-full transition-shadow duration-500"
                 style={{
                   boxShadow: isScrambling
-                    ? "0 0 0 3px rgba(8,17,31,0.85), 0 0 32px rgba(236,124,180,0.22), 0 0 80px rgba(236,124,180,0.08), inset 0 0 36px rgba(236,124,180,0.07)"
-                    : "0 0 0 3px rgba(8,17,31,0.85), 0 0 32px rgba(119,236,208,0.45), 0 0 80px rgba(119,236,208,0.18), inset 0 0 36px rgba(119,236,208,0.12)",
+                    ? "0 0 0 3px rgba(13,8,8,0.85), 0 0 32px rgba(255,107,94,0.22), 0 0 80px rgba(255,107,94,0.08), inset 0 0 36px rgba(255,107,94,0.07)"
+                    : "0 0 0 3px rgba(13,8,8,0.85), 0 0 32px rgba(217,100,90,0.3), 0 0 60px rgba(217,100,90,0.18), inset 0 0 36px rgba(217,100,90,0.1)",
                 }}
               >
                 {!photoLoaded && (
@@ -348,7 +349,7 @@ export default function HeroSection() {
                   onLoad={() => setPhotoLoaded(true)}
                 />
                 <span
-                  className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(119,236,208,0.08),transparent_60%),linear-gradient(180deg,rgba(8,17,31,0.05)_0%,rgba(8,17,31,0.55)_100%)]"
+                  className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(217,100,90,0.08),transparent_60%),linear-gradient(180deg,rgba(13,8,8,0.05)_0%,rgba(13,8,8,0.55)_100%)]"
                   aria-hidden
                 />
               </div>

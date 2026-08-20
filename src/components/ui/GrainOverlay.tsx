@@ -9,12 +9,12 @@ export default function GrainOverlay() {
     <>
       <div
         aria-hidden
-        className="pointer-events-none fixed inset-0 z-[9999] opacity-[0.035] mix-blend-overlay"
+        className="grain-overlay pointer-events-none fixed inset-0 z-9999 opacity-[0.035] mix-blend-overlay"
         style={{ backgroundImage: GRAIN }}
       />
       <div
         aria-hidden
-        className="pointer-events-none fixed inset-0 z-[9997]"
+        className="grain-overlay pointer-events-none fixed inset-0 z-9997"
         style={{
           backgroundImage:
             "repeating-linear-gradient(to bottom, transparent 0 2px, rgba(0,0,0,0.16) 2px 4px)",

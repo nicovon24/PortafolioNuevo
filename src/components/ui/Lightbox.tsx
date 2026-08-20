@@ -54,9 +54,12 @@ export default function Lightbox({
     document.addEventListener("keydown", onKey);
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    // Apaga las scanlines/grano retro del GrainOverlay mientras el visor esta abierto.
+    document.body.classList.add("modal-open");
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = prevOverflow;
+      document.body.classList.remove("modal-open");
     };
   }, [open, onClose, goPrev, goNext]);
 
@@ -89,6 +92,7 @@ export default function Lightbox({
             src={images[index]}
             alt={t("gallery.screenshotOf", { title, n: index + 1 })}
             fill
+            quality={95}
             sizes="100vw"
             className="object-contain"
           />

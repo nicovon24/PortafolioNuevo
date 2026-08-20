@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono, Nunito_Sans } from "next/font/google";
+import { JetBrains_Mono, Nunito_Sans, Space_Grotesk } from "next/font/google";
 import dynamic from "next/dynamic";
 import GrainOverlay from "@/components/ui/GrainOverlay";
+import Loader from "@/components/ui/Loader";
 import I18nProvider from "@/components/providers/I18nProvider";
 import "@/styles/globals.css";
 
@@ -22,6 +23,14 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+// Display: nombre del hero y titulos H1. Weight 700 unicamente.
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  weight: ["700"],
+  variable: "--font-space-grotesk",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "Nicolas Von Muhlinen | Full-stack Developer",
   description:
@@ -36,7 +45,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html
       lang="es"
-      className={`scroll-smooth ${nunitoSans.variable} ${jetbrainsMono.variable}`}
+      className={`scroll-smooth ${nunitoSans.variable} ${jetbrainsMono.variable} ${spaceGrotesk.variable}`}
       suppressHydrationWarning
     >
       <body className={`antialiased ${nunitoSans.className}`} suppressHydrationWarning>
@@ -46,6 +55,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         >
           Saltar al contenido
         </a>
+        <Loader />
         <GrainOverlay />
         <I18nProvider>
           <TrailingCursor />

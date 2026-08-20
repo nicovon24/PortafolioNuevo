@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { profile } from "@/data/portfolio";
 
 const iconBtn =
-  "grid size-9 place-items-center rounded-full border border-line bg-[rgba(119,236,208,0.08)] text-accent transition-colors hover:border-accent-2 hover:bg-[rgba(236,124,180,0.12)] hover:text-accent-2";
+  "grid size-9 place-items-center rounded-full border border-line bg-[rgba(217,100,90,0.04)] text-accent transition-colors hover:border-accent-2 hover:bg-[rgba(255,107,94,0.12)] hover:text-accent-2";
 
 const panel =
   "rounded-2xl border border-line bg-panel px-6 py-8 shadow-[0_20px_56px_rgba(0,0,0,0.22)] backdrop-blur-[14px] md:px-8 md:py-9";

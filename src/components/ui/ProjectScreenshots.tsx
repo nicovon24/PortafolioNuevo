@@ -78,6 +78,7 @@ export default function ProjectScreenshots({
               src={image}
               alt=""
               fill
+              quality={90}
               sizes="(max-width: 768px) 80vw, 34vw"
               className={cn(
                 "pointer-events-none object-cover transition-[opacity,filter] duration-500",

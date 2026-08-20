@@ -33,7 +33,14 @@ export default function ProjectsSection() {
   );
 
   return (
-    <Section id="projects" index="03" eyebrow={t("projects.eyebrow")} title={t("projects.title")} parallax>
+    <Section
+      id="projects"
+      index="03"
+      eyebrow={t("projects.eyebrow")}
+      title={t("projects.title")}
+      parallax
+      variant="grid-floor"
+    >
       <div
         role="tablist"
         aria-label={t("projects.filters.filterLabel")}

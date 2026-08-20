@@ -114,6 +114,7 @@ export default function ExperienceSection() {
       eyebrow={t("experience.eyebrow")}
       title={t("experience.title")}
       parallax
+      variant="tech"
     >
       {/* Timeline unica alineada a la izquierda: mismo layout en mobile y desktop. */}
       <ol className="relative m-0 list-none border-l border-line/70 p-0 pl-7 sm:pl-9">
@@ -134,7 +135,12 @@ export default function ExperienceSection() {
                   "shrink-0 rounded object-contain p-1",
                   exp.compact ? "size-8" : "size-10",
                 )}
-                style={{ backgroundColor: exp.iconBg ?? "#f5f5f5" }}
+                style={{
+                  backgroundColor: exp.iconBg ?? "#f5f5f5",
+                  // Duotone rojo: neutraliza el color de marca original y lo
+                  // recalibra al hue del accent (#d9645a, ~7deg).
+                  filter: "grayscale(1) sepia(1) saturate(4) hue-rotate(-28deg) brightness(0.95)",
+                }}
               />
               <div className="min-w-0 flex-1">
                 <div className="flex flex-wrap items-center gap-2">
