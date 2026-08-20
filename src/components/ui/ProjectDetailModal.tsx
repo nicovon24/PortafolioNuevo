@@ -47,15 +47,15 @@ export default function ProjectDetailModal({
   const [imgIndex, setImgIndex] = useState(0);
   const [imgLoaded, setImgLoaded] = useState(false);
   const [lightbox, setLightbox] = useState(false);
-  // Abierto directo como lightbox ("Ver imagenes"): cerrarlo debe cerrar todo.
-  const directLightboxRef = useRef(false);
   const count = images.length;
 
   useFocusTrap(panelRef, open && !lightbox);
 
+  // Cerrar el lightbox (imagen ampliada) cierra todo el modal, sin importar
+  // si se entro con "Ver imagenes" o ampliando una foto desde el detalle:
+  // ir para atras un paso a la vez sorprendia mas de lo que ayudaba.
   const closeLightbox = useCallback(() => {
-    if (directLightboxRef.current) onClose();
-    else setLightbox(false);
+    onClose();
   }, [onClose]);
 
   const goPrev = useCallback(() => {
@@ -73,7 +73,6 @@ export default function ProjectDetailModal({
     setImgIndex(0);
     setImgLoaded(false);
     setLightbox(initialLightbox);
-    directLightboxRef.current = initialLightbox;
   }, [open, initialLightbox]);
 
   useEffect(() => {
@@ -87,9 +86,13 @@ export default function ProjectDetailModal({
     document.addEventListener("keydown", onKey);
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    // Apaga las scanlines/grano retro del GrainOverlay mientras el modal esta abierto:
+    // las capturas de dashboards necesitan verse nitidas ahi.
+    document.body.classList.add("modal-open");
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = prev;
+      document.body.classList.remove("modal-open");
     };
   }, [open, lightbox, onClose, goPrev, goNext]);
 
@@ -111,7 +114,7 @@ export default function ProjectDetailModal({
           aria-labelledby={labelId}
           onClick={(e) => e.stopPropagation()}
           // Una sola columna: en dos columnas la imagen quedaba chica y el texto cortado.
-          className="relative flex w-full max-w-4xl flex-col overflow-y-auto rounded-card border border-line bg-background-deep shadow-[0_32px_80px_rgba(0,0,0,0.75)]"
+          className="relative flex w-full max-w-4xl flex-col overflow-y-auto rounded-card border border-line bg-background-deep shadow-[0_32px_80px_rgba(0,0,0,0.75)] lg:max-w-6xl"
           style={{ maxHeight: "92vh" }}
         >
           <IconButton
@@ -124,14 +127,15 @@ export default function ProjectDetailModal({
 
           {/* Galeria arriba, a lo ancho del modal. */}
           <div className="relative flex w-full shrink-0 flex-col bg-canvas">
-            <div className="relative h-[42vh] max-h-104 min-h-56 w-full overflow-hidden">
+            <div className="relative h-[42vh] max-h-104 min-h-56 w-full overflow-hidden lg:h-[min(50vh,28rem)]">
               {!imgLoaded && <Skeleton className="absolute inset-0 rounded-none" />}
               {images[imgIndex] && (
                 <Image
                   src={images[imgIndex]}
                   alt={t("gallery.screenshotOf", { title, n: imgIndex + 1 })}
                   fill
-                  sizes="(max-width: 896px) 100vw, 896px"
+                  quality={95}
+                  sizes="(max-width: 896px) 100vw, (max-width: 1152px) 896px, 1152px"
                   // contain y no cover: son capturas de pantalla, recortarlas pierde la UI.
                   className={cn(
                     "cursor-zoom-in object-contain transition-opacity duration-300",

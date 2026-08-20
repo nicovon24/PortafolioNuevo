@@ -573,6 +573,12 @@ html.with-hud-cursor [contenteditable="true"] {
   }
 }
 
+/* Con un modal/lightbox de proyecto abierto, se apaga el grano/scanlines
+   retro: las capturas de dashboards necesitan verse nitidas ahi. */
+body.modal-open .grain-overlay {
+  display: none;
+}
+
 /* Loader de entrada: anillo animado con framer-motion, ver Loader.tsx. */
 @media (prefers-reduced-motion: reduce) {
   .section-bg-grid-floor::before {
