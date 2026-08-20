@@ -3,23 +3,24 @@
 @theme {
   --font-sans: var(--font-nunito-sans), "Segoe UI", system-ui, sans-serif;
   --font-mono: var(--font-jetbrains-mono), ui-monospace, "Cascadia Code", "Consolas", monospace;
+  --font-display: var(--font-space-grotesk), "Segoe UI", system-ui, sans-serif;
 
   --spacing-page: clamp(1rem, 4vw, 3.75rem);
   /* Ancho del contenido. Unico lugar donde se ajusta: navbar, hero, secciones y footer lo consumen. */
   --spacing-shell: 72rem;
 
-  --color-background: #0e1a2e;
-  --color-background-deep: #08111f;
-  --color-ink: #ffffff;
-  --color-muted: #b9c2d0;
-  /* Acentos con 25% menos de saturacion: mismo tono y brillo, menos estridencia. */
-  --color-accent: #77ecd0;
-  --color-accent-2: #ec7cb4;
-  --color-line: rgba(119, 236, 208, 0.24);
-  --color-panel: rgba(11, 23, 43, 0.78);
-  --color-panel-strong: rgba(8, 17, 31, 0.92);
-  --color-canvas: #0b172b;
-  --color-overlay: rgba(5, 10, 20, 0.96);
+  --color-background: #180d0d;
+  --color-background-deep: #0d0808;
+  --color-ink: #f2ebe9;
+  --color-muted: #c4b8b5;
+  --color-accent: #d9645a;
+  /* Secundario: mismo tono, mas quemado. Para gradientes y estados hover. */
+  --color-accent-2: #ff6b5e;
+  --color-line: rgba(217, 100, 90, 0.18);
+  --color-panel: rgba(42, 20, 20, 0.78);
+  --color-panel-strong: rgba(24, 13, 13, 0.92);
+  --color-canvas: #2a1414;
+  --color-overlay: rgba(13, 8, 8, 0.96);
 
   /* Dos radios: superficies y pills. Antes convivian 8 valores distintos. */
   --radius-card: 1rem;
@@ -39,11 +40,13 @@
 }
 
 :root {
-  --line: rgba(119, 236, 208, 0.24);
+  --line: rgba(217, 100, 90, 0.18);
   --page-padding: var(--spacing-page);
   --layout-shell-width: 100%;
-  --hud-tick: #8b9cad;
-  --hud-tick-glow: rgba(139, 156, 173, 0.45);
+  --color-muted-2: #b3a7a4;
+  --color-muted-3: #8a7d7a;
+  --hud-tick: #8a7d7a;
+  --hud-tick-glow: rgba(138, 125, 122, 0.45);
 }
 
 @layer base {
@@ -56,16 +59,82 @@
   html {
     @apply bg-background;
     overflow-x: hidden;
-    background-image: url("/images/bg-hero-pattern.svg");
-    background-repeat: repeat;
+  }
+
+  /* Fondo en tres capas, de atras hacia adelante:
+       1. body            -> gradiente radial base (carbon rojizo)
+       2. body::before    -> glows decorativos del hero, se van con el scroll
+       3. body::after     -> atmosfera + vineta, siempre presentes */
+  body::before {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 190vh;
+    z-index: -2;
+    content: "";
+    pointer-events: none;
+    background:
+      radial-gradient(
+        circle at 85% 15%,
+        rgba(217, 100, 90, 0.16),
+        transparent 45%
+      ),
+      radial-gradient(
+        circle at 10% 80%,
+        rgba(255, 107, 94, 0.1),
+        transparent 50%
+      );
+  }
+
+  body::after {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    content: "";
+    pointer-events: none;
+    background:
+      /* respiracion lateral suave, sostiene el medio de la pagina */
+      radial-gradient(
+        62rem 58rem at 100% 52%,
+        rgba(217, 100, 90, 0.08) 0%,
+        transparent 64%
+      ),
+      radial-gradient(
+        58rem 54rem at 0% 78%,
+        rgba(255, 107, 94, 0.07) 0%,
+        transparent 66%
+      ),
+      /* vineta: cierra los bordes y empuja la mirada al centro */
+      radial-gradient(
+        140% 110% at 50% 45%,
+        transparent 58%,
+        rgba(0, 0, 0, 0.18) 86%,
+        rgba(0, 0, 0, 0.3) 100%
+      ),
+      /* nodos y trazas de circuito, dispersos, se repiten cada 600px */
+      url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22600%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23e8543d%22%20stroke-width%3D%220.6%22%20opacity%3D%220.35%22%3E%3Cpath%20d%3D%22M40%2060%20L120%2060%20L120%20140%22/%3E%3Cpath%20d%3D%22M120%20140%20L220%20140%22/%3E%3Cpath%20d%3D%22M480%2090%20L480%20180%20L560%20180%22/%3E%3Cpath%20d%3D%22M60%20380%20L60%20460%20L160%20460%22/%3E%3Cpath%20d%3D%22M340%20420%20L420%20420%20L420%20500%22/%3E%3Cpath%20d%3D%22M260%20260%20L340%20260%20L340%20320%22/%3E%3Cpath%20d%3D%22M500%20340%20L500%20420%20L440%20420%22/%3E%3C/g%3E%3Cg%20fill%3D%22%23e8543d%22%20opacity%3D%220.35%22%3E%3Ccircle%20cx%3D%2240%22%20cy%3D%2260%22%20r%3D%222.5%22/%3E%3Ccircle%20cx%3D%22120%22%20cy%3D%2260%22%20r%3D%222.5%22/%3E%3Ccircle%20cx%3D%22120%22%20cy%3D%22140%22%20r%3D%222.5%22/%3E%3Ccircle%20cx%3D%22220%22%20cy%3D%22140%22%20r%3D%222.5%22/%3E%3Ccircle%20cx%3D%22480%22%20cy%3D%2290%22%20r%3D%222.5%22/%3E%3Ccircle%20cx%3D%22480%22%20cy%3D%22180%22%20r%3D%222.5%22/%3E%3Ccircle%20cx%3D%22560%22%20cy%3D%22180%22%20r%3D%222.5%22/%3E%3Ccircle%20cx%3D%2260%22%20cy%3D%22380%22%20r%3D%222.5%22/%3E%3Ccircle%20cx%3D%2260%22%20cy%3D%22460%22%20r%3D%222.5%22/%3E%3Ccircle%20cx%3D%22160%22%20cy%3D%22460%22%20r%3D%222.5%22/%3E%3Ccircle%20cx%3D%22340%22%20cy%3D%22420%22%20r%3D%222.5%22/%3E%3Ccircle%20cx%3D%22420%22%20cy%3D%22420%22%20r%3D%222.5%22/%3E%3Ccircle%20cx%3D%22420%22%20cy%3D%22500%22%20r%3D%222.5%22/%3E%3Ccircle%20cx%3D%22260%22%20cy%3D%22260%22%20r%3D%222.5%22/%3E%3Ccircle%20cx%3D%22340%22%20cy%3D%22260%22%20r%3D%222.5%22/%3E%3Ccircle%20cx%3D%22340%22%20cy%3D%22320%22%20r%3D%222.5%22/%3E%3Ccircle%20cx%3D%22500%22%20cy%3D%22340%22%20r%3D%222.5%22/%3E%3Ccircle%20cx%3D%22500%22%20cy%3D%22420%22%20r%3D%222.5%22/%3E%3Ccircle%20cx%3D%22440%22%20cy%3D%22420%22%20r%3D%222.5%22/%3E%3C/g%3E%3C/svg%3E"),
+      /* grid de circuito 52x52, lineas finas repetidas */
+      url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2252%22%20height%3D%2252%22%3E%3Cpath%20d%3D%22M52%200H0V52%22%20fill%3D%22none%22%20stroke%3D%22%23e8543d%22%20stroke-width%3D%220.6%22%20opacity%3D%220.35%22/%3E%3C/svg%3E");
+    background-repeat: no-repeat, no-repeat, no-repeat, repeat, repeat;
+    background-size: auto, auto, auto, 600px 600px, 52px 52px;
+    background-position: center, center, center, center, center;
   }
 
   body {
     @apply m-0 min-h-screen font-sans text-ink;
+    position: relative;
     overflow-x: hidden;
     width: var(--layout-shell-width);
     margin-inline: auto;
-    background: transparent;
+    /* Base: carbon rojizo difuminado desde arriba-izquierda. */
+    background-image: radial-gradient(
+      circle at 20% 10%,
+      #2a1414,
+      #180d0d 55%,
+      #0a0605 100%
+    );
+    background-attachment: fixed;
   }
 
   a {
@@ -89,13 +158,13 @@
   }
 
   ::selection {
-    background-color: color-mix(in srgb, var(--color-accent) 40%, transparent);
-    color: var(--color-background-deep);
+    background-color: var(--color-accent);
+    color: var(--color-background);
   }
 
   ::-moz-selection {
-    background-color: color-mix(in srgb, var(--color-accent) 40%, transparent);
-    color: var(--color-background-deep);
+    background-color: var(--color-accent);
+    color: var(--color-background);
   }
 
   /* Barra fina: el track lila anterior no pertenecia a la paleta. */
@@ -392,8 +461,8 @@ html.with-hud-cursor [contenteditable="true"] {
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(119, 236, 208, 0.9) 40%,
-    rgba(236, 124, 180, 0.85) 60%,
+    rgba(217, 100, 90, 0.9) 40%,
+    rgba(255, 107, 94, 0.85) 60%,
     transparent 100%
   );
   background-size: 200% 100%;
@@ -419,8 +488,8 @@ html.with-hud-cursor [contenteditable="true"] {
   background: conic-gradient(
     from var(--photo-angle),
     transparent 20%,
-    rgba(119, 236, 208, 0.95) 48%,
-    rgba(236, 124, 180, 0.9) 60%,
+    rgba(217, 100, 90, 0.95) 48%,
+    rgba(255, 107, 94, 0.9) 60%,
     transparent 80%
   );
   padding: 2.5px;
@@ -428,25 +497,12 @@ html.with-hud-cursor [contenteditable="true"] {
   animation: photo-border-spin 14s linear infinite;
 }
 
-.hero-tech-icon-even,
-.hero-tech-icon-odd {
-  transition: filter 0.2s ease, opacity 0.2s ease;
-}
-
-.group\/hero-tech-item:hover .hero-tech-icon-even {
-  filter: sepia(1) hue-rotate(112deg) saturate(2.5) brightness(1.05);
-}
-
-.group\/hero-tech-item:hover .hero-tech-icon-odd {
-  filter: sepia(1) hue-rotate(288deg) saturate(2.5) brightness(1.05);
-}
-
 .photo-border-ring--glitch {
   background: conic-gradient(
     from var(--photo-angle),
     transparent 20%,
-    rgba(236, 124, 180, 0.55) 48%,
-    rgba(119, 236, 208, 0.35) 60%,
+    rgba(255, 107, 94, 0.55) 48%,
+    rgba(217, 100, 90, 0.35) 60%,
     transparent 80%
   );
   animation: photo-border-spin 14s linear infinite;
@@ -458,7 +514,7 @@ html.with-hud-cursor [contenteditable="true"] {
     background: linear-gradient(
       90deg,
       transparent,
-      rgba(119, 236, 208, 0.6),
+      rgba(217, 100, 90, 0.6),
       transparent
     );
     background-size: 100% 100%;
@@ -468,8 +524,8 @@ html.with-hud-cursor [contenteditable="true"] {
     background: conic-gradient(
       from 45deg,
       transparent 20%,
-      rgba(119, 236, 208, 0.8) 50%,
-      rgba(236, 124, 180, 0.7) 62%,
+      rgba(217, 100, 90, 0.8) 50%,
+      rgba(255, 107, 94, 0.7) 62%,
       transparent 80%
     );
   }
@@ -488,7 +544,7 @@ html.with-hud-cursor [contenteditable="true"] {
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(119, 236, 208, 0.06) 50%,
+    rgba(217, 100, 90, 0.06) 50%,
     transparent 100%
   );
   animation: skeleton-shimmer 1.8s ease-in-out infinite;
@@ -519,5 +575,45 @@ html.with-hud-cursor [contenteditable="true"] {
     outline: 2px solid var(--color-accent);
     outline-offset: 2px;
     border-radius: 2px;
+  }
+}
+
+/* ---- Loader de entrada ---- */
+@keyframes loader-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loader-pulse {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.loader-spinner {
+  display: block;
+  width: 44px;
+  height: 44px;
+  border: 2px solid color-mix(in srgb, var(--color-accent) 18%, transparent);
+  /* Solo el borde superior lleva el color pleno: eso da la sensacion de giro. */
+  border-top-color: var(--color-accent);
+  border-radius: 50%;
+  box-shadow: 0 0 24px color-mix(in srgb, var(--color-accent) 22%, transparent);
+  animation: loader-spin 900ms linear infinite;
+}
+
+.loader-text {
+  animation: loader-pulse 1.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loader-spinner,
+  .loader-text {
+    animation: none;
   }
 }

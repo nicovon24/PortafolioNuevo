@@ -1,7 +1,14 @@
 {
   "permissions": {
     "allow": [
-      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\Nicolas\\\\Desktop\\\\Proyectos-Challenges\\\\Portfolio\\\\PortfolioNicoNvo\" -Force)"
+      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\Nicolas\\\\Desktop\\\\Proyectos-Challenges\\\\Portfolio\\\\PortfolioNicoNvo\" -Force)",
+      "Bash(python3 -c ' *)",
+      "Bash(npm view *)",
+      "Bash(claude update *)",
+      "Bash(node -e ' *)",
+      "PowerShell(Remove-Item \"c:\\\\Users\\\\Nicolas\\\\Desktop\\\\Proyectos-Challenges\\\\nuevos\\\\Portfolio\\\\PortfolioNicoNvo\\\\src\\\\components\\\\sections\\\\CircuitCanvas.tsx\" -Confirm:$false)",
+      "Bash(awk '{print $1}')",
+      "Bash(git rm *)"
     ]
   }
 }

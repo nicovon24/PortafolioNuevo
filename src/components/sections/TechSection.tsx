@@ -1,10 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { MotionStagger, MotionStaggerItem } from "@/components/motion/MotionStagger";
 import Section from "@/components/ui/Section";
+import { TechIcon } from "@/components/ui/TechIcon";
 import { cn } from "@/lib/utils";
 import { techGroups } from "@/data/portfolio";
 
@@ -76,12 +76,9 @@ export default function TechSection() {
                 isPrimary ? "border-accent/45" : "border-line",
               )}
             >
-              <Image
-                src={item.icon}
-                alt=""
-                width={26}
-                height={26}
-                className="size-6.5 shrink-0 object-contain"
+              <TechIcon
+                name={item.icon}
+                className="size-6.5 shrink-0 text-accent"
               />
               <span className="min-w-0 flex-1 text-sm font-semibold leading-tight text-ink">
                 {item.name}

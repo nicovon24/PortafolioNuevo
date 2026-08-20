@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 import LanguageToggle from "@/components/ui/LanguageToggle";
 
 const headerIconBtn =
-  "grid size-9 place-items-center rounded-full border border-line bg-[rgba(119,236,208,0.08)] text-accent transition-colors hover:border-accent-2 hover:bg-[rgba(236,124,180,0.12)] hover:text-accent-2";
+  "grid size-9 place-items-center rounded-full border border-line bg-[rgba(217,100,90,0.04)] text-accent transition-colors hover:border-accent-2 hover:bg-[rgba(255,107,94,0.12)] hover:text-accent-2";
 
 function useActiveSectionHref() {
   const ids = useMemo(() => navItems.map((item) => item.href.replace(/^#/, "")), []);
@@ -79,7 +79,7 @@ export default function Navbar() {
   return (
     <motion.header
       className={cn(
-        "fixed top-0 left-1/2 z-40 w-full -translate-x-1/2 border border-transparent bg-[rgba(14,26,46,0.72)] backdrop-blur-[18px] px-page",
+        "fixed top-0 left-1/2 z-40 w-full -translate-x-1/2 border border-transparent bg-[rgba(26,21,18,0.72)] backdrop-blur-[18px] px-page",
         open ? "overflow-visible" : "overflow-hidden",
         hasScrolled &&
           "w-[min(94vw,84rem)] rounded-full border-line bg-panel-strong shadow-[0_18px_60px_rgba(0,0,0,0.34)]",
@@ -90,7 +90,7 @@ export default function Navbar() {
     >
       <div
         className={cn(
-          "pointer-events-none absolute inset-[-1px] bg-[linear-gradient(110deg,transparent_0%,rgba(119,236,208,0.18)_36%,rgba(236,124,180,0.14)_48%,transparent_62%)] opacity-0 [transform:translateX(-55%)]",
+          "pointer-events-none absolute inset-[-1px] bg-[linear-gradient(110deg,transparent_0%,rgba(217,100,90,0.18)_36%,rgba(255,107,94,0.14)_48%,transparent_62%)] opacity-0 [transform:translateX(-55%)]",
           hasScrolled && "opacity-100 [animation:nav-shine_5s_ease-in-out_infinite]",
         )}
         aria-hidden="true"
@@ -164,7 +164,7 @@ export default function Navbar() {
               href={item.href}
               className={cn(
                 "rounded-lg px-2 py-2 text-ink transition-colors hover:text-accent-2",
-                activeHref === item.href && "bg-[rgba(119,236,208,0.14)] text-accent",
+                activeHref === item.href && "bg-[rgba(217,100,90,0.14)] text-accent",
               )}
               aria-current={activeHref === item.href ? "location" : undefined}
               onClick={() => setOpen(false)}
