@@ -157,9 +157,21 @@ export const experiences: Array<{
 ];
 
 /** Filtros de la seccion Proyectos. El orden define el orden de las tabs. */
-export const projectCategories = ["iot", "web", "java", "work", "personal"] as const;
+export const projectCategories = [
+  "work",
+  "personal",
+  "freelance",
+  "iot",
+  "fullstack",
+  "frontend",
+  "javascript",
+  "java",
+] as const;
 
 export type ProjectCategory = (typeof projectCategories)[number];
+
+/** Origen del proyecto: se muestra como ultima etiqueta junto al role. */
+export type ProjectOrg = "senzary" | "freelance" | "personal";
 
 export type PortfolioProject = {
   key: string;
@@ -171,6 +183,8 @@ export type PortfolioProject = {
   year: string;
   /** Rol que cumpliste, junto al año. */
   role: string;
+  /** Senzary (laboral), freelance o personal. Se muestra junto al role. */
+  org: ProjectOrg;
   /** Ocupa dos columnas en la grilla de desktop. */
   featured?: boolean;
   images: string[];
@@ -184,60 +198,11 @@ export type PortfolioProject = {
 
 export const projects: PortfolioProject[] = [
   {
-    key: "trashcans",
-    categories: ["iot", "work"],
-    year: "2024",
-    role: "Full-stack · IoT",
-    title: "TrashCans — Senzary",
-    technologies: ["Angular", "Node.js", "IoT", "Dashboards"],
-    images: [
-      "/images/projects/senzary/vercel/trashcans/landing.png",
-      "/images/projects/senzary/vercel/trashcans/map.png",
-      "/images/projects/senzary/vercel/trashcans/analytics.png",
-      "/images/projects/senzary/vercel/trashcans/tickets.png",
-      "/images/projects/senzary/vercel/trashcans/onboarding.png",
-    ],
-    live: "https://trashcans.senzary.com/",
-    privateRepo: true,
-  },
-  {
-    key: "queabuso",
-    categories: ["web", "work"],
-    year: "2025",
-    role: "Full-stack",
-    title: "Apps políticas",
-    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Node.js", "PostgreSQL"],
-    images: [
-      "/images/projects/partido/queabuso/landing.png",
-      "/images/projects/partido/queabuso/deja-denuncias.png",
-      "/images/projects/partido/queabuso/denuncias.png",
-      "/images/projects/partido/gabriel/sorteo.png",
-      "/images/projects/partido/gabriel/home.png",
-    ],
-    live: "https://queabusocba.com/",
-    live2: "https://gabrielbornoroni.com.ar/",
-    privateRepo: true,
-  },
-  {
-    key: "prodeazo",
-    categories: ["web", "personal"],
-    year: "2026",
-    role: "Full-stack",
-    title: "Prodeazo (Prode Mundial 2026)",
-    technologies: ["Next.js", "TypeScript", "Supabase", "Tailwind", "NextUI"],
-    images: [
-      "/images/projects/prodeazo/home.jpg",
-      "/images/projects/prodeazo/login.png",
-      "/images/projects/prodeazo/inicio.jpg",
-    ],
-    code: "https://github.com/nicovon24/Prodeazo",
-    live: "https://prodeazo.vercel.app",
-  },
-  {
     key: "iotarg",
-    categories: ["iot", "web", "personal"],
+    categories: ["iot", "personal", "fullstack", "javascript"],
     year: "2026",
     role: "Full-stack",
+    org: "personal",
     title: "IoTArg",
     technologies: [
       "React.js",
@@ -262,15 +227,70 @@ export const projects: PortfolioProject[] = [
       "/images/projects/iotarg/2.png",
       "/images/projects/iotarg/3.png",
       "/images/projects/iotarg/4.png",
+      "/images/projects/iotarg/5.png",
+      "/images/projects/iotarg/6.png",
     ],
     code: "https://github.com/nicovon24/iot_app",
     live: "https://iotarg.vercel.app/",
   },
   {
+    key: "trashcans",
+    categories: ["iot", "work", "fullstack", "javascript"],
+    year: "2024",
+    role: "Full-stack · IoT",
+    org: "senzary",
+    title: "TrashCans — Senzary",
+    technologies: ["Angular", "Node.js", "IoT", "Dashboards"],
+    images: [
+      "/images/projects/senzary/vercel/trashcans/landing.png",
+      "/images/projects/senzary/vercel/trashcans/map.png",
+      "/images/projects/senzary/vercel/trashcans/analytics.png",
+      "/images/projects/senzary/vercel/trashcans/tickets.png",
+      "/images/projects/senzary/vercel/trashcans/onboarding.png",
+    ],
+    live: "https://trashcans.senzary.com/",
+    privateRepo: true,
+  },
+  {
+    key: "awsprep",
+    categories: ["personal", "fullstack", "javascript"],
+    year: "2026",
+    role: "Full-stack",
+    org: "personal",
+    title: "AWS Study App",
+    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+    images: [
+      "/images/projects/awsprep/2.png",
+      "/images/projects/awsprep/3.png",
+      "/images/projects/awsprep/1.png",
+      "/images/projects/awsprep/4.png",
+      "/images/projects/awsprep/5.png",
+    ],
+    code: "https://github.com/nicovon24/aws_study",
+    live: "https://aws-prep-26.vercel.app/",
+  },
+  {
+    key: "prodeazo",
+    categories: ["personal", "fullstack", "javascript"],
+    year: "2026",
+    role: "Full-stack",
+    org: "personal",
+    title: "Prodeazo (Prode Mundial 2026)",
+    technologies: ["Next.js", "TypeScript", "Supabase", "Tailwind", "NextUI"],
+    images: [
+      "/images/projects/prodeazo/home.jpg",
+      "/images/projects/prodeazo/login.png",
+      "/images/projects/prodeazo/inicio.jpg",
+    ],
+    code: "https://github.com/nicovon24/Prodeazo",
+    live: "https://prodeazo.vercel.app",
+  },
+  {
     key: "scoutpanel",
-    categories: ["web", "personal"],
+    categories: ["personal", "fullstack", "javascript"],
     year: "2025",
     role: "Full-stack",
+    org: "personal",
     title: "Scout Panel",
     technologies: ["Next.js", "TypeScript", "Express", "Drizzle", "PostgreSQL", "Tailwind"],
     images: [
@@ -282,10 +302,30 @@ export const projects: PortfolioProject[] = [
     live: "https://scout-panel-ldp.vercel.app",
   },
   {
+    key: "queabuso",
+    categories: ["work", "freelance", "fullstack", "javascript"],
+    year: "2025",
+    role: "Full-stack",
+    org: "freelance",
+    title: "Apps políticas",
+    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Node.js", "PostgreSQL"],
+    images: [
+      "/images/projects/partido/queabuso/landing.png",
+      "/images/projects/partido/queabuso/deja-denuncias.png",
+      "/images/projects/partido/queabuso/denuncias.png",
+      "/images/projects/partido/gabriel/sorteo.png",
+      "/images/projects/partido/gabriel/home.png",
+    ],
+    live: "https://queabusocba.com/",
+    live2: "https://gabrielbornoroni.com.ar/",
+    privateRepo: true,
+  },
+  {
     key: "workeriq",
-    categories: ["iot", "web", "work"],
+    categories: ["iot", "work", "fullstack", "javascript"],
     year: "2024",
     role: "Full-stack",
+    org: "senzary",
     featured: true,
     title: "WorkerIQ — ENI · Senzary",
     technologies: ["React", "Node.js", "IoT", "Tiempo real", "Mapas", "Dashboards"],
@@ -299,9 +339,10 @@ export const projects: PortfolioProject[] = [
   },
   {
     key: "iotlogiq",
-    categories: ["iot", "web", "work"],
+    categories: ["iot", "work", "fullstack", "javascript"],
     year: "2023—2026",
     role: "Full-stack",
+    org: "senzary",
     title: "IoTLogIQ — Senzary",
     technologies: [
       "Angular",
@@ -334,9 +375,10 @@ export const projects: PortfolioProject[] = [
   },
   {
     key: "fintrack",
-    categories: ["java", "personal"],
+    categories: ["personal", "fullstack", "java", "javascript"],
     year: "2026",
     role: "Full-stack",
+    org: "personal",
     title: "Fintrack",
     technologies: [
       "Java",
@@ -360,9 +402,10 @@ export const projects: PortfolioProject[] = [
   },
   {
     key: "appfiscalizacion",
-    categories: ["web", "work"],
+    categories: ["work", "freelance", "fullstack", "javascript"],
     year: "2025",
     role: "Full-stack",
+    org: "freelance",
     featured: true,
     title: "App Fiscalización",
     technologies: ["Next.js", "Framer Motion", "Redux Toolkit", "Vercel"],
@@ -377,10 +420,23 @@ export const projects: PortfolioProject[] = [
     ],
   },
   {
+    key: "cloudlab",
+    categories: ["personal", "frontend", "javascript"],
+    year: "2023",
+    role: "Frontend",
+    org: "personal",
+    title: "Cloudlab - No Country",
+    technologies: ["Next.js", "TypeScript", "Tailwind"],
+    images: ["/images/projects/cloudlab/1.png", "/images/projects/cloudlab/2.png", "/images/projects/cloudlab/3.png"],
+    code: "https://github.com/No-Country/s9-16-m-node-react",
+    live: "https://cloudlab-s9-16.vercel.app/",
+  },
+  {
     key: "airportiq",
-    categories: ["iot", "work"],
+    categories: ["iot", "work", "fullstack", "javascript"],
     year: "2024—2025",
     role: "Full-stack",
+    org: "senzary",
     title: "AirportIQ — Jacksonville Airport · Senzary",
     technologies: [
       "Angular",
@@ -397,16 +453,5 @@ export const projects: PortfolioProject[] = [
       "/images/projects/senzary/airport/7.png",
     ],
     privateRepo: true,
-  },
-  {
-    key: "cloudlab",
-    categories: ["web", "personal"],
-    year: "2023",
-    role: "Frontend",
-    title: "Cloudlab - No Country",
-    technologies: ["Next.js", "TypeScript", "Tailwind"],
-    images: ["/images/projects/cloudlab/1.png", "/images/projects/cloudlab/2.png", "/images/projects/cloudlab/3.png"],
-    code: "https://github.com/No-Country/s9-16-m-node-react",
-    live: "https://cloudlab-s9-16.vercel.app/",
   },
 ];

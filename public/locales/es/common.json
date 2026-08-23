@@ -74,6 +74,11 @@
     "viewImages": "Ver Imágenes",
     "live1": "Ver en Vivo 1",
     "live2": "Ver en Vivo 2",
+    "org": {
+      "senzary": "Senzary",
+      "freelance": "Freelance",
+      "personal": "Personal"
+    },
     "items": {
       "prodeazo": {
         "description": "Plataforma de pronósticos y estadísticas de fútbol pensada para el Mundial 2026 y escalar a otros torneos: fixtures y resultados en tiempo real, predicciones antes del inicio del partido, puntos por aciertos y rankings generales y por ligas. MVP con fixture, predicciones, ranking, comparativa usuario a usuario y picks especiales (campeón, goleador, etc.); roadmap en fases para miniligas con administración y un módulo estadístico reutilizable (grupos, llaves, métricas y perfiles). Stack inicial: Next.js y TypeScript, Supabase con PostgreSQL, Tailwind y NextUI; fixtures y resultados vía Bzzoiro BSD."
@@ -102,6 +107,9 @@
       "iotarg": {
         "description": "Plataforma full-stack de gestión de flota IoT: monitoreo de dispositivos y activos en tiempo real, mapas geolocalizados, alarmas, dashboards personalizables con drag-and-drop y control de acceso multi-cliente y multi-rol. Integra ThingsBoard como motor IoT (telemetría, reglas, entidades) detrás de un backend en NestJS que expone APIs REST + WebSocket, con frontend en Next.js/React. Pensada para escalar a múltiples clientes con jerarquías de dispositivos y permisos granulares por rol. Actualmente corre sobre el plan free-tier de ThingsBoard, por lo que algunas funciones enterprise están limitadas por ahora."
       },
+      "awsprep": {
+        "description": "App de estudio para la certificación AWS Certified Cloud Practitioner: mapea unos 80 servicios de AWS en categorías y en los 4 dominios del examen mediante un mapa mental interactivo con zoom, un catálogo con buscador, diagramas de referencia de arquitecturas y un modo de práctica con flashcards. 100% client-side, sin backend. Next.js, React, TypeScript y Tailwind CSS."
+      },
       "fintrack": {
         "description": "App full-stack para gestionar ingresos, gastos e inversiones con soporte multi-moneda (ARS/USD). Backend en Java 21 + Spring Boot 4 (JPA, Spring Security con JWT y Google OAuth2, importación de Excel vía Apache POI) y frontend en Angular 22 con Signals, integrando datos en tiempo real de tipo de cambio y bróker (dólar blue, IOL) para el módulo de inversiones. Incluye dashboard de analítica, categorización de transacciones y un patrimonio neto consolidado."
       },
@@ -111,11 +119,14 @@
     },
     "filters": {
       "all": "Todos",
-      "iot": "IoT",
-      "web": "Web",
-      "java": "Java",
       "work": "Work",
       "personal": "Personales",
+      "freelance": "Freelance",
+      "iot": "IoT",
+      "fullstack": "Full-stack",
+      "frontend": "Frontend",
+      "javascript": "JavaScript",
+      "java": "Java",
       "countOne": "{{count}} proyecto",
       "countOther": "{{count}} proyectos",
       "filterLabel": "Filtrar proyectos por categoría",

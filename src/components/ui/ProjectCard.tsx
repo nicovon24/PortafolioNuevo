@@ -20,6 +20,7 @@ type ProjectCardProps = {
   inDevelopment?: boolean;
   year?: string;
   role?: string;
+  org?: string;
   featured?: boolean;
   index?: number;
 };
@@ -36,6 +37,7 @@ export default function ProjectCard({
   inDevelopment = false,
   year,
   role,
+  org,
   featured = false,
   index = 0,
 }: ProjectCardProps) {
@@ -50,6 +52,8 @@ export default function ProjectCard({
   }
 
   const twoLivesAndPrivate = Boolean(live && live2 && privateRepo);
+  const orgLabel = org ? t(`projects.org.${org}`) : undefined;
+  const roleWithOrg = [role, orgLabel].filter(Boolean).join(" · ");
 
   return (
     <>
@@ -81,11 +85,11 @@ export default function ProjectCard({
         </div>
 
         <div className="flex flex-1 flex-col p-4 sm:p-5">
-          {(year || role) && (
+          {(year || roleWithOrg) && (
             <p className="m-0 mb-1.5 flex items-center gap-2 font-mono text-micro uppercase tracking-wider text-muted">
               {year && <span className="tabular-nums text-accent">{year}</span>}
-              {year && role && <span aria-hidden className="h-px w-3 bg-line" />}
-              {role && <span>{role}</span>}
+              {year && roleWithOrg && <span aria-hidden className="h-px w-3 bg-line" />}
+              {roleWithOrg && <span>{roleWithOrg}</span>}
             </p>
           )}
           <div className="flex flex-wrap items-center gap-2 gap-y-1">

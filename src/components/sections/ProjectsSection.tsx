@@ -100,6 +100,7 @@ export default function ProjectsSection() {
                 inDevelopment={project.inDevelopment}
                 year={project.year}
                 role={project.role}
+                org={project.org}
                 featured={project.featured}
                 index={index}
               />
