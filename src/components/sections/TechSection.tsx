@@ -35,7 +35,7 @@ export default function TechSection() {
       eyebrow={t("tech.eyebrow")}
       title={t("tech.title")}
       parallax
-      variant="tech"
+      variant="surface"
       className="py-10 md:py-12 lg:py-14 [&>div:first-child]:mb-5 md:[&>div:first-child]:mb-6 [&_h2]:text-[clamp(1.25rem,3vw,2rem)]"
     >
       {/* Tabs por grupo: antes eran 4 grupos apilados, mucho alto y todo con el mismo peso. */}

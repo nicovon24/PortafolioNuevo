@@ -145,7 +145,7 @@ export default function HeroSection() {
     <section
       ref={sectionRef}
       id="top"
-      className="section-bg-grid-floor relative flex w-full flex-col items-start overflow-hidden px-page pb-12 pt-32 sm:pb-14 sm:pt-36 lg:min-h-screen lg:pb-36 lg:pt-30"
+      className="section-bg-surface relative flex w-full flex-col items-start overflow-hidden px-page pb-12 pt-32 sm:pb-14 sm:pt-36 lg:min-h-screen lg:pb-36 lg:pt-30"
     >
       {/* Los HUD se alinean al contenedor centrado, no al borde de la pantalla:
           anclados a right-page quedaban fuera del shell y descentraban el hero. */}

@@ -29,7 +29,7 @@ export default function AboutSection() {
       eyebrow={t("about.eyebrow")}
       title={t("about.title")}
       parallax
-      variant="tech"
+      variant="surface"
     >
       <div className="grid grid-cols-1 items-start gap-7 lg:grid-cols-[1fr_0.85fr] lg:gap-8">
         <ParallaxLayer speed={22}>

@@ -14,16 +14,16 @@ type SectionProps = {
   parallax?: boolean;
   /**
    * Fondo de la seccion:
-   * - "grid-floor": piso de grilla en perspectiva animado, se repite por seccion (default de la app)
-   * - "tech": grid fino + glow rojo, estatico (variante alternativa sin animacion)
+   * - "surface": fondo sobrio oscuro con acento rojo muy sutil
+   * - "tech": alias historico del fondo sobrio
    * - "none": solo el fondo global del body
    */
-  variant?: "tech" | "grid-floor" | "none";
+  variant?: "surface" | "tech" | "none";
 };
 
 const VARIANT_CLASS = {
+  surface: "section-bg-surface",
   tech: "section-bg-tech",
-  "grid-floor": "section-bg-grid-floor",
   none: "",
 } as const;
 

@@ -86,7 +86,7 @@ export default function ProjectDetailModal({
     document.addEventListener("keydown", onKey);
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    // Apaga las scanlines/grano retro del GrainOverlay mientras el modal esta abierto:
+    // Apaga el grano del GrainOverlay mientras el modal esta abierto:
     // las capturas de dashboards necesitan verse nitidas ahi.
     document.body.classList.add("modal-open");
     return () => {

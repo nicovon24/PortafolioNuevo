@@ -39,7 +39,7 @@ export default function ProjectsSection() {
       eyebrow={t("projects.eyebrow")}
       title={t("projects.title")}
       parallax
-      variant="tech"
+      variant="surface"
     >
       <div
         role="tablist"

@@ -54,7 +54,7 @@ export default function Lightbox({
     document.addEventListener("keydown", onKey);
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    // Apaga las scanlines/grano retro del GrainOverlay mientras el visor esta abierto.
+    // Apaga el grano del GrainOverlay mientras el visor esta abierto.
     document.body.classList.add("modal-open");
     return () => {
       document.removeEventListener("keydown", onKey);

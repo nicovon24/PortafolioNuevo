@@ -19,7 +19,7 @@ export default function ContactSection() {
       className="scroll-mt-24"
       eyebrow={t("contact.eyebrow")}
       title={t("contact.title")}
-      variant="tech"
+      variant="surface"
     >
       <div className={`${panel} flex flex-col justify-center gap-4`}>
         <MotionFade className="flex flex-col justify-center gap-4">
