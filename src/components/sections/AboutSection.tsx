@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Music, Tv } from "lucide-react";
+import { Music, Plane } from "lucide-react";
 import MotionFade from "@/components/motion/MotionFade";
 import { MotionStagger, MotionStaggerItem } from "@/components/motion/MotionStagger";
 import { ParallaxLayer } from "@/components/motion/Parallax";
@@ -28,7 +28,7 @@ const PERSONAL = [
   { key: "futbol", icon: <SoccerBallIcon className="size-4.5 text-accent" aria-hidden /> },
   { key: "rock", icon: <Music className="size-4.5 text-accent" aria-hidden /> },
   { key: "starwars", icon: <TechIcon name="vader" className="size-4.5 text-accent" /> },
-  { key: "bettercallsaul", icon: <Tv className="size-4.5 text-accent" aria-hidden /> },
+  { key: "travel", icon: <Plane className="size-4.5 text-accent" aria-hidden /> },
 ] as const;
 
 const ABOUT_PHOTOS: Record<ProfilePhotoMode, string> = {

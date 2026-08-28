@@ -60,19 +60,19 @@
     "personal": {
       "starwars": {
         "label": "Star Wars",
-        "text": "I've watched the whole saga more times than I can justify. I have a firm stance on the watch order and I'll defend it to the death."
+        "text": "I love Star Wars — the whole saga and the new shows too. I could talk for hours about the right watch order."
       },
-      "bettercallsaul": {
-        "label": "Better Call Saul",
-        "text": "The best-written show of the decade, in my book. Watching Jimmy McGill turn into Saul, season after season, is a masterclass."
+      "travel": {
+        "label": "Travel",
+        "text": "I've already been to a World Cup, and one of my goals is going to Liverpool to catch a match at Anfield. I've traveled through the US and Europe too — and I wouldn't rule out living abroad someday."
       },
       "rock": {
         "label": "Rock",
-        "text": "The Beatles and Oasis are always playing while I code. If I had to pick one album for a long night of coding, Definitely Maybe."
+        "text": "The Beatles and Oasis are always on while I code. If I had to pick one album for a long night of coding, it's Definitely Maybe."
       },
       "futbol": {
         "label": "Football",
-        "text": "Liverpool on weekends and the national team when it's on. I also play — pretty badly, but I never miss a game."
+        "text": "Liverpool fan on weekends, Argentina fan whenever they're playing. I play too — badly, but I never miss a game."
       }
     }
   },
@@ -152,10 +152,6 @@
       "personal": "Personal",
       "freelance": "Freelance",
       "iot": "IoT",
-      "fullstack": "Full-stack",
-      "frontend": "Frontend",
-      "javascript": "JavaScript",
-      "java": "Java",
       "countOne": "{{count}} project",
       "countOther": "{{count}} projects",
       "filterLabel": "Filter projects by category",

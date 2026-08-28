@@ -164,10 +164,6 @@ export const projectCategories = [
   "personal",
   "freelance",
   "iot",
-  "fullstack",
-  "frontend",
-  "javascript",
-  "java",
 ] as const;
 
 export type ProjectCategory = (typeof projectCategories)[number];
@@ -201,7 +197,7 @@ export type PortfolioProject = {
 export const projects: PortfolioProject[] = [
   {
     key: "iotarg",
-    categories: ["iot", "personal", "fullstack", "javascript"],
+    categories: ["iot", "personal"],
     year: "2026",
     role: "Full-stack",
     org: "personal",
@@ -237,7 +233,7 @@ export const projects: PortfolioProject[] = [
   },
   {
     key: "trashcans",
-    categories: ["iot", "work", "fullstack", "javascript"],
+    categories: ["iot", "work"],
     year: "2024",
     role: "Full-stack · IoT",
     org: "senzary",
@@ -255,7 +251,7 @@ export const projects: PortfolioProject[] = [
   },
   {
     key: "awsprep",
-    categories: ["personal", "fullstack", "javascript"],
+    categories: ["personal"],
     year: "2026",
     role: "Full-stack",
     org: "personal",
@@ -273,7 +269,7 @@ export const projects: PortfolioProject[] = [
   },
   {
     key: "prodeazo",
-    categories: ["personal", "fullstack", "javascript"],
+    categories: ["personal"],
     year: "2026",
     role: "Full-stack",
     org: "personal",
@@ -289,7 +285,7 @@ export const projects: PortfolioProject[] = [
   },
   {
     key: "scoutpanel",
-    categories: ["personal", "fullstack", "javascript"],
+    categories: ["personal"],
     year: "2025",
     role: "Full-stack",
     org: "personal",
@@ -305,7 +301,7 @@ export const projects: PortfolioProject[] = [
   },
   {
     key: "queabuso",
-    categories: ["work", "freelance", "fullstack", "javascript"],
+    categories: ["work", "freelance"],
     year: "2025",
     role: "Full-stack",
     org: "freelance",
@@ -324,7 +320,7 @@ export const projects: PortfolioProject[] = [
   },
   {
     key: "workeriq",
-    categories: ["iot", "work", "fullstack", "javascript"],
+    categories: ["iot", "work"],
     year: "2024",
     role: "Full-stack",
     org: "senzary",
@@ -341,7 +337,7 @@ export const projects: PortfolioProject[] = [
   },
   {
     key: "iotlogiq",
-    categories: ["iot", "work", "fullstack", "javascript"],
+    categories: ["iot", "work"],
     year: "2023—2026",
     role: "Full-stack",
     org: "senzary",
@@ -377,7 +373,7 @@ export const projects: PortfolioProject[] = [
   },
   {
     key: "fintrack",
-    categories: ["personal", "fullstack", "java", "javascript"],
+    categories: ["personal"],
     year: "2026",
     role: "Full-stack",
     org: "personal",
@@ -404,7 +400,7 @@ export const projects: PortfolioProject[] = [
   },
   {
     key: "appfiscalizacion",
-    categories: ["work", "freelance", "fullstack", "javascript"],
+    categories: ["work", "freelance"],
     year: "2025",
     role: "Full-stack",
     org: "freelance",
@@ -423,7 +419,7 @@ export const projects: PortfolioProject[] = [
   },
   {
     key: "cloudlab",
-    categories: ["personal", "frontend", "javascript"],
+    categories: ["personal"],
     year: "2023",
     role: "Frontend",
     org: "personal",
@@ -435,7 +431,7 @@ export const projects: PortfolioProject[] = [
   },
   {
     key: "airportiq",
-    categories: ["iot", "work", "fullstack", "javascript"],
+    categories: ["iot", "work"],
     year: "2024—2025",
     role: "Full-stack",
     org: "senzary",
