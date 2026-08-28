@@ -12,39 +12,68 @@
     "closeMenu": "Close menu"
   },
   "hero": {
+    "greeting": "Hi, I'm",
     "stackKey": "Stack ·",
     "stackVal": "TypeScript · Python · Java",
     "roleKey": "Role ·",
     "roleVal": "Full-stack",
     "statusKey": "Focus ·",
     "statusVal": "Full-stack / AI",
-    "available": "Córdoba, ARG · Remote",
+    "available": "Available for new projects",
+    "location": "Córdoba, ARG · Remote",
     "viewProjects": "View projects",
-    "cv": "CV",
+    "cv": "Download CV",
     "profileSummary": "Profile summary",
     "statsLabel": "Experience & projects",
     "experienceStat": "Experience",
     "projectsStat": "Projects",
     "stackFocus": "Focus & stack",
-    "intro": "I'm a Full-stack Developer and Systems Analyst with experience since 2022. I build the frontend and backend of web applications, dashboards and data platforms with React, Node, Angular, React Native, Claude Code and AWS. I've worked on projects across diverse industries — custom software, industrial IoT, sports platforms and electoral software — for clients in Latin America and the US.",
+    "intro": "I'm full-stack and a Systems Analyst, with 3+ years going back and forth between frontend and backend. I use React, Next.js, Node, Angular and TypeScript to build dashboards, data platforms and IoT systems for clients across Latin America and the US: airport monitoring, sports platforms, even software for an election. These days I code with Claude and Codex right next to me. They don't think for me, but they speed things up a lot.",
     "phrases": [
-      "Full-stack developer",
-      "React · Next · Node · TypeScript",
-      "+4 years of experience",
-      "Frontend · Backend · Product"
+      "Full-stack Developer",
+      "Systems Analyst",
+      "TypeScript · Java · Python",
+      "Experience since 2022"
     ],
     "eduKey": "Edu ·",
     "eduVal": "Systems Analyst"
   },
+  "photoMode": {
+    "label": "Choose profile photo",
+    "work": "Professional mode",
+    "football": "Football mode"
+  },
   "about": {
+    "sectionLabel": "About me",
     "eyebrow": "../About me",
     "title": "I build interfaces and systems that connect data with decisions.",
-    "description": "Based in Córdoba, Argentina. I'm a full-stack developer and Systems Analyst: I work both on the frontend and the backend with React, Next.js, Node, TypeScript, Angular and SQL/NoSQL databases. I've shipped projects across diverse industries — custom software, sports platforms, electoral applications and industrial IoT platforms (airports, data centers, environmental monitoring) — for clients in Latin America and the US. I speak three languages and use AI tools (Cursor, Claude, Gemini) as an active part of my workflow.",
+    "descriptionP1": "I've been coding since 2022. I started on the frontend and ended up in everything else too: databases, APIs, deploys, and the tickets nobody wants to touch. These days I'm equally comfortable on either end.",
+    "descriptionP2": "I've worked on custom software, industrial IoT (airports, data centers, environmental monitoring), sports platforms and electoral software. I use React, Next.js, Node, Angular and SQL or NoSQL databases. Claude and Codex are open next to my editor every single day.",
+    "photoCaption": "Full-stack developer based in Córdoba, Argentina. Available for remote projects across Latin America and the US.",
+    "photoCaptionFootball": "Outside of code: football, Liverpool and Argentina whenever they're playing.",
     "services": {
       "fullstack": "Full-stack: frontend & backend",
       "dashboards": "Dashboards & data visualization",
-      "industries": "Projects across diverse industries",
-      "starwars": "Star Wars and sports fan"
+      "industries": "Projects across very different industries",
+      "ai": "AI is already part of my daily flow"
+    },
+    "personal": {
+      "starwars": {
+        "label": "Star Wars",
+        "text": "I've watched the whole saga more times than I can justify. I have a firm stance on the watch order and I'll defend it to the death."
+      },
+      "bettercallsaul": {
+        "label": "Better Call Saul",
+        "text": "The best-written show of the decade, in my book. Watching Jimmy McGill turn into Saul, season after season, is a masterclass."
+      },
+      "rock": {
+        "label": "Rock",
+        "text": "The Beatles and Oasis are always playing while I code. If I had to pick one album for a long night of coding, Definitely Maybe."
+      },
+      "futbol": {
+        "label": "Football",
+        "text": "Liverpool on weekends and the national team when it's on. I also play — pretty badly, but I never miss a game."
+      }
     }
   },
   "tech": {
@@ -235,7 +264,12 @@
     }
   },
   "footer": {
-    "downloadCv": "Download CV"
+    "downloadCv": "Download CV",
+    "tagline": "I build web products, dashboards and data platforms across frontend, backend and AI.",
+    "navigation": "Navigation",
+    "available": "Available for new projects",
+    "writeMe": "Email me",
+    "backToTop": "Back to top"
   },
   "lang": {
     "toggle": "Change language"

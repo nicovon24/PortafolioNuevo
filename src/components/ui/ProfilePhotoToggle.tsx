@@ -1,0 +1,58 @@
+"use client";
+
+import { BriefcaseBusiness } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { SoccerBallIcon } from "@/components/ui/SoccerBallIcon";
+import { cn } from "@/lib/utils";
+
+export type ProfilePhotoMode = "work" | "football";
+
+export const PROFILE_PHOTOS: Record<ProfilePhotoMode, string> = {
+  work: "/images/profile/hero-work.jpeg",
+  football: "/images/profile/football.jpeg",
+};
+
+export default function ProfilePhotoToggle({
+  mode,
+  onChange,
+}: {
+  mode: ProfilePhotoMode;
+  onChange: (mode: ProfilePhotoMode) => void;
+}) {
+  const { t } = useTranslation();
+
+  return (
+    <div
+      className="flex items-center gap-1 rounded-full border border-line bg-panel-strong p-1 shadow-card-sm backdrop-blur-sm"
+      role="group"
+      aria-label={t("photoMode.label")}
+    >
+      <button
+        type="button"
+        onClick={() => onChange("work")}
+        aria-pressed={mode === "work"}
+        aria-label={t("photoMode.work")}
+        title={t("photoMode.work")}
+        className={cn(
+          "grid size-8 place-items-center rounded-full text-muted transition-all hover:bg-accent/10 hover:text-accent",
+          mode === "work" && "bg-accent text-background shadow-card-sm hover:bg-accent hover:text-background",
+        )}
+      >
+        <BriefcaseBusiness size={16} />
+      </button>
+      <button
+        type="button"
+        onClick={() => onChange("football")}
+        aria-pressed={mode === "football"}
+        aria-label={t("photoMode.football")}
+        title={t("photoMode.football")}
+        className={cn(
+          "grid size-8 place-items-center rounded-full text-muted transition-all hover:bg-accent/10 hover:text-accent",
+          mode === "football" && "bg-accent text-background shadow-card-sm hover:bg-accent hover:text-background",
+        )}
+      >
+        <SoccerBallIcon className="size-4" />
+      </button>
+    </div>
+  );
+}

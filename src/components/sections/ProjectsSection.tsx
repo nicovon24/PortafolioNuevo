@@ -41,35 +41,50 @@ export default function ProjectsSection() {
       parallax
       variant="surface"
     >
-      <div
-        role="tablist"
-        aria-label={t("projects.filters.filterLabel")}
-        className="mb-5 flex flex-wrap items-center gap-1.5"
-      >
-        {tabs.map(([value, count]) => {
-          const active = filter === value;
-          return (
-            <button
-              key={value}
-              role="tab"
-              type="button"
-              suppressHydrationWarning
-              aria-selected={active}
-              onClick={() => setFilter(value)}
-              className={cn(
-                "rounded-full border px-2 py-0.5 font-mono text-micro transition-colors",
-                active
-                  ? "border-accent bg-accent/10 text-accent"
-                  : "border-line/60 text-muted hover:border-accent/60 hover:text-accent",
-              )}
-            >
-              {t(`projects.filters.${value}`)}
-              <span className="ml-1 opacity-50">{count}</span>
-            </button>
-          );
-        })}
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
+        {/* Segmented Glass Filter Bar */}
+        <div
+          role="tablist"
+          aria-label={t("projects.filters.filterLabel")}
+          className="inline-flex flex-wrap items-center gap-1.5 rounded-full border border-line/40 bg-panel/50 p-1.5 backdrop-blur-md shadow-card-sm"
+        >
+          {tabs.map(([value, count]) => {
+            const active = filter === value;
+            return (
+              <button
+                key={value}
+                role="tab"
+                type="button"
+                suppressHydrationWarning
+                aria-selected={active}
+                onClick={() => setFilter(value)}
+                className={cn(
+                  "relative flex items-center gap-2 rounded-full px-3.5 py-1.5 font-mono text-xs font-semibold transition-colors duration-200 outline-none select-none",
+                  active ? "text-accent-contrast font-bold" : "text-muted hover:text-ink"
+                )}
+              >
+                {active && (
+                  <motion.div
+                    layoutId="projects-filter-active-pill"
+                    className="absolute inset-0 rounded-full bg-accent shadow-[0_2px_12px_color-mix(in_srgb,var(--color-accent)_35%,transparent)]"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+                <span className="relative z-10">{t(`projects.filters.${value}`)}</span>
+                <span
+                  className={cn(
+                    "relative z-10 rounded-full px-2 py-0.5 text-micro font-bold transition-colors",
+                    active ? "bg-black/20 dark:bg-black/30 text-accent-contrast" : "bg-line/40 text-muted"
+                  )}
+                >
+                  {count}
+                </span>
+              </button>
+            );
+          })}
+        </div>
 
-        <span aria-live="polite" className="ml-auto font-mono text-micro text-muted">
+        <span aria-live="polite" className="font-mono text-xs font-semibold text-muted">
           {t(filtered.length === 1 ? "projects.filters.countOne" : "projects.filters.countOther", {
             count: filtered.length,
           })}

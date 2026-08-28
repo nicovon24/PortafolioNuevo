@@ -5,11 +5,13 @@ export const navItems = [
   { href: "#tech", label: "nav.tech" },
   { href: "#projects", label: "nav.projects" },
   { href: "#experience", label: "nav.experience" },
-  { href: "#contact", label: "nav.contact" },
 ];
 
 export const profile = {
   name: "NICOLAS VON MUHLINEN",
+  // Nombre de pila con capitalizacion normal: usado en el hero ("Hola, soy Nicolás"),
+  // separado de `name` (mayusculas, footer/alt) para no parsear/normalizar ahi.
+  heroFirstName: "Nicolás",
   roleFirst: "Full-stack",
   roleSecond: "Developer",
   location: "Córdoba, Argentina",

@@ -137,9 +137,10 @@ export default function ExperienceSection() {
                 )}
                 style={{
                   backgroundColor: exp.iconBg ?? "#f5f5f5",
-                  // Duotone rojo: neutraliza el color de marca original y lo
-                  // recalibra al hue del accent (#d9645a, ~7deg).
-                  filter: "grayscale(1) sepia(1) saturate(4) hue-rotate(-28deg) brightness(0.95)",
+                  // Duotone celeste: neutraliza el color de marca original y lo
+                  // recalibra al hue del accent default (#57c7ff, ~200deg).
+                  // Calibrado para la paleta "blue"; con otras paletas el hue no coincide exacto.
+                  filter: "grayscale(1) sepia(1) saturate(4) hue-rotate(167deg) brightness(0.95)",
                 }}
               />
               <div className="min-w-0 flex-1">

@@ -131,12 +131,14 @@ export default function HeroScrambleName({ firstName, lastName, line1Class, line
     return () => cancelAnimationFrame(raf);
   }, [firstName, lastName, active]);
 
-  const label = `${firstName} ${lastName}`;
+  const label = [firstName, lastName].filter(Boolean).join(" ");
 
   return (
     <h1 ref={headingRef} className="m-0 font-sans font-extrabold tracking-tight" style={{ opacity: wrapOpacity }} aria-label={label}>
       <span className={`block max-w-none ${line1Class}`}>{line1}</span>
-      <span className={`mt-1 block max-w-none transition-[filter] duration-300 ${isScrambling && line2ScrambleClass ? line2ScrambleClass : line2Class}`}>{line2}</span>
+      {lastName && (
+        <span className={`mt-1 block max-w-none transition-[filter] duration-300 ${isScrambling && line2ScrambleClass ? line2ScrambleClass : line2Class}`}>{line2}</span>
+      )}
     </h1>
   );
 }

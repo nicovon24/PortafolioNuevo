@@ -9,8 +9,8 @@ const focusRing =
 const base = `inline-flex items-center justify-center gap-1.5 rounded-full font-bold transition-colors ${focusRing}`;
 
 const variants = {
-  /** Accion principal: relleno turquesa sobre texto navy. */
-  primary: "bg-accent text-background-deep transition-opacity hover:opacity-85",
+  /** Accion principal: relleno turquesa sobre texto contrastante. */
+  primary: "bg-accent text-accent-contrast transition-opacity hover:opacity-90 shadow-sm",
   /** Accion secundaria: contorno turquesa. */
   outline: "border border-accent bg-transparent text-accent hover:bg-accent/10",
   /** Superficie tenue, para links dentro de paneles. */
@@ -88,7 +88,7 @@ export function IconButton({ label, className, children, ...rest }: IconButtonPr
 /** Chip de tecnologia. */
 export function TechChip({ children }: { children: ReactNode }) {
   return (
-    <span className="rounded-full bg-accent/10 px-2.5 py-1 font-mono text-mini font-bold text-accent">
+    <span className="rounded-full border border-line/60 bg-panel-strong/80 px-2.5 py-1 font-mono text-mini font-semibold text-ink/90 transition-colors hover:border-accent/40 hover:text-accent">
       {children}
     </span>
   );

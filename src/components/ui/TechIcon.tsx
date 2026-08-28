@@ -97,6 +97,53 @@ export type TechSlug = keyof typeof ICONS;
 
 export const TECH_SLUGS = Object.keys(ICONS) as TechSlug[];
 
+/** Color principal de marca. Los SVG son monocromos y heredan currentColor. */
+export const TECH_COLORS: Record<TechSlug, string> = {
+  angular: "#dd0031",
+  aws: "#ff9900",
+  claude: "#d97757",
+  css: "#1572b6",
+  docker: "#2496ed",
+  express: "var(--color-ink)",
+  figma: "#f24e1e",
+  gemini: "#8e75b2",
+  git: "#f05032",
+  graphql: "#e10098",
+  gsd: "var(--color-accent)",
+  html: "#e34f26",
+  java: "#e76f00",
+  jest: "#c21325",
+  jira: "#0052cc",
+  js: "#f7df1e",
+  jwt: "#d63aff",
+  linux: "#fcc624",
+  mercadopago: "#009ee3",
+  mongo: "#47a248",
+  nestjs: "#e0234e",
+  next: "var(--color-ink)",
+  node: "#5fa04e",
+  openai: "#10a37f",
+  passport: "#34e27a",
+  playwright: "#2ead33",
+  postgresql: "#4169e1",
+  postman: "#ff6c37",
+  react: "#61dafb",
+  redux: "#764abc",
+  sequelize: "#52b0e7",
+  springboot: "#6db33f",
+  sql: "#336791",
+  stripe: "#635bff",
+  supertest: "#22b573",
+  tailwind: "#06b6d4",
+  threejs: "var(--color-ink)",
+  ts: "#3178c6",
+  vader: "var(--color-ink)",
+  vercel: "var(--color-ink)",
+  vite: "#646cff",
+  vitest: "#6e9f18",
+  zustand: "#433e38",
+};
+
 type TechIconProps = SVGProps<SVGSVGElement> & { name: TechSlug };
 
 export function TechIcon({ name, ...props }: TechIconProps) {

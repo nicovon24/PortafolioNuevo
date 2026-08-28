@@ -1,26 +1,28 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-nunito-sans), "Segoe UI", system-ui, sans-serif;
+  --font-sans: var(--font-manrope), "Segoe UI", system-ui, sans-serif;
   --font-mono: var(--font-jetbrains-mono), ui-monospace, "Cascadia Code", "Consolas", monospace;
-  --font-display: var(--font-space-grotesk), "Segoe UI", system-ui, sans-serif;
+  --font-display: var(--font-sora), "Segoe UI", system-ui, sans-serif;
 
   --spacing-page: clamp(1rem, 4vw, 3.75rem);
   /* Ancho del contenido. Unico lugar donde se ajusta: navbar, hero, secciones y footer lo consumen. */
   --spacing-shell: 72rem;
 
-  --color-background: #0a0808;
-  --color-background-deep: #070505;
-  --color-ink: #f2ebe9;
-  --color-muted: #c4b8b5;
-  --color-accent: #d9645a;
-  /* Secundario: mismo tono, mas quemado. Para gradientes y estados hover. */
-  --color-accent-2: #ff6b5e;
-  --color-line: rgba(217, 100, 90, 0.18);
-  --color-panel: rgba(42, 20, 20, 0.78);
-  --color-panel-strong: rgba(24, 13, 13, 0.92);
-  --color-canvas: #2a1414;
-  --color-overlay: rgba(13, 8, 8, 0.96);
+  /* Los valores reales viven en :root y en los bloques [data-palette][data-mode] de mas abajo.
+     Estos son solo el fallback / valor inicial que Tailwind necesita para generar las clases. */
+  --color-background: #0a0f16;
+  --color-background-deep: #060a10;
+  --color-ink: #e6ecf5;
+  --color-muted: #8b98ab;
+  --color-accent: #57c7ff;
+  --color-accent-2: #7dd4ff;
+  --color-accent-contrast: #060a10;
+  --color-line: rgba(87, 199, 255, 0.18);
+  --color-panel: rgba(18, 26, 38, 0.78);
+  --color-panel-strong: rgba(10, 15, 22, 0.92);
+  --color-canvas: #121a26;
+  --color-overlay: rgba(6, 10, 16, 0.96);
 
   /* Dos radios: superficies y pills. Antes convivian 8 valores distintos. */
   --radius-card: 1rem;
@@ -40,13 +42,121 @@
 }
 
 :root {
-  --line: rgba(217, 100, 90, 0.18);
+  --line: rgba(87, 199, 255, 0.18);
   --page-padding: var(--spacing-page);
   --layout-shell-width: 100%;
-  --color-muted-2: #b3a7a4;
-  --color-muted-3: #8a7d7a;
-  --hud-tick: #8a7d7a;
-  --hud-tick-glow: rgba(138, 125, 122, 0.45);
+  --color-muted-2: #a3aec0;
+  --color-muted-3: #6b7890;
+  --hud-tick: #6b7890;
+  --hud-tick-glow: rgba(107, 120, 144, 0.45);
+}
+
+/* ============================================================
+   Paletas de acento (blue/ocean/lime/red) x modo (dark/light)
+   8 combinaciones. data-palette y data-mode los setea ThemeProvider
+   (con inline script anti-FOUC en layout.tsx) sobre <html>.
+   Cada bloque redefine SOLO lo que cambia entre paletas/modos —
+   los tokens estructurales (radius, shadow, spacing) quedan fijos.
+   ============================================================ */
+
+:root,
+[data-mode="dark"] {
+  --color-background: #0a0f16;
+  --color-background-deep: #060a10;
+  --color-ink: #e6ecf5;
+  --color-muted: #8b98ab;
+  --color-muted-2: #a3aec0;
+  --color-muted-3: #6b7890;
+  --color-panel: rgba(18, 26, 38, 0.78);
+  --color-panel-strong: rgba(10, 15, 22, 0.92);
+  --color-canvas: #121a26;
+  --color-overlay: rgba(6, 10, 16, 0.96);
+  --hud-tick: #6b7890;
+  --hud-tick-glow: rgba(107, 120, 144, 0.45);
+}
+
+[data-mode="light"] {
+  --color-background: #eef8fc;
+  --color-background-deep: #deedf5;
+  --color-ink: #101826;
+  --color-muted: #56637a;
+  --color-muted-2: #465166;
+  --color-muted-3: #7a8699;
+  --color-panel: rgba(255, 255, 255, 0.72);
+  --color-panel-strong: rgba(255, 255, 255, 0.9);
+  --color-canvas: #ffffff;
+  --color-overlay: rgba(238, 248, 252, 0.96);
+  --hud-tick: var(--color-muted-3);
+  --hud-tick-glow: color-mix(in srgb, var(--color-muted-3) 45%, transparent);
+  --color-line: var(--line);
+}
+
+/* 1. Palette: Blue */
+[data-palette="blue"],
+[data-palette="blue"][data-mode="dark"] {
+  --color-accent: #57c7ff;
+  --color-accent-2: #7dd4ff;
+  --color-accent-contrast: #060a10;
+  --line: rgba(87, 199, 255, 0.18);
+  --color-line: rgba(87, 199, 255, 0.18);
+}
+[data-palette="blue"][data-mode="light"] {
+  --color-accent: #0284c7;
+  --color-accent-2: #0369a1;
+  --color-accent-contrast: #ffffff;
+  --line: rgba(2, 132, 199, 0.22);
+  --color-line: rgba(2, 132, 199, 0.22);
+}
+
+/* 2. Palette: Ocean */
+[data-palette="ocean"],
+[data-palette="ocean"][data-mode="dark"] {
+  --color-accent: #2dd4bf;
+  --color-accent-2: #5eead4;
+  --color-accent-contrast: #041f1a;
+  --line: rgba(45, 212, 191, 0.2);
+  --color-line: rgba(45, 212, 191, 0.2);
+}
+[data-palette="ocean"][data-mode="light"] {
+  --color-accent: #0d9488;
+  --color-accent-2: #0f766e;
+  --color-accent-contrast: #ffffff;
+  --line: rgba(13, 148, 136, 0.22);
+  --color-line: rgba(13, 148, 136, 0.22);
+}
+
+/* 3. Palette: Lime */
+[data-palette="lime"],
+[data-palette="lime"][data-mode="dark"] {
+  --color-accent: #a3e635;
+  --color-accent-2: #bef264;
+  --color-accent-contrast: #112402;
+  --line: rgba(163, 230, 53, 0.22);
+  --color-line: rgba(163, 230, 53, 0.22);
+}
+[data-palette="lime"][data-mode="light"] {
+  --color-accent: #65a30d;
+  --color-accent-2: #4d7c0f;
+  --color-accent-contrast: #ffffff;
+  --line: rgba(101, 163, 13, 0.24);
+  --color-line: rgba(101, 163, 13, 0.24);
+}
+
+/* 4. Palette: Red */
+[data-palette="red"],
+[data-palette="red"][data-mode="dark"] {
+  --color-accent: #d63a3a;
+  --color-accent-2: #ef5858;
+  --color-accent-contrast: #2a0605;
+  --line: rgba(214, 58, 58, 0.24);
+  --color-line: rgba(214, 58, 58, 0.24);
+}
+[data-palette="red"][data-mode="light"] {
+  --color-accent: #c22c2c;
+  --color-accent-2: #a12222;
+  --color-accent-contrast: #ffffff;
+  --line: rgba(194, 44, 44, 0.24);
+  --color-line: rgba(194, 44, 44, 0.24);
 }
 
 @layer base {
@@ -61,28 +171,21 @@
     overflow-x: hidden;
   }
 
-  /* Fondo en tres capas, de atras hacia adelante:
-       1. body            -> base carbon rojiza
-       2. body::before    -> glows decorativos muy suaves, se van con el scroll
-       3. body::after     -> atmosfera + vineta, siempre presentes */
   body::before {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    height: 190vh;
+    position: fixed;
+    inset: 0;
     z-index: -2;
     content: "";
     pointer-events: none;
     background:
       radial-gradient(
         circle at 85% 15%,
-        rgba(226, 87, 76, 0.1),
+        color-mix(in srgb, var(--color-accent) 10%, transparent),
         transparent 45%
       ),
       radial-gradient(
         circle at 10% 80%,
-        rgba(226, 87, 76, 0.06),
+        color-mix(in srgb, var(--color-accent) 6%, transparent),
         transparent 50%
       );
   }
@@ -94,23 +197,21 @@
     content: "";
     pointer-events: none;
     background:
-      /* respiracion lateral suave, sostiene el medio de la pagina */
       radial-gradient(
         62rem 58rem at 100% 52%,
-        rgba(217, 100, 90, 0.08) 0%,
+        color-mix(in srgb, var(--color-accent) 8%, transparent) 0%,
         transparent 64%
       ),
       radial-gradient(
         58rem 54rem at 0% 78%,
-        rgba(255, 107, 94, 0.07) 0%,
+        color-mix(in srgb, var(--color-accent-2) 7%, transparent) 0%,
         transparent 66%
       ),
-      /* vineta: cierra los bordes y empuja la mirada al centro */
       radial-gradient(
         140% 110% at 50% 45%,
         transparent 58%,
-        rgba(0, 0, 0, 0.18) 86%,
-        rgba(0, 0, 0, 0.3) 100%
+        color-mix(in srgb, black 18%, transparent) 86%,
+        color-mix(in srgb, black 30%, transparent) 100%
       );
     background-repeat: no-repeat;
     background-position: center;
@@ -122,72 +223,29 @@
     overflow-x: hidden;
     width: var(--layout-shell-width);
     margin-inline: auto;
-    /* Base: negro casi puro. El rojo entra solo como acento en los fondos por seccion. */
     background-image: radial-gradient(
       circle at 20% 10%,
-      #0a0808,
-      #080606 55%,
-      #070505 100%
+      var(--color-background),
+      var(--color-background) 55%,
+      var(--color-background-deep) 100%
     );
     background-attachment: fixed;
   }
 
-  a {
-    @apply text-inherit no-underline;
-    cursor: pointer;
+  [data-mode="light"] body::before {
+    background:
+      radial-gradient(circle at 82% 12%, color-mix(in srgb, var(--color-accent) 13%, transparent), transparent 42%),
+      radial-gradient(circle at 12% 72%, color-mix(in srgb, var(--color-accent-2) 8%, transparent), transparent 48%);
   }
 
-  button,
-  [role="button"],
-  label[for] {
-    cursor: pointer;
-  }
-
-  input,
-  textarea {
-    cursor: text;
-  }
-
-  img {
-    object-fit: cover;
-  }
-
-  ::selection {
-    background-color: var(--color-accent);
-    color: var(--color-background);
-  }
-
-  ::-moz-selection {
-    background-color: var(--color-accent);
-    color: var(--color-background);
-  }
-
-  /* Barra fina: el track lila anterior no pertenecia a la paleta. */
-  ::-webkit-scrollbar {
-    width: 5px;
-    height: 5px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background-color: var(--color-background-deep);
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background-color: color-mix(in srgb, var(--color-accent) 55%, transparent);
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background-color: var(--color-accent);
-  }
-
-  html {
-    scrollbar-width: thin;
-    scrollbar-color: color-mix(in srgb, var(--color-accent) 55%, transparent) var(--color-background-deep);
+  [data-mode="light"] body::after {
+    background:
+      radial-gradient(70rem 55rem at 100% 48%, color-mix(in srgb, var(--color-accent) 8%, transparent), transparent 66%),
+      radial-gradient(60rem 52rem at 0% 78%, color-mix(in srgb, var(--color-accent-2) 6%, transparent), transparent 68%),
+      linear-gradient(180deg, color-mix(in srgb, white 24%, transparent), transparent 32%, color-mix(in srgb, var(--color-accent) 3%, transparent));
   }
 }
 
-/* Cursor HUD custom (punto + marcas): ocultar cursor del sistema */
-html.with-hud-cursor,
 html.with-hud-cursor * {
   cursor: none !important;
 }
@@ -344,7 +402,7 @@ html.with-hud-cursor [contenteditable="true"] {
     position: absolute;
     inset: 0;
     z-index: -1;
-    border-radius: 0.35rem;
+    border-radius: 9999px;
     background: var(--color-accent);
     content: "";
     opacity: 0;
@@ -432,98 +490,17 @@ html.with-hud-cursor [contenteditable="true"] {
   );
 }
 
-@keyframes nav-shine {
-  0% {
-    transform: translateX(-70%);
-  }
-
-  45%,
-  100% {
-    transform: translateX(70%);
-  }
+.portfolio-loader {
+  background: var(--bg);
+  transform-origin: center;
 }
 
-@keyframes navbar-border-sweep {
-  0% {
-    background-position: -100% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-.navbar-border-animated {
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(217, 100, 90, 0.9) 40%,
-    rgba(255, 107, 94, 0.85) 60%,
-    transparent 100%
-  );
-  background-size: 200% 100%;
-  animation: navbar-border-sweep 9s linear infinite;
-}
-
-@property --photo-angle {
-  syntax: "<angle>";
-  inherits: false;
-  initial-value: 0deg;
-}
-
-@keyframes photo-border-spin {
-  from {
-    --photo-angle: 0deg;
-  }
-  to {
-    --photo-angle: 360deg;
-  }
-}
-
-.photo-border-ring {
-  background: conic-gradient(
-    from var(--photo-angle),
-    transparent 20%,
-    rgba(217, 100, 90, 0.95) 48%,
-    rgba(255, 107, 94, 0.9) 60%,
-    transparent 80%
-  );
-  padding: 2.5px;
-  border-radius: 9999px;
-  animation: photo-border-spin 14s linear infinite;
-}
-
-.photo-border-ring--glitch {
-  background: conic-gradient(
-    from var(--photo-angle),
-    transparent 20%,
-    rgba(255, 107, 94, 0.55) 48%,
-    rgba(217, 100, 90, 0.35) 60%,
-    transparent 80%
-  );
-  animation: photo-border-spin 14s linear infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .navbar-border-animated {
-    animation: none;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(217, 100, 90, 0.6),
-      transparent
-    );
-    background-size: 100% 100%;
-  }
-  .photo-border-ring {
-    animation: none;
-    background: conic-gradient(
-      from 45deg,
-      transparent 20%,
-      rgba(217, 100, 90, 0.8) 50%,
-      rgba(255, 107, 94, 0.7) 62%,
-      transparent 80%
-    );
-  }
+/* data-loader="pending" lo escribe el script inline de layout.tsx antes del
+   primer paint, y lo quita el Loader al empezar su salida. Sin esto el
+   contenido se ve un instante antes de que el overlay monte. */
+:root[data-loader="pending"] body > *:not(.portfolio-loader):not(.grain-overlay) {
+  opacity: 0;
+  visibility: hidden;
 }
 
 @keyframes skeleton-shimmer {
@@ -539,7 +516,7 @@ html.with-hud-cursor [contenteditable="true"] {
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(217, 100, 90, 0.06) 50%,
+    color-mix(in srgb, var(--color-accent) 6%, transparent) 50%,
     transparent 100%
   );
   animation: skeleton-shimmer 1.8s ease-in-out infinite;
@@ -561,6 +538,7 @@ html.with-hud-cursor [contenteditable="true"] {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+
 }
 
 /* Piso de accesibilidad: todo lo enfocable muestra anillo, sin depender de que
@@ -581,56 +559,24 @@ body.modal-open .grain-overlay {
 
 /* ============================================================
    Fondos por seccion
-   Base comun: negro casi puro (#070505-#0a0808). El rojo queda
-   como acento atmosferico sutil, sin rejillas, perspectiva ni piso.
+   Base: --color-background-deep del modo activo. El acento entra
+   como atmosfera sutil via color-mix sobre --color-accent, sin
+   rejillas, perspectiva ni piso.
    ============================================================ */
 
 .section-bg-surface,
 .section-bg-tech {
   position: relative;
   isolation: isolate;
-  background:
-    linear-gradient(180deg, rgba(10, 8, 8, 0.96) 0%, rgba(7, 5, 5, 0.98) 100%),
-    var(--color-background-deep);
+  background: transparent;
 }
 
 .section-bg-surface::before,
 .section-bg-tech::before {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  content: "";
-  pointer-events: none;
-  background:
-    radial-gradient(42rem 22rem at 22% 0%, rgba(217, 100, 90, 0.1) 0%, transparent 72%),
-    radial-gradient(36rem 20rem at 86% 18%, rgba(255, 107, 94, 0.055) 0%, transparent 74%),
-    repeating-linear-gradient(
-      to right,
-      rgba(217, 100, 90, 0.14) 0 1px,
-      transparent 1px 40px
-    ),
-    repeating-linear-gradient(
-      to bottom,
-      rgba(217, 100, 90, 0.14) 0 1px,
-      transparent 1px 40px
-    );
-  /* Grid se desvanece hacia los bordes: sostiene el degradado en vez de cortar seco. */
-  -webkit-mask-image: radial-gradient(120% 100% at 50% 40%, #000 55%, transparent 100%);
-  mask-image: radial-gradient(120% 100% at 50% 40%, #000 55%, transparent 100%);
+  content: none;
 }
 
 .section-bg-surface::after,
 .section-bg-tech::after {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  content: "";
-  pointer-events: none;
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0.3) 0%,
-    rgba(0, 0, 0, 0.02) 28%,
-    rgba(0, 0, 0, 0.03) 72%,
-    rgba(0, 0, 0, 0.28) 100%
-  );
+  content: none;
 }

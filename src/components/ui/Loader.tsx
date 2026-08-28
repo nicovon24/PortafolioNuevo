@@ -1,121 +1,212 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import { useEffect, useState, type CSSProperties } from "react";
 
-const HOLD_MS = 1300;
-const FADE_MS = 450;
+import { useLoaderControls } from "@/components/providers/LoaderProvider";
+import {
+  BALL_OUTLINE,
+  BALL_PATHS,
+  BallGeometry,
+  CENTER_PENTAGON_D,
+} from "@/components/ui/SoccerBallIcon";
+import { profile } from "@/data/portfolio";
 
-const RADIUS = 34;
-const STROKE = 3;
-const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
+type LoaderVariables = CSSProperties & {
+  "--accent": string;
+};
+
+/** Duracion total visible del loader antes de iniciar la salida */
+const LOADER_TOTAL_TIME = 2400;
+/** Duracion de la animacion de salida */
+const LOADER_EXIT_TIME = 550;
+
+const NAME_LETTERS = profile.name.split("");
 
 /**
- * Cortina de carga: anillo de progreso SVG + contador de % + "LOADING",
- * con la misma paleta y tipografia del navbar/hero. El % avanza en sync
- * con HOLD_MS (no hay carga de red real que trackear en esta pagina).
- * Monta oculto para prefers-reduced-motion y para quienes ya navegaron
- * en esta sesion, de modo que no se repite en cada vuelta atras.
+ * Loader de entrada: la pelota se dibuja trazo a trazo (stroke-dashoffset),
+ * gira lento sobre su eje y el nombre completo aparece letra por letra debajo.
+ * Sin barra, sin porcentaje, sin texto "cargando".
  */
 export default function Loader() {
   const [leaving, setLeaving] = useState(false);
   const [done, setDone] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const reducedMotion = useReducedMotion();
+  const prefersReducedMotion = useReducedMotion();
+  const markReady = useLoaderControls();
 
   useEffect(() => {
-    const seen = sessionStorage.getItem("loader-seen") === "1";
-
-    if (reducedMotion || seen) {
+    // Se ejecuta una sola vez por sesion de usuario
+    if (sessionStorage.getItem("loader-seen") === "1") {
+      delete document.documentElement.dataset.loader;
       setDone(true);
+      markReady();
       return;
     }
 
-    sessionStorage.setItem("loader-seen", "1");
-    // Bloquea el scroll mientras la cortina esta arriba.
     document.body.style.overflow = "hidden";
 
-    const start = performance.now();
-    let raf = 0;
-    const tick = (now: number) => {
-      const pct = Math.min(100, Math.round(((now - start) / HOLD_MS) * 100));
-      setProgress(pct);
-      if (pct < 100) raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
+    const exitTimer = setTimeout(() => {
+      setLeaving(true);
+      // El contenido arranca su entrada mientras el loader hace fade out:
+      // los dos se solapan y la transicion no queda con un hueco muerto.
+      // Quitar data-loader devuelve visibilidad a #main/nav/footer justo aqui.
+      delete document.documentElement.dataset.loader;
+      markReady();
+      document.body.style.overflow = "";
+    }, LOADER_TOTAL_TIME);
 
-    const fadeAt = window.setTimeout(() => setLeaving(true), HOLD_MS);
-    const removeAt = window.setTimeout(() => setDone(true), HOLD_MS + FADE_MS);
+    const cleanupTimer = setTimeout(() => {
+      sessionStorage.setItem("loader-seen", "1");
+      setDone(true);
+    }, LOADER_TOTAL_TIME + LOADER_EXIT_TIME);
 
     return () => {
-      cancelAnimationFrame(raf);
-      window.clearTimeout(fadeAt);
-      window.clearTimeout(removeAt);
+      clearTimeout(exitTimer);
+      clearTimeout(cleanupTimer);
+      // Si el Loader desmonta antes de tiempo, el contenido no puede quedar
+      // oculto por un atributo que ya nadie va a limpiar.
+      delete document.documentElement.dataset.loader;
       document.body.style.overflow = "";
     };
-  }, [reducedMotion]);
-
-  useEffect(() => {
-    if (done) document.body.style.overflow = "";
-  }, [done]);
+  }, [markReady]);
 
   if (done) return null;
 
-  const dashOffset = CIRCUMFERENCE * (1 - progress / 100);
+  const themeVariables: LoaderVariables = {
+    "--accent": "var(--color-accent)",
+  };
 
   return (
     <motion.div
-      className="fixed inset-0 z-10000 grid place-items-center bg-background-deep"
-      style={{
-        backgroundImage:
-          "radial-gradient(28rem 28rem at 50% 50%, rgba(217,100,90,0.16) 0%, transparent 68%)",
-      }}
+      className={`portfolio-loader fixed inset-0 z-200 flex flex-col items-center justify-center gap-7 bg-background ${
+        leaving ? "pointer-events-none" : ""
+      }`}
+      style={themeVariables}
+      initial={{ opacity: 1 }}
+      animate={{ opacity: leaving ? 0 : 1 }}
+      transition={{ duration: LOADER_EXIT_TIME / 1000, ease: [0.22, 1, 0.36, 1] }}
       role="status"
       aria-live="polite"
       aria-label="Cargando"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: leaving ? 0 : 1, scale: leaving ? 1.04 : 1 }}
-      transition={{ duration: (leaving ? FADE_MS : 300) / 1000, ease: "easeOut" }}
     >
-      <div className="flex flex-col items-center gap-4">
-        <div className="relative grid size-20 place-items-center">
-          <svg
-            width="80"
-            height="80"
-            viewBox="0 0 80 80"
-            className="absolute inset-0 -rotate-90"
-            style={{ filter: "drop-shadow(0 0 8px rgba(217,100,90,0.6))" }}
-            aria-hidden
-          >
-            <circle
-              cx="40"
-              cy="40"
-              r={RADIUS}
-              fill="none"
-              stroke="rgba(217,100,90,0.15)"
-              strokeWidth={STROKE}
-            />
-            <motion.circle
-              cx="40"
-              cy="40"
-              r={RADIUS}
-              fill="none"
-              stroke="var(--color-accent)"
-              strokeWidth={STROKE}
+      {/* Halo suave detras de la pelota */}
+      <div className="relative flex items-center justify-center">
+        <motion.div
+          aria-hidden
+          className="absolute size-40 rounded-full bg-accent/12 blur-3xl"
+          initial={{ opacity: 0, scale: 0.6 }}
+          animate={{ opacity: leaving ? 0 : 1, scale: 1 }}
+          transition={{ duration: 1.1, ease: "easeOut" }}
+        />
+
+        {/* Rotacion lenta continua, solo una vez que la pelota
+            termino de dibujarse (delay = duracion del trazado) */}
+        <motion.div
+          className="relative text-accent"
+          initial={{ scale: 0.94, opacity: 0 }}
+          animate={{
+            rotate: prefersReducedMotion ? 0 : 360,
+            scale: leaving ? 1.08 : 1,
+            opacity: 1,
+          }}
+          transition={{
+            rotate: {
+              duration: 14,
+              ease: "linear",
+              repeat: Infinity,
+              repeatType: "loop",
+              delay: 1.4,
+            },
+            scale: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+            opacity: { duration: 0.4 },
+          }}
+        >
+          <svg width="104" height="104" viewBox="0 0 32 32" aria-hidden fill="none">
+            {/* Capa fantasma: la geometria completa en muy baja opacidad,
+                para que el trazo se "revele" sobre una guia y no sobre vacio */}
+            <g opacity="0.1">
+              <BallGeometry strokeWidth={1} fillPentagon={false} />
+            </g>
+
+            {/* Capa dibujada: cada arista se traza con pathLength
+                (stroke-dashoffset) escalonada de centro hacia afuera */}
+            <g
+              stroke="currentColor"
+              strokeWidth={1}
               strokeLinecap="round"
-              strokeDasharray={CIRCUMFERENCE}
-              animate={{ strokeDashoffset: dashOffset }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
+              strokeLinejoin="round"
+              fill="none"
+            >
+              {/* Contorno exterior: se dibuja primero, de un tiron */}
+              <motion.circle
+                {...BALL_OUTLINE}
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ duration: 0.85, ease: [0.4, 0, 0.2, 1] }}
+              />
+
+              {BALL_PATHS.map(({ d, soft }, index) => (
+                <motion.path
+                  key={d}
+                  d={d}
+                  initial={{ pathLength: 0, opacity: 0 }}
+                  animate={{ pathLength: 1, opacity: soft ? 0.55 : 1 }}
+                  transition={{
+                    pathLength: {
+                      duration: 0.5,
+                      delay: 0.35 + index * 0.055,
+                      ease: [0.4, 0, 0.2, 1],
+                    },
+                    opacity: { duration: 0.15, delay: 0.35 + index * 0.055 },
+                  }}
+                />
+              ))}
+            </g>
+
+            {/* Relleno del pentagono central: entra al final, cuando
+                el contorno ya termino de dibujarse */}
+            <motion.path
+              d={CENTER_PENTAGON_D}
+              fill="currentColor"
+              stroke="none"
+              initial={{ fillOpacity: 0 }}
+              animate={{ fillOpacity: 0.22 }}
+              transition={{ duration: 0.5, delay: 1.35, ease: "easeOut" }}
             />
           </svg>
-          <span className="font-mono text-base font-bold tabular-nums text-accent">
-            {progress}
-          </span>
-        </div>
-        <span className="font-mono text-mini font-bold uppercase tracking-[0.2em] text-muted">
-          Loading
-        </span>
+        </motion.div>
       </div>
+
+      {/* Nombre completo apareciendo letra por letra */}
+      <h1 className="flex flex-wrap justify-center px-6 font-mono text-[0.72rem] font-medium uppercase tracking-[0.42em] text-muted sm:text-sm">
+        {NAME_LETTERS.map((letter, index) => (
+          <motion.span
+            key={`${letter}-${index}`}
+            aria-hidden
+            initial={{ opacity: 0, y: 6, filter: "blur(4px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{
+              duration: 0.35,
+              delay: 0.95 + index * 0.032,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className={letter === " " ? "w-[0.42em]" : undefined}
+          >
+            {letter === " " ? " " : letter}
+          </motion.span>
+        ))}
+        <span className="sr-only">{profile.name}</span>
+      </h1>
+
+      {/* Linea de progreso minima bajo el nombre: se llena en el tiempo
+          exacto del loader, sin porcentaje ni texto */}
+      <motion.div
+        aria-hidden
+        className="h-px w-28 origin-left bg-accent/50"
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: 1 }}
+        transition={{ duration: LOADER_TOTAL_TIME / 1000, ease: [0.35, 0, 0.2, 1] }}
+      />
     </motion.div>
   );
 }

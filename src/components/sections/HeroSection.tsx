@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowDown, Download, Github, Linkedin } from "lucide-react";
+import { ArrowDown, Download, Github, Linkedin, MapPin } from "lucide-react";
 import { motion, useReducedMotion, useScroll, useTransform, type Variants } from "framer-motion";
 import { useCallback, useRef, useState } from "react";
 import { Skeleton } from "@/components/ui/Skeleton";
@@ -11,7 +11,12 @@ import MotionSlide from "@/components/motion/MotionSlide";
 import HeroScrambleName from "@/components/sections/HeroScrambleName";
 import HeroRoleCycle from "@/components/sections/HeroRoleCycle";
 import HeroTechCarousel from "@/components/sections/HeroTechCarousel";
-import { TechIcon, type TechSlug } from "@/components/ui/TechIcon";
+import { TECH_COLORS, TechIcon, type TechSlug } from "@/components/ui/TechIcon";
+import ProfilePhotoToggle, {
+  PROFILE_PHOTOS,
+  type ProfilePhotoMode,
+} from "@/components/ui/ProfilePhotoToggle";
+import { useLoaderReady } from "@/components/providers/LoaderProvider";
 import { profile } from "@/data/portfolio";
 
 const HERO_CAROUSEL: Array<{ name: string; icon: TechSlug }> = [
@@ -30,22 +35,19 @@ const HERO_CAROUSEL: Array<{ name: string; icon: TechSlug }> = [
 ];
 
 const btnPrimary =
-  "inline-flex min-h-10 items-center justify-center gap-2 border border-accent bg-accent px-3.5 font-mono text-sm font-bold uppercase tracking-wider text-background shadow-[0_0_24px_rgba(217,100,90,0.18)] transition-colors hover:border-accent-2 hover:bg-accent-2";
+  "inline-flex min-h-10 items-center justify-center gap-2 rounded-full border border-accent bg-accent px-5 font-mono text-sm font-bold uppercase tracking-wider text-background shadow-[0_0_24px_color-mix(in_srgb,var(--color-accent)_18%,transparent)] transition-colors hover:border-accent-2 hover:bg-accent-2";
 
 const btnSecondary =
-  "inline-flex min-h-10 items-center justify-center gap-2 border border-line bg-transparent px-3.5 font-mono text-sm font-bold uppercase tracking-wider text-muted transition-colors hover:border-accent hover:text-accent";
+  "inline-flex min-h-10 items-center justify-center gap-2 rounded-full border border-line bg-transparent px-5 font-mono text-sm font-bold uppercase tracking-wider text-muted transition-colors hover:border-accent hover:text-accent";
 
 const iconBtn =
-  "grid size-9 place-items-center border border-line bg-panel-strong text-accent transition-colors hover:border-accent-2 hover:bg-[rgba(255,107,94,0.12)] hover:text-accent-2";
-
-const nameLine1Class =
-  "font-display font-bold leading-[0.95] text-ink text-[clamp(2.05rem,calc(0.88rem+5.2vw),4rem)]";
+  "grid size-9 place-items-center rounded-full border border-line bg-panel-strong text-accent transition-colors hover:border-accent-2 hover:bg-accent-2/12 hover:text-accent-2";
 
 const nameLine2Class =
-  "font-display font-bold text-accent text-[clamp(2.35rem,calc(1rem+5.85vw),4.65rem)] leading-[0.92] [text-shadow:0_0_30px_rgba(217,100,90,0.35)]";
+  "font-display font-bold text-accent text-[clamp(2.35rem,calc(1rem+5.85vw),4.65rem)] leading-[0.92] [text-shadow:0_0_30px_color-mix(in_srgb,var(--color-accent)_35%,transparent)]";
 
 const nameLine2ScrambleClass =
-  "font-display font-bold text-accent-2 text-[clamp(2.35rem,calc(1rem+5.85vw),4.65rem)] leading-[0.92] [text-shadow:0_0_30px_rgba(255,107,94,0.3)]";
+  "font-display font-bold text-accent-2 text-[clamp(2.35rem,calc(1rem+5.85vw),4.65rem)] leading-[0.92] [text-shadow:0_0_30px_color-mix(in_srgb,var(--color-accent-2)_30%,transparent)]";
 
 const hudRow =
   "m-0 flex flex-wrap justify-end gap-x-1 font-mono text-micro leading-snug";
@@ -58,12 +60,17 @@ const hudValAccent =
 
 const HERO_TAGS = ["Fullstack", "Frontend", "Backend", "Dashboards"] as const;
 
-const heroHudViewport = { once: true as const, margin: "-80px" as const };
+// Etapas de entrada del hero tras el loader. Cada bloque arranca donde el
+// anterior ya se leyo, para que el contenido aparezca por partes y no de golpe.
+const STAGE_TEXT = 0.05;
+const STAGE_PHOTO = 0.3;
+const STAGE_HUD = 0.65;
+const STAGE_STATS = 0.9;
 
 const heroHudListVariants: Variants = {
   hidden: {},
   visible: {
-    transition: { staggerChildren: 0.07, delayChildren: 0.14 },
+    transition: { staggerChildren: 0.07, delayChildren: STAGE_HUD },
   },
 };
 
@@ -79,7 +86,7 @@ const heroHudRowVariants: Variants = {
 const heroStatsListVariants: Variants = {
   hidden: {},
   visible: {
-    transition: { staggerChildren: 0.16, delayChildren: 0.22 },
+    transition: { staggerChildren: 0.16, delayChildren: STAGE_STATS },
   },
 };
 
@@ -100,7 +107,7 @@ function HeroRingStat({ label, value }: { label: string; value: string }) {
         {label}
       </span>
       <div
-        className="relative grid size-[4.35rem] place-items-center rounded-full border-2 border-dashed border-accent/75 bg-panel-strong shadow-[0_0_28px_rgba(217,100,90,0.18),inset_0_0_20px_rgba(217,100,90,0.08)] backdrop-blur-sm sm:size-[4.85rem]"
+        className="relative grid size-[4.35rem] place-items-center rounded-full border-2 border-dashed border-accent/75 bg-panel-strong shadow-[0_0_28px_color-mix(in_srgb,var(--color-accent)_18%,transparent),inset_0_0_20px_color-mix(in_srgb,var(--color-accent)_8%,transparent)] backdrop-blur-sm sm:size-[4.85rem]"
         aria-hidden
       >
         <div className="pointer-events-none absolute inset-0 rounded-full border border-accent/25" />
@@ -112,6 +119,9 @@ function HeroRingStat({ label, value }: { label: string; value: string }) {
 
 export default function HeroSection() {
   const { t } = useTranslation();
+  // El hero es lo primero en pantalla: sin esta guarda su entrada se consume
+  // detras del loader y al levantarse ya esta todo quieto.
+  const ready = useLoaderReady();
 
   const github = profile.socials.find((s) => s.label === "GitHub")!;
   const linkedin = profile.socials.find((s) => s.label === "LinkedIn")!;
@@ -119,7 +129,11 @@ export default function HeroSection() {
 
   const [isScrambling, setIsScrambling] = useState(false);
   const [badgeGlitch, setBadgeGlitch] = useState(false);
-  const [photoLoaded, setPhotoLoaded] = useState(false);
+  const [photoMode, setPhotoMode] = useState<ProfilePhotoMode>("work");
+  // Que modos ya terminaron de cargar al menos una vez. Al volver a un modo
+  // ya visto (ida y vuelta del toggle) no vuelve a mostrar el skeleton.
+  const [loadedModes, setLoadedModes] = useState<Partial<Record<ProfilePhotoMode, true>>>({});
+  const photoLoaded = Boolean(loadedModes[photoMode]);
 
   // Acotado al hero: useScroll() global mantiene la suscripcion viva con la seccion fuera de pantalla.
   const sectionRef = useRef<HTMLElement>(null);
@@ -137,15 +151,15 @@ export default function HeroSection() {
     }
   }, []);
 
-  const nameParts = profile.name.trim().split(/\s+/);
-  const heroFirstName = nameParts[0] ?? profile.name;
-  const heroLastName = nameParts.slice(1).join(" ") || "";
+  // Solo el nombre de pila queda grande/scrambleado ("Hola, soy Nicolás"); el apellido
+  // completo sigue disponible en el resto de la UI (footer, meta, aria-label, etc.).
+  const heroFirstName = profile.heroFirstName;
 
   return (
     <section
       ref={sectionRef}
       id="top"
-      className="section-bg-surface relative flex w-full flex-col items-start overflow-hidden px-page pb-12 pt-32 sm:pb-14 sm:pt-36 lg:min-h-screen lg:pb-36 lg:pt-30"
+      className="section-bg-surface relative flex w-full flex-col items-start overflow-hidden px-page pb-12 pt-28 sm:pb-14 sm:pt-30 lg:min-h-screen lg:pb-28 lg:pt-28"
     >
       {/* Los HUD se alinean al contenedor centrado, no al borde de la pantalla:
           anclados a right-page quedaban fuera del shell y descentraban el hero. */}
@@ -158,8 +172,7 @@ export default function HeroSection() {
           className="space-y-1.5"
           variants={heroHudListVariants}
           initial="hidden"
-          whileInView="visible"
-          viewport={heroHudViewport}
+          animate={ready ? "visible" : "hidden"}
         >
           <motion.p className={hudRow} variants={heroHudRowVariants}>
             <span className={hudKey}>{t("hero.stackKey")}</span>
@@ -185,11 +198,10 @@ export default function HeroSection() {
         aria-label={t("hero.statsLabel")}
         variants={heroStatsListVariants}
         initial="hidden"
-        whileInView="visible"
-        viewport={heroHudViewport}
+        animate={ready ? "visible" : "hidden"}
       >
         <motion.div variants={heroStatItemVariants}>
-          <HeroRingStat label={t("hero.experienceStat")} value="4+" />
+          <HeroRingStat label={t("hero.experienceStat")} value="3+" />
         </motion.div>
         <motion.div variants={heroStatItemVariants}>
           <HeroRingStat label={t("hero.projectsStat")} value="12+" />
@@ -198,25 +210,14 @@ export default function HeroSection() {
       </div>
 
       {/* Flex row at lg+: text left, photo right. Stacked below lg so the photo doesn't get cramped on tablets. */}
-      <div className="relative z-0 mx-auto flex w-full min-w-0 max-w-shell flex-col justify-start pt-1 text-left lg:flex-1 lg:flex-row lg:items-center lg:justify-center lg:gap-10 lg:pt-0 xl:gap-12">
+      <div className="relative z-0 mx-auto flex w-full min-w-0 max-w-[68rem] flex-col justify-start pt-1 text-left lg:flex-1 lg:-translate-y-2 lg:flex-row lg:items-center lg:justify-center lg:gap-10 lg:pt-0 xl:gap-12">
 
         {/* ── TEXT (DOM first → above on tablet/mobile / left on desktop) ── */}
         <div className="min-w-0 flex-1 lg:max-w-[38rem] xl:max-w-[44rem]">
-          <MotionSlide direction="left">
-            <HeroScrambleName
-              firstName={heroFirstName}
-              lastName={heroLastName}
-              line1Class={nameLine1Class}
-              line2Class={nameLine2Class}
-              line2ScrambleClass={nameLine2ScrambleClass}
-              onScrambleChange={handleScrambleChange}
-            />
-            <div className="mt-4 flex w-full flex-col gap-3 font-mono text-[clamp(0.65rem,0.55rem+1vw,0.78rem)] font-semibold uppercase tracking-[0.14em] text-muted sm:flex-row sm:items-center sm:justify-between sm:gap-4">
-              <div className="min-h-[1.5em] min-w-0 flex-1 sm:mr-2">
-                <HeroRoleCycle className="text-muted" />
-              </div>
+          <MotionSlide direction="left" delay={STAGE_TEXT}>
+            <div className="mb-5 flex flex-wrap items-center gap-2 font-mono text-micro font-bold tracking-[0.12em] sm:text-mini">
               <span
-                className={`inline-flex w-fit shrink-0 items-center gap-2 rounded-full px-3 py-1 text-micro font-bold tracking-[0.12em] transition-colors duration-300 sm:text-mini ${
+                className={`inline-flex w-fit shrink-0 items-center gap-2 rounded-full px-3 py-1 uppercase transition-colors duration-300 ${
                   badgeGlitch
                     ? "border border-accent-2/40 bg-accent-2/[0.07] text-accent-2"
                     : "border border-accent/40 bg-accent/[0.07] text-accent"
@@ -224,30 +225,48 @@ export default function HeroSection() {
               >
                 <span className="relative flex h-2 w-2 shrink-0" aria-hidden>
                   <span className={`absolute inline-flex h-full w-full animate-ping rounded-full opacity-35 transition-colors duration-300 ${badgeGlitch ? "bg-accent-2" : "bg-accent"}`} />
-                  <span className={`relative m-auto inline-flex h-[5px] w-[5px] rounded-full transition-all duration-300 ${badgeGlitch ? "bg-accent-2 shadow-[0_0_8px_rgba(255,107,94,0.85)]" : "bg-accent shadow-[0_0_8px_rgba(217,100,90,0.85)]"}`} />
+                  <span className={`relative m-auto inline-flex h-[5px] w-[5px] rounded-full transition-all duration-300 ${badgeGlitch ? "bg-accent-2 shadow-[0_0_8px_color-mix(in_srgb,var(--color-accent-2)_85%,transparent)]" : "bg-accent shadow-[0_0_8px_color-mix(in_srgb,var(--color-accent)_85%,transparent)]"}`} />
                 </span>
                 {t("hero.available")}
               </span>
+              <span className="inline-flex w-fit shrink-0 items-center gap-1.5 rounded-full border border-line px-3 py-1 text-muted">
+                <MapPin size={11} aria-hidden />
+                {t("hero.location")}
+              </span>
+            </div>
+            <p className="m-0 font-sans text-[clamp(1.15rem,1rem+0.6vw,1.5rem)] font-semibold text-muted">
+              {t("hero.greeting")}
+            </p>
+            <HeroScrambleName
+              firstName={heroFirstName}
+              lastName=""
+              line1Class={nameLine2Class}
+              line2Class={nameLine2Class}
+              line2ScrambleClass={nameLine2ScrambleClass}
+              onScrambleChange={handleScrambleChange}
+            />
+            <div className="mt-4 min-h-[1.5em] font-mono text-[clamp(0.75rem,0.65rem+0.6vw,0.95rem)] font-semibold text-muted">
+              <span className="text-accent">&gt;</span> <HeroRoleCycle className="text-muted" />
             </div>
           </MotionSlide>
-          <MotionFade delay={0.08}>
+          <MotionFade delay={STAGE_TEXT + 0.18}>
             <ul className="mt-6 flex flex-wrap gap-2" aria-label={t("hero.stackFocus")}>
               {HERO_TAGS.map((tag) => (
                 <li
                   key={tag}
-                  className="rounded border border-accent/25 bg-accent/[0.05] px-3 py-1.5 font-mono text-micro font-semibold uppercase tracking-[0.1em] text-accent/90 sm:text-mini"
+                  className="rounded-full border border-accent/25 bg-accent/[0.05] px-3 py-1.5 font-mono text-micro font-semibold uppercase tracking-[0.1em] text-accent/90 sm:text-mini"
                 >
                   {tag}
                 </li>
               ))}
             </ul>
           </MotionFade>
-          <MotionFade delay={0.1}>
+          <MotionFade delay={STAGE_TEXT + 0.3}>
             <p className="mt-5 font-sans text-[0.8rem] leading-relaxed text-muted sm:mt-6 sm:text-[0.95rem]">
               {t("hero.intro")}
             </p>
           </MotionFade>
-          <MotionFade delay={0.2} className="mt-6 flex flex-col gap-3 sm:mt-8">
+          <MotionFade delay={STAGE_TEXT + 0.42} className="mt-6 flex flex-col gap-3 sm:mt-8">
             <div className="flex flex-wrap gap-3 sm:gap-4">
               <a className={btnPrimary} href="#projects">
                 {t("hero.viewProjects")} <ArrowDown size={16} />
@@ -265,7 +284,7 @@ export default function HeroSection() {
               </a>
             </div>
           </MotionFade>
-          <MotionFade delay={0.28} className="mt-6 sm:mt-8">
+          <MotionFade delay={STAGE_TEXT + 0.56} className="mt-6 sm:mt-8">
             <div
               className="hero-tech-mask group/hero-tech relative w-full overflow-x-clip overflow-y-visible py-3"
               aria-label={t("gallery.techCarousel")}
@@ -279,18 +298,15 @@ export default function HeroSection() {
                     key={`${item.name}-${i}`}
                     className={`group/hero-tech-item flex w-[5.75rem] shrink-0 flex-col items-center justify-center gap-1.5 rounded-lg border border-line/70 bg-panel-strong px-2 py-2.5 backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 sm:w-[6.25rem] ${
                       isEven
-                        ? "hover:border-accent hover:bg-[rgba(217,100,90,0.04)] hover:shadow-[0_0_0_1px_rgba(217,100,90,0.4)_inset,0_0_18px_rgba(217,100,90,0.22)]"
-                        : "hover:border-accent-2 hover:bg-[rgba(255,107,94,0.04)] hover:shadow-[0_0_0_1px_rgba(255,107,94,0.4)_inset,0_0_18px_rgba(255,107,94,0.22)]"
+                        ? "hover:border-accent hover:bg-accent/4 hover:shadow-[0_0_0_1px_color-mix(in_srgb,var(--color-accent)_40%,transparent)_inset,0_0_18px_color-mix(in_srgb,var(--color-accent)_22%,transparent)]"
+                        : "hover:border-accent-2 hover:bg-accent-2/4 hover:shadow-[0_0_0_1px_color-mix(in_srgb,var(--color-accent-2)_40%,transparent)_inset,0_0_18px_color-mix(in_srgb,var(--color-accent-2)_22%,transparent)]"
                     }`}
                     aria-hidden={i >= HERO_CAROUSEL.length ? true : undefined}
                   >
                     <TechIcon
                       name={item.icon}
-                      className={`size-6 text-muted opacity-90 transition-colors duration-200 group-hover/hero-tech-item:opacity-100 ${
-                        isEven
-                          ? "group-hover/hero-tech-item:text-accent"
-                          : "group-hover/hero-tech-item:text-accent-2"
-                      }`}
+                      className="size-6 opacity-90 transition-[opacity,transform] duration-200 group-hover/hero-tech-item:scale-110 group-hover/hero-tech-item:opacity-100"
+                      style={{ color: TECH_COLORS[item.icon] }}
                     />
                     <span className={`block w-full truncate text-center font-mono text-micro font-semibold uppercase tracking-[0.08em] text-muted transition-colors duration-200 sm:text-micro ${
                       isEven ? "group-hover/hero-tech-item:text-accent" : "group-hover/hero-tech-item:text-accent-2"
@@ -307,11 +323,11 @@ export default function HeroSection() {
 
         {/* ── PHOTO (DOM last → below carousel on tablet/mobile / right on desktop) ── */}
         <motion.div
-          className="flex cursor-pointer justify-center pt-6 lg:order-2 lg:ml-auto lg:shrink-0 lg:pt-0"
+          className="flex cursor-pointer flex-col items-center gap-4 pt-6 lg:order-2 lg:ml-auto lg:shrink-0 lg:pt-0"
           style={{ y: photoParallaxY }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          initial={{ opacity: 0, scale: 0.94 }}
+          animate={ready ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.94 }}
+          transition={{ duration: 0.7, delay: STAGE_PHOTO, ease: [0.22, 1, 0.36, 1] }}
           // Una sacudida por hover. Antes era repeat: Infinity mientras el mouse estuviera encima.
           whileHover={{
             x: [0, 8, -8, 6, -6, 3, 0],
@@ -322,39 +338,45 @@ export default function HeroSection() {
             className="relative size-[14rem] sm:size-[16rem] md:size-[18rem] lg:size-[22rem] xl:size-[26rem]"
             aria-hidden="false"
           >
-            <span
-              className={`pointer-events-none absolute -inset-4 rounded-full blur-3xl transition-colors duration-500 ${isScrambling ? "bg-accent-2/10" : "bg-accent/15"}`}
-              aria-hidden
-            />
-            <span className="pointer-events-none absolute inset-0 animate-pulse rounded-full ring-1 ring-accent/25" aria-hidden />
-            <div className={`photo-border-ring absolute inset-0 ${isScrambling ? "photo-border-ring--glitch" : ""}`}>
+            {/* Unico elemento de color alrededor de la foto: borde solido
+                accent + sombra difusa (glow). Sin gradiente, sin rotacion:
+                no depende de un padding-trick que se rompa si falta un bg. */}
+            <div className="absolute inset-0 rounded-full">
               <div
-                className="relative size-full overflow-hidden rounded-full transition-shadow duration-500"
+                className="relative size-full overflow-hidden rounded-full bg-background-deep transition-shadow duration-500"
                 style={{
                   boxShadow: isScrambling
-                    ? "0 0 0 3px rgba(13,8,8,0.85), 0 0 32px rgba(255,107,94,0.22), 0 0 80px rgba(255,107,94,0.08), inset 0 0 36px rgba(255,107,94,0.07)"
-                    : "0 0 0 3px rgba(13,8,8,0.85), 0 0 32px rgba(217,100,90,0.3), 0 0 60px rgba(217,100,90,0.18), inset 0 0 36px rgba(217,100,90,0.1)",
+                    ? "0 0 0 2.5px var(--color-accent-2), 0 0 32px color-mix(in srgb, var(--color-accent-2) 35%, transparent), 0 0 64px color-mix(in srgb, var(--color-accent-2) 15%, transparent), 0 18px 40px rgba(0, 0, 0, 0.35)"
+                    : "0 0 0 2.5px var(--color-accent), 0 0 32px color-mix(in srgb, var(--color-accent) 35%, transparent), 0 0 64px color-mix(in srgb, var(--color-accent) 15%, transparent), 0 18px 40px rgba(0, 0, 0, 0.35)",
                 }}
               >
+                {/* Skeleton debajo de la foto: se tapa apenas la imagen
+                    actual termina de cargar (la primera vez que se ve). */}
                 {!photoLoaded && (
                   <Skeleton className="absolute inset-0 rounded-full" />
                 )}
+
+                {/* Una sola capa, siempre montada. Si el modo ya se cargo
+                    antes queda opaca de entrada (sin parpadeo al ir y volver
+                    en el toggle); si es la primera vez, hace fade + escala. */}
                 <Image
-                  src="/images/profile/profile.png"
+                  key={photoMode}
+                  src={PROFILE_PHOTOS[photoMode]}
                   alt={profile.name}
                   fill
                   sizes="(min-width: 1280px) 26rem, (min-width: 1024px) 22rem, (min-width: 768px) 18rem, (min-width: 640px) 16rem, 14rem"
-                  className={`object-cover object-[center_18%] transition-opacity duration-500 ${photoLoaded ? "opacity-100" : "opacity-0"}`}
+                  className={`object-cover transition-[opacity,transform] duration-500 ease-out ${
+                    photoMode === "work" ? "object-[56%_45%]" : "object-[center_30%]"
+                  } ${photoLoaded ? "scale-100 opacity-100" : "scale-[1.04] opacity-0"}`}
                   priority
-                  onLoad={() => setPhotoLoaded(true)}
-                />
-                <span
-                  className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(217,100,90,0.08),transparent_60%),linear-gradient(180deg,rgba(13,8,8,0.05)_0%,rgba(13,8,8,0.55)_100%)]"
-                  aria-hidden
+                  onLoad={() =>
+                    setLoadedModes((prev) => ({ ...prev, [photoMode]: true }))
+                  }
                 />
               </div>
             </div>
           </div>
+          <ProfilePhotoToggle mode={photoMode} onChange={setPhotoMode} />
         </motion.div>
       </div>
 

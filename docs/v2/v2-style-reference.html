@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>V2 Design Reference - Extracted from bundle export</title>
+</head>
+<body>
+<!--
+  NOTA (Claude/Codex): este documento es una extracción legible del bundle
+  original "Portfolio Standalone.html" pegado por el usuario en la conversación
+  del 2026-08-28. El bundle original es un export de una herramienta no-code
+  (React class components con estilos inline vía DCLogic/renderVals, ~2MB+ de
+  assets base64: fuentes woff2, fotos, React/ReactDOM runtime). NO se guardó
+  crudo por tamaño; esta extracción conserva todo lo necesario para portar el
+  diseño al stack real del repo (Next.js 15 + TypeScript + Tailwind v4 +
+  Framer Motion). Ver plan en docs/v2/v2-migration-plan.md.
+-->
+
+<h1>1. Paleta de colores</h1>
+<pre>
+Modo oscuro (default):
+  bg:        #0a0f16
+  bgAlt:     #121a26
+  bgAlt2:    rgba(10,15,22,0.82)
+  text:      #e6ecf5
+  textMuted: #8b98ab
+  border:    rgba(230,236,245,0.1)
+  cardShadow: 0 20px 40px -20px rgba(0,0,0,0.5)
+
+Modo claro:
+  bg:        #f6f8fb
+  bgAlt:     #ffffff
+  bgAlt2:    rgba(246,248,251,0.85)
+  text:      #101826
+  textMuted: #56637a
+  border:    rgba(16,24,38,0.08)
+  cardShadow: 0 20px 40px -24px rgba(16,24,38,0.2)
+
+Paletas de acento seleccionables (swatch en nav):
+  blue  (default): dark #57c7ff / light #0284c7
+  ocean:            dark #2dd4bf / light #0f9488
+  lime:             dark #bef264 / light #65a30d
+  pink:             dark #f94c84 / light #db2f6c
+</pre>
+
+<h1>2. Tipografías (Google Fonts)</h1>
+<pre>
+Sora        — headings (h1, nombre hero, títulos de proyecto). Pesos 400/500/600/700/800.
+Manrope     — body text. Pesos 400/500/600/700.
+JetBrains Mono — labels, UI mono (nav, badges, meta info, footer). Peso 400/500.
+</pre>
+
+<h1>3. Layout general</h1>
+<p>SPA de una página, secciones ancladas por id, sticky nav con blur, rails laterales fijos (solo desktop, viewport >= 1480px) con iconos sociales y email vertical (writing-mode: vertical-rl).</p>
+
+<h2>Loader inicial</h2>
+<p>Overlay full-screen 2.6s: SVG hexágono con anillo animado (stroke-dashoffset), texto "NVM", contador de porcentaje 0-100 vía CSS @property, luego fade+scale out.</p>
+
+<h2>Nav (sticky, blur)</h2>
+<ul>
+<li>Logo: "&lt;" / "Nicolas" + "Von Muhlinen" apilado / "/&gt;" en JetBrains Mono</li>
+<li>Links: Inicio, Sobre mí, Experiencia, Proyectos (con iconos SVG inline stroke)</li>
+<li>Toggle idioma ES/EN (placeholder, no funcional según export)</li>
+<li>Swatches de paleta (4 círculos clicables)</li>
+<li>Toggle modo claro/oscuro (ícono sol/luna)</li>
+<li>Botón CTA "CONTACTAR" (pill, fill accent)</li>
+</ul>
+
+<h2>Hero (id="top")</h2>
+<ul>
+<li>Fondo: grid de puntos radiales + gradientes radiales con el color de acento, overlay con mask fade</li>
+<li>Panel de meta info alineado a la derecha arriba: STACK, ROL, FOCO, FORMACIÓN (mono, pequeño)</li>
+<li>Grid 2 columnas: texto a la izquierda, foto circular + stats a la derecha</li>
+<li>Badge "DISPONIBLE PARA NUEVOS PROYECTOS" + badge de ubicación "📍 Córdoba, ARG · Remoto"</li>
+<li>H1: "Hola, soy <accent>Nicolás</accent>"</li>
+<li>H2 con typewriter: cicla por 4 frases con efecto de tipeo/borrado + cursor parpadeante:
+  "Full-stack Developer", "Analista de Sistemas", "TypeScript · Java · Python", "Experiencia desde 2022"</li>
+<li>Fila de tags: FULLSTACK, FRONTEND, BACKEND, DASHBOARDS</li>
+<li>Descripción larga (párrafo sobre experiencia, industrias, uso de IA en el flujo)</li>
+<li>Botones: "Descargar CV" (fill) + "Ver proyectos →" (ghost)</li>
+<li>Iconos sociales circulares: GitHub, LinkedIn, mailto</li>
+<li>Foto: círculo con borde accent y glow, toggle entre "modo trabajo" (foto formal) y "modo hincha"
+  (foto con camiseta Argentina) — dos botones circulares debajo de la foto</li>
+<li>2 círculos de stats: "4+ Experiencia", "12+ Proyectos"</li>
+</ul>
+
+<h2>Secciones con reveal on-scroll (IntersectionObserver)</h2>
+<p>Cada sección tiene label tipo "01. Sobre mí" con efecto de tipeo (maxWidth 0→100%), cursor caret parpadeante, y línea horizontal que crece (scaleX 0→1). Los hijos internos hacen fade+translateY escalonado (stagger ~90ms).</p>
+
+<h2>01. Sobre mí (id="about")</h2>
+<ul>
+<li>Grid 2 columnas: texto (2 párrafos + lista de 4 "facts" con bullets) | foto con mismo toggle trabajo/hincha</li>
+<li>Banda inferior de "datos personales" en 4 columnas con separadores verticales:
+  Star Wars, Better Call Saul, Rock (Beatles/Oasis), Fútbol (Liverpool + Selección) — cada uno con
+  ícono SVG + label mono + texto corto</li>
+</ul>
+
+<h2>02. Tech stack (id="stack")</h2>
+<ul>
+<li>Filtros por categoría: Core, All, Frontend, Backend, Testing, AI (pills con contador)</li>
+<li>Marquee horizontal infinito (animación CSS translateX -50%→0, 22s linear) con cards de tecnología
+  (ícono via simpleicons CDN + nombre), mask de fade en los bordes del viewport</li>
+<li>Lista real de techs (nombre + categorías + slug de icono simpleicons):
+  Next.js, React, Angular, TypeScript, TailwindCSS, Redux Toolkit, Zustand, React Native (frontend)
+  Node.js, NestJS, Express, Spring Boot, Java, GraphQL, PostgreSQL, MongoDB, Prisma, Drizzle, SQL,
+  Docker, AWS, Jira (backend)
+  Jest, Vitest, Playwright, Supertest (testing)
+  Claude Code, Cursor, Gemini, GitHub Copilot (ia)</li>
+</ul>
+
+<h2>03. Proyectos (id="projects")</h2>
+<ul>
+<li>Filtros: Todos, Work, Personales, Freelance, IoT, Full-stack, Frontend</li>
+<li>1 proyecto "featured" en card grande (grid 1.25fr/1fr, imagen + texto largo, sangrado a la derecha
+  con margin-right negativo en desktop ancho)</li>
+<li>Resto en grid de cards estándar (3/2/1 columnas según viewport)</li>
+<li>Cada card: imagen, meta (año · rol), título, descripción, tags, links (Ver en vivo / Código / Repo privado)</li>
+<li>Lista real de proyectos (id, año, rol, título, descripción corta, tags, categorías, link):
+  <br>- iotarg (2026, Personal): IoTArg — plataforma IoT full-stack con ThingsBoard+NestJS+Next.js. Live+code.
+  <br>- trashcans (2024, Senzary): dashboard IoT contenedores inteligentes. Angular+Node. Live, privado.
+  <br>- awsprep (2026, Personal): app de estudio AWS Cloud Practitioner. Next.js. Live+code.
+  <br>- prodeazo (2026, Personal): Prode Mundial 2026. Next.js+Supabase. Live+code.
+  <br>- scoutpanel (2025, Personal): comparador de jugadores tipo Sofascore. Next.js+Express+Drizzle. Live+code.
+  <br>- politicas (2025, Freelance): apps de denuncias + campaña. Next.js+Node+PostgreSQL. Live, privado.
+  <br>- workeriq (2024, Senzary): seguridad de trabajadores en campo IoT. React+Node. Live, privado.
+  <br>- iotlogiq (2023-2026, Senzary): producto Smart Industry, migración desde ThingsBoard. Angular+Node. Live, privado.
+  <br>- fintrack (2026, Personal): gestión de finanzas multi-moneda. Java+Spring Boot+Angular. Code.
+  <br>- fiscalizacion (2025, Freelance): app de fiscalización electoral 2025. Next.js+Redux+Framer Motion. Live, privado.
+  <br>- cloudlab (2023, Personal/No Country): plataforma laboratorios clínicos. Next.js. Live+code.
+  <br>- airportiq (2024-2025, Senzary): monitoreo ambiental Jacksonville Airport. Angular+Node. Privado.</li>
+</ul>
+
+<h2>04. Experiencia (id="experience")</h2>
+<ul>
+<li>Timeline de 3 bloques (cards), cada uno con ícono inicial + badge + rol/empresa/período</li>
+<li>Dentro de cada bloque, sub-items expandibles tipo acordeón (botón con +/× toggle, primero abierto por defecto)</li>
+<li>Bloques reales:
+  <br>1. Senzary (Ago 2023-actualidad): Full-stack/Líder Frontend, IoT industrial. Sub-items: IoTLogIQ,
+  AirportIQ (Jacksonville Airport), WorkerIQ (ENI), DustIQ (IAC), Oil&gas/energía/acero, TrashCans,
+  adopción de IA en equipo.
+  <br>2. Freelance (Jul 2025-actualidad): apps electorales e IoT. Sub-items: apps electorales/fiscalización,
+  apps IoT end-to-end, entrega y coordinación.
+  <br>3. Inicios (Ene-Jul 2023): Soy Henry / No Country / GEN Consultores. Sub-items: asistente de
+  enseñanza, proyecto grupal Cloudlab, frontend freelance GEN Consultores.</li>
+</ul>
+
+<h2>Footer / Contacto (id="contact")</h2>
+<ul>
+<li>Marca + tagline, nav secundaria, botones CV + "Escribime" (mailto)</li>
+<li>Línea divisoria, copyright, link "volver arriba"</li>
+<li>Botón flotante fijo (FAB) "volver arriba" que aparece tras 700px de scroll</li>
+</ul>
+
+<h1>4. Interacciones / detalles técnicos a portar</h1>
+<ul>
+<li>Cursor HUD custom (ring + dot + 4 ticks direccionales N/E/S/O) que sigue el mouse, se agranda sobre
+  elementos clicables, y dispara un "click burst" (círculo expandiéndose) al hacer click. Solo en
+  desktop con hover fino, respeta prefers-reduced-motion. (Nice-to-have, no crítico)</li>
+<li>Toggle claro/oscuro + 4 paletas de acento seleccionables, persistidas en state (no localStorage en
+  el export, pero recomendable agregarlo al portar)</li>
+<li>Reveal on-scroll con IntersectionObserver por sección, con stagger en los hijos</li>
+<li>Typewriter en el rol del hero (loop de 4 frases)</li>
+<li>Marquee de tech logos infinito, con filtros por categoría</li>
+<li>Toggle foto "trabajo" vs "hincha" en hero y en about</li>
+<li>Acordeón de experiencia con primer item abierto por defecto</li>
+<li>Rails laterales fijos con iconos sociales, solo si viewport >= 1480px</li>
+</ul>
+
+<h1>5. Restricción del usuario (clave)</h1>
+<p><strong>El contenido/copy actual de v1 se mantiene igual.</strong> Este documento es solo para adoptar
+la dirección visual (paleta, tipografía, layout, animaciones, estructura de componentes) de v2 sobre
+los componentes reales del repo en src/components/sections/*, sin reescribir contenido salvo que haga
+falta para calzar con el nuevo layout.</p>
+
+</body>
+</html>
