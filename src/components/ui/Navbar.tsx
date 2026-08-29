@@ -155,7 +155,7 @@ export default function Navbar() {
     <AnimatePresence>
       {open && (
         <motion.div
-          className="fixed inset-0 z-30 flex flex-col overflow-y-auto bg-background-deep pt-[calc(env(safe-area-inset-top)+5.5rem)] pb-10 lg:hidden"
+          className="portfolio-navbar fixed inset-0 z-30 flex flex-col overflow-y-auto pt-[calc(env(safe-area-inset-top)+5.5rem)] pb-10 lg:hidden"
           aria-label={t("nav.mobileNav")}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

@@ -7,7 +7,7 @@ export type ThemeMode = "dark" | "light";
 
 const PALETTE_STORAGE_KEY = "theme_palette";
 const MODE_STORAGE_KEY = "theme_mode";
-const DEFAULT_PALETTE: ThemePalette = "ocean";
+const DEFAULT_PALETTE: ThemePalette = "red";
 const DEFAULT_MODE: ThemeMode = "dark";
 
 type ThemeContextValue = {

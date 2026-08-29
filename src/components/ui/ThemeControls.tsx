@@ -5,10 +5,10 @@ import { useTheme, type ThemePalette } from "@/components/providers/ThemeProvide
 import { cn } from "@/lib/utils";
 
 const PALETTES: Array<{ key: ThemePalette; label: string; swatch: string }> = [
+  { key: "red", label: "Pink", swatch: "#ff4785" },
   { key: "ocean", label: "Ocean", swatch: "#2dd4bf" },
   { key: "blue", label: "Blue", swatch: "#57c7ff" },
   { key: "lime", label: "Lime", swatch: "#bef264" },
-  { key: "red", label: "Pink", swatch: "#ff4785" },
 ];
 
 export default function ThemeControls() {

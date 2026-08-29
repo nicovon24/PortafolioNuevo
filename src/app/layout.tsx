@@ -40,7 +40,7 @@ const sora = Sora({
 // Setea data-palette/data-mode antes de hidratar y, en la misma pasada, marca
 // data-loader="pending" si el loader va a mostrarse: el CSS oculta #main/nav/footer
 // desde el primer frame, para que el contenido no se vea antes que el loader.
-const themeInitScript = `(function(){try{var d=document.documentElement;var p=localStorage.getItem("theme_palette")||"ocean";var m=localStorage.getItem("theme_mode")||"dark";d.dataset.palette=p;d.dataset.mode=m;if(sessionStorage.getItem("loader-seen")!=="1"){d.dataset.loader="pending";}}catch(e){}})();`;
+const themeInitScript = `(function(){try{var d=document.documentElement;var p=localStorage.getItem("theme_palette")||"red";var m=localStorage.getItem("theme_mode")||"dark";d.dataset.palette=p;d.dataset.mode=m;if(sessionStorage.getItem("loader-seen")!=="1"){d.dataset.loader="pending";}}catch(e){}})();`;
 
 export const metadata: Metadata = {
   title: "Nicolas Von Muhlinen | Full-stack Developer",
