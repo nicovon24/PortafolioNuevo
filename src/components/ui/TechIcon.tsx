@@ -6,6 +6,7 @@ import ClaudeIcon from "@/assets/svg/claude.svg";
 import CssIcon from "@/assets/svg/css.svg";
 import DockerIcon from "@/assets/svg/docker.svg";
 import ExpressIcon from "@/assets/svg/express.svg";
+import FastapiIcon from "@/assets/svg/fastapi.svg";
 import FigmaIcon from "@/assets/svg/figma.svg";
 import GeminiIcon from "@/assets/svg/gemini.svg";
 import GitIcon from "@/assets/svg/git.svg";
@@ -53,6 +54,7 @@ const ICONS = {
   "css": CssIcon,
   "docker": DockerIcon,
   "express": ExpressIcon,
+  "fastapi": FastapiIcon,
   "figma": FigmaIcon,
   "gemini": GeminiIcon,
   "git": GitIcon,
@@ -105,6 +107,7 @@ export const TECH_COLORS: Record<TechSlug, string> = {
   css: "#1572b6",
   docker: "#2496ed",
   express: "var(--color-ink)",
+  fastapi: "#009688",
   figma: "#f24e1e",
   gemini: "#8e75b2",
   git: "#f05032",

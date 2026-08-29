@@ -63,7 +63,7 @@
 [data-mode="dark"] {
   --color-background: #141c28;
   --color-background-deep: #0e1621;
-  --page-background: color-mix(in srgb, var(--color-background) 87%, var(--color-accent) 13%);
+  --page-background: color-mix(in srgb, var(--color-background) 90%, var(--color-accent) 10%);
   --surface-control: color-mix(in srgb, var(--page-background) 96%, white 4%);
   --surface-control-strong: color-mix(in srgb, var(--page-background) 92%, white 8%);
   --border-control: color-mix(in srgb, var(--color-accent) 28%, transparent);

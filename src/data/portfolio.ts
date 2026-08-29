@@ -41,7 +41,7 @@ export const techGroups: Array<{
   {
     title: "tech.groups.frontend",
     items: [
-      { name: "Next.js", icon: "next", primary: true },
+      { name: "Next.js", icon: "next" },
       { name: "React", icon: "react", primary: true },
       { name: "Angular", icon: "angular", primary: true },
       { name: "Vite.js", icon: "vite" },
@@ -60,21 +60,22 @@ export const techGroups: Array<{
   {
     title: "tech.groups.backend",
     items: [
-      { name: "Java", icon: "java", primary: true },
-      { name: "Spring Boot", icon: "springboot", primary: true },
+      { name: "Java", icon: "java" },
+      { name: "Spring Boot", icon: "springboot" },
       { name: "Node.js", icon: "node", primary: true },
-      { name: "NestJS", icon: "nestjs", primary: true },
+      { name: "FastAPI", icon: "fastapi", primary: true },
+      { name: "NestJS", icon: "nestjs" },
       { name: "Express.js", icon: "express" },
       { name: "JWT", icon: "jwt" },
       { name: "Passport.js", icon: "passport" },
-      { name: "SQL", icon: "sql", primary: true },
-      { name: "PostgreSQL", icon: "postgresql", primary: true },
-      { name: "MongoDB", icon: "mongo", primary: true },
+      { name: "SQL", icon: "sql" },
+      { name: "PostgreSQL", icon: "postgresql" },
+      { name: "MongoDB", icon: "mongo" },
       { name: "Sequelize", icon: "sequelize" },
       { name: "Postman", icon: "postman" },
       { name: "Stripe", icon: "stripe" },
       { name: "Mercado Pago", icon: "mercadopago" },
-      { name: "Docker", icon: "docker", primary: true },
+      { name: "Docker", icon: "docker" },
       { name: "AWS", icon: "aws", primary: true },
       { name: "Git", icon: "git" },
       { name: "Linux", icon: "linux" },
@@ -92,7 +93,7 @@ export const techGroups: Array<{
   {
     title: "tech.groups.ia",
     items: [
-      { name: "Claude Code", icon: "claude", primary: true },
+      { name: "Claude Code", icon: "claude" },
       { name: "ChatGPT", icon: "openai" },
       { name: "Gemini", icon: "gemini" },
       { name: "Agentes GSD", icon: "gsd" },

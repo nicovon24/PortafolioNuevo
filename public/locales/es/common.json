@@ -16,7 +16,7 @@
   "hero": {
     "greeting": "Hola, soy",
     "stackKey": "Stack ·",
-    "stackVal": "TypeScript · Python · Java",
+    "stackVal": "React · Node · TypeScript",
     "roleKey": "Rol ·",
     "roleVal": "Full-stack",
     "statusKey": "Foco ·",
@@ -30,11 +30,11 @@
     "experienceStat": "Experiencia",
     "projectsStat": "Proyectos",
     "stackFocus": "Enfoques y stack",
-    "intro": "Soy full-stack y Analista de Sistemas, con más de 3 años dando vueltas entre frontend y backend. Uso React, Next.js, Node, Angular y TypeScript para armar dashboards, plataformas de datos y sistemas IoT para clientes de Latinoamérica y Estados Unidos: monitoreo de aeropuertos, plataformas deportivas, hasta software para una elección. Hoy programo con Claude y Codex al lado. No piensan por mí, pero aceleran bastante.",
+    "intro": "Soy full-stack y Analista de Sistemas, con más de 3 años moviéndome entre frontend y backend. Trabajo con React, Node, Angular, TypeScript, AWS y FastAPI para armar dashboards, plataformas de datos y sistemas IoT para clientes de Latinoamérica y Estados Unidos: desde monitoreo de aeropuertos y plataformas deportivas hasta software electoral. Hoy programo con Claude y Codex, aplicando spec-driven development y cuidando algo que pesa más que nunca: los fundamentos de programación.",
     "phrases": [
       "Full-stack Developer",
       "Analista de Sistemas",
-      "TypeScript · Java · Python",
+      "React · Node · AWS",
       "Experiencia desde 2022"
     ],
     "eduKey": "Edu ·",
@@ -50,7 +50,7 @@
     "eyebrow": "../Sobre mi",
     "title": "Construyo interfaces y sistemas que conectan datos con decisiones.",
     "descriptionP1": "Programo desde 2022. Arranqué por el frontend y terminé metiéndome en todo lo demás: base de datos, API, deploy y los tickets que nadie quiere agarrar. Hoy trabajo igual de cómodo en cualquiera de las dos puntas.",
-    "descriptionP2": "Pasé por software a medida, IoT industrial (aeropuertos, data centers, monitoreo ambiental), plataformas deportivas y software electoral. Uso React, Next.js, Node, Angular y bases SQL o NoSQL. Claude y Codex están abiertos al lado del editor todos los días.",
+    "descriptionP2": "Pasé por software a medida, IoT industrial (aeropuertos, data centers, monitoreo ambiental), plataformas deportivas y software electoral. Uso React, Node, Angular, TypeScript, AWS y FastAPI para resolver desde interfaces hasta APIs y despliegues. Claude y Codex están abiertos al lado del editor, con spec-driven development y fundamentos bien presentes.",
     "photoCaption": "Desarrollador full-stack en Córdoba, Argentina. Disponible para proyectos remotos en Latinoamérica y Estados Unidos.",
     "photoCaptionFootball": "Fuera del código: fútbol, Liverpool y la Selección Argentina siempre que toca.",
     "services": {
@@ -70,11 +70,11 @@
       },
       "rock": {
         "label": "Rock",
-        "text": "Beatles y Oasis suenan siempre que estoy programando. Si tengo que elegir un disco para una noche larga de código, Definitely Maybe."
+        "text": "Beatles y Oasis suenan siempre que estoy programando."
       },
       "futbol": {
         "label": "Fútbol",
-        "text": "Hincha de Liverpool los fines de semana, de la Selección cuando juega. Yo también juego al fútbol — mal, pero no me pierdo un partido."
+        "text": "Hincha de Liverpool los fines de semana, de la Selección cuando juega."
       }
     }
   },
