@@ -23,7 +23,7 @@ export default function ProfilePhotoToggle({
 
   return (
     <div
-      className="flex items-center gap-1 rounded-full border border-line bg-panel-strong p-1 shadow-card-sm backdrop-blur-sm"
+      className="control-surface-strong flex items-center gap-1 rounded-full border p-1 shadow-card-sm backdrop-blur-sm"
       role="group"
       aria-label={t("photoMode.label")}
     >
@@ -35,7 +35,7 @@ export default function ProfilePhotoToggle({
         title={t("photoMode.work")}
         className={cn(
           "grid size-8 place-items-center rounded-full text-muted transition-all hover:bg-accent/10 hover:text-accent",
-          mode === "work" && "bg-accent text-background shadow-card-sm hover:bg-accent hover:text-background",
+          mode === "work" && "bg-accent text-accent-contrast shadow-card-sm hover:bg-accent hover:text-accent-contrast",
         )}
       >
         <BriefcaseBusiness size={16} />
@@ -48,7 +48,7 @@ export default function ProfilePhotoToggle({
         title={t("photoMode.football")}
         className={cn(
           "grid size-8 place-items-center rounded-full text-muted transition-all hover:bg-accent/10 hover:text-accent",
-          mode === "football" && "bg-accent text-background shadow-card-sm hover:bg-accent hover:text-background",
+          mode === "football" && "bg-accent text-accent-contrast shadow-card-sm hover:bg-accent hover:text-accent-contrast",
         )}
       >
         <SoccerBallIcon className="size-4" />

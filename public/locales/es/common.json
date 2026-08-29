@@ -9,7 +9,9 @@
     "mainNav": "Navegación principal",
     "mobileNav": "Navegación móvil",
     "openMenu": "Abrir menú",
-    "closeMenu": "Cerrar menú"
+    "closeMenu": "Cerrar menú",
+    "language": "Idioma",
+    "theme": "Tema"
   },
   "hero": {
     "greeting": "Hola, soy",

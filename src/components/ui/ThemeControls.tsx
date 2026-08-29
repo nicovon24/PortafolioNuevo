@@ -8,7 +8,7 @@ const PALETTES: Array<{ key: ThemePalette; label: string; swatch: string }> = [
   { key: "ocean", label: "Ocean", swatch: "#2dd4bf" },
   { key: "blue", label: "Blue", swatch: "#57c7ff" },
   { key: "lime", label: "Lime", swatch: "#bef264" },
-  { key: "red", label: "Red", swatch: "#d63a3a" },
+  { key: "red", label: "Pink", swatch: "#ff4785" },
 ];
 
 export default function ThemeControls() {
@@ -37,7 +37,7 @@ export default function ThemeControls() {
         onClick={toggleMode}
         aria-label={mode === "dark" ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
         title={mode === "dark" ? "Modo claro" : "Modo oscuro"}
-        className="grid size-9 place-items-center rounded-full border border-line bg-accent/4 text-accent transition-colors hover:border-accent-2 hover:bg-accent-2/12 hover:text-accent-2"
+        className="control-surface grid size-9 place-items-center rounded-full border text-accent transition-colors hover:border-accent-2 hover:bg-accent-2/12 hover:text-accent-2"
       >
         {mode === "dark" ? <Sun size={16} /> : <Moon size={16} />}
       </button>

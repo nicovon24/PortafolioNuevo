@@ -46,7 +46,7 @@ export default function ProjectsSection() {
         <div
           role="tablist"
           aria-label={t("projects.filters.filterLabel")}
-          className="inline-flex flex-wrap items-center gap-1.5 rounded-full border border-line/40 bg-panel/50 p-1.5 backdrop-blur-md shadow-card-sm"
+          className="control-surface inline-flex flex-wrap items-center gap-1.5 rounded-full border p-1.5 backdrop-blur-md shadow-card-sm"
         >
           {tabs.map(([value, count]) => {
             const active = filter === value;

@@ -7,13 +7,13 @@ import { useTranslation } from "react-i18next";
 import { navItems, profile } from "@/data/portfolio";
 
 const iconBtn =
-  "grid size-9 place-items-center rounded-full border border-line bg-accent/4 text-accent transition-all hover:-translate-y-0.5 hover:border-accent hover:bg-accent/10";
+  "control-surface grid size-9 place-items-center rounded-full border text-accent transition-all hover:-translate-y-0.5 hover:border-accent hover:bg-accent/10";
 
 const actionPrimary =
-  "inline-flex min-h-10 items-center justify-center gap-2 rounded-full border border-accent bg-accent px-5 font-mono text-mini font-bold uppercase tracking-[0.12em] text-background transition-colors hover:border-accent-2 hover:bg-accent-2";
+  "inline-flex min-h-10 items-center justify-center gap-2 rounded-full border border-accent bg-accent px-5 font-mono text-mini font-bold uppercase tracking-[0.12em] text-accent-contrast transition-colors hover:border-accent-2 hover:bg-accent-2";
 
 const actionSecondary =
-  "inline-flex min-h-10 items-center justify-center gap-2 rounded-full border border-line bg-panel-strong px-5 font-mono text-mini font-bold uppercase tracking-[0.12em] text-ink transition-colors hover:border-accent hover:text-accent";
+  "control-surface inline-flex min-h-10 items-center justify-center gap-2 rounded-full border px-5 font-mono text-mini font-bold uppercase tracking-[0.12em] text-ink transition-colors hover:border-accent hover:text-accent";
 
 export default function Footer() {
   const { t } = useTranslation();

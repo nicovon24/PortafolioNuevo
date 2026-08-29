@@ -43,7 +43,7 @@ export default function TechSection() {
       <div
         role="tablist"
         aria-label={t("tech.groupLabel")}
-        className="mb-6 inline-flex flex-wrap items-center gap-1.5 rounded-full border border-line/40 bg-panel/50 p-1.5 backdrop-blur-md shadow-card-sm"
+        className="control-surface mb-6 inline-flex flex-wrap items-center gap-1.5 rounded-full border p-1.5 backdrop-blur-md shadow-card-sm"
       >
         {tabs.map((tab) => {
           const isActive = active === tab.key;
@@ -90,9 +90,9 @@ export default function TechSection() {
                 key={`${item.name}-${index}`}
                 aria-hidden={index >= items.length ? true : undefined}
                 className={cn(
-                  "group/tech-card relative flex w-36 sm:w-40 shrink-0 flex-col items-center justify-center gap-2.5 rounded-2xl border p-4 text-center backdrop-blur-md transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_12px_28px_-6px_color-mix(in_srgb,var(--color-accent)_22%,transparent)]",
+                  "tech-surface-card group/tech-card relative flex w-36 sm:w-40 shrink-0 flex-col items-center justify-center gap-2.5 rounded-2xl border p-4 text-center backdrop-blur-md transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_12px_28px_-6px_color-mix(in_srgb,var(--color-accent)_22%,transparent)]",
                   isPrimary
-                    ? "border-accent/40 bg-panel-strong/80 hover:border-accent"
+                    ? "tech-stack-card--primary border-accent/40 bg-panel-strong/80 hover:border-accent"
                     : "border-line/40 bg-panel/50 hover:border-accent/50"
                 )}
               >

@@ -9,7 +9,9 @@
     "mainNav": "Main navigation",
     "mobileNav": "Mobile navigation",
     "openMenu": "Open menu",
-    "closeMenu": "Close menu"
+    "closeMenu": "Close menu",
+    "language": "Language",
+    "theme": "Theme"
   },
   "hero": {
     "greeting": "Hi, I'm",

@@ -35,13 +35,13 @@ const HERO_CAROUSEL: Array<{ name: string; icon: TechSlug }> = [
 ];
 
 const btnPrimary =
-  "inline-flex min-h-10 items-center justify-center gap-2 rounded-full border border-accent bg-accent px-5 font-mono text-sm font-bold uppercase tracking-wider text-background shadow-[0_0_24px_color-mix(in_srgb,var(--color-accent)_18%,transparent)] transition-colors hover:border-accent-2 hover:bg-accent-2";
+  "inline-flex min-h-10 items-center justify-center gap-2 rounded-full border border-accent bg-accent px-5 font-mono text-sm font-bold uppercase tracking-wider text-accent-contrast shadow-[0_0_24px_color-mix(in_srgb,var(--color-accent)_18%,transparent)] transition-colors hover:border-accent-2 hover:bg-accent-2";
 
 const btnSecondary =
-  "inline-flex min-h-10 items-center justify-center gap-2 rounded-full border border-line bg-transparent px-5 font-mono text-sm font-bold uppercase tracking-wider text-muted transition-colors hover:border-accent hover:text-accent";
+  "control-surface inline-flex min-h-10 items-center justify-center gap-2 rounded-full border px-5 font-mono text-sm font-bold uppercase tracking-wider text-muted transition-colors hover:border-accent hover:bg-accent/8 hover:text-accent";
 
 const iconBtn =
-  "grid size-9 place-items-center rounded-full border border-line bg-panel-strong text-accent transition-colors hover:border-accent-2 hover:bg-accent-2/12 hover:text-accent-2";
+  "control-surface grid size-9 place-items-center rounded-full border text-accent transition-colors hover:border-accent-2 hover:bg-accent-2/12 hover:text-accent-2";
 
 const nameLine2Class =
   "font-display font-bold text-accent text-[clamp(2.35rem,calc(1rem+5.85vw),4.65rem)] leading-[0.92] [text-shadow:0_0_30px_color-mix(in_srgb,var(--color-accent)_35%,transparent)]";
@@ -107,7 +107,7 @@ function HeroRingStat({ label, value }: { label: string; value: string }) {
         {label}
       </span>
       <div
-        className="relative grid size-[4.35rem] place-items-center rounded-full border-2 border-dashed border-accent/75 bg-panel-strong shadow-[0_0_28px_color-mix(in_srgb,var(--color-accent)_18%,transparent),inset_0_0_20px_color-mix(in_srgb,var(--color-accent)_8%,transparent)] backdrop-blur-sm sm:size-[4.85rem]"
+        className="hero-ring-stat control-surface-strong relative grid size-[4.35rem] place-items-center rounded-full border-2 border-dashed border-accent/75 shadow-[0_0_28px_color-mix(in_srgb,var(--color-accent)_18%,transparent),inset_0_0_20px_color-mix(in_srgb,var(--color-accent)_8%,transparent)] backdrop-blur-sm sm:size-[4.85rem]"
         aria-hidden
       >
         <div className="pointer-events-none absolute inset-0 rounded-full border border-accent/25" />
@@ -296,7 +296,7 @@ export default function HeroSection() {
                   return (
                   <li
                     key={`${item.name}-${i}`}
-                    className={`group/hero-tech-item flex w-[5.75rem] shrink-0 flex-col items-center justify-center gap-1.5 rounded-lg border border-line/70 bg-panel-strong px-2 py-2.5 backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 sm:w-[6.25rem] ${
+                    className={`tech-surface-card group/hero-tech-item flex w-[5.75rem] shrink-0 flex-col items-center justify-center gap-1.5 rounded-lg border border-line/70 bg-panel-strong px-2 py-2.5 backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 sm:w-[6.25rem] ${
                       isEven
                         ? "hover:border-accent hover:bg-accent/4 hover:shadow-[0_0_0_1px_color-mix(in_srgb,var(--color-accent)_40%,transparent)_inset,0_0_18px_color-mix(in_srgb,var(--color-accent)_22%,transparent)]"
                         : "hover:border-accent-2 hover:bg-accent-2/4 hover:shadow-[0_0_0_1px_color-mix(in_srgb,var(--color-accent-2)_40%,transparent)_inset,0_0_18px_color-mix(in_srgb,var(--color-accent-2)_22%,transparent)]"

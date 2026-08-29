@@ -1,7 +1,7 @@
 "use client";
 
 import { Menu, X } from "lucide-react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { navItems } from "@/data/portfolio";
@@ -10,7 +10,7 @@ import LanguageToggle from "@/components/ui/LanguageToggle";
 import ThemeControls from "@/components/ui/ThemeControls";
 
 const headerIconBtn =
-  "grid size-9 place-items-center rounded-full border border-line bg-accent/4 text-accent transition-colors hover:border-accent-2 hover:bg-accent-2/12 hover:text-accent-2";
+  "control-surface grid size-9 place-items-center rounded-full border text-accent transition-colors hover:border-accent-2 hover:bg-accent-2/12 hover:text-accent-2";
 
 function useActiveSectionHref() {
   const ids = useMemo(() => navItems.map((item) => item.href.replace(/^#/, "")), []);
@@ -77,26 +77,28 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // El panel mobile tapa toda la pantalla: bloquea el scroll de fondo
+  // mientras esta abierto, igual que hace el Loader.
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
   return (
+    <>
     <motion.header
       className={cn(
-        "fixed top-0 left-1/2 z-40 w-full -translate-x-1/2 border border-transparent bg-background-deep/72 backdrop-blur-[18px] px-page",
+        "portfolio-navbar fixed top-0 left-1/2 z-40 w-full -translate-x-1/2 border border-transparent px-page",
         open ? "overflow-visible" : "overflow-hidden",
         hasScrolled &&
-          "w-[min(94vw,84rem)] rounded-full border-line bg-panel-strong shadow-[0_18px_60px_rgba(0,0,0,0.34)]",
+          "w-[min(94vw,84rem)] rounded-full border-line shadow-[0_18px_60px_rgba(0,0,0,0.34)]",
       )}
       initial={{ opacity: 0, y: -42 }}
       animate={{ opacity: 1, y: hasScrolled ? 16 : 0 }}
       transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
     >
-      {/* Línea inferior estática, como en la referencia visual. */}
-      <span
-        className={cn(
-          "pointer-events-none absolute bottom-0 left-0 h-px w-full bg-accent/35 opacity-100 transition-opacity duration-300",
-          hasScrolled && "opacity-0",
-        )}
-        aria-hidden="true"
-      />
       <div className={cn(
         "mx-auto flex w-full max-w-shell items-center justify-between gap-[clamp(1rem,2vw,2.5rem)] py-[1.05rem]",
         hasScrolled && "py-3",
@@ -132,44 +134,74 @@ export default function Navbar() {
           </a>
         ))}
       </nav>
-      <div className="relative z-[1] flex items-center gap-1.5">
+      {/* Controles de tema/idioma solo en desktop: en mobile viven dentro
+          del panel full-screen, con mas espacio y labels legibles. */}
+      <div className="relative z-[1] hidden items-center gap-1.5 lg:flex">
         <ThemeControls />
         <LanguageToggle />
-        <button
-          type="button"
-          className={cn(headerIconBtn, "lg:hidden")}
-          onClick={() => setOpen((value) => !value)}
-          aria-label={open ? "Cerrar menu" : "Abrir menu"}
-          aria-expanded={open}
-        >
-          {open ? <X size={19} /> : <Menu size={19} />}
-        </button>
       </div>
-      {open && (
-        <motion.nav
-          className="absolute top-[calc(100%+10px)] right-0 z-50 grid w-[min(260px,88vw)] gap-3 rounded-[22px] border border-line bg-panel-strong p-4 shadow-[0_24px_60px_rgba(25,25,25,0.14)] lg:hidden"
-          aria-label={t("nav.mobileNav")}
-          initial={{ opacity: 0, y: -14, scale: 0.98 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.25, ease: "easeOut" }}
-        >
-          {navItems.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "rounded-lg px-2 py-2 text-ink transition-colors hover:text-accent-2",
-                activeHref === item.href && "bg-accent/14 text-accent",
-              )}
-              aria-current={activeHref === item.href ? "location" : undefined}
-              onClick={() => setOpen(false)}
-            >
-              {t(item.label)}
-            </a>
-          ))}
-        </motion.nav>
-      )}
+      <button
+        type="button"
+        className={cn(headerIconBtn, "relative z-1 lg:hidden")}
+        onClick={() => setOpen((value) => !value)}
+        aria-label={open ? "Cerrar menu" : "Abrir menu"}
+        aria-expanded={open}
+      >
+        {open ? <X size={19} /> : <Menu size={19} />}
+      </button>
       </div>
     </motion.header>
+
+    <AnimatePresence>
+      {open && (
+        <motion.div
+          className="fixed inset-0 z-30 flex flex-col overflow-y-auto bg-background-deep pt-[calc(env(safe-area-inset-top)+5.5rem)] pb-10 lg:hidden"
+          aria-label={t("nav.mobileNav")}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.25, ease: "easeOut" }}
+        >
+          <nav
+            className="flex flex-col gap-1 px-page"
+            aria-label={t("nav.mainNav")}
+          >
+            {navItems.map((item, index) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  "flex items-center gap-3 rounded-2xl px-3 py-3.5 font-mono text-lg text-ink transition-colors hover:text-accent-2",
+                  activeHref === item.href && "bg-accent/14 text-accent",
+                )}
+                aria-current={activeHref === item.href ? "location" : undefined}
+                onClick={() => setOpen(false)}
+              >
+                <span className="font-mono text-xs text-muted">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                {t(item.label)}
+              </a>
+            ))}
+          </nav>
+
+          <div className="mt-8 flex flex-col gap-4 border-t border-line px-page pt-6">
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-muted">
+                {t("nav.language")}
+              </span>
+              <LanguageToggle />
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-muted">
+                {t("nav.theme")}
+              </span>
+              <ThemeControls />
+            </div>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+    </>
   );
 }
