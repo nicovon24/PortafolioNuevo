@@ -453,4 +453,22 @@ export const projects: PortfolioProject[] = [
     ],
     privateRepo: true,
   },
+  {
+    key: "tictactoe",
+    categories: ["personal"],
+    year: "2026",
+    role: "Frontend",
+    org: "personal",
+    title: "Tic Tac Toe",
+    technologies: ["JavaScript", "HTML5", "CSS"],
+    images: [
+      "/images/projects/tictactoe/1.png",
+      "/images/projects/tictactoe/2.png",
+      "/images/projects/tictactoe/3.png",
+      "/images/projects/tictactoe/4.png",
+      "/images/projects/tictactoe/5.png",
+    ],
+    code: "https://github.com/nicovon24/tictac-toe",
+    live: "https://tictactoe-arg.vercel.app/",
+  },
 ];
