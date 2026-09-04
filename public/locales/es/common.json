@@ -30,7 +30,7 @@
     "experienceStat": "Experiencia",
     "projectsStat": "Proyectos",
     "stackFocus": "Enfoques y stack",
-    "intro": "Soy full-stack y Analista de Sistemas, con más de 3 años moviéndome entre frontend y backend. Trabajo con React, Node, Angular, TypeScript, AWS y FastAPI para armar dashboards, plataformas de datos y sistemas IoT para clientes de Latinoamérica y Estados Unidos: desde monitoreo de aeropuertos y plataformas deportivas hasta software electoral. Hoy programo con Claude y Codex, aplicando spec-driven development y cuidando algo que pesa más que nunca: los fundamentos de programación.",
+    "intro": "Soy full-stack y Analista de Sistemas, con 4 años moviéndome entre frontend y backend. Trabajo con React, Node, Angular, TypeScript, AWS y FastAPI para armar dashboards, plataformas de datos y sistemas IoT para clientes de Latinoamérica y Estados Unidos: desde monitoreo de aeropuertos y plataformas deportivas hasta software electoral. Hoy programo con Claude y Codex, aplicando spec-driven development y cuidando algo que pesa más que nunca: los fundamentos de programación.",
     "phrases": [
       "Full-stack Developer",
       "Analista de Sistemas",
@@ -166,7 +166,7 @@
     "items": {
       "senzary": {
         "title": "Full-stack Developer · Líder de Frontend · IoT industrial",
-        "date": "Agosto 2023 - Actualidad",
+        "date": "Enero 2023 - Actualidad",
         "points": [
           "Desarrollo end-to-end de dashboards IoT industriales, con fuerte foco en UX/UI para supervisión y lectura rápida de sensores y KPIs",
           "Análisis de casos de uso, offsets y thresholds; rule chains, procesamiento avanzado de datos y alarmas (severidad y notificación acordes a operación)",

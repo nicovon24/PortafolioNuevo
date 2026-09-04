@@ -30,7 +30,7 @@
     "experienceStat": "Experience",
     "projectsStat": "Projects",
     "stackFocus": "Focus & stack",
-    "intro": "I'm full-stack and a Systems Analyst, with 3+ years moving between frontend and backend. I work with React, Node, Angular, TypeScript, AWS and FastAPI to build dashboards, data platforms and IoT systems for clients across Latin America and the US: from airport monitoring and sports platforms to electoral software. These days I code with Claude and Codex, using spec-driven development while keeping one thing very clear: programming fundamentals matter more than ever.",
+    "intro": "I'm full-stack and a Systems Analyst, with 4 years moving between frontend and backend. I work with React, Node, Angular, TypeScript, AWS and FastAPI to build dashboards, data platforms and IoT systems for clients across Latin America and the US: from airport monitoring and sports platforms to electoral software. These days I code with Claude and Codex, using spec-driven development while keeping one thing very clear: programming fundamentals matter more than ever.",
     "phrases": [
       "Full-stack Developer",
       "Systems Analyst",
@@ -166,7 +166,7 @@
     "items": {
       "senzary": {
         "title": "Full-stack Developer · Frontend Lead · Industrial IoT",
-        "date": "August 2023 - Present",
+        "date": "January 2023 - Present",
         "points": [
           "End-to-end industrial IoT dashboard work with strong UX/UI emphasis for operations and quick reading of sensors and KPIs",
           "Use case breakdown, offsets and thresholds; rule chains, advanced data processing and alarms (severity and notification aligned with operations)",
