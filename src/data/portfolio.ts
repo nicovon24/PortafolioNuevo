@@ -197,6 +197,35 @@ export type PortfolioProject = {
 
 export const projects: PortfolioProject[] = [
   {
+    key: "hermes",
+    categories: ["personal"],
+    year: "2026",
+    role: "Full-stack · AI",
+    org: "personal",
+    title: "Hermes — Agent-to-Agent B2B Commerce Platform",
+    technologies: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "PostgreSQL",
+      "Prisma",
+      "Groq",
+      "Zod",
+      "Viem",
+      "Solana Web3.js",
+      "NDJSON/SSE",
+      "Vitest",
+      "Docker",
+    ],
+    images: [
+      "/images/projects/hermes/1.png",
+      "/images/projects/hermes/2.png",
+      "/images/projects/hermes/3.png",
+      "/images/projects/hermes/4.png",
+      "/images/projects/hermes/5.png",
+    ],
+  },
+  {
     key: "iotarg",
     categories: ["iot", "personal"],
     year: "2026",
