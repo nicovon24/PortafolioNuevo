@@ -202,7 +202,7 @@ export const projects: PortfolioProject[] = [
     year: "2026",
     role: "Full-stack · AI",
     org: "personal",
-    title: "Hermes — Agent-to-Agent B2B Commerce Platform",
+    title: "Hermes - Agent-to-Agent - Hackathon",
     technologies: [
       "Next.js",
       "React",
