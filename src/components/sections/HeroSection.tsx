@@ -201,7 +201,7 @@ export default function HeroSection() {
         animate={ready ? "visible" : "hidden"}
       >
         <motion.div variants={heroStatItemVariants}>
-          <HeroRingStat label={t("hero.experienceStat")} value="4" />
+          <HeroRingStat label={t("hero.experienceStat")} value="3+" />
         </motion.div>
         <motion.div variants={heroStatItemVariants}>
           <HeroRingStat label={t("hero.projectsStat")} value="12+" />

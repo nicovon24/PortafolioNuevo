@@ -12,13 +12,13 @@ export const profile = {
   // Nombre de pila con capitalizacion normal: usado en el hero ("Hola, soy Nicolás"),
   // separado de `name` (mayusculas, footer/alt) para no parsear/normalizar ahi.
   heroFirstName: "Nicolás",
-  roleFirst: "Full-stack",
-  roleSecond: "Developer",
+  roleFirst: "AI Engineer",
+  roleSecond: "Full-Stack",
   location: "Córdoba, Argentina",
   intro:
-    "Soy desarrollador Full-stack y Analista de Sistemas con experiencia desde 2022. Construyo frontend y backend de aplicaciones web, dashboards y plataformas de datos con React, Node, Angular, React Native, Claude Code y AWS. He trabajado en proyectos para industrias diversas — software a medida, IoT industrial, plataformas deportivas y software electoral — para clientes en Latinoamérica y EE.UU.",
+    "AI Engineer con base full-stack y experiencia profesional desde 2023. Construyo aplicaciones con LLMs, agentes y MCP. En Senzary desarrollé un MCP usado por clientes en producción; hoy evalúo agentes de código en AnyoneAI.",
   about:
-    "Radicado en Córdoba, Argentina. Soy desarrollador full-stack y Analista de Sistemas: trabajo tanto en frontend como en backend con React, Next.js, Node, TypeScript, Angular y bases de datos SQL/NoSQL. He entregado proyectos en industrias diversas — software a medida, plataformas deportivas, aplicaciones electorales y plataformas IoT industriales (aeropuertos, data centers, monitoreo ambiental) — para clientes en Latinoamérica y EE.UU. Hablo tres idiomas y uso herramientas de IA (Cursor, Claude, Gemini) como parte activa de mi flujo de trabajo.",
+    "Desde Córdoba construyo aplicaciones con LLMs sobre una base de ingeniería full-stack. Fui Senior Full-Stack en Senzary y hoy trabajo en AnyoneAI, además de continuar Polytics como freelance. FinTrack es de uso personal, Hermes es una demo premiada y LoRa Desk está en desarrollo.",
   email: "nicovon24@gmail.com",
   socials: [
     { label: "GitHub", href: "https://github.com/nicovon24" },
@@ -29,8 +29,8 @@ export const profile = {
 
 export const services = [
   "Full-stack: frontend y backend",
-  "Dashboards y visualización de datos",
-  "Proyectos en industrias diversas",
+  "Aplicaciones con LLMs, agentes y MCP",
+  "Integraciones con datos y controles de acceso",
   "Fan de Star Wars y del deporte",
 ];
 
@@ -116,7 +116,7 @@ export const senzaryProducts = [
 ] as const;
 
 /** Freelance: politica primero, que es el foco principal. */
-export const freelanceProducts = ["political", "iot", "delivery"] as const;
+export const freelanceProducts = ["political", "delivery"] as const;
 
 export const experiences: Array<{
   key: string;
@@ -132,26 +132,24 @@ export const experiences: Array<{
   products?: readonly string[];
 }> = [
   {
+    key: "anyoneai",
+    company: "AnyoneAI",
+    icon: "/images/company/freelance.png",
+    kind: "professional",
+    current: true,
+  },
+  {
     key: "senzary",
     company: "Senzary",
     icon: "/images/projects/senzary/logo/1.png",
     kind: "professional",
-    current: true,
+    current: false,
     products: senzaryProducts,
-  },
-  {
-    key: "politicalFreelance",
-    company: "Freelance · consultoría política e IoT",
-    icon: "/images/company/freelance.png",
-    iconBg: "#2a1414",
-    kind: "freelance",
-    current: true,
-    products: freelanceProducts,
   },
   {
     key: "early2023",
     // Soy Henry ya va en el titulo: repetirlo aca era redundante.
-    company: "No Country · GEN Consultores",
+    company: "Henry",
     icon: "/images/company/henry.png",
     iconBg: "#ffff00",
     kind: "academic",
@@ -197,10 +195,42 @@ export type PortfolioProject = {
 
 export const projects: PortfolioProject[] = [
   {
-    key: "hermes",
+    key: "fintrack",
     categories: ["personal"],
     year: "2026",
-    role: "Full-stack · AI",
+    role: "AI · Full-stack",
+    org: "personal",
+    title: "FinTrack",
+    technologies: [
+      "Java",
+      "Spring Boot",
+      "Spring AI",
+      "Groq",
+      "MCP",
+      "Angular 22",
+      "Maven",
+      "Docker",
+      "Spring Data",
+      "Spring Security",
+      "Swagger",
+    ],
+    images: [
+      "/images/projects/fintrack/1.png",
+      "/images/projects/fintrack/2.png",
+      "/images/projects/fintrack/3.png",
+      "/images/projects/fintrack/4.png",
+      "/images/projects/fintrack/5.png",
+    ],
+    code: "https://github.com/nicovon24/fintrack",
+  },
+
+  {
+    key: "hermes",
+    code: "https://github.com/nicovon24/hermes",
+    live: "https://hermes-hk.vercel.app/",
+    categories: ["personal"],
+    year: "2026",
+    role: "Backend · Agents",
     org: "personal",
     title: "Hermes - Agent-to-Agent - Hackathon",
     technologies: [
@@ -210,6 +240,7 @@ export const projects: PortfolioProject[] = [
       "PostgreSQL",
       "Prisma",
       "Groq",
+      "LangChain",
       "Zod",
       "Viem",
       "Solana Web3.js",
@@ -310,7 +341,7 @@ export const projects: PortfolioProject[] = [
       "/images/projects/prodeazo/login.png",
       "/images/projects/prodeazo/inicio.jpg",
     ],
-    code: "https://github.com/nicovon24/Prodeazo",
+    code: "https://github.com/ProdeazoApp/ProdeazoApp",
     live: "https://prodeazo.vercel.app",
   },
   {
@@ -389,7 +420,6 @@ export const projects: PortfolioProject[] = [
       "/images/projects/senzary/smartindustry/smart-industry-1.png",
       "/images/projects/senzary/smartindustry/overview.png",
       "/images/projects/senzary/smartindustry/digitaltwin.png",
-      "/images/projects/senzary/demo/predictive.png",
       "/images/projects/senzary/indiana/1.png",
       "/images/projects/senzary/demo/air-quality-2.png",
       "/images/projects/senzary/demo/temperature.png",
@@ -402,40 +432,13 @@ export const projects: PortfolioProject[] = [
     privateRepo: true,
   },
   {
-    key: "fintrack",
-    categories: ["personal"],
-    year: "2026",
-    role: "Full-stack",
-    org: "personal",
-    title: "Fintrack",
-    technologies: [
-      "Java",
-      "Spring Boot",
-      "AngularJS",
-      "Maven",
-      "Docker",
-      "Spring Data",
-      "Spring Security",
-      "Passport.js",
-      "Swagger",
-    ],
-    images: [
-      "/images/projects/fintrack/1.png",
-      "/images/projects/fintrack/2.png",
-      "/images/projects/fintrack/3.png",
-      "/images/projects/fintrack/4.png",
-      "/images/projects/fintrack/5.png",
-    ],
-    code: "https://github.com/nicovon24/fintrack",
-  },
-  {
     key: "appfiscalizacion",
     categories: ["work", "freelance"],
     year: "2025",
     role: "Full-stack",
     org: "freelance",
     featured: true,
-    title: "App Fiscalización",
+    title: "Polytics · App Fiscalización",
     technologies: ["Next.js", "Framer Motion", "Redux Toolkit", "Vercel"],
     live: "https://fiscalizar.lalibertadavanzacba.com/",
     privateRepo: true,
@@ -484,6 +487,7 @@ export const projects: PortfolioProject[] = [
   },
   {
     key: "tictactoe",
+    hidden: true,
     categories: ["personal"],
     year: "2026",
     role: "Frontend",

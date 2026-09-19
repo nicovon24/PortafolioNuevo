@@ -43,9 +43,9 @@ const sora = Sora({
 const themeInitScript = `(function(){try{var d=document.documentElement;var p=localStorage.getItem("theme_palette")||"red";var m=localStorage.getItem("theme_mode")||"dark";d.dataset.palette=p;d.dataset.mode=m;if(sessionStorage.getItem("loader-seen")!=="1"){d.dataset.loader="pending";}}catch(e){}})();`;
 
 export const metadata: Metadata = {
-  title: "Nicolas Von Muhlinen | Full-stack Developer",
+  title: "Nicolás Von Muhlinen | AI Engineer · Full-Stack",
   description:
-    "Portfolio de Nicolas Von Muhlinen, desarrollador Full-stack (frontend y backend) basado en Córdoba, Argentina. Proyectos en industrias diversas: software a medida, plataformas de datos, dashboards e IoT.",
+    "Portfolio de Nicolás Von Muhlinen, AI Engineer con base full-stack en Córdoba, Argentina. Aplicaciones con LLMs, agentes, MCP y sistemas en producción.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

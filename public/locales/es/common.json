@@ -16,12 +16,12 @@
   "hero": {
     "greeting": "Hola, soy",
     "stackKey": "Stack ·",
-    "stackVal": "React · Node · TypeScript",
+    "stackVal": "TypeScript · Java · Python",
     "roleKey": "Rol ·",
-    "roleVal": "Full-stack",
+    "roleVal": "AI Engineer · Full-Stack",
     "statusKey": "Foco ·",
-    "statusVal": "Full-stack / IA",
-    "available": "Disponible para nuevos proyectos",
+    "statusVal": "LLM apps · Agents · MCP",
+    "available": "Disponible para un rol full-time",
     "location": "Córdoba, ARG · Remoto",
     "viewProjects": "Ver proyectos",
     "cv": "Descargar CV",
@@ -30,12 +30,12 @@
     "experienceStat": "Experiencia",
     "projectsStat": "Proyectos",
     "stackFocus": "Enfoques y stack",
-    "intro": "Soy full-stack y Analista de Sistemas, con 4 años moviéndome entre frontend y backend. Trabajo con React, Node, Angular, TypeScript, AWS y FastAPI para armar dashboards, plataformas de datos y sistemas IoT para clientes de Latinoamérica y Estados Unidos: desde monitoreo de aeropuertos y plataformas deportivas hasta software electoral. Hoy programo con Claude y Codex, aplicando spec-driven development y cuidando algo que pesa más que nunca: los fundamentos de programación.",
+    "intro": "AI Engineer con base full-stack y experiencia en software desde 2023. En Senzary lideré el equipo y construí un servidor Model Context Protocol (MCP) usado por clientes en producción. Desarrollo aplicaciones con LLMs, salidas validadas y controles de acceso en backend, y evalúo agentes de código en AnyoneAI. Disponible para un rol full-time; mi actividad actual combina un contrato part-time flexible y proyectos freelance.",
     "phrases": [
-      "Full-stack Developer",
-      "Analista de Sistemas",
-      "React · Node · AWS",
-      "Experiencia desde 2022"
+      "AI Engineer",
+      "Full-Stack",
+      "LLM apps · Agents · MCP",
+      "Experiencia profesional desde 2023"
     ],
     "eduKey": "Edu ·",
     "eduVal": "Analista de Sistemas"
@@ -48,15 +48,15 @@
   "about": {
     "sectionLabel": "Sobre mí",
     "eyebrow": "../Sobre mi",
-    "title": "Construyo interfaces y sistemas que conectan datos con decisiones.",
-    "descriptionP1": "Programo desde 2022. Arranqué por el frontend y terminé metiéndome en todo lo demás: base de datos, API, deploy y los tickets que nadie quiere agarrar. Hoy trabajo igual de cómodo en cualquiera de las dos puntas.",
-    "descriptionP2": "Pasé por software a medida, IoT industrial (aeropuertos, data centers, monitoreo ambiental), plataformas deportivas y software electoral. Uso React, Node, Angular, TypeScript, AWS y FastAPI para resolver desde interfaces hasta APIs y despliegues. Claude y Codex están abiertos al lado del editor, con spec-driven development y fundamentos bien presentes.",
-    "photoCaption": "Desarrollador full-stack en Córdoba, Argentina. Disponible para proyectos remotos en Latinoamérica y Estados Unidos.",
+    "title": "Conecto funcionalidades con LLMs con el producto que las rodea.",
+    "descriptionP1": "En Senzary pasé de Junior Frontend a Senior Full-Stack, lideré el equipo y contribuí al crecimiento de 3 a más de 10 clientes enterprise. Construí su servidor MCP e integraciones multi-tenant en tiempo real. Desde agosto de 2026 evalúo agentes de código en AnyoneAI.",
+    "descriptionP2": "FinTrack combina Spring AI, herramientas del bróker de solo lectura y tablas financieras armadas en Java. En Hermes desarrollé el backend y la integración de agentes dentro de un equipo de cinco. LoRa Desk está en desarrollo con Python/FastAPI, infraestructura RAG híbrida y MCP. También tengo experiencia con AWS en producción.",
+    "photoCaption": "AI Engineer · Full-Stack en Córdoba, Argentina. Disponible para nuevas oportunidades.",
     "photoCaptionFootball": "Fuera del código: fútbol, Liverpool y la Selección Argentina siempre que toca.",
     "services": {
       "fullstack": "Full-stack: frontend y backend",
-      "dashboards": "Dashboards y visualización de datos",
-      "industries": "Proyectos en industrias bien distintas",
+      "dashboards": "Aplicaciones con LLMs, agentes y MCP",
+      "industries": "Sistemas en tiempo real y acceso por tenant",
       "ai": "La IA ya es parte de mi flujo diario"
     },
     "personal": {
@@ -112,16 +112,16 @@
     },
     "items": {
       "hermes": {
-        "description": "Proyecto creado para un hackathon, donde obtuvimos el segundo puesto en el track Fintech. Hermes es un prototipo de comercio B2B autónomo en el que agentes de IA compran por empresas. A partir del contexto privado de la compañía —inventario, ventas, cobertura objetivo y capital— genera una solicitud de compra, abre una licitación con tres agentes distribuidores, negocia precios y condiciones por rondas, adjudica cada producto a la mejor oferta elegible y emite las órdenes de compra. Si el mandato lo permite, también liquida el pago con activos digitales: ARGt sobre Arbitrum y una ruta experimental cross-chain con USDC sobre Solana. Construido como un monolito modular y server-centric con Next.js y PostgreSQL mediante Prisma. Groq propone lenguaje y términos comerciales con salida estructurada, mientras reglas determinísticas del servidor validan identidad, stock, presupuesto, margen, adjudicación y pagos antes de persistir cualquier dato. Cada mensaje, oferta, ronda, orden, pago y evento de dominio queda registrado para auditoría y replay. Demo/prototipo; no es un sistema de producción."
+        "description": "Demo de hackathon de negociación B2B entre agentes con liquidación on-chain. 2.º puesto, HackCBA/26 Fintech. En un equipo de cinco desarrollé el backend y la integración de agentes con TypeScript, LangChain y Groq. Esquemas estrictos, fallbacks deterministas y validación en servidor acotan presupuesto, proveedores, stock e importes. Incluye idempotencia por correlation ID, auditoría y progreso por SSE. Demo/prototipo, no servicio en producción."
       },
       "prodeazo": {
-        "description": "Plataforma de pronósticos y estadísticas de fútbol pensada para el Mundial 2026 y escalar a otros torneos: fixtures y resultados en tiempo real, predicciones antes del inicio del partido, puntos por aciertos y rankings generales y por ligas. MVP con fixture, predicciones, ranking, comparativa usuario a usuario y picks especiales (campeón, goleador, etc.); roadmap en fases para miniligas con administración y un módulo estadístico reutilizable (grupos, llaves, métricas y perfiles). Stack inicial: Next.js y TypeScript, Supabase con PostgreSQL, Tailwind y NextUI; fixtures y resultados vía Bzzoiro BSD."
+        "description": "Plataforma de pronósticos de fútbol co-construida y en producción, con fixtures y resultados en tiempo real, predicciones, puntos y rankings generales y por liga. Desarrollada para el Mundial 2026 con Next.js, TypeScript y Supabase."
       },
       "scoutpanel": {
         "description": "Proyecto desarrollado para un challenge y que sigue en proceso: planeo seguir trabajándolo hasta cerrarlo. El diseño del frontend, del backend y de la base de datos es propio. Los datos son inventados y cargados por seed; la app no está conectada a ninguna API externa de estadísticas ni jugadores reales. Funcionalidades: búsqueda y filtros (posición, nacionalidad, club, edad), comparador hasta tres jugadores con radar y tablas, historial de lesiones ligado al rating, shortlist con auth JWT, clubes, reportes exportables PDF/Excel, heatmaps y vista de mercado. UI oscura inspirada en LDP y Sofascore. Stack: Next.js 14 (App Router), TypeScript, Tailwind, HeroUI (NextUI), Zustand y Recharts; API Express, Drizzle, Zod y PostgreSQL 16; tests Vitest, Supertest y Playwright; Docker y deploy Vercel + Render + Supabase."
       },
       "appfiscalizacion": {
-        "description": "Web para fiscales generales de Córdoba en las legislativas de octubre de 2025: dashboard, login, fiscales, incidencias, preguntas y escrutinio por mesas, consumiendo una API REST. Next.js (App Router), Redux Toolkit y Tailwind; feedback con toasts y alertas. Deploy en Vercel."
+        "description": "Polytics, freelance desde enero de 2025. Construí la app para más de 20.000 fiscales y participé en el diseño del sistema que centralizó más de 20.000 actas la noche electoral, sin pérdida de datos reportada durante el evento. También desarrollé sitios públicos sin caídas reportadas durante los picos de ese día. Hoy construyo una nueva versión de la app y un CRM. Node.js, NestJS y Next.js."
       },
       "queabuso": {
         "description": "Dos apps para el mismo cliente — Gabriel Bornoroni y Libertad Avanza Córdoba. ¡Qué Abuso! CBA: plataforma para denunciar abusos impositivos y burocráticos, con formulario y carga de evidencia, feed público de denuncias y reacciones. Sitio oficial de Gabriel Bornoroni: web de campaña con home, sorteo y secciones. Full-stack: Next.js/React, TypeScript, Tailwind y Node.js + PostgreSQL."
@@ -145,10 +145,13 @@
         "description": "App de estudio para la certificación AWS Certified Cloud Practitioner: mapea unos 80 servicios de AWS en categorías y en los 4 dominios del examen mediante un mapa mental interactivo con zoom, un catálogo con buscador, diagramas de referencia de arquitecturas y un modo de práctica con flashcards. 100% client-side, sin backend. Next.js, React, TypeScript y Tailwind CSS."
       },
       "fintrack": {
-        "description": "App full-stack para gestionar ingresos, gastos e inversiones con soporte multi-moneda (ARS/USD). Backend en Java 21 + Spring Boot 4 (JPA, Spring Security con JWT y Google OAuth2, importación de Excel vía Apache POI) y frontend en Angular 22 con Signals, integrando datos en tiempo real de tipo de cambio y bróker (dólar blue, IOL) para el módulo de inversiones. Incluye dashboard de analítica, categorización de transacciones y un patrimonio neto consolidado."
+        "description": "Asistente de research de inversiones de uso personal con Java, Spring Boot, Spring AI, Groq y Angular 22. Un planner validado reúne evidencia de tools de solo lectura del MCP oficial de IOL y Finnhub. Java arma las tablas numéricas con datos del proveedor o cálculos deterministas, con fuente y hora. Implementé el cliente MCP en Java con OAuth/PKCE, tokens cifrados y allowlists por nombre exacto, además de memoria acotada y controles de privacidad. Los tests de regresión cubren fallas concretas; el set de 30 preguntas para evaluar el LLM está planificado. El código de IA está en frontend-and-chat."
       },
       "airportiq": {
         "description": "Solución de operación aeroportuaria desarrollada para Jacksonville Airport sobre la plataforma IoTLogIQ: calidad de aire, temperatura, conteo y flujo de personas, gestión de filas y monitoreo ambiental. Dashboards pensados para lectura rápida en sala de control, con alarmas por umbral, vistas por terminal e histórico de mediciones."
+      },
+      "tictactoe": {
+        "description": "Proyecto personal de tres en línea desarrollado con JavaScript, HTML y CSS."
       }
     },
     "filters": {
@@ -168,18 +171,18 @@
     "title": "Experiencias",
     "items": {
       "senzary": {
-        "title": "Full-stack Developer · Líder de Frontend · IoT industrial",
-        "date": "Enero 2023 - Actualidad",
+        "title": "Junior Frontend → Semi Senior Frontend → Senior Full-Stack",
+        "date": "Enero 2023 - Julio 2026",
         "points": [
-          "Desarrollo end-to-end de dashboards IoT industriales, con fuerte foco en UX/UI para supervisión y lectura rápida de sensores y KPIs",
-          "Análisis de casos de uso, offsets y thresholds; rule chains, procesamiento avanzado de datos y alarmas (severidad y notificación acordes a operación)",
-          "Metodologías ágiles, documentación técnica/funcional (ThingsBoard e integraciones cuando aplica) y pruebas funcionales y de regresión sobre vistas, flujos y alarmas",
-          "Capacitación a otros desarrolladores"
+          "Lideré el equipo full-stack y contribuí al crecimiento de la plataforma de 3 a más de 10 clientes enterprise.",
+          "Construí un MCP usado por clientes en producción, con tools de dispositivos, telemetría y alarmas y acceso por tenant.",
+          "Lideré la migración de ThingsBoard a Angular + Node.js e implementé streaming WebSocket multi-tenant.",
+          "Implementé tracking de 200 personas para ENI; impulsé el desarrollo asistido por IA y la mentoría."
         ]
       },
       "politicalFreelance": {
-        "title": "Freelance full-stack · Apps electorales e IoT",
-        "date": "Julio 2025 - Actualidad",
+        "title": "Polytics · Desarrollador Full-Stack freelance",
+        "date": "Enero 2025 - Actualidad",
         "points": [
           "Desarrollo full-stack de apps político-electorales y de fiscalización: uso interno y campaña; interfaces operativas (p. ej. seccionales/mesas) según alcance",
           "Aplicaciones IoT end-to-end sobre ThingsBoard: medición de niveles y volumen de tanques y monitoreo de pontones, desde el modelado de dispositivos y rule chains hasta los dashboards y las alarmas",
@@ -188,13 +191,18 @@
         ]
       },
       "early2023": {
-        "title": "Estudiante de Analista de Sistemas · Tutor & Dev en Soy Henry",
-        "date": "Enero 2023 - Julio 2023",
+        "title": "Teaching Assistant",
+        "date": "2023",
         "points": [
-          "Soy Henry — asistente de enseñanza: coordinación de estudiantes, propuestas de mejora del bootcamp y cohesión grupal",
-          "No Country — full-stack en proyecto grupal: base de datos y servidor, rutas y controladores, apoyo en frontend y componentes",
-          "GEN Consultores — freelance: renderizado de componentes y estilos por sección, mantenimiento y optimización de la aplicación",
-          "Trabajo colaborativo, comunicación constante en equipo y mejoras funcionales continuas"
+          "Acompañé a estudiantes después de completar el bootcamp full-stack."
+        ]
+      },
+      "anyoneai": {
+        "title": "AI Trainer Engineer · Project Nectarine",
+        "date": "Agosto 2026 - presente",
+        "points": [
+          "Construyo datasets de benchmark y evaluaciones expertas de agentes de código y modelos de edición; cliente: LinkedIn.",
+          "Analizo fallas en flujos reales de desarrollo. Contractor, part-time, remoto."
         ]
       }
     },
@@ -203,7 +211,7 @@
       "freelance": "Freelance",
       "academic": "Experiencia académica"
     },
-    "summaryEarly2023": "Mis primeros pasos en desarrollo: asistente de enseñanza en el bootcamp de Soy Henry, full-stack en un proyecto grupal de No Country y trabajo freelance de frontend para GEN Consultores.",
+    "summaryEarly2023": "Teaching Assistant después de completar el bootcamp full-stack de Henry (noviembre de 2022 - abril de 2023).",
     "products": {
       "iotlogiq": {
         "name": "IoTLogIQ · plataforma",
@@ -219,7 +227,7 @@
       },
       "industry": {
         "name": "Oil & gas, energía y siderurgia",
-        "detail": "Soluciones para Shell, AES y Ternium: monitoreo de activos, digital twin, analítica predictiva y tableros de KPIs para operación industrial. Análisis de casos de uso, offsets y thresholds, rule chains y alarmas con severidad acorde a cada operación."
+        "detail": "Dashboards de telemetría y alarmas operativas para clientes industriales. Trabajo de ingeniería de aplicaciones, visualización de datos y controles de acceso."
       },
       "trashcans": {
         "name": "TrashCans",
@@ -227,7 +235,7 @@
       },
       "ai": {
         "name": "Adopción de IA en el equipo",
-        "detail": "Lideré la incorporación de herramientas de IA en el flujo de trabajo del equipo de desarrollo: definición de estándares de uso, prompts y criterios de revisión, además de capacitación a otros desarrolladores para acelerar entregas sin resignar calidad."
+        "detail": "Construí el MCP de Senzary, usado por clientes en producción para consultar dispositivos, telemetría y alarmas con acceso por tenant. También impulsé Claude Code y Codex en el flujo de desarrollo del equipo."
       },
       "iac": {
         "name": "DustIQ · IAC",
@@ -249,8 +257,8 @@
   },
   "contact": {
     "eyebrow": "../Contacto",
-    "title": "Hablemos de tu próximo proyecto.",
-    "description": "Si tenés un proyecto — software a medida, dashboards, plataformas de datos o cualquier idea — escribime.",
+    "title": "Conversemos sobre tu equipo de ingeniería.",
+    "description": "Conversemos sobre IA aplicada, integraciones con LLMs o desarrollo de producto full-stack.",
     "form": {
       "name": "Nombre",
       "namePlaceholder": "Tu nombre",
@@ -266,9 +274,9 @@
   },
   "footer": {
     "downloadCv": "Descargar CV",
-    "tagline": "Desarrollo productos web, dashboards y plataformas de datos combinando frontend, backend e IA.",
+    "tagline": "AI Engineer · Full-Stack. Aplicaciones con LLMs, agentes y MCP.",
     "navigation": "Navegación",
-    "available": "Disponible para nuevos proyectos",
+    "available": "Disponible para un rol full-time",
     "writeMe": "Escribime",
     "backToTop": "Volver arriba"
   },
@@ -286,7 +294,7 @@
     "openGalleryAt": "{{title}} captura {{n}} — abrir galería",
     "thumbnail": "Ir a la captura {{n}}",
     "closeDialog": "Cerrar",
-    "productionBuild": "PRODUCTION BUILD",
+    "productionBuild": "VISTA DEL PROYECTO",
     "logoOf": "Logo de {{company}}",
     "techCarousel": "Tecnologías y herramientas",
     "openProject": "Ver detalle de {{title}}"
