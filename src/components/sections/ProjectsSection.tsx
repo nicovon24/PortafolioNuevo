@@ -15,7 +15,10 @@ export default function ProjectsSection() {
   const reduced = useReducedMotion();
   const [filter, setFilter] = useState<Filter>("all");
 
-  const visible = useMemo(() => projects.filter((p) => !p.hidden), []);
+  const visible = useMemo(
+    () => projects.filter((project) => !project.hidden),
+    [],
+  );
 
   // Solo se ofrecen categorias que tengan al menos un proyecto.
   const tabs = useMemo(() => {
@@ -35,65 +38,49 @@ export default function ProjectsSection() {
   return (
     <Section
       id="projects"
-      index="03"
-      eyebrow={t("projects.eyebrow")}
-      title={t("projects.title")}
-      parallax
       variant="surface"
     >
-      <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
-        {/* Segmented Glass Filter Bar */}
+      <div className="mb-8 max-w-2xl">
+        <h2 className="font-display text-section font-semibold tracking-[-0.03em] text-ink">{t("projects.title")}</h2>
+        <p className="mt-4 text-base leading-relaxed text-muted">{t("projects.intro")}</p>
+      </div>
+      <div className="mb-8 flex flex-wrap items-center justify-between gap-4 border-b border-line pb-6">
         <div
-          role="tablist"
+          role="group"
           aria-label={t("projects.filters.filterLabel")}
-          className="control-surface inline-flex flex-wrap items-center gap-1.5 rounded-full border p-1.5 backdrop-blur-md shadow-card-sm"
+          className="flex flex-wrap items-center gap-2"
         >
           {tabs.map(([value, count]) => {
             const active = filter === value;
             return (
               <button
                 key={value}
-                role="tab"
                 type="button"
-                suppressHydrationWarning
-                aria-selected={active}
+                aria-pressed={active}
+                aria-controls="project-results"
                 onClick={() => setFilter(value)}
                 className={cn(
-                  "relative flex items-center gap-2 rounded-full px-3.5 py-1.5 font-mono text-xs font-semibold transition-colors duration-200 outline-none select-none",
-                  active ? "text-accent-contrast font-bold" : "text-muted hover:text-ink"
+                  "flex min-h-11 items-center gap-2.5 rounded-full border px-4 py-2 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
+                  active ? "border-accent bg-accent text-accent-contrast" : "border-line text-ink hover:border-accent"
                 )}
               >
-                {active && (
-                  <motion.div
-                    layoutId="projects-filter-active-pill"
-                    className="absolute inset-0 rounded-full bg-accent shadow-[0_2px_12px_color-mix(in_srgb,var(--color-accent)_35%,transparent)]"
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                  />
-                )}
-                <span className="relative z-10">{t(`projects.filters.${value}`)}</span>
-                <span
-                  className={cn(
-                    "relative z-10 rounded-full px-2 py-0.5 text-micro font-bold transition-colors",
-                    active ? "bg-black/20 dark:bg-black/30 text-accent-contrast" : "bg-line/40 text-muted"
-                  )}
-                >
-                  {count}
-                </span>
+                <span>{t(`projects.filters.${value}`)}</span>
+                <span className="font-mono text-xs tabular-nums">{count}</span>
               </button>
             );
           })}
         </div>
 
-        <span aria-live="polite" className="font-mono text-xs font-semibold text-muted">
+        <span aria-live="polite" aria-atomic="true" className="text-sm text-muted">
           {t(filtered.length === 1 ? "projects.filters.countOne" : "projects.filters.countOther", {
             count: filtered.length,
           })}
         </span>
       </div>
 
-      <motion.div layout={!reduced} className="grid items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+      <motion.div id="project-results" layout={!reduced} className="grid grid-cols-6 items-stretch gap-x-6 gap-y-8 lg:gap-y-10">
         <AnimatePresence mode="popLayout" initial={false}>
-          {filtered.map((project, index) => (
+          {filtered.map((project) => (
             <motion.div
               key={project.key}
               layout={!reduced}
@@ -101,7 +88,7 @@ export default function ProjectsSection() {
               animate={{ opacity: 1, y: 0 }}
               exit={reduced ? undefined : { opacity: 0, y: -12 }}
               transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-              className="h-full"
+              className={cn("col-span-6 h-full", project.featured ? "lg:col-span-3" : "sm:col-span-3 lg:col-span-2")}
             >
               <ProjectCard
                 projectKey={project.key}
@@ -117,7 +104,7 @@ export default function ProjectsSection() {
                 role={project.role}
                 org={project.org}
                 featured={project.featured}
-                index={index}
+                index={projects.indexOf(project)}
               />
             </motion.div>
           ))}

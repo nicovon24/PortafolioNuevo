@@ -125,24 +125,27 @@ export default function ExperienceSection() {
 
           const header = (
             <div className="flex items-start gap-3">
-              <Image
-                src={exp.icon}
-                alt=""
-                width={40}
-                height={40}
-                loading="lazy"
+              <span
                 className={cn(
-                  "shrink-0 rounded object-contain p-1",
+                  "relative shrink-0 overflow-hidden rounded",
                   exp.compact ? "size-8" : "size-10",
                 )}
                 style={{
                   backgroundColor: exp.iconBg ?? "#f5f5f5",
-                  // Duotone celeste: neutraliza el color de marca original y lo
-                  // recalibra al hue del accent default (#57c7ff, ~200deg).
-                  // Calibrado para la paleta "blue"; con otras paletas el hue no coincide exacto.
-                  filter: "grayscale(1) sepia(1) saturate(4) hue-rotate(167deg) brightness(0.95)",
+                  // Preserve the supplied AnyoneAI brand colors.
+                  filter: exp.key === "anyoneai"
+                    ? undefined
+                    : "grayscale(1) sepia(1) saturate(4) hue-rotate(167deg) brightness(0.95)",
                 }}
-              />
+              >
+                <Image
+                  src={exp.icon}
+                  alt=""
+                  fill
+                  sizes={exp.compact ? "32px" : "40px"}
+                  className="object-contain p-1"
+                />
+              </span>
               <div className="min-w-0 flex-1">
                 <div className="flex flex-wrap items-center gap-2">
                   <h3

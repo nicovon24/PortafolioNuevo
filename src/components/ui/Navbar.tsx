@@ -121,7 +121,7 @@ export default function Navbar() {
           /&gt;
         </span>
       </a>
-      <nav className="relative z-[1] hidden items-center gap-[clamp(0.75rem,2.2vw,2rem)] text-ink lg:flex" aria-label={t("nav.mainNav")}>
+      <nav className="relative z-[1] hidden items-center gap-[clamp(0.75rem,2.2vw,2rem)] text-ink xl:flex" aria-label={t("nav.mainNav")}>
         {navItems.map((item, index) => (
           <a
             key={item.href}
@@ -136,13 +136,13 @@ export default function Navbar() {
       </nav>
       {/* Controles de tema/idioma solo en desktop: en mobile viven dentro
           del panel full-screen, con mas espacio y labels legibles. */}
-      <div className="relative z-[1] hidden items-center gap-1.5 lg:flex">
+      <div className="relative z-[1] hidden items-center gap-1.5 xl:flex">
         <ThemeControls />
         <LanguageToggle />
       </div>
       <button
         type="button"
-        className={cn(headerIconBtn, "relative z-1 lg:hidden")}
+        className={cn(headerIconBtn, "relative z-1 xl:hidden")}
         onClick={() => setOpen((value) => !value)}
         aria-label={open ? "Cerrar menu" : "Abrir menu"}
         aria-expanded={open}
@@ -155,7 +155,7 @@ export default function Navbar() {
     <AnimatePresence>
       {open && (
         <motion.div
-          className="portfolio-navbar fixed inset-0 z-30 flex flex-col overflow-y-auto pt-[calc(env(safe-area-inset-top)+5.5rem)] pb-10 lg:hidden"
+          className="portfolio-navbar fixed inset-0 z-30 flex flex-col overflow-y-auto pt-[calc(env(safe-area-inset-top)+5.5rem)] pb-10 xl:hidden"
           aria-label={t("nav.mobileNav")}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

@@ -198,7 +198,7 @@ export default function ProjectDetailModal({
                 {t("gallery.productionBuild")}
               </span>
               <span className="font-mono text-micro text-muted">
-                ID: {id} // {year}
+                ID: {id} {" // "} {year}
               </span>
             </div>
 

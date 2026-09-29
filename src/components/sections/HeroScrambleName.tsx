@@ -129,7 +129,7 @@ export default function HeroScrambleName({ firstName, lastName, line1Class, line
 
     raf = requestAnimationFrame(frame);
     return () => cancelAnimationFrame(raf);
-  }, [firstName, lastName, active]);
+  }, [firstName, lastName, active, onScrambleChange]);
 
   const label = [firstName, lastName].filter(Boolean).join(" ");
 

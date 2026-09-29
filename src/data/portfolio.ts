@@ -5,6 +5,21 @@ export const navItems = [
   { href: "#tech", label: "nav.tech" },
   { href: "#projects", label: "nav.projects" },
   { href: "#experience", label: "nav.experience" },
+  { href: "#certifications", label: "nav.certifications" },
+];
+
+export const aiCertification = {
+  name: "AWS Certified AI Practitioner",
+  issuer: "Amazon Web Services",
+  earnedOn: "2026-09-28",
+  badge: "/images/certifications/aws-ai-practitioner.png",
+  credentialUrl: "https://www.credly.com/badges/89996ff2-da70-4d55-a231-f2f7daa6ead7/public_url",
+};
+
+export const professionalCourses = [
+  { name: "Developing and Implementing AI Solutions", issuer: "Carnegie Mellon", completedOn: "2026-08" },
+  { name: "AI Agents Fundamentals", issuer: "Hugging Face", completedOn: "2026-08" },
+  { name: "Claude Code in Action", issuer: "Anthropic", completedOn: "2026-06" },
 ];
 
 export const profile = {
@@ -134,7 +149,7 @@ export const experiences: Array<{
   {
     key: "anyoneai",
     company: "AnyoneAI",
-    icon: "/images/company/freelance.png",
+    icon: "/images/company/anyoneai.png",
     kind: "professional",
     current: true,
   },
@@ -195,37 +210,8 @@ export type PortfolioProject = {
 
 export const projects: PortfolioProject[] = [
   {
-    key: "fintrack",
-    categories: ["personal"],
-    year: "2026",
-    role: "AI · Full-stack",
-    org: "personal",
-    title: "FinTrack",
-    technologies: [
-      "Java",
-      "Spring Boot",
-      "Spring AI",
-      "Groq",
-      "MCP",
-      "Angular 22",
-      "Maven",
-      "Docker",
-      "Spring Data",
-      "Spring Security",
-      "Swagger",
-    ],
-    images: [
-      "/images/projects/fintrack/1.png",
-      "/images/projects/fintrack/2.png",
-      "/images/projects/fintrack/3.png",
-      "/images/projects/fintrack/4.png",
-      "/images/projects/fintrack/5.png",
-    ],
-    code: "https://github.com/nicovon24/fintrack",
-  },
-
-  {
     key: "hermes",
+    featured: true,
     code: "https://github.com/nicovon24/hermes",
     live: "https://hermes-hk.vercel.app/",
     categories: ["personal"],
@@ -256,6 +242,44 @@ export const projects: PortfolioProject[] = [
       "/images/projects/hermes/5.png",
     ],
   },
+
+  {
+    key: "trashcans",
+    featured: true,
+    categories: ["iot", "work"],
+    year: "2024",
+    role: "Full-stack · IoT",
+    org: "senzary",
+    title: "TrashCans — Senzary",
+    technologies: ["Angular", "Node.js", "IoT", "Dashboards"],
+    images: [
+      "/images/projects/senzary/vercel/trashcans/landing.png",
+      "/images/projects/senzary/vercel/trashcans/map.png",
+      "/images/projects/senzary/vercel/trashcans/analytics.png",
+      "/images/projects/senzary/vercel/trashcans/tickets.png",
+      "/images/projects/senzary/vercel/trashcans/onboarding.png",
+    ],
+    live: "https://trashcans.senzary.com/",
+    privateRepo: true,
+  },
+
+  {
+    key: "prodeazo",
+    categories: ["personal"],
+    year: "2026",
+    role: "Full-stack",
+    org: "personal",
+    title: "Prodeazo (Prode Mundial 2026)",
+    technologies: ["Next.js", "TypeScript", "Supabase", "Tailwind", "NextUI"],
+    images: [
+      "/images/projects/prodeazo/home.jpg",
+      "/images/projects/prodeazo/login.png",
+      "/images/projects/prodeazo/inicio.jpg",
+    ],
+    code: "https://github.com/ProdeazoApp/ProdeazoApp",
+    live: "https://prodeazo.vercel.app",
+  },
+
   {
     key: "iotarg",
     categories: ["iot", "personal"],
@@ -292,24 +316,54 @@ export const projects: PortfolioProject[] = [
     code: "https://github.com/nicovon24/iot_app",
     live: "https://iotarg.vercel.app/",
   },
+
   {
-    key: "trashcans",
+    key: "fintrack",
+    categories: ["personal"],
+    year: "2026",
+    role: "AI · Full-stack",
+    org: "personal",
+    title: "FinTrack",
+    technologies: [
+      "Java",
+      "Spring Boot",
+      "Spring AI",
+      "Groq",
+      "MCP",
+      "Angular 22",
+      "Maven",
+      "Docker",
+      "Spring Data",
+      "Spring Security",
+      "Swagger",
+    ],
+    images: [
+      "/images/projects/fintrack/1.png",
+      "/images/projects/fintrack/2.png",
+      "/images/projects/fintrack/3.png",
+      "/images/projects/fintrack/4.png",
+      "/images/projects/fintrack/5.png",
+    ],
+    code: "https://github.com/nicovon24/fintrack",
+  },
+
+  {
+    key: "workeriq",
     categories: ["iot", "work"],
     year: "2024",
-    role: "Full-stack · IoT",
+    role: "Full-stack",
     org: "senzary",
-    title: "TrashCans — Senzary",
-    technologies: ["Angular", "Node.js", "IoT", "Dashboards"],
+    title: "WorkerIQ — ENI · Senzary",
+    technologies: ["React", "Node.js", "IoT", "Tiempo real", "Mapas", "Dashboards"],
     images: [
-      "/images/projects/senzary/vercel/trashcans/landing.png",
-      "/images/projects/senzary/vercel/trashcans/map.png",
-      "/images/projects/senzary/vercel/trashcans/analytics.png",
-      "/images/projects/senzary/vercel/trashcans/tickets.png",
-      "/images/projects/senzary/vercel/trashcans/onboarding.png",
+      "/images/projects/senzary/vercel/workeriq/landing.png",
+      "/images/projects/senzary/vercel/workeriq/map.png",
+      "/images/projects/senzary/vercel/workeriq/map-v2.png",
     ],
-    live: "https://trashcans.senzary.com/",
+    live: "https://workeriq-drill.iotlogiq.com/",
     privateRepo: true,
   },
+
   {
     key: "awsprep",
     categories: ["personal"],
@@ -328,22 +382,7 @@ export const projects: PortfolioProject[] = [
     code: "https://github.com/nicovon24/aws_study",
     live: "https://aws-prep-26.vercel.app/",
   },
-  {
-    key: "prodeazo",
-    categories: ["personal"],
-    year: "2026",
-    role: "Full-stack",
-    org: "personal",
-    title: "Prodeazo (Prode Mundial 2026)",
-    technologies: ["Next.js", "TypeScript", "Supabase", "Tailwind", "NextUI"],
-    images: [
-      "/images/projects/prodeazo/home.jpg",
-      "/images/projects/prodeazo/login.png",
-      "/images/projects/prodeazo/inicio.jpg",
-    ],
-    code: "https://github.com/ProdeazoApp/ProdeazoApp",
-    live: "https://prodeazo.vercel.app",
-  },
+
   {
     key: "scoutpanel",
     categories: ["personal"],
@@ -360,6 +399,7 @@ export const projects: PortfolioProject[] = [
     code: "https://github.com/nicovon24/ScoutPanelLDP",
     live: "https://scout-panel-ldp.vercel.app",
   },
+
   {
     key: "queabuso",
     categories: ["work", "freelance"],
@@ -379,23 +419,7 @@ export const projects: PortfolioProject[] = [
     live2: "https://gabrielbornoroni.com.ar/",
     privateRepo: true,
   },
-  {
-    key: "workeriq",
-    categories: ["iot", "work"],
-    year: "2024",
-    role: "Full-stack",
-    org: "senzary",
-    featured: true,
-    title: "WorkerIQ — ENI · Senzary",
-    technologies: ["React", "Node.js", "IoT", "Tiempo real", "Mapas", "Dashboards"],
-    images: [
-      "/images/projects/senzary/vercel/workeriq/landing.png",
-      "/images/projects/senzary/vercel/workeriq/map.png",
-      "/images/projects/senzary/vercel/workeriq/map-v2.png",
-    ],
-    live: "https://workeriq-drill.iotlogiq.com/",
-    privateRepo: true,
-  },
+
   {
     key: "iotlogiq",
     categories: ["iot", "work"],
@@ -431,13 +455,13 @@ export const projects: PortfolioProject[] = [
     live: "https://iotlogiq.com/",
     privateRepo: true,
   },
+
   {
     key: "appfiscalizacion",
     categories: ["work", "freelance"],
     year: "2025",
     role: "Full-stack",
     org: "freelance",
-    featured: true,
     title: "Polytics · App Fiscalización",
     technologies: ["Next.js", "Framer Motion", "Redux Toolkit", "Vercel"],
     live: "https://fiscalizar.lalibertadavanzacba.com/",
@@ -450,6 +474,7 @@ export const projects: PortfolioProject[] = [
       "/images/projects/partido/app/mesas.png",
     ],
   },
+
   {
     key: "cloudlab",
     categories: ["personal"],
@@ -462,6 +487,7 @@ export const projects: PortfolioProject[] = [
     code: "https://github.com/No-Country/s9-16-m-node-react",
     live: "https://cloudlab-s9-16.vercel.app/",
   },
+
   {
     key: "airportiq",
     categories: ["iot", "work"],
@@ -485,6 +511,7 @@ export const projects: PortfolioProject[] = [
     ],
     privateRepo: true,
   },
+
   {
     key: "tictactoe",
     hidden: true,

@@ -12,7 +12,7 @@ const variants = {
   /** Accion principal: relleno turquesa sobre texto contrastante. */
   primary: "bg-accent text-accent-contrast transition-opacity hover:opacity-90 shadow-sm",
   /** Accion secundaria: contorno turquesa. */
-  outline: "control-surface border text-accent hover:border-accent hover:bg-accent/10",
+  outline: "control-surface border text-ink hover:border-accent hover:bg-accent/10",
   /** Superficie tenue, para links dentro de paneles. */
   subtle:
     "control-surface border text-accent hover:border-accent-2 hover:bg-accent-2/10 hover:text-accent-2",

@@ -4,6 +4,7 @@
     "tech": "Tech",
     "projects": "Proyectos",
     "experience": "Experiencia",
+    "certifications": "Certificaciones",
     "contact": "Contacto",
     "home": "Ir al inicio",
     "mainNav": "Navegación principal",
@@ -14,6 +15,7 @@
     "theme": "Tema"
   },
   "hero": {
+    "introShort": "Desarrollo aplicaciones con IA y soluciones full-stack. Trabajo con LLMs, agentes y MCP, con experiencia en productos en producción desde 2023.",
     "greeting": "Hola, soy",
     "stackKey": "Stack ·",
     "stackVal": "TypeScript · Java · Python",
@@ -92,6 +94,14 @@
     "groupLabel": "Grupos de tecnologías"
   },
   "projects": {
+    "intro": "Una selección de mi trabajo: productos para clientes, aplicaciones propias y experimentos con IA.",
+    "viewProject": "Ver proyecto",
+    "demo": "Demo",
+    "code": "Código",
+    "imageCount_one": "{{count}} imagen",
+    "imageCount_other": "{{count}} imágenes",
+    "moreTechnologies_one": "{{count}} tecnología más; disponible en el detalle del proyecto",
+    "moreTechnologies_other": "{{count}} tecnologías más; disponibles en el detalle del proyecto",
     "eyebrow": "../Proyectos",
     "title": "Proyectos destacados",
     "inDevelopment": "En desarrollo",
@@ -121,6 +131,7 @@
         "description": "Proyecto desarrollado para un challenge y que sigue en proceso: planeo seguir trabajándolo hasta cerrarlo. El diseño del frontend, del backend y de la base de datos es propio. Los datos son inventados y cargados por seed; la app no está conectada a ninguna API externa de estadísticas ni jugadores reales. Funcionalidades: búsqueda y filtros (posición, nacionalidad, club, edad), comparador hasta tres jugadores con radar y tablas, historial de lesiones ligado al rating, shortlist con auth JWT, clubes, reportes exportables PDF/Excel, heatmaps y vista de mercado. UI oscura inspirada en LDP y Sofascore. Stack: Next.js 14 (App Router), TypeScript, Tailwind, HeroUI (NextUI), Zustand y Recharts; API Express, Drizzle, Zod y PostgreSQL 16; tests Vitest, Supertest y Playwright; Docker y deploy Vercel + Render + Supabase."
       },
       "appfiscalizacion": {
+        "summary": "Desarrollé la app para más de 20.000 fiscales y participé en el sistema que centralizó más de 20.000 actas durante la noche electoral.",
         "description": "Polytics, freelance desde enero de 2025. Construí la app para más de 20.000 fiscales y participé en el diseño del sistema que centralizó más de 20.000 actas la noche electoral, sin pérdida de datos reportada durante el evento. También desarrollé sitios públicos sin caídas reportadas durante los picos de ese día. Hoy construyo una nueva versión de la app y un CRM. Node.js, NestJS y Next.js."
       },
       "queabuso": {
@@ -130,6 +141,7 @@
         "description": "Dashboard IoT para monitoreo en tiempo real de contenedores de residuos inteligentes: nivel de llenado, temperatura, alertas y rutas de recolección. Desarrollado sobre la plataforma de Senzary."
       },
       "workeriq": {
+        "summary": "Seguimiento de personal y alertas operativas para ENI. Construí la interfaz en React sobre IoTLogIQ, con mapas en tiempo real y vistas para los equipos en campo.",
         "description": "Solución de seguridad de trabajadores para ENI, construida en React sobre la plataforma IoTLogIQ: seguimiento de personal en tiempo real, mapas geolocalizados, mustering, alertas operativas y visualización de métricas para equipos en campo."
       },
       "iotlogiq": {
@@ -156,7 +168,7 @@
     },
     "filters": {
       "all": "Todos",
-      "work": "Work",
+      "work": "Trabajo",
       "personal": "Personales",
       "freelance": "Freelance",
       "iot": "IoT",
@@ -254,6 +266,15 @@
         "detail": "Testing funcional y de regresión previo a hitos críticos, y coordinación de recursos, plazos y prioridades en entornos de alta exigencia, con fechas de campaña que no se mueven."
       }
     }
+  },
+  "certifications": {
+    "title": "Certificaciones y formación",
+    "aboutLink": "{{name}}: ver certificaciones y formación",
+    "badgeAlt": "Insignia oficial de {{name}}",
+    "earned": "Obtenida el",
+    "viewCredential": "Ver credencial",
+    "credentialLabel": "Ver credencial de {{name}} en Credly (abre en una nueva pestaña)",
+    "coursesTitle": "Cursos y formación"
   },
   "contact": {
     "eyebrow": "../Contacto",

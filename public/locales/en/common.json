@@ -4,6 +4,7 @@
     "tech": "Tech",
     "projects": "Projects",
     "experience": "Experience",
+    "certifications": "Certifications",
     "contact": "Contact",
     "home": "Go to top",
     "mainNav": "Main navigation",
@@ -14,6 +15,7 @@
     "theme": "Theme"
   },
   "hero": {
+    "introShort": "I build AI applications and full-stack solutions. My work spans LLMs, agents and MCP, with experience delivering production software since 2023.",
     "greeting": "Hi, I'm",
     "stackKey": "Stack ·",
     "stackVal": "TypeScript · Java · Python",
@@ -92,6 +94,14 @@
     "groupLabel": "Technology groups"
   },
   "projects": {
+    "intro": "A selection of my work: products for clients, personal applications and experiments with AI.",
+    "viewProject": "View project",
+    "demo": "Demo",
+    "code": "Code",
+    "imageCount_one": "{{count}} image",
+    "imageCount_other": "{{count}} images",
+    "moreTechnologies_one": "{{count}} more technology; available in the project details",
+    "moreTechnologies_other": "{{count}} more technologies; available in the project details",
     "eyebrow": "../Projects",
     "title": "Featured projects",
     "inDevelopment": "In development",
@@ -121,6 +131,7 @@
         "description": "Project developed for a challenge and still in progress: I plan to keep working on it until it's complete. The frontend, backend and database design is my own. Data is fictional and loaded by seed; the app is not connected to any external statistics or real player API. Features: search and filters (position, nationality, club, age), comparison of up to three players with radar and tables, injury history linked to rating, JWT auth shortlist, clubs, exportable PDF/Excel reports, heatmaps and market view. Dark UI inspired by LDP and Sofascore. Stack: Next.js 14 (App Router), TypeScript, Tailwind, HeroUI (NextUI), Zustand and Recharts; Express API, Drizzle, Zod and PostgreSQL 16; Vitest, Supertest and Playwright tests; Docker and deploy Vercel + Render + Supabase."
       },
       "appfiscalizacion": {
+        "summary": "I built the app for 20,000+ poll watchers and contributed to the system that centralized 20,000+ vote-count reports on election night.",
         "description": "Polytics, freelance since January 2025. I built the app for 20,000+ poll watchers and helped design the system that centralized 20,000+ vote-count reports on election night, with no data loss reported during the event. I also built public sites with no downtime reported during election-day peaks. Currently developing a new app version and a CRM. Node.js, NestJS and Next.js."
       },
       "queabuso": {
@@ -130,6 +141,7 @@
         "description": "IoT dashboard for real-time monitoring of smart waste containers: fill level, temperature, alerts and collection routes. Built on the Senzary platform."
       },
       "workeriq": {
+        "summary": "Personnel tracking and operational alerts for ENI. I built the React interface on IoTLogIQ, with real-time maps and views for field teams.",
         "description": "Worker safety solution for ENI, built in React on top of the IoTLogIQ platform: real-time personnel tracking, geolocated maps, mustering, operational alerts and metric visualization for field teams."
       },
       "iotlogiq": {
@@ -254,6 +266,15 @@
         "detail": "Functional and regression testing ahead of critical milestones, plus coordination of resources, deadlines and priorities in high-demand environments, with campaign dates that do not move."
       }
     }
+  },
+  "certifications": {
+    "title": "Certifications & education",
+    "aboutLink": "{{name}}: view certifications and education",
+    "badgeAlt": "Official {{name}} badge",
+    "earned": "Earned",
+    "viewCredential": "View credential",
+    "credentialLabel": "View {{name}} credential on Credly (opens in a new tab)",
+    "coursesTitle": "Courses & professional development"
   },
   "contact": {
     "eyebrow": "../Contact",

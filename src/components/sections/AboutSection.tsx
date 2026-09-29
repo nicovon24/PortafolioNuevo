@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Music, Plane } from "lucide-react";
+import { ArrowDownRight, BadgeCheck, Music, Plane } from "lucide-react";
 import MotionFade from "@/components/motion/MotionFade";
 import { MotionStagger, MotionStaggerItem } from "@/components/motion/MotionStagger";
 import { ParallaxLayer } from "@/components/motion/Parallax";
@@ -14,7 +14,7 @@ import ProfilePhotoToggle, {
   type ProfilePhotoMode,
 } from "@/components/ui/ProfilePhotoToggle";
 import { SoccerBallIcon } from "@/components/ui/SoccerBallIcon";
-import { profile } from "@/data/portfolio";
+import { aiCertification, profile } from "@/data/portfolio";
 
 // Emparejado por clave, no por indice: reordenar el JSON de locales ya no descoloca los iconos.
 const SERVICES = [
@@ -32,7 +32,7 @@ const PERSONAL = [
 ] as const;
 
 const ABOUT_PHOTOS: Record<ProfilePhotoMode, string> = {
-  work: "/images/profile/profile.png",
+  work: "/images/profile/profile.png?v=day",
   football: PROFILE_PHOTOS.football,
 };
 
@@ -57,6 +57,15 @@ export default function AboutSection() {
             <MotionFade className="text-sm leading-relaxed text-muted md:text-base">
               <p>{t("about.descriptionP1")}</p>
               <p className="mt-4">{t("about.descriptionP2")}</p>
+              <a
+                href="#certifications"
+                className="mt-6 inline-flex min-h-11 items-center gap-2.5 rounded border border-accent/35 bg-accent/5 px-3 py-2 font-mono text-xs text-accent transition-colors hover:border-accent hover:bg-accent/10"
+                aria-label={t("certifications.aboutLink", { name: aiCertification.name })}
+              >
+                <BadgeCheck className="size-4 shrink-0" aria-hidden />
+                <span>{aiCertification.name}</span>
+                <ArrowDownRight className="size-4 shrink-0" aria-hidden />
+              </a>
             </MotionFade>
             <MotionStagger className="mt-7 grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2">
               {SERVICES.map((service) => (
