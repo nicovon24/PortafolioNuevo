@@ -1,5 +1,6 @@
 {
   "nav": {
+    "skipToContent": "Skip to content",
     "about": "About me",
     "tech": "Tech",
     "projects": "Projects",
@@ -15,7 +16,7 @@
     "theme": "Theme"
   },
   "hero": {
-    "introShort": "I build AI applications and full-stack solutions. My work spans LLMs, agents and MCP, with experience delivering production software since 2023.",
+    "introShort": "I build full-stack products and applied AI for real-world operations. At Senzary I deliver production software, and at AnyoneAI I evaluate coding agents part-time.",
     "greeting": "Hi, I'm",
     "stackKey": "Stack ·",
     "stackVal": "TypeScript · Java · Python",
@@ -27,12 +28,13 @@
     "location": "Córdoba, ARG · Remote",
     "viewProjects": "View projects",
     "cv": "Download CV",
+    "emailMe": "Email me",
     "profileSummary": "Profile summary",
     "statsLabel": "Experience & projects",
     "experienceStat": "Experience",
     "projectsStat": "Projects",
     "stackFocus": "Focus & stack",
-    "intro": "AI Engineer with a full-stack background and software experience since 2023. At Senzary, I led the development team and built a Model Context Protocol (MCP) server used by customers in production. I build LLM applications with validated outputs and backend access controls, and evaluate coding agents at AnyoneAI. Available for full-time roles alongside a flexible, part-time contract and freelance work.",
+    "intro": "AI Engineer with a full-stack background and software experience since 2023. I work at Senzary, where I led the development team and built a Model Context Protocol (MCP) server used by customers in production. I build LLM applications with validated outputs and backend access controls, and evaluate coding agents at AnyoneAI on a flexible, part-time contract. Available for full-time roles alongside my current work and freelance projects.",
     "phrases": [
       "AI Engineer",
       "Full-Stack",
@@ -51,8 +53,8 @@
     "sectionLabel": "About me",
     "eyebrow": "../About me",
     "title": "I connect LLM features to the products around them.",
-    "descriptionP1": "At Senzary, I progressed from Junior Frontend to Senior Full-Stack, led the team and helped grow the platform from 3 to 10+ enterprise customers. I built its MCP server and multi-tenant real-time integrations. Since August 2026, I've been evaluating coding agents at AnyoneAI.",
-    "descriptionP2": "FinTrack combines Spring AI, read-only brokerage tools and financial tables built in Java. For Hermes, I built the backend and agent integration in a team of five. LoRa Desk is in development with Python/FastAPI, hybrid RAG infrastructure and MCP. I also have experience using AWS in production.",
+    "descriptionP1": "I work at Senzary, where I grew from Junior Full-Stack Developer to Senior Full-Stack and led the development team. I built its MCP server, used by customers in production. I also evaluate coding agents at AnyoneAI on a part-time contract.",
+    "descriptionP2": "My work covers IoT platforms, electoral operations and applied AI. At Senzary, I helped grow the platform from 3 to 10+ enterprise customers. For Polytics, I built a poll-watching app for 20,000+ people and helped design the system that centralized 20,000+ tally sheets. In Hermes, I built the backend and agent integration for a team demo that took second place at a hackathon.",
     "photoCaption": "AI Engineer · Full-Stack, based in Córdoba, Argentina. Available for new opportunities.",
     "photoCaptionFootball": "Outside of code: football, Liverpool and Argentina whenever they're playing.",
     "services": {
@@ -94,7 +96,16 @@
     "groupLabel": "Technology groups"
   },
   "projects": {
-    "intro": "A selection of my work: products for clients, personal applications and experiments with AI.",
+    "intro": "Three selected cases across industrial software, election operations and applied AI.",
+    "archive": {
+      "title": "Project archive",
+      "intro": "Browse all {{count}} public projects, including the selected cases. Filter by type of work."
+    },
+    "case": {
+      "problem": "The challenge",
+      "contribution": "My contribution",
+      "outcome": "Outcome / status"
+    },
     "viewProject": "View project",
     "demo": "Demo",
     "code": "Code",
@@ -122,7 +133,12 @@
     },
     "items": {
       "hermes": {
-        "description": "Hackathon demo of agent-to-agent B2B negotiation with on-chain settlement. 2nd place, HackCBA/26 Fintech. In a team of five, I built the backend and agent integration with TypeScript, LangChain and Groq. Strict schemas, deterministic fallbacks and server-side checks constrain budget, suppliers, stock and amounts. Includes correlation-ID idempotency, audit events and SSE progress. Demo/prototype, not a production service."
+        "case": {
+          "problem": "A hackathon team needed a working demo of B2B negotiation between agents with on-chain settlement.",
+          "contribution": "As part of the team, I built the backend and integrated the agents with validation, fallbacks and progress updates.",
+          "outcome": "The demo took 2nd place at HackCBA/26 Fintech. It remains a prototype, not a production service."
+        },
+        "description": "Hackathon demo of agent-to-agent B2B negotiation with on-chain settlement. 2nd place, HackCBA/26 Fintech. As part of the team, I built the backend and agent integration with TypeScript, LangChain and Groq. Strict schemas, deterministic fallbacks and server-side checks constrain budget, suppliers, stock and amounts. Includes correlation-ID idempotency, audit events and SSE progress. Demo/prototype, not a production service."
       },
       "prodeazo": {
         "description": "Co-built football predictions platform in production, with real-time fixtures and results, predictions, points and global/league rankings. Built for the 2026 World Cup with Next.js, TypeScript and Supabase."
@@ -131,6 +147,11 @@
         "description": "Project developed for a challenge and still in progress: I plan to keep working on it until it's complete. The frontend, backend and database design is my own. Data is fictional and loaded by seed; the app is not connected to any external statistics or real player API. Features: search and filters (position, nationality, club, age), comparison of up to three players with radar and tables, injury history linked to rating, JWT auth shortlist, clubs, exportable PDF/Excel reports, heatmaps and market view. Dark UI inspired by LDP and Sofascore. Stack: Next.js 14 (App Router), TypeScript, Tailwind, HeroUI (NextUI), Zustand and Recharts; Express API, Drizzle, Zod and PostgreSQL 16; Vitest, Supertest and Playwright tests; Docker and deploy Vercel + Render + Supabase."
       },
       "appfiscalizacion": {
+        "case": {
+          "problem": "Election teams needed an app for more than 20,000 poll watchers and a way to centralize vote-count reports on election night.",
+          "contribution": "I built the poll-watcher app and helped design the wider system that consolidated the reports.",
+          "outcome": "The system centralized more than 20,000 reports during the event, with no data loss reported."
+        },
         "summary": "I built the app for 20,000+ poll watchers and contributed to the system that centralized 20,000+ vote-count reports on election night.",
         "description": "Polytics, freelance since January 2025. I built the app for 20,000+ poll watchers and helped design the system that centralized 20,000+ vote-count reports on election night, with no data loss reported during the event. I also built public sites with no downtime reported during election-day peaks. Currently developing a new app version and a CRM. Node.js, NestJS and Next.js."
       },
@@ -145,7 +166,12 @@
         "description": "Worker safety solution for ENI, built in React on top of the IoTLogIQ platform: real-time personnel tracking, geolocated maps, mustering, operational alerts and metric visualization for field teams."
       },
       "iotlogiq": {
-        "description": "Smart Industry product built from scratch with tailored solutions for Shell, ENI, AES, IAC, Jacksonville Airport and Ternium, among others. I worked full-stack, on both frontend and backend, and supported the product migration from ThingsBoard to an in-house stack on Angular and Node.js. I also led AI tooling adoption across the development team. Over 10 projects delivered for clients in airports, oil & gas, energy, steel, data centers and environmental monitoring, mainly in Latin America and the US."
+        "case": {
+          "problem": "Industrial clients needed tailored monitoring and operations views on a shared IoT platform.",
+          "contribution": "I worked across frontend and backend and supported the move from ThingsBoard to a React and Node.js stack.",
+          "outcome": "IoTLogIQ has been used for tailored industrial monitoring solutions. Its public website is linked below."
+        },
+        "description": "Smart Industry product built from scratch with tailored solutions for Shell, ENI, AES, IAC, Jacksonville Airport and Ternium, among others. I worked full-stack, on both frontend and backend, and supported the product migration from ThingsBoard to an in-house stack on React and Node.js. I also led AI tooling adoption across the development team. The platform supports client-specific monitoring and operational views for industrial and infrastructure use cases."
       },
       "cloudlab": {
         "description": "Platform for clinical laboratories aimed at streamlining the management of studies, results and patients. "
@@ -155,6 +181,10 @@
       },
       "awsprep": {
         "description": "Interactive study app for the AWS Certified Cloud Practitioner exam. Maps ~80 AWS services into categories and the exam's 4 domains through a zoomable mind-map, a searchable catalog, reference architecture diagrams, and a flashcard practice mode. Fully client-side, no backend. Next.js, React, TypeScript and Tailwind CSS."
+      },
+      "mirador": {
+        "summary": "A platform to follow Argentine and US markets, research companies, and view investments in one place.",
+        "description": "Mirador brings together market summaries, stock, CEDEAR and bond quotes, watchlists, charts, and fundamental data for comparing companies. Users can add positions manually and view their InvertirOnline holdings and balances through read-only access from their own account."
       },
       "fintrack": {
         "description": "Personal-use investment research assistant built with Java, Spring Boot, Spring AI, Groq and Angular 22. A validated planner gathers evidence through read-only tools from the official IOL MCP server and Finnhub. Java builds numeric tables from provider data or deterministic calculations, with sources and timestamps. I implemented the Java MCP client with OAuth/PKCE, encrypted tokens and exact-name tool allowlists, plus bounded memory and privacy controls. Regression tests cover concrete failure cases; a dedicated 30-question LLM evaluation set is planned. Code for the AI work is on frontend-and-chat."
@@ -183,12 +213,12 @@
     "title": "Experience",
     "items": {
       "senzary": {
-        "title": "Junior Frontend → Semi-Senior Frontend → Senior Full-Stack",
-        "date": "January 2023 - July 2026",
+        "title": "Junior Full-Stack Developer → Semi-Senior → Senior Full-Stack",
+        "date": "January 2023 - Present",
         "points": [
           "Led the full-stack team and contributed to platform growth from 3 to 10+ enterprise customers.",
           "Built an MCP server used by customers in production, with tools for devices, telemetry and alarms and tenant-level access controls.",
-          "Led the ThingsBoard migration to Angular + Node.js and built multi-tenant WebSocket streaming.",
+          "Led the ThingsBoard migration to React + Node.js and built multi-tenant WebSocket streaming.",
           "Built tracking for 200 people at ENI; introduced AI-assisted development and mentored developers."
         ]
       },
@@ -223,11 +253,11 @@
       "freelance": "Freelance",
       "academic": "Academic experience"
     },
-    "summaryEarly2023": "Teaching Assistant after completing Henry's full-stack bootcamp (November 2022 - April 2023).",
+    "summaryEarly2023": "Teaching Assistant after completing Henry's full-stack bootcamp in 2023.",
     "products": {
       "iotlogiq": {
         "name": "IoTLogIQ · platform",
-        "detail": "Smart Industry product built from scratch, with a base platform and tailored solutions per client: Shell, ENI, AES, IAC, Jacksonville Airport and Ternium, among others. I worked full-stack, leading the frontend and often the backend as well, and supported the product migration from ThingsBoard to an in-house stack on Angular and Node.js."
+        "detail": "Smart Industry product built from scratch, with a base platform and tailored solutions per client: Shell, ENI, AES, IAC, Jacksonville Airport and Ternium, among others. I worked full-stack, leading the frontend and often the backend as well, and supported the product migration from ThingsBoard to an in-house stack on React and Node.js."
       },
       "airportiq": {
         "name": "AirportIQ · Jacksonville Airport",
@@ -274,7 +304,12 @@
     "earned": "Earned",
     "viewCredential": "View credential",
     "credentialLabel": "View {{name}} credential on Credly (opens in a new tab)",
-    "coursesTitle": "Courses & professional development"
+    "coursesTitle": "Courses & professional development",
+    "educationTitle": "Education",
+    "education": {
+      "systems": "Systems Analyst",
+      "henry": "Full-stack development bootcamp"
+    }
   },
   "contact": {
     "eyebrow": "../Contact",
@@ -300,6 +335,9 @@
     "available": "Available for a full-time role",
     "writeMe": "Email me",
     "backToTop": "Back to top"
+  },
+  "seo": {
+    "description": "Portfolio of Nicolás Von Muhlinen, an AI Engineer with a full-stack background based in Córdoba, Argentina. LLM applications, agents, MCP and production software."
   },
   "lang": {
     "toggle": "Change language"

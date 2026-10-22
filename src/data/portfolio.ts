@@ -2,8 +2,8 @@ import type { TechSlug } from "@/components/ui/TechIcon";
 
 export const navItems = [
   { href: "#about", label: "nav.about" },
-  { href: "#tech", label: "nav.tech" },
   { href: "#projects", label: "nav.projects" },
+  { href: "#tech", label: "nav.tech" },
   { href: "#experience", label: "nav.experience" },
   { href: "#certifications", label: "nav.certifications" },
 ];
@@ -22,6 +22,11 @@ export const professionalCourses = [
   { name: "Claude Code in Action", issuer: "Anthropic", completedOn: "2026-06" },
 ];
 
+export const education = [
+  { key: "systems", institution: "IES Córdoba", period: "2026" },
+  { key: "henry", institution: "Henry", period: "2023" },
+] as const;
+
 export const profile = {
   name: "NICOLAS VON MUHLINEN",
   // Nombre de pila con capitalizacion normal: usado en el hero ("Hola, soy Nicolás"),
@@ -31,9 +36,9 @@ export const profile = {
   roleSecond: "Full-Stack",
   location: "Córdoba, Argentina",
   intro:
-    "AI Engineer con base full-stack y experiencia profesional desde 2023. Construyo aplicaciones con LLMs, agentes y MCP. En Senzary desarrollé un MCP usado por clientes en producción; hoy evalúo agentes de código en AnyoneAI.",
+    "AI Engineer con base full-stack y experiencia profesional desde 2023. Construyo aplicaciones con LLMs, agentes y MCP. Trabajo en Senzary, donde desarrollé un MCP usado por clientes en producción, y evalúo agentes de código en AnyoneAI con un contrato part-time.",
   about:
-    "Desde Córdoba construyo aplicaciones con LLMs sobre una base de ingeniería full-stack. Fui Senior Full-Stack en Senzary y hoy trabajo en AnyoneAI, además de continuar Polytics como freelance. FinTrack es de uso personal, Hermes es una demo premiada y LoRa Desk está en desarrollo.",
+    "Desde Córdoba construyo productos full-stack e IA aplicada. Soy Senior Full-Stack en Senzary y evalúo agentes de código en AnyoneAI con un contrato part-time. En Polytics desarrollé una app de fiscalización para más de 20.000 personas; en Hermes construí el backend y la integración de agentes de una demo de equipo que obtuvo el segundo puesto en un hackathon.",
   email: "nicovon24@gmail.com",
   socials: [
     { label: "GitHub", href: "https://github.com/nicovon24" },
@@ -158,7 +163,7 @@ export const experiences: Array<{
     company: "Senzary",
     icon: "/images/projects/senzary/logo/1.png",
     kind: "professional",
-    current: false,
+    current: true,
     products: senzaryProducts,
   },
   {
@@ -245,7 +250,6 @@ export const projects: PortfolioProject[] = [
 
   {
     key: "trashcans",
-    featured: true,
     categories: ["iot", "work"],
     year: "2024",
     role: "Full-stack · IoT",
@@ -278,6 +282,78 @@ export const projects: PortfolioProject[] = [
     ],
     code: "https://github.com/ProdeazoApp/ProdeazoApp",
     live: "https://prodeazo.vercel.app",
+  },
+
+  {
+    key: "queabuso",
+    categories: ["work", "freelance"],
+    year: "2025",
+    role: "Full-stack",
+    org: "freelance",
+    title: "Apps políticas",
+    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Node.js", "PostgreSQL"],
+    images: [
+      "/images/projects/partido/queabuso/landing.png",
+      "/images/projects/partido/queabuso/deja-denuncias.png",
+      "/images/projects/partido/queabuso/denuncias.png",
+      "/images/projects/partido/gabriel/sorteo.png",
+      "/images/projects/partido/gabriel/home.png",
+    ],
+    live: "https://queabusocba.com/",
+    live2: "https://gabrielbornoroni.com.ar/",
+    privateRepo: true,
+  },
+
+  {
+    key: "mirador",
+    categories: ["personal"],
+    year: "2026",
+    role: "Full-stack",
+    org: "personal",
+    title: "Mirador Inversiones",
+    technologies: ["Next.js", "React", "Dashboards", "Datos de mercado"],
+    images: [
+      "/images/projects/mirador/1.png",
+      "/images/projects/mirador/2.png",
+      "/images/projects/mirador/3.png",
+    ],
+    live: "https://mirador-inversiones.vercel.app/portfolio",
+  },
+
+  {
+    key: "workeriq",
+    categories: ["iot", "work"],
+    year: "2024",
+    role: "Full-stack",
+    org: "senzary",
+    title: "WorkerIQ — ENI · Senzary",
+    technologies: ["React", "Node.js", "IoT", "Tiempo real", "Mapas", "Dashboards"],
+    images: [
+      "/images/projects/senzary/vercel/workeriq/landing.png",
+      "/images/projects/senzary/vercel/workeriq/map.png",
+      "/images/projects/senzary/vercel/workeriq/map-v2.png",
+    ],
+    live: "https://workeriq-drill.iotlogiq.com/",
+    privateRepo: true,
+  },
+
+  {
+    key: "awsprep",
+    categories: ["personal"],
+    year: "2026",
+    role: "Full-stack",
+    org: "personal",
+    title: "AWS Study App",
+    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+    images: [
+      "/images/projects/awsprep/2.png",
+      "/images/projects/awsprep/3.png",
+      "/images/projects/awsprep/1.png",
+      "/images/projects/awsprep/4.png",
+      "/images/projects/awsprep/5.png",
+    ],
+    code: "https://github.com/nicovon24/aws_study",
+    live: "https://aws-prep-26.vercel.app/",
   },
 
   {
@@ -348,43 +424,8 @@ export const projects: PortfolioProject[] = [
   },
 
   {
-    key: "workeriq",
-    categories: ["iot", "work"],
-    year: "2024",
-    role: "Full-stack",
-    org: "senzary",
-    title: "WorkerIQ — ENI · Senzary",
-    technologies: ["React", "Node.js", "IoT", "Tiempo real", "Mapas", "Dashboards"],
-    images: [
-      "/images/projects/senzary/vercel/workeriq/landing.png",
-      "/images/projects/senzary/vercel/workeriq/map.png",
-      "/images/projects/senzary/vercel/workeriq/map-v2.png",
-    ],
-    live: "https://workeriq-drill.iotlogiq.com/",
-    privateRepo: true,
-  },
-
-  {
-    key: "awsprep",
-    categories: ["personal"],
-    year: "2026",
-    role: "Full-stack",
-    org: "personal",
-    title: "AWS Study App",
-    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
-    images: [
-      "/images/projects/awsprep/2.png",
-      "/images/projects/awsprep/3.png",
-      "/images/projects/awsprep/1.png",
-      "/images/projects/awsprep/4.png",
-      "/images/projects/awsprep/5.png",
-    ],
-    code: "https://github.com/nicovon24/aws_study",
-    live: "https://aws-prep-26.vercel.app/",
-  },
-
-  {
     key: "scoutpanel",
+    hidden: true,
     categories: ["personal"],
     year: "2025",
     role: "Full-stack",
@@ -401,36 +442,16 @@ export const projects: PortfolioProject[] = [
   },
 
   {
-    key: "queabuso",
-    categories: ["work", "freelance"],
-    year: "2025",
-    role: "Full-stack",
-    org: "freelance",
-    title: "Apps políticas",
-    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Node.js", "PostgreSQL"],
-    images: [
-      "/images/projects/partido/queabuso/landing.png",
-      "/images/projects/partido/queabuso/deja-denuncias.png",
-      "/images/projects/partido/queabuso/denuncias.png",
-      "/images/projects/partido/gabriel/sorteo.png",
-      "/images/projects/partido/gabriel/home.png",
-    ],
-    live: "https://queabusocba.com/",
-    live2: "https://gabrielbornoroni.com.ar/",
-    privateRepo: true,
-  },
-
-  {
     key: "iotlogiq",
+    featured: true,
     categories: ["iot", "work"],
     year: "2023—2026",
     role: "Full-stack",
     org: "senzary",
     title: "IoTLogIQ — Senzary",
     technologies: [
-      "Angular",
-      "Node.js",
       "React",
+      "Node.js",
       "ThingsBoard",
       "IoT",
       "Digital twin",
@@ -458,6 +479,7 @@ export const projects: PortfolioProject[] = [
 
   {
     key: "appfiscalizacion",
+    featured: true,
     categories: ["work", "freelance"],
     year: "2025",
     role: "Full-stack",
@@ -477,6 +499,7 @@ export const projects: PortfolioProject[] = [
 
   {
     key: "cloudlab",
+    hidden: true,
     categories: ["personal"],
     year: "2023",
     role: "Frontend",
@@ -490,6 +513,7 @@ export const projects: PortfolioProject[] = [
 
   {
     key: "airportiq",
+    hidden: true,
     categories: ["iot", "work"],
     year: "2024—2025",
     role: "Full-stack",

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useRef, useState, type KeyboardEvent } from "react";
 import { useTranslation } from "react-i18next";
 import HeroTechCarousel from "@/components/sections/HeroTechCarousel";
 import Section from "@/components/ui/Section";
@@ -17,6 +17,7 @@ const ALL = "all";
 export default function TechSection() {
   const { t } = useTranslation();
   const [active, setActive] = useState<string>(PRIMARY);
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   const primaryItems = techGroups.flatMap((g) => g.items.filter((i) => "primary" in i && i.primary));
   const allItems = techGroups.flatMap((g) => g.items);
@@ -29,10 +30,35 @@ export default function TechSection() {
     ...techGroups.map((g) => ({ key: g.title, label: t(g.title), count: g.items.length })),
   ];
 
+  function handleTabKeyDown(event: KeyboardEvent<HTMLButtonElement>, index: number) {
+    let nextIndex: number;
+
+    switch (event.key) {
+      case "ArrowRight":
+        nextIndex = (index + 1) % tabs.length;
+        break;
+      case "ArrowLeft":
+        nextIndex = (index - 1 + tabs.length) % tabs.length;
+        break;
+      case "Home":
+        nextIndex = 0;
+        break;
+      case "End":
+        nextIndex = tabs.length - 1;
+        break;
+      default:
+        return;
+    }
+
+    event.preventDefault();
+    tabRefs.current[nextIndex]?.focus();
+    setActive(tabs[nextIndex].key);
+  }
+
   return (
     <Section
       id="tech"
-      index="02"
+      index="03"
       eyebrow={t("tech.eyebrow")}
       title={t("tech.title")}
       parallax
@@ -45,18 +71,24 @@ export default function TechSection() {
         aria-label={t("tech.groupLabel")}
         className="control-surface mb-6 inline-flex flex-wrap items-center gap-1.5 rounded-full border p-1.5 backdrop-blur-md shadow-card-sm"
       >
-        {tabs.map((tab) => {
+        {tabs.map((tab, index) => {
           const isActive = active === tab.key;
           return (
             <button
               key={tab.key}
               role="tab"
               type="button"
+              id={`tech-tab-${index}`}
+              ref={(element) => { tabRefs.current[index] = element; }}
               suppressHydrationWarning
               aria-selected={isActive}
+              aria-controls="tech-tab-panel"
+              tabIndex={isActive ? 0 : -1}
+              onFocus={() => setActive(tab.key)}
+              onKeyDown={(event) => handleTabKeyDown(event, index)}
               onClick={() => setActive(tab.key)}
               className={cn(
-                "relative flex items-center gap-2 rounded-full px-3.5 py-1.5 font-mono text-xs font-semibold transition-colors duration-200 outline-none select-none",
+                "relative flex min-h-11 min-w-11 items-center gap-2 rounded-full px-3.5 py-1.5 font-mono text-xs font-semibold transition-colors duration-200 outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent select-none",
                 isActive ? "text-accent-contrast font-bold" : "text-muted hover:text-ink"
               )}
             >
@@ -81,7 +113,14 @@ export default function TechSection() {
         })}
       </div>
 
-      <div className="hero-tech-mask group/hero-tech relative w-full overflow-x-clip overflow-y-visible py-4" aria-live="polite">
+      <div
+        id="tech-tab-panel"
+        role="tabpanel"
+        aria-labelledby={`tech-tab-${tabs.findIndex((tab) => tab.key === active)}`}
+        tabIndex={0}
+        className="hero-tech-mask group/hero-tech relative w-full overflow-x-clip overflow-y-visible py-4"
+        aria-live="polite"
+      >
         <HeroTechCarousel key={active}>
           {[...items, ...items].map((item, index) => {
             const isPrimary = "primary" in item && item.primary;

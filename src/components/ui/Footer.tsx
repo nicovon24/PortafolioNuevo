@@ -10,7 +10,7 @@ const iconBtn =
   "control-surface grid size-9 place-items-center rounded-full border text-accent transition-all hover:-translate-y-0.5 hover:border-accent hover:bg-accent/10";
 
 const actionPrimary =
-  "inline-flex min-h-10 items-center justify-center gap-2 rounded-full border border-accent bg-accent px-5 font-mono text-mini font-bold uppercase tracking-[0.12em] text-accent-contrast transition-colors hover:border-accent-2 hover:bg-accent-2";
+  "inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-accent bg-accent px-5 font-mono text-mini font-bold uppercase tracking-[0.12em] text-accent-contrast transition-colors hover:border-accent-2 hover:bg-accent-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";
 
 const actionSecondary =
   "control-surface inline-flex min-h-10 items-center justify-center gap-2 rounded-full border px-5 font-mono text-mini font-bold uppercase tracking-[0.12em] text-ink transition-colors hover:border-accent hover:text-accent";

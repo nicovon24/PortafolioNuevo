@@ -93,7 +93,7 @@ export default function Navbar() {
         "portfolio-navbar fixed top-0 left-1/2 z-40 w-full -translate-x-1/2 border border-transparent px-page",
         open ? "overflow-visible" : "overflow-hidden",
         hasScrolled &&
-          "w-[min(94vw,84rem)] rounded-full border-line shadow-[0_18px_60px_rgba(0,0,0,0.34)]",
+          "w-[min(96vw,96rem)] rounded-full border-line shadow-[0_18px_60px_rgba(0,0,0,0.34)]",
       )}
       initial={{ opacity: 0, y: -42 }}
       animate={{ opacity: 1, y: hasScrolled ? 16 : 0 }}
@@ -144,7 +144,7 @@ export default function Navbar() {
         type="button"
         className={cn(headerIconBtn, "relative z-1 xl:hidden")}
         onClick={() => setOpen((value) => !value)}
-        aria-label={open ? "Cerrar menu" : "Abrir menu"}
+        aria-label={t(open ? "nav.closeMenu" : "nav.openMenu")}
         aria-expanded={open}
       >
         {open ? <X size={19} /> : <Menu size={19} />}

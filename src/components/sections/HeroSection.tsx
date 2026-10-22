@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowDown, Download, Github, Linkedin, MapPin } from "lucide-react";
+import { ArrowDown, Download, Github, Linkedin, Mail, MapPin } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import HeroTechCarousel from "@/components/sections/HeroTechCarousel";
@@ -53,7 +53,7 @@ export default function HeroSection() {
           </p>
         </div>
 
-        <div className="relative col-start-2 row-start-1 hidden aspect-4/5 w-full overflow-hidden rounded-card bg-background-deep md:block lg:row-span-2">
+        <div className="relative col-start-2 row-start-1 hidden aspect-4/5 w-full overflow-hidden rounded-card bg-background-deep md:block lg:row-span-2 2xl:aspect-square">
           <Image
             src="/images/profile/profile.png?v=day"
             alt={profile.name}
@@ -78,6 +78,9 @@ export default function HeroSection() {
             </Button>
             <Button as="a" href={cv.href} size="lg" variant="outline" target="_blank" rel="noreferrer" className="gap-2 px-5 text-sm sm:px-6 sm:text-base">
               {t("hero.cv")} <Download size={17} aria-hidden />
+            </Button>
+            <Button as="a" href={`mailto:${profile.email}`} size="lg" variant="outline" className="gap-2 px-5 text-sm sm:px-6 sm:text-base">
+              {t("hero.emailMe")} <Mail size={17} aria-hidden />
             </Button>
           </div>
           <div className="mt-6 flex flex-wrap items-center justify-between gap-x-5 gap-y-2 border-t border-line pt-4">

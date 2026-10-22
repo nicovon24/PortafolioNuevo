@@ -5,7 +5,7 @@ import { ArrowUpRight, BadgeCheck } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import MotionFade from "@/components/motion/MotionFade";
 import Section from "@/components/ui/Section";
-import { aiCertification, professionalCourses } from "@/data/portfolio";
+import { aiCertification, education, professionalCourses } from "@/data/portfolio";
 
 export default function CertificationsSection() {
   const { t, i18n } = useTranslation();
@@ -62,6 +62,21 @@ export default function CertificationsSection() {
           </a>
         </div>
       </MotionFade>
+
+      <div className="mt-10">
+        <h3 className="mb-3 font-mono text-base font-bold text-ink">{t("certifications.educationTitle")}</h3>
+        <ul className="divide-y divide-line border-b border-line">
+          {education.map((item) => (
+            <li key={item.key} className="flex flex-col gap-2 py-5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-8">
+              <div className="min-w-0">
+                <h4 className="text-base font-medium leading-relaxed text-ink">{t(`certifications.education.${item.key}`)}</h4>
+                <p className="mt-1 text-sm text-muted">{item.institution}</p>
+              </div>
+              <span className="shrink-0 font-mono text-xs text-muted">{item.period}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
 
       <div className="mt-10">
         <h3 className="mb-3 font-mono text-base font-bold text-ink">{t("certifications.coursesTitle")}</h3>

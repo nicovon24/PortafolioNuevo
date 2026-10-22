@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, ExternalLink, Github, Lock, X } from "lucide-react";
-import { useCallback, useEffect, useId, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
@@ -44,6 +44,10 @@ export default function ProjectDetailModal({
   const { t } = useTranslation();
   const labelId = useId();
   const panelRef = useRef<HTMLDivElement>(null);
+  const modalTriggerRef = useRef<HTMLElement | null>(null);
+  const zoomTriggerRef = useRef<HTMLButtonElement>(null);
+  const restoreZoomFocusRef = useRef(false);
+  const wasOpenRef = useRef(false);
   const [imgIndex, setImgIndex] = useState(0);
   const [imgLoaded, setImgLoaded] = useState(false);
   const [lightbox, setLightbox] = useState(false);
@@ -51,12 +55,31 @@ export default function ProjectDetailModal({
 
   useFocusTrap(panelRef, open && !lightbox);
 
-  // Cerrar el lightbox (imagen ampliada) cierra todo el modal, sin importar
-  // si se entro con "Ver imagenes" o ampliando una foto desde el detalle:
-  // ir para atras un paso a la vez sorprendia mas de lo que ayudaba.
-  const closeLightbox = useCallback(() => {
+  useLayoutEffect(() => {
+    if (open && !wasOpenRef.current) {
+      modalTriggerRef.current = document.activeElement as HTMLElement | null;
+    }
+    wasOpenRef.current = open;
+  }, [open]);
+
+  const closeModal = useCallback(() => {
+    const trigger = modalTriggerRef.current;
     onClose();
+    // El trap se reactiva al volver del lightbox y puede guardar otro foco.
+    // Restaurar siempre el disparador original cuando se desmonta el modal.
+    requestAnimationFrame(() => trigger?.focus());
   }, [onClose]);
+
+  const closeLightbox = useCallback(() => {
+    setLightbox(false);
+  }, []);
+
+  useEffect(() => {
+    if (!open || lightbox || !restoreZoomFocusRef.current) return;
+    restoreZoomFocusRef.current = false;
+    const frame = requestAnimationFrame(() => zoomTriggerRef.current?.focus());
+    return () => cancelAnimationFrame(frame);
+  }, [open, lightbox]);
 
   const goPrev = useCallback(() => {
     setImgLoaded(false);
@@ -79,7 +102,7 @@ export default function ProjectDetailModal({
     // Con el lightbox arriba, el teclado lo maneja el propio Lightbox.
     if (!open || lightbox) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") closeModal();
       if (e.key === "ArrowLeft") goPrev();
       if (e.key === "ArrowRight") goNext();
     };
@@ -94,7 +117,7 @@ export default function ProjectDetailModal({
       document.body.style.overflow = prev;
       document.body.classList.remove("modal-open");
     };
-  }, [open, lightbox, onClose, goPrev, goNext]);
+  }, [open, lightbox, closeModal, goPrev, goNext]);
 
   if (!open) return null;
 
@@ -105,7 +128,7 @@ export default function ProjectDetailModal({
     <>
       <div
         className="fixed inset-0 z-200 flex items-center justify-center bg-black/80 p-3 backdrop-blur-sm sm:p-5"
-        onClick={onClose}
+        onClick={closeModal}
       >
         <div
           ref={panelRef}
@@ -119,8 +142,8 @@ export default function ProjectDetailModal({
         >
           <IconButton
             label={t("gallery.closeDialog")}
-            onClick={onClose}
-            className="absolute right-3 top-3 z-10 size-9"
+            onClick={closeModal}
+            className="absolute right-3 top-3 z-10 size-11"
           >
             <X size={18} />
           </IconButton>
@@ -130,20 +153,30 @@ export default function ProjectDetailModal({
             <div className="relative h-[42vh] max-h-104 min-h-56 w-full overflow-hidden lg:h-[min(50vh,28rem)]">
               {!imgLoaded && <Skeleton className="absolute inset-0 rounded-none" />}
               {images[imgIndex] && (
-                <Image
-                  src={images[imgIndex]}
-                  alt={t("gallery.screenshotOf", { title, n: imgIndex + 1 })}
-                  fill
-                  quality={95}
-                  sizes="(max-width: 896px) 100vw, (max-width: 1152px) 896px, 1152px"
-                  // contain y no cover: son capturas de pantalla, recortarlas pierde la UI.
-                  className={cn(
-                    "cursor-zoom-in object-contain transition-opacity duration-300",
-                    imgLoaded ? "opacity-100" : "opacity-0",
-                  )}
-                  onClick={() => setLightbox(true)}
-                  onLoad={() => setImgLoaded(true)}
-                />
+                <button
+                  ref={zoomTriggerRef}
+                  type="button"
+                  aria-label={t("gallery.openGalleryAt", { title, n: imgIndex + 1 })}
+                  onClick={() => {
+                    restoreZoomFocusRef.current = true;
+                    setLightbox(true);
+                  }}
+                  className="absolute inset-0 cursor-zoom-in focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-accent"
+                >
+                  <Image
+                    src={images[imgIndex]}
+                    alt=""
+                    fill
+                    quality={95}
+                    sizes="(max-width: 896px) 100vw, (max-width: 1152px) 896px, 1152px"
+                    // contain y no cover: son capturas de pantalla, recortarlas pierde la UI.
+                    className={cn(
+                      "object-contain transition-opacity duration-300",
+                      imgLoaded ? "opacity-100" : "opacity-0",
+                    )}
+                    onLoad={() => setImgLoaded(true)}
+                  />
+                </button>
               )}
 
               {count > 1 && (
@@ -151,14 +184,14 @@ export default function ProjectDetailModal({
                   <IconButton
                     label={t("gallery.previous")}
                     onClick={goPrev}
-                    className="absolute left-2 top-1/2 z-10 size-8 -translate-y-1/2"
+                    className="absolute left-2 top-1/2 z-10 size-11 -translate-y-1/2"
                   >
                     <ChevronLeft size={18} />
                   </IconButton>
                   <IconButton
                     label={t("gallery.next")}
                     onClick={goNext}
-                    className="absolute right-2 top-1/2 z-10 size-8 -translate-y-1/2"
+                    className="absolute right-2 top-1/2 z-10 size-11 -translate-y-1/2"
                   >
                     <ChevronRight size={18} />
                   </IconButton>
@@ -178,13 +211,13 @@ export default function ProjectDetailModal({
                     suppressHydrationWarning
                     onClick={() => setImgIndex(i)}
                     className={cn(
-                      "relative size-10 shrink-0 overflow-hidden rounded border transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
+                      "relative size-11 shrink-0 overflow-hidden rounded border transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
                       i === imgIndex ? "border-accent" : "border-line/50 opacity-60 hover:opacity-90",
                     )}
                     aria-label={t("gallery.thumbnail", { n: i + 1 })}
                     aria-current={i === imgIndex}
                   >
-                    <Image src={img} alt="" fill sizes="40px" className="object-cover" />
+                    <Image src={img} alt="" fill sizes="44px" className="object-cover" />
                   </button>
                 ))}
               </div>

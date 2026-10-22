@@ -5,8 +5,10 @@ import GrainOverlay from "@/components/ui/GrainOverlay";
 import Loader from "@/components/ui/Loader";
 import SideRails from "@/components/ui/SideRails";
 import I18nProvider from "@/components/providers/I18nProvider";
+import SkipLink from "@/components/ui/SkipLink";
 import { LoaderProvider } from "@/components/providers/LoaderProvider";
 import ThemeProvider from "@/components/providers/ThemeProvider";
+import es from "../../public/locales/es/common.json";
 import "@/styles/globals.css";
 
 // Decorativo y sin efecto en mobile (se autodesactiva en pointer:coarse): fuera del bundle inicial.
@@ -44,8 +46,7 @@ const themeInitScript = `(function(){try{var d=document.documentElement;var p=lo
 
 export const metadata: Metadata = {
   title: "Nicolás Von Muhlinen | AI Engineer · Full-Stack",
-  description:
-    "Portfolio de Nicolás Von Muhlinen, AI Engineer con base full-stack en Córdoba, Argentina. Aplicaciones con LLMs, agentes, MCP y sistemas en producción.",
+  description: es.seo.description,
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
@@ -59,12 +60,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body className={`antialiased ${manrope.className}`} suppressHydrationWarning>
-        <a
-          href="#main"
-          className="sr-only rounded-card border border-accent bg-background-deep px-4 py-2 font-mono text-sm text-accent focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-400"
-        >
-          Saltar al contenido
-        </a>
         {/* LoaderProvider envuelve al Loader y al contenido: es el canal por el
             que el loader avisa que termino y las secciones destraban su entrada. */}
         <LoaderProvider>
@@ -72,6 +67,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <GrainOverlay />
           <ThemeProvider>
             <I18nProvider>
+              <SkipLink />
               <TrailingCursor />
               <SideRails />
               {children}

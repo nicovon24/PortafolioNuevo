@@ -28,16 +28,13 @@ const LoaderContext = createContext<LoaderContextValue>({
  * las animaciones se consumen detras del overlay y al levantarse el loader
  * la pagina ya esta quieta. `ready` es la senal que destraba esas entradas.
  *
- * Arranca en `false` solo si el loader va a mostrarse (primera visita de la
- * sesion). En visitas repetidas arranca en `true` para no retrasar nada.
+ * Arranca en `false` tanto en servidor como en cliente para evitar diferencias
+ * de hidratacion. Loader lo cambia a `true` al montar si ya se vio la entrada.
  */
 export function LoaderProvider({ children }: { children: ReactNode }) {
-  const [ready, setReady] = useState(() => {
-    // SSR: asumimos que el loader se muestra, para no emitir markup con el
-    // contenido ya visible y que despues parpadee al ocultarse.
-    if (typeof window === "undefined") return false;
-    return sessionStorage.getItem("loader-seen") === "1";
-  });
+  // El primer render debe coincidir en servidor y cliente. Loader marca ready
+  // despues del montaje cuando la sesion ya vio la introduccion.
+  const [ready, setReady] = useState(false);
 
   const markReady = useCallback(() => setReady(true), []);
 

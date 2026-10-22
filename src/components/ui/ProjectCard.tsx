@@ -22,17 +22,19 @@ type ProjectCardProps = {
   role?: string;
   org?: string;
   featured?: boolean;
+  archive?: boolean;
   index?: number;
 };
 
 export default function ProjectCard({
   projectKey, title, technologies, images, live, live2, code,
   privateRepo = false, inDevelopment = false, year, role, org,
-  featured = false, index = 0,
+  featured = false, archive = false, index = 0,
 }: ProjectCardProps) {
   const { t } = useTranslation();
   const description = t(`projects.items.${projectKey}.description`);
   const summary = t(`projects.items.${projectKey}.summary`, { defaultValue: description });
+  const caseDetails = featured ? ["problem", "contribution", "outcome"] as const : [];
   const [modalOpen, setModalOpen] = useState(false);
   const [startLightbox, setStartLightbox] = useState(false);
   const orgLabel = org ? t(`projects.org.${org}`) : undefined;
@@ -69,18 +71,29 @@ export default function ProjectCard({
         )}
 
         <div className={cn("flex flex-1 flex-col p-5", featured && "sm:p-7")}>
-          <h3 className={cn("m-0 text-xl font-semibold leading-snug text-ink", featured && "sm:text-2xl")}>
-            {title}
-          </h3>
+          {archive ? (
+            <h4 className="m-0 text-xl font-semibold leading-snug text-ink">{title}</h4>
+          ) : (
+            <h3 className={cn("m-0 text-xl font-semibold leading-snug text-ink", featured && "sm:text-2xl")}>{title}</h3>
+          )}
           <p className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs leading-relaxed text-muted">
             {year && <span className="font-mono tabular-nums">{year}</span>}
             {year && (role || orgLabel) && <span aria-hidden>/</span>}
             {[role, orgLabel].filter(Boolean).join(" / ")}
           </p>
           {inDevelopment && <p className="mt-2 text-sm font-semibold text-accent">{t("projects.inDevelopment")}</p>}
-          <p className={cn("mt-4 text-sm leading-relaxed text-ink/85", featured ? "text-base" : "line-clamp-3")}>
-            {summary}
-          </p>
+          {featured ? (
+            <dl className="mt-5 space-y-3 text-sm leading-relaxed text-ink/85">
+              {caseDetails.map((detail) => (
+                <div key={detail}>
+                  <dt className="font-mono text-xs font-semibold uppercase tracking-wide text-accent">{t(`projects.case.${detail}`)}</dt>
+                  <dd className="mt-1">{t(`projects.items.${projectKey}.case.${detail}`)}</dd>
+                </div>
+              ))}
+            </dl>
+          ) : (
+            <p className="mt-4 line-clamp-3 text-sm leading-relaxed text-ink/85">{summary}</p>
+          )}
           <ul className="mt-5 flex flex-wrap gap-x-3 gap-y-2" aria-label={t("projects.architectureStack")}>
             {technologies.slice(0, technologyLimit).map((tech) => (
               <li key={tech} className="font-mono text-xs text-muted">{tech}</li>

@@ -45,19 +45,26 @@ export default function Lightbox({
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
+        e.preventDefault();
         e.stopPropagation();
         onClose();
       }
-      if (e.key === "ArrowLeft") goPrev();
-      if (e.key === "ArrowRight") goNext();
+      if (e.key === "ArrowLeft") {
+        e.stopPropagation();
+        goPrev();
+      }
+      if (e.key === "ArrowRight") {
+        e.stopPropagation();
+        goNext();
+      }
     };
-    document.addEventListener("keydown", onKey);
+    document.addEventListener("keydown", onKey, true);
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     // Apaga el grano del GrainOverlay mientras el visor esta abierto.
     document.body.classList.add("modal-open");
     return () => {
-      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("keydown", onKey, true);
       document.body.style.overflow = prevOverflow;
       document.body.classList.remove("modal-open");
     };
@@ -82,7 +89,7 @@ export default function Lightbox({
         <IconButton
           label={t("gallery.closeImage")}
           onClick={onClose}
-          className="absolute right-3 top-3 z-10 size-9"
+          className="absolute right-3 top-3 z-10 size-11"
         >
           <X size={18} />
         </IconButton>
@@ -103,14 +110,14 @@ export default function Lightbox({
             <IconButton
               label={t("gallery.previous")}
               onClick={goPrev}
-              className="absolute left-2 top-1/2 z-10 size-10 -translate-y-1/2"
+              className="absolute left-2 top-1/2 z-10 size-11 -translate-y-1/2"
             >
               <ChevronLeft size={22} />
             </IconButton>
             <IconButton
               label={t("gallery.next")}
               onClick={goNext}
-              className="absolute right-2 top-1/2 z-10 size-10 -translate-y-1/2"
+              className="absolute right-2 top-1/2 z-10 size-11 -translate-y-1/2"
             >
               <ChevronRight size={22} />
             </IconButton>

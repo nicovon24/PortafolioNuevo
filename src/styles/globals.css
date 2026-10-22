@@ -7,7 +7,7 @@
 
   --spacing-page: clamp(1rem, 4vw, 3.75rem);
   /* Ancho del contenido. Unico lugar donde se ajusta: navbar, hero, secciones y footer lo consumen. */
-  --spacing-shell: 72rem;
+  --spacing-shell: 90rem;
 
   /* Los valores reales viven en :root y en los bloques [data-palette][data-mode] de mas abajo.
      Estos son solo el fallback / valor inicial que Tailwind necesita para generar las clases. */
