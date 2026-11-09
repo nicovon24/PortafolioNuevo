@@ -96,7 +96,9 @@
     "groupLabel": "Grupos de tecnologías"
   },
   "projects": {
-    "intro": "Tres casos elegidos entre software industrial, operaciones electorales e IA aplicada.",
+    "intro": "Trabajos seleccionados entre software industrial, operaciones electorales e IA aplicada.",
+    "main": { "title": "Más proyectos", "intro": "Productos y sistemas para clientes y uso personal." },
+    "other": { "title": "Otros proyectos", "intro": "Prototipos, experimentos y herramientas adicionales." },
     "archive": {
       "title": "Archivo de proyectos",
       "intro": "Explorá los {{count}} proyectos públicos, incluidos los casos destacados. Filtrá por tipo de trabajo."
@@ -129,6 +131,7 @@
     "org": {
       "senzary": "Senzary",
       "freelance": "Freelance",
+      "client": "Proyecto para cliente",
       "personal": "Personal"
     },
     "items": {
@@ -150,10 +153,10 @@
         "case": {
           "problem": "Los equipos electorales necesitaban una app para más de 20.000 fiscales y centralizar las actas durante la noche electoral.",
           "contribution": "Construí la app para fiscales y participé en el diseño del sistema más amplio que reunió las actas.",
-          "outcome": "El sistema centralizó más de 20.000 actas durante el evento, sin pérdida de datos reportada."
+          "outcome": "El sistema centralizó más de 20.000 actas durante el evento, sin pérdida de datos reportada. El trabajo para el mismo cliente incluye ¡Qué Abuso! CBA y el sitio de Gabriel Bornoroni; sus capturas y enlaces están aquí."
         },
         "summary": "Desarrollé la app para más de 20.000 fiscales y participé en el sistema que centralizó más de 20.000 actas durante la noche electoral.",
-        "description": "Polytics, freelance desde enero de 2025. Construí la app para más de 20.000 fiscales y participé en el diseño del sistema que centralizó más de 20.000 actas la noche electoral, sin pérdida de datos reportada durante el evento. También desarrollé sitios públicos sin caídas reportadas durante los picos de ese día. Hoy construyo una nueva versión de la app y un CRM. Node.js, NestJS y Next.js."
+        "description": "Polytics, freelance desde enero de 2025. Construí la app para más de 20.000 fiscales y participé en el diseño del sistema que centralizó más de 20.000 actas la noche electoral, sin pérdida de datos reportada durante el evento. También desarrollé sitios públicos sin caídas reportadas durante los picos de ese día. Ese trabajo incluye ¡Qué Abuso! CBA, una plataforma de denuncias impositivas y burocráticas con carga de evidencia y feed público, y el sitio de campaña de Gabriel Bornoroni con sorteo y secciones de contenido. Sus capturas y enlaces están aquí. Hoy construyo una nueva versión de la app y un CRM. Node.js, NestJS y Next.js."
       },
       "queabuso": {
         "description": "Dos apps para el mismo cliente — Gabriel Bornoroni y Libertad Avanza Córdoba. ¡Qué Abuso! CBA: plataforma para denunciar abusos impositivos y burocráticos, con formulario y carga de evidencia, feed público de denuncias y reacciones. Sitio oficial de Gabriel Bornoroni: web de campaña con home, sorteo y secciones. Full-stack: Next.js/React, TypeScript, Tailwind y Node.js + PostgreSQL."
@@ -169,9 +172,9 @@
         "case": {
           "problem": "Los clientes industriales necesitaban vistas de monitoreo y operación a medida sobre una plataforma IoT compartida.",
           "contribution": "Trabajé en frontend y backend y acompañé la migración de ThingsBoard a un stack con React y Node.js.",
-          "outcome": "IoTLogIQ se utilizó para soluciones de monitoreo industrial a medida. Su sitio público está enlazado abajo."
+          "outcome": "IoTLogIQ incluye AirportIQ para Jacksonville Airport, con dashboards de calidad de aire, flujo de personas, filas y ambiente. Las capturas de AirportIQ están en esta galería."
         },
-        "description": "Producto Smart Industry desarrollado desde cero con soluciones a medida para Shell, ENI, AES, IAC, Jacksonville Airport y Ternium, entre otros. Trabajé full-stack, tanto en frontend como en backend, y acompañé la migración del producto desde ThingsBoard hacia un stack propio en React y Node.js. Lideré además la adopción de herramientas de IA en el equipo de desarrollo. La plataforma ofrece monitoreo y vistas operativas a medida para casos de uso industriales y de infraestructura."
+        "description": "Producto Smart Industry desarrollado desde cero con soluciones a medida para Shell, ENI, AES, IAC, Jacksonville Airport y Ternium, entre otros. Trabajé full-stack, tanto en frontend como en backend, y acompañé la migración del producto desde ThingsBoard hacia un stack propio en React y Node.js. Lideré además la adopción de herramientas de IA en el equipo de desarrollo. AirportIQ, desarrollado sobre IoTLogIQ para Jacksonville Airport, cubre calidad de aire, temperatura, conteo y flujo de personas, gestión de filas, alarmas por umbral, vistas por terminal e histórico de mediciones. Sus capturas están en esta galería."
       },
       "cloudlab": {
         "description": "Plataforma para laboratorios clinicos orientada a agilizar la gestion de estudios, resultados y pacientes."
@@ -187,7 +190,20 @@
         "description": "Mirador reúne un resumen de mercado, cotizaciones de acciones, CEDEARs y bonos, listas de seguimiento, gráficos y datos fundamentales para comparar empresas. Permite cargar posiciones manuales y consultar cartera y saldos de InvertirOnline con acceso de solo lectura desde la cuenta del usuario."
       },
       "fintrack": {
+        "case": {
+          "problem": "El research de inversiones necesitaba respuestas trazables basadas en datos de mercado y herramientas de cuenta.",
+          "contribution": "Desarrollé el cliente MCP en Java, un planner validado, tablas numéricas deterministas y memoria acotada con controles de privacidad.",
+          "outcome": "Es un asistente de research de uso personal; la evaluación dedicada de 30 preguntas para el LLM sigue planificada."
+        },
         "description": "Asistente de research de inversiones de uso personal con Java, Spring Boot, Spring AI, Groq y Angular 22. Un planner validado reúne evidencia de tools de solo lectura del MCP oficial de IOL y Finnhub. Java arma las tablas numéricas con datos del proveedor o cálculos deterministas, con fuente y hora. Implementé el cliente MCP en Java con OAuth/PKCE, tokens cifrados y allowlists por nombre exacto, además de memoria acotada y controles de privacidad. Los tests de regresión cubren fallas concretas; el set de 30 preguntas para evaluar el LLM está planificado. El código de IA está en frontend-and-chat."
+      },
+      "blackfruit": {
+        "summary": "Gestión de ventas, producción, importaciones y permisos para un negocio de frutas; tienda online planificada.",
+        "description": "BlackFruit actualmente gestiona ventas, producción, importaciones y permisos para un negocio de frutas. La tienda online es trabajo futuro planificado, no una función entregada. La app publicada requiere una cuenta."
+      },
+      "aiengineering": {
+        "summary": "Portfolio de proyectos de AI Engineering con prototipos locales de inteligencia documental y revisión de propuestas.",
+        "description": "Colección de proyectos prácticos de AI Engineering en desarrollo. Document Intelligence explora la búsqueda en documentos con citas verificables y respuestas explícitas cuando falta evidencia. Debate and Proposal Review tiene un MVP local terminado para examinar propuestas desde distintas perspectivas con revisión humana. Los demás proyectos del repositorio están planificados."
       },
       "airportiq": {
         "description": "Solución de operación aeroportuaria desarrollada para Jacksonville Airport sobre la plataforma IoTLogIQ: calidad de aire, temperatura, conteo y flujo de personas, gestión de filas y monitoreo ambiental. Dashboards pensados para lectura rápida en sala de control, con alarmas por umbral, vistas por terminal e histórico de mediciones."
@@ -202,6 +218,7 @@
       "personal": "Personales",
       "freelance": "Freelance",
       "iot": "IoT",
+      "ai": "AI Engineering",
       "countOne": "{{count}} proyecto",
       "countOther": "{{count}} proyectos",
       "filterLabel": "Filtrar proyectos por categoría",

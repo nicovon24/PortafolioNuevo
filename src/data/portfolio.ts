@@ -183,12 +183,19 @@ export const projectCategories = [
   "personal",
   "freelance",
   "iot",
+  "ai",
 ] as const;
 
 export type ProjectCategory = (typeof projectCategories)[number];
 
+export const projectDisplayOrder = {
+  featured: ["iotlogiq", "hermes", "appfiscalizacion"],
+  main: ["fintrack", "trashcans", "workeriq", "mirador", "iotarg", "blackfruit"],
+  other: ["prodeazo", "awsprep", "aiengineering"],
+} as const;
+
 /** Origen del proyecto: se muestra como ultima etiqueta junto al role. */
-export type ProjectOrg = "senzary" | "freelance" | "personal";
+export type ProjectOrg = "senzary" | "freelance" | "client" | "personal";
 
 export type PortfolioProject = {
   key: string;
@@ -210,6 +217,7 @@ export type PortfolioProject = {
   code?: string;
   privateRepo?: boolean;
   inDevelopment?: boolean;
+  relatedLinks?: Array<{ label: string; href: string }>;
   hidden?: boolean;
 };
 
@@ -219,7 +227,7 @@ export const projects: PortfolioProject[] = [
     featured: true,
     code: "https://github.com/nicovon24/hermes",
     live: "https://hermes-hk.vercel.app/",
-    categories: ["personal"],
+    categories: ["personal", "ai"],
     year: "2026",
     role: "Backend · Agents",
     org: "personal",
@@ -286,6 +294,7 @@ export const projects: PortfolioProject[] = [
 
   {
     key: "queabuso",
+    hidden: true,
     categories: ["work", "freelance"],
     year: "2025",
     role: "Full-stack",
@@ -395,7 +404,7 @@ export const projects: PortfolioProject[] = [
 
   {
     key: "fintrack",
-    categories: ["personal"],
+    categories: ["personal", "ai"],
     year: "2026",
     role: "AI · Full-stack",
     org: "personal",
@@ -420,7 +429,7 @@ export const projects: PortfolioProject[] = [
       "/images/projects/fintrack/4.png",
       "/images/projects/fintrack/5.png",
     ],
-    code: "https://github.com/nicovon24/fintrack",
+    code: "https://github.com/nicovon24/fintrack/tree/frontend-and-chat",
   },
 
   {
@@ -472,6 +481,12 @@ export const projects: PortfolioProject[] = [
       "/images/projects/senzary/demo/doors-2.png",
       "/images/projects/senzary/demo/on-off-1.png",
       "/images/projects/senzary/demo/bob.png",
+      "/images/projects/senzary/airport/1.png",
+      "/images/projects/senzary/airport/3.png",
+      "/images/projects/senzary/airport/4.png",
+      "/images/projects/senzary/airport/5.png",
+      "/images/projects/senzary/airport/6.png",
+      "/images/projects/senzary/airport/7.png",
     ],
     live: "https://iotlogiq.com/",
     privateRepo: true,
@@ -494,9 +509,47 @@ export const projects: PortfolioProject[] = [
       "/images/projects/partido/app/dashboard3.png",
       "/images/projects/partido/app/seccionales.png",
       "/images/projects/partido/app/mesas.png",
+      "/images/projects/partido/queabuso/landing.png",
+      "/images/projects/partido/queabuso/deja-denuncias.png",
+      "/images/projects/partido/queabuso/denuncias.png",
+      "/images/projects/partido/gabriel/sorteo.png",
+      "/images/projects/partido/gabriel/home.png",
+    ],
+    relatedLinks: [
+      { label: "¡Qué Abuso! CBA", href: "https://queabusocba.com/" },
+      { label: "Gabriel Bornoroni", href: "https://gabrielbornoroni.com.ar/" },
     ],
   },
 
+  {
+    key: "blackfruit",
+    categories: ["work"],
+    year: "2026",
+    role: "Full-stack",
+    org: "client",
+    title: "BlackFruit",
+    technologies: ["Next.js", "Better Auth", "Prisma", "PostgreSQL"],
+    images: [
+      "/images/projects/blackfruit/1.png",
+      "/images/projects/blackfruit/2.png",
+      "/images/projects/blackfruit/3.png",
+      "/images/projects/blackfruit/4.png",
+    ],
+    code: "https://github.com/nicovon24/blackfruit",
+    live: "https://blackfruit-cba.vercel.app",
+  },
+  {
+    key: "aiengineering",
+    categories: ["personal", "ai"],
+    year: "2026",
+    role: "AI Engineering",
+    org: "personal",
+    title: "AI Engineering Projects",
+    technologies: ["Next.js", "TypeScript", "RAG", "LLMs"],
+    images: [],
+    code: "https://github.com/nicovon24/ai-engineering-projects-ideas",
+    inDevelopment: true,
+  },
   {
     key: "cloudlab",
     hidden: true,

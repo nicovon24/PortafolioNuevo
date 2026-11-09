@@ -96,7 +96,9 @@
     "groupLabel": "Technology groups"
   },
   "projects": {
-    "intro": "Three selected cases across industrial software, election operations and applied AI.",
+    "intro": "Selected work across industrial software, election operations and applied AI.",
+    "main": { "title": "More work", "intro": "Products and systems built for clients and personal use." },
+    "other": { "title": "Other projects", "intro": "Additional prototypes, experiments and tools." },
     "archive": {
       "title": "Project archive",
       "intro": "Browse all {{count}} public projects, including the selected cases. Filter by type of work."
@@ -129,6 +131,7 @@
     "org": {
       "senzary": "Senzary",
       "freelance": "Freelance",
+      "client": "Client project",
       "personal": "Personal"
     },
     "items": {
@@ -150,10 +153,10 @@
         "case": {
           "problem": "Election teams needed an app for more than 20,000 poll watchers and a way to centralize vote-count reports on election night.",
           "contribution": "I built the poll-watcher app and helped design the wider system that consolidated the reports.",
-          "outcome": "The system centralized more than 20,000 reports during the event, with no data loss reported."
+          "outcome": "The system centralized more than 20,000 reports during the event, with no data loss reported. The same client work includes ¡Qué Abuso! CBA and Gabriel Bornoroni's site; their screenshots and links are available here."
         },
         "summary": "I built the app for 20,000+ poll watchers and contributed to the system that centralized 20,000+ vote-count reports on election night.",
-        "description": "Polytics, freelance since January 2025. I built the app for 20,000+ poll watchers and helped design the system that centralized 20,000+ vote-count reports on election night, with no data loss reported during the event. I also built public sites with no downtime reported during election-day peaks. Currently developing a new app version and a CRM. Node.js, NestJS and Next.js."
+        "description": "Polytics, freelance since January 2025. I built the app for 20,000+ poll watchers and helped design the system that centralized 20,000+ vote-count reports on election night, with no data loss reported during the event. I also built public sites with no downtime reported during election-day peaks. That client work includes ¡Qué Abuso! CBA, a tax and bureaucracy complaint platform with evidence upload and public feed, and Gabriel Bornoroni's campaign site with a raffle and content sections. Their screenshots and links are included here. Currently developing a new app version and a CRM. Node.js, NestJS and Next.js."
       },
       "queabuso": {
         "description": "Two apps for the same client — Gabriel Bornoroni and Libertad Avanza Córdoba. ¡Qué Abuso! CBA: platform to report tax and bureaucratic abuses, with complaint form, evidence upload, public feed and reactions. Gabriel Bornoroni official site: campaign website with home, raffle and content sections. Full-stack: Next.js/React, TypeScript, Tailwind and Node.js + PostgreSQL."
@@ -169,9 +172,9 @@
         "case": {
           "problem": "Industrial clients needed tailored monitoring and operations views on a shared IoT platform.",
           "contribution": "I worked across frontend and backend and supported the move from ThingsBoard to a React and Node.js stack.",
-          "outcome": "IoTLogIQ has been used for tailored industrial monitoring solutions. Its public website is linked below."
+          "outcome": "IoTLogIQ includes AirportIQ for Jacksonville Airport, with air quality, people flow, queues and environmental dashboards. AirportIQ screenshots are in this case gallery."
         },
-        "description": "Smart Industry product built from scratch with tailored solutions for Shell, ENI, AES, IAC, Jacksonville Airport and Ternium, among others. I worked full-stack, on both frontend and backend, and supported the product migration from ThingsBoard to an in-house stack on React and Node.js. I also led AI tooling adoption across the development team. The platform supports client-specific monitoring and operational views for industrial and infrastructure use cases."
+        "description": "Smart Industry product built from scratch with tailored solutions for Shell, ENI, AES, IAC, Jacksonville Airport and Ternium, among others. I worked full-stack, on both frontend and backend, and supported the product migration from ThingsBoard to an in-house stack on React and Node.js. I also led AI tooling adoption across the development team. AirportIQ, built on IoTLogIQ for Jacksonville Airport, covers air quality, temperature, people counting and flow, queue management, threshold alarms, per-terminal views and measurement history. Its screenshots are in this gallery."
       },
       "cloudlab": {
         "description": "Platform for clinical laboratories aimed at streamlining the management of studies, results and patients. "
@@ -187,7 +190,20 @@
         "description": "Mirador brings together market summaries, stock, CEDEAR and bond quotes, watchlists, charts, and fundamental data for comparing companies. Users can add positions manually and view their InvertirOnline holdings and balances through read-only access from their own account."
       },
       "fintrack": {
+        "case": {
+          "problem": "Investment research needed traceable answers from market data and account tools.",
+          "contribution": "I built the Java MCP client, a validated planner, deterministic numeric tables and bounded memory with privacy controls.",
+          "outcome": "A personal-use research assistant; a dedicated 30-question LLM evaluation remains planned."
+        },
         "description": "Personal-use investment research assistant built with Java, Spring Boot, Spring AI, Groq and Angular 22. A validated planner gathers evidence through read-only tools from the official IOL MCP server and Finnhub. Java builds numeric tables from provider data or deterministic calculations, with sources and timestamps. I implemented the Java MCP client with OAuth/PKCE, encrypted tokens and exact-name tool allowlists, plus bounded memory and privacy controls. Regression tests cover concrete failure cases; a dedicated 30-question LLM evaluation set is planned. Code for the AI work is on frontend-and-chat."
+      },
+      "blackfruit": {
+        "summary": "Sales, production, imports and permissions management for a fruit business; online store planned.",
+        "description": "BlackFruit currently manages sales, production, imports and permissions for a fruit business. The online store is planned future work, not a delivered feature. The live app requires an account."
+      },
+      "aiengineering": {
+        "summary": "AI Engineering project portfolio with local prototypes for document intelligence and proposal review.",
+        "description": "A collection of practical AI Engineering projects in development. Document Intelligence explores document retrieval with verifiable citations and explicit handling of insufficient evidence. Debate and Proposal Review has a completed local MVP for examining proposals from different perspectives with human review. Other projects in the repository are planned."
       },
       "airportiq": {
         "description": "Airport operations solution built for Jacksonville Airport on top of the IoTLogIQ platform: air quality, temperature, people counting and flow, queue management and environmental monitoring. Dashboards designed for quick reading in the control room, with threshold alarms, per-terminal views and measurement history."
@@ -202,6 +218,7 @@
       "personal": "Personal",
       "freelance": "Freelance",
       "iot": "IoT",
+      "ai": "AI Engineering",
       "countOne": "{{count}} project",
       "countOther": "{{count}} projects",
       "filterLabel": "Filter projects by category",

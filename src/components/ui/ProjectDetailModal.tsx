@@ -22,9 +22,9 @@ type ProjectDetailModalProps = {
   live?: string;
   live2?: string;
   code?: string;
+  relatedLinks?: Array<{ label: string; href: string }>;
   privateRepo?: boolean;
   index?: number;
-  initialLightbox?: boolean;
 };
 
 export default function ProjectDetailModal({
@@ -37,16 +37,14 @@ export default function ProjectDetailModal({
   live,
   live2,
   code,
+  relatedLinks = [],
   privateRepo = false,
   index = 0,
-  initialLightbox = false,
 }: ProjectDetailModalProps) {
   const { t } = useTranslation();
   const labelId = useId();
   const panelRef = useRef<HTMLDivElement>(null);
   const modalTriggerRef = useRef<HTMLElement | null>(null);
-  const zoomTriggerRef = useRef<HTMLButtonElement>(null);
-  const restoreZoomFocusRef = useRef(false);
   const wasOpenRef = useRef(false);
   const [imgIndex, setImgIndex] = useState(0);
   const [imgLoaded, setImgLoaded] = useState(false);
@@ -64,29 +62,19 @@ export default function ProjectDetailModal({
 
   const closeModal = useCallback(() => {
     const trigger = modalTriggerRef.current;
+    setLightbox(false);
     onClose();
-    // El trap se reactiva al volver del lightbox y puede guardar otro foco.
-    // Restaurar siempre el disparador original cuando se desmonta el modal.
     requestAnimationFrame(() => trigger?.focus());
   }, [onClose]);
 
-  const closeLightbox = useCallback(() => {
-    setLightbox(false);
-  }, []);
-
-  useEffect(() => {
-    if (!open || lightbox || !restoreZoomFocusRef.current) return;
-    restoreZoomFocusRef.current = false;
-    const frame = requestAnimationFrame(() => zoomTriggerRef.current?.focus());
-    return () => cancelAnimationFrame(frame);
-  }, [open, lightbox]);
-
   const goPrev = useCallback(() => {
+    if (count === 0) return;
     setImgLoaded(false);
     setImgIndex((i) => (i - 1 + count) % count);
   }, [count]);
 
   const goNext = useCallback(() => {
+    if (count === 0) return;
     setImgLoaded(false);
     setImgIndex((i) => (i + 1) % count);
   }, [count]);
@@ -95,8 +83,8 @@ export default function ProjectDetailModal({
     if (!open) return;
     setImgIndex(0);
     setImgLoaded(false);
-    setLightbox(initialLightbox);
-  }, [open, initialLightbox]);
+    setLightbox(false);
+  }, [open]);
 
   useEffect(() => {
     // Con el lightbox arriba, el teclado lo maneja el propio Lightbox.
@@ -126,6 +114,7 @@ export default function ProjectDetailModal({
 
   return createPortal(
     <>
+      {!lightbox && (
       <div
         className="fixed inset-0 z-200 flex items-center justify-center bg-black/80 p-3 backdrop-blur-sm sm:p-5"
         onClick={closeModal}
@@ -151,16 +140,13 @@ export default function ProjectDetailModal({
           {/* Galeria arriba, a lo ancho del modal. */}
           <div className="relative flex w-full shrink-0 flex-col bg-canvas">
             <div className="relative h-[42vh] max-h-104 min-h-56 w-full overflow-hidden lg:h-[min(50vh,28rem)]">
-              {!imgLoaded && <Skeleton className="absolute inset-0 rounded-none" />}
+              {count > 0 && !imgLoaded && <Skeleton className="absolute inset-0 rounded-none" />}
+              {count === 0 && <div className="flex h-full items-center justify-center px-6 text-center font-mono text-3xl font-semibold text-accent">{title}</div>}
               {images[imgIndex] && (
                 <button
-                  ref={zoomTriggerRef}
                   type="button"
                   aria-label={t("gallery.openGalleryAt", { title, n: imgIndex + 1 })}
-                  onClick={() => {
-                    restoreZoomFocusRef.current = true;
-                    setLightbox(true);
-                  }}
+                  onClick={() => setLightbox(true)}
                   className="absolute inset-0 cursor-zoom-in focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-accent"
                 >
                   <Image
@@ -277,6 +263,11 @@ export default function ProjectDetailModal({
                   <Github size={15} /> {t("projects.sourceCode")}
                 </Button>
               )}
+              {relatedLinks.map((link) => (
+                <Button key={link.href} as="a" size="lg" variant="subtle" href={link.href} target="_blank" rel="noreferrer" className="flex-1">
+                  {link.label} <ExternalLink size={15} />
+                </Button>
+              ))}
               {!code && privateRepo && (
                 <Button as="span" size="lg" variant="muted" className="flex-1">
                   <Lock size={15} /> {t("projects.privateRepo")}
@@ -286,13 +277,14 @@ export default function ProjectDetailModal({
           </div>
         </div>
       </div>
+      )}
 
       <Lightbox
         open={lightbox}
         images={images}
         index={imgIndex}
         title={title}
-        onClose={closeLightbox}
+        onClose={closeModal}
         onIndexChange={setImgIndex}
       />
     </>,

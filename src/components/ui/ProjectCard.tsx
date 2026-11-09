@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
 import Button from "@/components/ui/Button";
+import Lightbox from "@/components/ui/Lightbox";
 import ProjectDetailModal from "@/components/ui/ProjectDetailModal";
 
 type ProjectCardProps = {
@@ -23,6 +24,7 @@ type ProjectCardProps = {
   org?: string;
   featured?: boolean;
   archive?: boolean;
+  relatedLinks?: Array<{ label: string; href: string }>;
   index?: number;
 };
 
@@ -30,21 +32,18 @@ export default function ProjectCard({
   projectKey, title, technologies, images, live, live2, code,
   privateRepo = false, inDevelopment = false, year, role, org,
   featured = false, archive = false, index = 0,
+  relatedLinks = [],
 }: ProjectCardProps) {
   const { t } = useTranslation();
   const description = t(`projects.items.${projectKey}.description`);
   const summary = t(`projects.items.${projectKey}.summary`, { defaultValue: description });
   const caseDetails = featured ? ["problem", "contribution", "outcome"] as const : [];
   const [modalOpen, setModalOpen] = useState(false);
-  const [startLightbox, setStartLightbox] = useState(false);
+  const [galleryOpen, setGalleryOpen] = useState(false);
+  const [galleryIndex, setGalleryIndex] = useState(0);
   const orgLabel = org ? t(`projects.org.${org}`) : undefined;
   const technologyLimit = featured ? 5 : 4;
   const remainingTechnologies = technologies.length - technologyLimit;
-
-  function open(lightbox: boolean) {
-    setStartLightbox(lightbox);
-    setModalOpen(true);
-  }
 
   return (
     <>
@@ -52,7 +51,7 @@ export default function ProjectCard({
         {images.length > 0 && (
           <button
             type="button"
-            onClick={() => open(true)}
+            onClick={() => { setGalleryIndex(0); setGalleryOpen(true); }}
             aria-label={t("gallery.openOf", { title })}
             className="relative block aspect-16/10 w-full overflow-hidden bg-canvas focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-accent"
           >
@@ -68,6 +67,11 @@ export default function ProjectCard({
               {t("projects.imageCount", { count: images.length })}
             </span>
           </button>
+        )}
+        {images.length === 0 && (
+          <div className="flex aspect-16/10 items-center justify-center bg-canvas px-6 text-center" aria-hidden="true">
+            <span className="font-mono text-2xl font-semibold tracking-tight text-accent sm:text-3xl">{title}</span>
+          </div>
         )}
 
         <div className={cn("flex flex-1 flex-col p-5", featured && "sm:p-7")}>
@@ -106,7 +110,7 @@ export default function ProjectCard({
           </ul>
           <div className="mt-auto pt-6">
             <div className="flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-line pt-4">
-              <Button size="lg" variant={featured ? "primary" : "outline"} onClick={() => open(false)} aria-label={t("gallery.openProject", { title })}>
+              <Button size="lg" variant={featured ? "primary" : "outline"} onClick={() => setModalOpen(true)} aria-label={t("gallery.openProject", { title })}>
                 {t("projects.viewProject")} <ArrowUpRight size={16} aria-hidden />
               </Button>
               {[live, live2].map((href, linkIndex) => href && (
@@ -119,6 +123,11 @@ export default function ProjectCard({
                   <Github size={15} aria-hidden /> {t("projects.code")}
                 </a>
               )}
+              {relatedLinks.map((link) => (
+                <a key={link.href} href={link.href} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center gap-1.5 rounded-sm text-sm font-semibold text-ink underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent">
+                  {link.label} <ExternalLink size={14} aria-hidden />
+                </a>
+              ))}
             </div>
             {!code && privateRepo && (
               <p className="mt-3 flex items-center gap-1.5 text-xs text-muted"><Lock size={12} aria-hidden />{t("projects.privateRepo")}</p>
@@ -129,7 +138,7 @@ export default function ProjectCard({
 
       <ProjectDetailModal
         open={modalOpen}
-        onClose={() => { setModalOpen(false); setStartLightbox(false); }}
+        onClose={() => setModalOpen(false)}
         projectKey={projectKey}
         title={title}
         description={description}
@@ -138,9 +147,17 @@ export default function ProjectCard({
         live={live}
         live2={live2}
         code={code}
+        relatedLinks={relatedLinks}
         privateRepo={privateRepo}
         index={index}
-        initialLightbox={startLightbox}
+      />
+      <Lightbox
+        open={galleryOpen}
+        images={images}
+        index={galleryIndex}
+        title={title}
+        onClose={() => setGalleryOpen(false)}
+        onIndexChange={setGalleryIndex}
       />
     </>
   );
